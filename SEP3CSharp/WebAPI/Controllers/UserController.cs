@@ -21,7 +21,7 @@ public class UserController :ControllerBase
         try
         {
             User user = await userLogic.CreateAsync(dto);
-            return Created($"/users/{user.Id}", user);
+            return Created($"/users/{user.UUID}", user);
         }
         catch (Exception e)
         {

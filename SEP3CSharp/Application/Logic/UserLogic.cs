@@ -15,32 +15,66 @@ public class UserLogic : IUserLogic
     }
 
 
-    public async Task<User> CreateAsync(UserCreationDto userCreationDto)
-    {
-        User? existing = await userDao.GetByUserNameAsync(userCreationDto.UserName);
-        if (existing != null)
-        
-            throw new Exception("User already exists");
-        
+        public async Task<IAccount> CreateAsync(UserCreationDto dto)
+        {
+            IAccount? existing = await userDao.GetByUserNameAsync(dto.FirstName,dto.LastName,dto.Email, dto.Password);
+            if (existing != null)
+            
+                throw new Exception("User already exists");
+            
 
-        ValidateDate(userCreationDto);
+            ValidateData(dto);
         
         User toCreate = new User
         {
-            UserName = userCreationDto.UserName
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            Password = dto.Password            
         };
         
-        User created = await userDao.CreateAsync(toCreate);
+        IAccount created = await userDao.CreateAsync(toCreate);
         return created;
     }
     
-    public static void ValidateDate(UserCreationDto userCreationDto)// denne metode bruger vi til at validere vores data.
-    {
-        string userName = userCreationDto.UserName;
+        public static void ValidateData(UserCreationDto userCreationDto)
+        {
+            string firstName = userCreationDto.FirstName;
+            string lastName = userCreationDto.LastName;
+            string email = userCreationDto.Email;
+            string password = userCreationDto.Password;
 
-        if (userName.Length < 3)
-            throw new Exception("Username must be at least 3 characters long");
-        if (userName.Length > 15)
-            throw new Exception("Username must be at most 16 characters long");
-    }
+            if (string.IsNullOrWhiteSpace(firstName))
+                throw new Exception("First Name is required");
+
+            if (string.IsNullOrWhiteSpace(lastName))
+                throw new Exception("Last Name is required");
+
+            if (string.IsNullOrWhiteSpace(email))
+                throw new Exception("Email is required");
+
+            if (string.IsNullOrWhiteSpace(password))
+                throw new Exception("Password is required");
+
+            if (firstName.Length < 3 || lastName.Length < 3)
+                throw new Exception("Both First Name and Last Name must be at least 3 characters long");
+
+            if (email.Length < 5 || !IsValidEmail(email))
+                throw new Exception("Email is not valid");
+
+            if (password.Length < 8)
+                throw new Exception("Password must be at least 8 characters long");
+        }
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                var address = new System.Net.Mail.MailAddress(email);
+                return address.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 }

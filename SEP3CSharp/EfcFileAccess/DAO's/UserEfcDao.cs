@@ -1,4 +1,7 @@
 ﻿using Application.DaoInterfaces;
+using Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EfcDataAccess.DAOs;
 
@@ -11,20 +14,24 @@ public class UserEfcDao : IUserDao
         this.context = context;
     }
 
-    public async Task<User> CreateAsync(User user)
+    public async Task<IAccount> CreateAsync(IAccount account)
     {
-        EntityEntry<User> newUser = await context.Users.AddAsync(user);
+        EntityEntry<IAccount> newAccount = await context.Accounts.AddAsync(account);
         await context.SaveChangesAsync();
-        return newUser.Entity;
+        return newAccount.Entity;
     }
 
-    public async Task<User?> GetByUsernameAsync(string userName)
+    public async Task<IAccount?> GetByUserNameAsync(string firstName, string lastName, string email, string password)
     {
-        User? existing = await context.Users.FirstOrDefaultAsync(u =>
-            u.UserName.ToLower().Equals(userName.ToLower())
+        IAccount? existing = await context.Accounts.FirstOrDefaultAsync(account =>
+            account.FirstName.ToLower() == firstName.ToLower() &&
+            account.LastName.ToLower() == lastName.ToLower() &&
+            account.Email.ToLower() == email.ToLower() &&
+            account.Password == password
         );
         return existing;
     }
+    
 
     public async Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchParameters)
     {
