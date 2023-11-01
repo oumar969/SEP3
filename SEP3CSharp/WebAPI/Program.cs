@@ -2,8 +2,7 @@ using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
 using EfcDataAccess;
-using FileData;
-using FileData.DAO_s;
+using EfcDataAccess.DAOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<EfcContext>();
-builder.Services.AddScoped<IUserDao, UserFileDao>();
+builder.Services.AddScoped<IUserDao, UserEfcDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
+
 
 
 var app = builder.Build();
@@ -33,5 +33,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseAuthentication();
 
 app.Run();

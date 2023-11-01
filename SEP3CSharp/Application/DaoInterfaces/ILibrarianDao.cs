@@ -1,8 +1,9 @@
-﻿using Domain;
+﻿using Domain.Models;
+
 
 namespace Application.DaoInterfaces;
 
 public interface ILibrarianDao
 {
-    Task<Librarian?> GetByIdAsync(string id);
+    Task<User?> GetByIdAsync(string id);
 }

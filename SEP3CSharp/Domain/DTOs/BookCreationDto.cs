@@ -2,7 +2,7 @@
 
 public class BookCreationDto
 {
-    public string UUID { get; set; }
+    public int UUID { get; set; }
     public string Title { get; set; }
     public string Author { get; set; }
     public string Genre { get; set; }
@@ -11,7 +11,7 @@ public class BookCreationDto
     public string Description { get; set; }
     public string Review { get; set; }
 
-    public BookCreationDto(string uuid)
+    public BookCreationDto(int uuid)
     {
         UUID = uuid;
     }

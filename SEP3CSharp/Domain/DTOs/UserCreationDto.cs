@@ -7,13 +7,16 @@ public class UserCreationDto
     public string LastName { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
+    public bool IsLibrarian { get; set; }
+
     
-    public UserCreationDto(string uuid,string firstName, string lastName, string email, string password)
+    public UserCreationDto(string uuid,string firstName, string lastName, string email, string password, bool isLibrarian)
     {
         UUID = uuid;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Password = password;
+        IsLibrarian = true;
     }
 }

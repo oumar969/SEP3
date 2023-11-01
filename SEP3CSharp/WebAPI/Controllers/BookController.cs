@@ -1,5 +1,5 @@
 ﻿using Application.LogicInterfaces;
-using Domain;
+using Domain.Models;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +18,11 @@ public class BookController : ControllerBase
         this.bookLogic = bookLogic;
     }
     [HttpPost]
-    public async Task<ActionResult<Book>> CreateAsync([FromBody]BookCreationDto dto, LibrarianCreationDto userId)
+    public async Task<ActionResult<Book>> CreateAsync([FromBody]BookCreationDto dto)
     {
         try
         {
-            Book created = await bookLogic.CreateAsync(dto,userId);
+            Book created = await bookLogic.CreateAsync(dto);
             return Created($"/books/{created.UUID}", created);
         }
         catch (Exception e)

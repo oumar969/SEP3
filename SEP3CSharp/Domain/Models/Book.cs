@@ -1,4 +1,4 @@
-﻿namespace Domain;
+﻿namespace Domain.Models;
 
 public class Book
 {
@@ -12,9 +12,9 @@ public class Book
      public string Review { get; set; }
 
      public User? Borrower { get; set; } // Brugeren, der har lånt bogen
-     public Librarian? Librarian { get; set; }
+     // public Librarian? Librarian { get; set; }
 
-     public Book(string title, string author, string genre, string location, string isbn, string description)
+     public Book(string title, string author, string genre, string location, string isbn, string description, string review)
      {
           Title = title;
           Author = author;
@@ -22,6 +22,7 @@ public class Book
           Location = location;
           Isbn = isbn;
           Description = description;
+          Review = review;
      }
      
      

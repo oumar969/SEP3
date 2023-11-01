@@ -1,5 +1,6 @@
 ﻿using Application.DaoInterfaces;
-using Domain;
+using Domain.Models;
+using Domain.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -14,16 +15,16 @@ public class UserEfcDao : IUserDao
         this.context = context;
     }
 
-    public async Task<IAccount> CreateAsync(IAccount account)
+    public async Task<User> CreateAsync(User account)
     {
-        EntityEntry<IAccount> newAccount = await context.Accounts.AddAsync(account);
+        EntityEntry<User> newAccount = await context.Users.AddAsync(account);
         await context.SaveChangesAsync();
         return newAccount.Entity;
     }
 
-    public async Task<IAccount?> GetByUserNameAsync(string firstName, string lastName, string email, string password)
+    public async Task<User?> GetByUserNameAsync(string firstName, string lastName, string email, string password)
     {
-        IAccount? existing = await context.Accounts.FirstOrDefaultAsync(account =>
+        User? existing = await context.Users.FirstOrDefaultAsync(account =>
             account.FirstName.ToLower() == firstName.ToLower() &&
             account.LastName.ToLower() == lastName.ToLower() &&
             account.Email.ToLower() == email.ToLower() &&
@@ -38,7 +39,7 @@ public class UserEfcDao : IUserDao
         IQueryable<User> usersQuery = context.Users.AsQueryable();
         if (searchParameters.UsernameContains != null)
             usersQuery = usersQuery.Where(u =>
-                u.UserName.ToLower().Contains(searchParameters.UsernameContains.ToLower()));
+                u.FirstName.ToLower().Contains(searchParameters.UsernameContains.ToLower()));
 
         IEnumerable<User> result = await usersQuery.ToListAsync();
         return result;
@@ -48,5 +49,24 @@ public class UserEfcDao : IUserDao
     {
         User? user = await context.Users.FindAsync(id);
         return user;
+    }
+
+    public Task<User> UpdateAsync(User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async  Task DeleteAsync(int id)
+    {
+        var existing = await context.Users.FirstOrDefaultAsync(u => u.UUID == id.ToString());
+
+        if (existing == null)
+        {
+            throw new Exception($"User with ID {id} not found!");
+        }
+
+        context.Users.Remove(existing);
+        await context.SaveChangesAsync();
+         
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Application.LogicInterfaces;
-using Domain;
+using Domain.Models;
 using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +22,52 @@ public class UserController :ControllerBase
         {
             User user = await userLogic.CreateAsync(dto);
             return Created($"/users/{user.UUID}", user);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<User>>> GetAsync([FromQuery] string? username)
+    {
+        try
+        {
+            SearchUserParametersDto parameters = new(username);
+            IEnumerable<User> users = await userLogic.GetAsync(parameters);
+            return Ok(users);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpPatch("{id}")]
+    public async Task<ActionResult<User>> UpdateAsync(int id, UserUpdateDto dto)
+    {
+        try
+        {
+            User user = await userLogic.UpdateAsync(id, dto);
+            return Ok(user);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteAsync(int id)
+    {
+        try
+        {
+            await userLogic.DeleteAsync(id);
+            return Ok();
         }
         catch (Exception e)
         {

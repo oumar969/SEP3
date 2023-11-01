@@ -1,6 +1,6 @@
 ﻿using Application.DaoInterfaces;
 using Application.LogicInterfaces;
-using Domain;
+using Domain.Models;
 using Domain.DTOs;
 
 namespace Application.Logic;
@@ -15,9 +15,9 @@ public class UserLogic : IUserLogic
     }
 
 
-        public async Task<IAccount> CreateAsync(UserCreationDto dto)
+        public async Task<User> CreateAsync(UserCreationDto dto)
         {
-            IAccount? existing = await userDao.GetByUserNameAsync(dto.FirstName,dto.LastName,dto.Email, dto.Password);
+            User? existing = await userDao.GetByUserNameAsync(dto.FirstName,dto.LastName,dto.Email, dto.Password);
             if (existing != null)
             
                 throw new Exception("User already exists");
@@ -33,10 +33,11 @@ public class UserLogic : IUserLogic
             Password = dto.Password            
         };
         
-        IAccount created = await userDao.CreateAsync(toCreate);
+        User created = await userDao.CreateAsync(toCreate);
         return created;
     }
-    
+
+        
         public static void ValidateData(UserCreationDto userCreationDto)
         {
             string firstName = userCreationDto.FirstName;
@@ -77,4 +78,21 @@ public class UserLogic : IUserLogic
                 return false;
             }
         }
+        
+        
+        public Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchParameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> UpdateAsync(int id, UserUpdateDto dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
 }

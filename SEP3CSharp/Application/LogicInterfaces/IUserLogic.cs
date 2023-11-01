@@ -1,10 +1,12 @@
-﻿using Domain;
+﻿using Domain.Models;
 using Domain.DTOs;
 
 namespace Application.LogicInterfaces;
 
 public interface IUserLogic
 {
-    Task<IAccount> CreateAsync(UserCreationDto userCreationDto);
-
+    public Task<User> CreateAsync(UserCreationDto dto);
+    public Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchParameters);
+    public Task<User> UpdateAsync(int id, UserUpdateDto dto);
+    public Task DeleteAsync(int id);
 }
