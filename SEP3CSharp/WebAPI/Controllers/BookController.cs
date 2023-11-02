@@ -50,4 +50,49 @@ public class BookController : ControllerBase
         }
     }
     
+    [HttpPatch]
+    public async Task<ActionResult> UpdateAsync([FromBody] BookUpdateDto dto)
+    {
+        try
+        {
+            await bookLogic.UpdateAsync(dto);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> DeleteAsync([FromRoute] int id)
+    {
+        try
+        {
+            await bookLogic.DeleteAsync(id);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<BookBasicDto>> GetById([FromRoute] int id)
+    {
+        try
+        {
+            BookBasicDto result = await bookLogic.GetByIdAsync(id);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
 }
