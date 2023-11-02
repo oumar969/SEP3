@@ -4,34 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DAOs/BookDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DAOs/BookDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DAOs/Response.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DataBase.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DatabaseConnection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/Models/Book.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/RunServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/Server.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/dataBaseNavn.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/Sep3JavaPersistenceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/controller/BookController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/domain/Book.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/domain/BookRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/test/java/com/via/sep3javapersistence/Sep3JavaPersistenceApplicationTests.java" beforeDir="false" />
-    </list>
+    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +90,7 @@
       <workItem from="1698962458302" duration="1651000" />
       <workItem from="1698964125993" duration="44000" />
       <workItem from="1698964207471" duration="361000" />
-      <workItem from="1698964578589" duration="1026000" />
+      <workItem from="1698964578589" duration="1188000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />
@@ -127,15 +100,35 @@
       <option name="project" value="LOCAL" />
       <updated>1698839325707</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ORM Java Server Setup">
+      <option name="closed" value="true" />
+      <created>1698965632965</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698965632965</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Java server update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Java server update" />
+    <MESSAGE value="ORM Java Server Setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="ORM Java Server Setup" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
