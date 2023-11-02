@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DAOs/BookDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DAOs/BookDaoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DAOs/Response.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DataBase.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/DatabaseConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/Models/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/RunServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FileAccessServer/dataBaseNavn.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/Sep3JavaPersistenceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/controller/BookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/domain/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/java/com/via/sep3javapersistence/domain/BookRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3JavaPersistence/src/test/java/com/via/sep3javapersistence/Sep3JavaPersistenceApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="1060ca31-7aa2-45c8-b3e1-ad0d575ca9d2" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2XZR6FSmHCbDyp2PYsx4ezLNJoX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bak/MEGA/School/VIA/Semester3/SEP3/SEP3Project/SEP3Java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0f9bd0d963b6a66c737c85903d24345c&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Sep3JavaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.via.sep3java.Sep3JavaApplication" />
+      <option name="VM_PARAMETERS" value="-Ddebug" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="" />
+      <created>1698834445671</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698834445671</updated>
+      <workItem from="1698834446936" duration="1292000" />
+      <workItem from="1698836814881" duration="3087000" />
+      <workItem from="1698841616456" duration="11459000" />
+      <workItem from="1698962458302" duration="1651000" />
+      <workItem from="1698964125993" duration="44000" />
+      <workItem from="1698964207471" duration="361000" />
+      <workItem from="1698964578589" duration="1026000" />
+    </task>
+    <task id="LOCAL-00001" summary="Java server update">
+      <option name="closed" value="true" />
+      <created>1698839325707</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698839325707</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Java server update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Java server update" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
