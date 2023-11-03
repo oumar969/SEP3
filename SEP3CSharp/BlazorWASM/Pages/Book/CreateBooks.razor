@@ -1,0 +1,114 @@
+﻿@page "/CreatePost"
+@attribute [Authorize]
+@using System.Security.Claims
+@using global::Domain.DTOs
+@* @using HttpClients.ClientInterface *@
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Authorization
+@* @inject IUserService userService; *@
+@* @inject IBookService postService; *@
+@inject NavigationManager navMgr
+
+<h3>Create Books</h3>
+
+<div class="card">
+    <h3>Create Book</h3>
+        <div class="form-group field">
+            <div>
+                <label>Title:</label>
+                <input type="text" @bind="bookTitle"/>
+            </div>
+            <div>
+                <label>Write here:</label>
+                <textarea rows="8" cols="20" @bind="bookBody" style="alignment: center"></textarea>
+            </div>
+            
+        </div>
+    
+        <div class="button-row">
+            @if (!string.IsNullOrEmpty(msg))
+            {
+                <label style="color: red">@msg</label>
+            }
+            <button @onclick="Create" class="acceptbtn">Create</button>
+        </div>
+</div>
+
+@code {
+   // private IEnumerable<User>? users;
+ //   private int? selectedUserId;
+    
+    private string bookTitle = "";
+    private string bookBody = "";
+    private string Author = "";
+    private string Genre = "";
+    private string Location = "";
+    private string Isbn = "";
+    private string Description = "";
+    private string Review = "";
+    
+    private string msg = "";
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    AuthenticationState authState;
+    ClaimsPrincipal user;
+    BookCreationDto dto;
+    
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     msg = "";
+    //     authState = await AuthState;
+    //     user = authState.User;
+    //     
+    //     try
+    //     {
+    //     //    users = await userService.GetUsers();
+    //         
+    //         
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Console.WriteLine(e);
+    //         msg = e.Message;
+    //      
+    //     }
+    // }
+
+    private async Task Create()
+    {
+        msg = "";
+        
+        if (string.IsNullOrEmpty(bookTitle))
+        {
+            msg = "Title cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(bookBody))
+        {
+            msg = "Title cannot be empty!";
+            return;
+        }
+
+        try
+        {
+            if (bookBody.Length > 100)
+            {
+                msg = "Body cannot be more than 100 characters!";
+                throw new Exception(msg);
+            }
+            int id = int.Parse(user.FindFirst("Id").Value);
+            // dto = new(id, bookTitle, bookBody);
+            // await postService.CreateAsync(dto);
+            navMgr.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+       //     msg = e.Message;
+        //    msg = user.ToString();
+       //     msg = (user.FindFirst("Id").Value);
+            msg = dto.ToString();
+        }
+    }
+}
