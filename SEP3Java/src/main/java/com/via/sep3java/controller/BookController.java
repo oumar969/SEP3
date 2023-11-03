@@ -13,8 +13,8 @@ public class BookController {
   private BookRepository repository;
 
   @PostMapping("/book")
-  public Book addEntity(@RequestBody Book entity) {
-    return repository.save(entity);
+  public Book addBook(@RequestBody Book book) {
+    return repository.save(book);
   }
 
 
