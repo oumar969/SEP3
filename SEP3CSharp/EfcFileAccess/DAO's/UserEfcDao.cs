@@ -58,7 +58,7 @@ public class UserEfcDao : IUserDao
 
     public async  Task DeleteAsync(int id)
     {
-        var existing = await context.Users.FirstOrDefaultAsync(u => u.UUID == id.ToString());
+        var existing = await context.Users.FirstOrDefaultAsync(u => u.UUID == id);
 
         if (existing == null)
         {

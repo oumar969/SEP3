@@ -2,7 +2,7 @@
 
 public class User //: IAccount
 {
-    public string UUID { get; set; }
+    public int UUID { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }

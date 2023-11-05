@@ -82,17 +82,30 @@ public class UserLogic : IUserLogic
         
         public Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchParameters)
         {
-            throw new NotImplementedException();
+            return userDao.GetAsync(searchParameters);
         }
 
         public Task<User> UpdateAsync(int id, UserUpdateDto dto)
         {
-            throw new NotImplementedException();
+            User toUpdate = new User
+            {
+                UUID = id, FirstName = dto.FirstName,LastName = dto.LastName, Password = dto.Password,Email = dto.Email,IsLibrarian = dto.IsLibrarian
+            };
+        
+            return userDao.UpdateAsync(toUpdate);
+            
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            User? user = await userDao.GetByIdAsync(id);
+            if (user == null)
+            {
+                throw new Exception($"Book with ID {id} was not found!");
+            }
+
+            await userDao.DeleteAsync(id);
+            
         }
 
 }
