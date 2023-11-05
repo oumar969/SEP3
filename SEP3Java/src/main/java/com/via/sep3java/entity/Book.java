@@ -7,54 +7,49 @@ import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
 @Entity
 public class Book {
-// test
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private String uuid;
 
   @Column(nullable = false)
-  private String title;
+  private String isbn;
 
   @Column
-  private String author;
+  private String loanerUuid;
 
   // Default constructor is required by JPA specifications
   public Book() {
-  }
-
-  // Getters and setters (or you can use Lombok to generate them)
-
-  // For the title field
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  // For the author field
-  public String getAuthor() {
-    return author;
-  }
-
-  public void setAuthor(String author) {
-    this.author = author;
+    this.uuid = UUID.randomUUID().toString();
   }
 
   // For the id field
-  public Integer getId() {
-    return id;
+  public String getUuid() {
+    return uuid;
   }
 
-  public void setId(Integer id) {
-    this.id = id;
+  public void setUuid(String uuid) {
+    this.uuid = uuid;
   }
 
-  // ...additional fields, constructors, methods as necessary...
+  public String getLoanerUuid()
+  {
+    return loanerUuid;
+  }
+
+  public void setLoanerUuid(String loanerUuid)
+  {
+    this.loanerUuid = loanerUuid;
+  }
+
+  public String getIsbn()
+  {
+    return isbn;
+  }
+
+  public void setIsbn(String isbn)
+  {
+    this.isbn = isbn;
+  }
 }
