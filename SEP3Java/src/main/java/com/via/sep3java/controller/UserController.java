@@ -1,7 +1,7 @@
-package main.java.com.via.sep3java.controller;
+package com.via.sep3java.controller;
 
-import main.java.com.via.sep3java.entity.User;
-import main.java.com.via.sep3java.repository.UserRepository;
+import com.via.sep3java.entity.User;
+import com.via.sep3java.repository.UserRepository;
 
 @RestController
 @CrossOrigin

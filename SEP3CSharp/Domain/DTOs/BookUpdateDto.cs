@@ -4,7 +4,12 @@ namespace Domain.DTOs;
 
 public class BookUpdateDto
 {
-    public int UUID { get; set; }
+    public BookUpdateDto(string uuid)
+    {
+        UUID = uuid;
+    }
+
+    public string UUID { get; set; }
     public string Title { get; set; }
     public string Author { get; set; }
     public string Genre { get; set; }
@@ -16,10 +21,4 @@ public class BookUpdateDto
 
 
     public User? Borrower { get; set; } // Brugeren, der har lånt bogen    
-    
-    
-    public BookUpdateDto(int id)
-    {
-        UUID = id;
-    }
 }

@@ -1,9 +1,7 @@
 ﻿using Application.LogicInterfaces;
-using Domain.Models;
 using Domain.DTOs;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace SEP3CSharp.Controllers;
 
@@ -11,18 +9,19 @@ namespace SEP3CSharp.Controllers;
 [Route("books")]
 public class BookController : ControllerBase
 {
-    private readonly IBookLogic bookLogic;
+    private readonly IBookRegistryLogic _bookRegistryLogic;
 
-    public BookController(IBookLogic bookLogic)
+    public BookController(IBookRegistryLogic bookRegistryLogic)
     {
-        this.bookLogic = bookLogic;
+        _bookRegistryLogic = bookRegistryLogic;
     }
+
     [HttpPost]
-    public async Task<ActionResult<Book>> CreateAsync([FromBody]BookCreationDto dto)
+    public async Task<ActionResult<Book>> CreateAsync([FromBody] BookRegistryCreationDto dto)
     {
         try
         {
-            Book created = await bookLogic.CreateAsync(dto);
+            var created = await _bookRegistryLogic.CreateAsync(dto);
             return Created($"/books/{created.UUID}", created);
         }
         catch (Exception e)
@@ -31,16 +30,17 @@ public class BookController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Book>>> GetAsync([FromQuery] string? id, [FromQuery] string? title,
-        [FromQuery] string? author,[FromQuery] string? isbn,[FromQuery] string? genre,[FromQuery] string? isBorrowed/*, [FromQuery] string? bodyContains*/)
+    public async Task<ActionResult<ICollection<Book>>> GetAsync([FromQuery] string? id, [FromQuery] string? title,
+        [FromQuery] string? author, [FromQuery] string? isbn, [FromQuery] string? genre,
+        [FromQuery] string? isBorrowed /*, [FromQuery] string? bodyContains*/)
     {
         try
         {
-            SearchBookParametersDto parameters =
-                new SearchBookParametersDto(id, title, author, isbn, genre, isBorrowed);
-            var todos = await bookLogic.GetAsync(parameters);
+            var parameters =
+                new SearchBookRegistryParametersDto(id, title, author, isbn, genre, isBorrowed);
+            var todos = await _bookRegistryLogic.GetAsync(parameters);
             return Ok(todos);
         }
         catch (Exception e)
@@ -49,13 +49,13 @@ public class BookController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
+
     [HttpPatch]
     public async Task<ActionResult> UpdateAsync([FromBody] BookUpdateDto dto)
     {
         try
         {
-            await bookLogic.UpdateAsync(dto);
+            await _bookRegistryLogic.UpdateAsync(dto);
             return Ok();
         }
         catch (Exception e)
@@ -64,13 +64,13 @@ public class BookController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
+
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> DeleteAsync([FromRoute] int id)
     {
         try
         {
-            await bookLogic.DeleteAsync(id);
+            await _bookRegistryLogic.DeleteAsync(id);
             return Ok();
         }
         catch (Exception e)
@@ -79,13 +79,13 @@ public class BookController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
+
     [HttpGet("{id:int}")]
     public async Task<ActionResult<BookBasicDto>> GetById([FromRoute] int id)
     {
         try
         {
-            BookBasicDto result = await bookLogic.GetByIdAsync(id);
+            var result = await _bookRegistryLogic.GetByIdAsync(id);
             return Ok(result);
         }
         catch (Exception e)
@@ -94,5 +94,4 @@ public class BookController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
-    
 }
