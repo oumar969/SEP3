@@ -1,8 +1,7 @@
 package com.via.sep3java.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import java.util.UUID;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

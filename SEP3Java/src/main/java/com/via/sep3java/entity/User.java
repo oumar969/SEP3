@@ -1,20 +1,28 @@
-package main.java.com.via.sep3java.entity;
+package com.via.sep3java.entity;
 
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
-public class User implements Serializable
+@Entity
+public class User
 {
-    public int UUID;
+    @Id
+    public String UUID;
+    @Column(nullable = false)
     public String FirstName;
+    @Column(nullable = false)
     public String LastName;
-
+    @Column(nullable = false)
     public String Password;
-
+    @Column(nullable = false)
     public String Email;
+    @Column(nullable = false)
     public String Role;
 
-    public User(int UUID, String firstName, String lastName, String password, String email, String role) {
+    public User(String UUID, String firstName, String lastName, String password, String email, String role) {
         this.UUID = UUID;
         FirstName = firstName;
         LastName = lastName;
@@ -34,11 +42,11 @@ public class User implements Serializable
     public User() {
     }
 
-    public int getUUID() {
-        return UUID;
+    public String getUUID() {
+        return String.valueOf(UUID);
     }
 
-    public void setUUID(int UUID) {
+    public void setUUID(String UUID) {
         this.UUID = UUID;
     }
 

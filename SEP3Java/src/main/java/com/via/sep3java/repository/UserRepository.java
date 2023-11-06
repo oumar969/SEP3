@@ -1,16 +1,13 @@
-package main.java.com.via.sep3java.repository;
+package com.via.sep3java.repository;
 
-import main.java.com.via.sep3java.entity.User;
+import com.via.sep3java.entity.User;
+import org.springframework.data.repository.CrudRepository;
 
-import java.io.IOException;
 
-public interface UserRepository {
-    User GetUser(String username)
-            throws IOException, ClassNotFoundException;
+public interface UserRepository extends CrudRepository<User, String>
+{
+    User findByUUID(String uuid);
 
-    void AddUser(User user)
-            throws IOException, ClassNotFoundException;
-    User editUser(User user);
-    void deleteUser(int id);
+
 
 }

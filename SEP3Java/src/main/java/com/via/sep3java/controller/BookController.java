@@ -14,14 +14,14 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/book")
 public class BookController {
   @Autowired
   private BookRepository bookRepository;
   @Autowired
   private BookRegistryRepository bookRegistryRepository;
 
-  @PostMapping("/book")
+  @PostMapping("/create")
   public ResponseEntity<?> addBook(@RequestBody Book book) {
     BookRegistry existingBook = bookRegistryRepository.findByIsbn(book.getIsbn());
     if (existingBook == null) {
