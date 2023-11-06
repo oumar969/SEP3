@@ -1,6 +1,7 @@
 ﻿@page "/EditPost/{id:int}"
 @using Domain.DTOs
 @using Domain.Models
+@using Microsoft.AspNetCore.Components
 @attribute [Authorize]
 @inject IPostService postService;
 @inject IUserService userService;
