@@ -1,7 +1,7 @@
 ﻿@page "/MyPosts"
-/@using System.Security.Claims
-@using global::Domain.Models
-@using Microsoft.AspNetCore.Components
+@using System.Security.Claims
+@using Domain.Models
+/
 @attribute [Authorize]
 @* @inject IBookService postService; *@
 @inject NavigationManager navMgr;
@@ -21,7 +21,7 @@
                 {
                     <label style="color: red">@msg</label>
                 }
-                
+
             </div>
         }
     </div>
@@ -78,15 +78,16 @@ else
 }
 
 @code {
+
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
 
     AuthenticationState authState;
     ClaimsPrincipal user;
 
-    private IEnumerable<Book>? posts;
+    private ICollection<Book>? posts;
     private string msg = "";
-    private bool doShowFilters = false;
+    private bool doShowFilters;
 
     private string? usernameFilter;
     private int? userIdFilter;
@@ -96,9 +97,8 @@ else
     protected override async Task OnInitializedAsync()
     {
         authState = await AuthState;
-            user = authState.User;
-            await LoadPosts();
-        
+        user = authState.User;
+        await LoadPosts();
     }
 
     private async Task LoadPosts()
@@ -106,15 +106,13 @@ else
         try
         {
             bool? completedFilterValue = null;
-            posts = await postService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter/*, bodyContainsFilter*/);
-            
-            
-            
+            posts = await postService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter /*, bodyContainsFilter*/);
+
+
             var list = new List<Book>(posts!);
             list.RemoveAll(post => post.Owner.Id != int.Parse(user.FindFirst("Id").Value));
             list.Sort(CompareById);
             posts = list.AsEnumerable();
-           
         }
         catch (Exception e)
         {
@@ -122,14 +120,14 @@ else
             msg = e.Message;
         }
     }
-    
+
     private async Task RemovePost(int postId)
     {
         msg = "";
         try
         {
             await postService.DeleteAsync(postId);
-        
+
             var list = new List<Book>(posts!);
             list.RemoveAll(post => post.Id == postId);
             posts = list.AsEnumerable();
@@ -138,20 +136,16 @@ else
         {
             Console.WriteLine(e);
             msg = e.Message;
-           
         }
     }
-    
+
     private int CompareById(Book x, Book y)
     {
         if (x.Id > y.Id)
         {
             return 1;
         }
-        else
-        {
-            return -1;
-        }
+        return -1;
     }
-    
+
 }

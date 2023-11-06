@@ -1,12 +1,10 @@
 ﻿@page "/ViewUsers"
-@attribute [Authorize]
+@using Domain.Models
 @using System.Security.Claims
-@using global::Domain.Models
+@attribute [Authorize]
 @* @using HttpClients.ClientInterface *@
-@using Microsoft.AspNetCore.Components
 @* @inject IUserService userService; *@
 <h3 style="text-align: center">Overview of all users</h3>
-
 
 
 @if (isLibrarian)
@@ -30,7 +28,7 @@
     else
     {
         <div class="users-container">
-            @foreach (User user in users)
+            @foreach (var user in users)
             {
                 <div class="user-card">
                     <div>
@@ -60,37 +58,37 @@ else
 }
 
 @code {
-    
+
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
-    private IEnumerable<User>? users;
+
+    private ICollection<User>? users;
     private string msg = "";
 
     private string? name;
-    private IEnumerable<Claim>? userClaims;
+    private ICollection<Claim>? userClaims;
     private bool isLibrarian;
 
     protected override async Task OnInitializedAsync()
     {
-        AuthenticationState authState = await AuthState;
-        ClaimsPrincipal user = authState.User;
+        var authState = await AuthState;
+        var user = authState.User;
         isLibrarian = user.IsInRole("Librarian");
 
         try
         {
-            // users = await userService.GetUsers();
+    // users = await userService.GetUsers();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             msg = e.Message;
         }
-        
+
         if (!isLibrarian) return;
-        
+
         userClaims = user.Claims;
         name = user.Identity!.Name!;
-        
     }
-    
+
 }

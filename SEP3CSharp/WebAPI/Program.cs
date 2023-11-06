@@ -1,8 +1,8 @@
-using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
-using EfcDataAccess;
-using EfcDataAccess.DAOs;
+using Domain.Models;
+using FileData;
+using JavaPersistenceClient.DAOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,10 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<EfcContext>();
-builder.Services.AddScoped<IUserDao, UserEfcDao>();
+builder.Services.AddScoped<IGenericDao<User>, UserDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
-
+builder.Services.AddScoped<IGenericDao<BookRegistry>, BookRegistryDao>();
+builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 
 
 var app = builder.Build();
