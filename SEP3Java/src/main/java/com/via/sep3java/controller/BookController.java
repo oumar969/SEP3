@@ -7,7 +7,6 @@ import com.via.sep3java.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,7 +21,7 @@ public class BookController {
   private BookRegistryRepository bookRegistryRepository;
 
   @PostMapping("/create")
-  public ResponseEntity<?> addBook(@RequestBody Book book) {
+  public ResponseEntity<?> createBook(@RequestBody Book book) {
     BookRegistry existingBook = bookRegistryRepository.findByIsbn(book.getIsbn());
     if (existingBook == null) {
       return new ResponseEntity<>("Book with ISBN " + book.getIsbn() + " is not in the book registry.", HttpStatus.BAD_REQUEST);
@@ -30,25 +29,27 @@ public class BookController {
     return new ResponseEntity<>(bookRepository.save(book), HttpStatus.CREATED);
   }
 
-  @PutMapping("/book/{uuid}")
+  @PutMapping("/update/{uuid}")
   public ResponseEntity<?> updateBook(@PathVariable String uuid, @RequestBody Map<String, String> body) {
-    Optional<Book> bookToUpdate = bookRepository.findById(uuid);
-    if (!bookToUpdate.isPresent()) {
+    Book book = bookRepository.findByUUID(uuid);
+    if (book == null) {
       return new ResponseEntity<>("Book with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
     }
-    String loanerUuid = body.get("loanerUuid");
-    bookToUpdate.get().setLoanerUuid(loanerUuid);
-    bookRepository.save(bookToUpdate.get());
+    String loanerUUID = body.get("loanerUUID");
+    if (loanerUUID != null && !loanerUUID.isEmpty()) {
+      book.setLoanerUUID(loanerUUID);
+    }
+    bookRepository.save(book);
     return new ResponseEntity<>("Book with UUID " + uuid + " updated successfully.", HttpStatus.OK);
   }
 
-  @DeleteMapping("/book/{uuid}")
+  @DeleteMapping("/delete/{uuid}")
   public ResponseEntity<?> deleteBook(@PathVariable String uuid) {
-    Book bookToDelete = bookRepository.findByUuid(uuid);
-    if (bookToDelete == null) {
+    Book book = bookRepository.findByUUID(uuid);
+    if (book == null) {
       return new ResponseEntity<>("Book with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
     }
-    bookRepository.delete(bookToDelete);
+    bookRepository.delete(book);
     return new ResponseEntity<>("Book with UUID " + uuid + " deleted successfully.", HttpStatus.OK);
   }
 }
