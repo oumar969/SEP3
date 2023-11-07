@@ -31,23 +31,23 @@ public class BookController {
 
   @PutMapping("/update/{uuid}")
   public ResponseEntity<?> updateBook(@PathVariable String uuid, @RequestBody Map<String, String> body) {
-    Book book = bookRepository.findByUUID(uuid);
+    Book book = bookRepository.findByUuid(uuid);
     if (book == null) {
       return new ResponseEntity<>("Book with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
     }
-    String loanerUUID = body.get("loanerUUID");
-    if (loanerUUID != null && !loanerUUID.isEmpty()) {
-      book.setLoanerUUID(loanerUUID);
+    String loanerUuid = body.get("loanerUuid");
+    if (loanerUuid != null && !loanerUuid.isEmpty()) {
+      book.setLoanerUuid(loanerUuid);
     }
     bookRepository.save(book);
-    return new ResponseEntity<>("Book with UUID " + uuid + " updated successfully.", HttpStatus.OK);
+    return new ResponseEntity<>("Book with uuid " + uuid + " updated successfully.", HttpStatus.OK);
   }
 
   @DeleteMapping("/delete/{uuid}")
   public ResponseEntity<?> deleteBook(@PathVariable String uuid) {
-    Book book = bookRepository.findByUUID(uuid);
+    Book book = bookRepository.findByUuid(uuid);
     if (book == null) {
-      return new ResponseEntity<>("Book with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
+      return new ResponseEntity<>("Book with Uuid " + uuid + " not found.", HttpStatus.NOT_FOUND);
     }
     bookRepository.delete(book);
     return new ResponseEntity<>("Book with UUID " + uuid + " deleted successfully.", HttpStatus.OK);

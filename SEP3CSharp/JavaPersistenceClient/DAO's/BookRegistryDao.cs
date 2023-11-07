@@ -10,6 +10,11 @@ public class BookRegistryDao : IBookRegistryDao
 {
     private readonly HttpClient _httpClient;
 
+    public BookRegistryDao()
+    {
+        _httpClient = new HttpClient();
+    }
+
     public Task<BookRegistry> UpdateAsync(BookRegistry entity)
     {
         throw new NotImplementedException();
@@ -20,9 +25,19 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public Task<BookRegistry> CreateAsync(BookRegistry entity)
+    public async Task<BookRegistry> CreateAsync(BookRegistry entity)
     {
-        throw new NotImplementedException();
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
+        Console.WriteLine("jsonContent11: " + jsonContent);
+        var response = await _httpClient.PostAsync("http://localhost:8080/book_registry/register", jsonContent);
+        Console.WriteLine("response: " + response);
+        if (!response.IsSuccessStatusCode)
+            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
+
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(jsonResponse);
+        return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
     }
 
     public Task<BookRegistry> GetByUuidAsync(string uuid)
@@ -40,17 +55,6 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public async Task<Book> CreateAsync(Book entity)
-    {
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync("http://localhost:8080/book/create", jsonContent);
-        Console.WriteLine(response);
-        if (!response.IsSuccessStatusCode) throw new Exception($"Error creating book: {response.StatusCode}");
-
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<Book>(jsonResponse);
-    }
 
     public Task<Book> UpdateAsync(Book entity)
     {

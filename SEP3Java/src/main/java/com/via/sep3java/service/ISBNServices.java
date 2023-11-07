@@ -2,7 +2,7 @@ package com.via.sep3java.service;
 
 import java.util.Random;
 
-public class ISBN
+public class ISBNServices
 {
   public static String Generate(){
     Random rand = new Random();

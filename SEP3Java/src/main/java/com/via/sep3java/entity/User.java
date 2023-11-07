@@ -10,7 +10,7 @@ import java.util.Objects;
 public class User
 {
     @Id
-    public String UUID;
+    public String uuid;
     @Column(nullable = false)
     public String FirstName;
     @Column(nullable = false)
@@ -22,8 +22,8 @@ public class User
     @Column(nullable = false)
     public String Role;
 
-    public User(String UUID, String firstName, String lastName, String password, String email, String role) {
-        this.UUID = UUID;
+    public User(String uuid, String firstName, String lastName, String password, String email, String role) {
+        this.uuid = uuid;
         FirstName = firstName;
         LastName = lastName;
         Password = password;
@@ -42,12 +42,12 @@ public class User
     public User() {
     }
 
-    public String getUUID() {
-        return String.valueOf(UUID);
+    public String getUuid() {
+        return String.valueOf(uuid);
     }
 
-    public void setUUID(String UUID) {
-        this.UUID = UUID;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getFirstName() {
@@ -95,18 +95,18 @@ public class User
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return UUID == user.UUID && Objects.equals(FirstName, user.FirstName) && Objects.equals(LastName, user.LastName) && Objects.equals(Password, user.Password) && Objects.equals(Email, user.Email) && Objects.equals(Role, user.Role);
+        return uuid == user.uuid && Objects.equals(FirstName, user.FirstName) && Objects.equals(LastName, user.LastName) && Objects.equals(Password, user.Password) && Objects.equals(Email, user.Email) && Objects.equals(Role, user.Role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(UUID, FirstName, LastName, Password, Email, Role);
+        return Objects.hash(uuid, FirstName, LastName, Password, Email, Role);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "UUID=" + UUID +
+                "UUID=" + uuid +
                 ", FirstName='" + FirstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 ", Password='" + Password + '\'' +

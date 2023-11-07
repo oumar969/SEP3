@@ -16,9 +16,9 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<?> addUser(@RequestBody User user) {
-        User existingUser = userRepository.findByUUID(user.getUUID());
+        User existingUser = userRepository.findByUuid(user.getUuid());
         if (existingUser != null) {
-            return new ResponseEntity<>("User with UUID " + user.getUUID() + " already exists.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User with UUID " + user.getUuid() + " already exists.", HttpStatus.BAD_REQUEST);
         }
 
         User savedUser = userRepository.save(user);
@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping("/get/{uuid}")
     public ResponseEntity<?> getUser(@PathVariable String uuid) {
-        User existingUser = userRepository.findByUUID(uuid);
+        User existingUser = userRepository.findByUuid(uuid);
         if (existingUser == null) {
             return new ResponseEntity<>("User with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
         }
@@ -37,7 +37,7 @@ public class UserController {
 
     @PutMapping("/edit/{uuid}")
     public ResponseEntity<?> editUser(@PathVariable String uuid, @RequestBody User user) {
-        User existingUser = userRepository.findByUUID(uuid);
+        User existingUser = userRepository.findByUuid(uuid);
         if (existingUser == null) {
             return new ResponseEntity<>("User with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
         }
@@ -46,14 +46,14 @@ public class UserController {
         existingUser.setEmail(user.getEmail());
         existingUser.setPassword(user.getPassword());
         existingUser.setRole(user.getRole());
-        //existingUser.setUUID(user.getUUID());
+        //existingUser.setUuid(user.getUuid());
         userRepository.save(existingUser);
         return new ResponseEntity<>(existingUser, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{uuid}")
     public ResponseEntity<?> deleteUser(@PathVariable String uuid) {
-        User existingUser = userRepository.findByUUID(uuid);
+        User existingUser = userRepository.findByUuid(uuid);
         if (existingUser == null) {
             return new ResponseEntity<>("User with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
         }
