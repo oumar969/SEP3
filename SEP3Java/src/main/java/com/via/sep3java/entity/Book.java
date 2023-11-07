@@ -16,7 +16,7 @@ public class Book {
   private String isbn;
 
   @Column
-  private String loanerUUID;
+  private String loanerUuid;
 
   // Default constructor is required by JPA specifications
   public Book() {
@@ -24,22 +24,22 @@ public class Book {
   }
 
   // For the id field
-  public String getUUID() {
+  public String getUuid() {
     return uuid;
   }
 
-  public void setUUID(String uuid) {
+  public void setUuid(String uuid) {
     this.uuid = uuid;
   }
 
-  public String getLoanerUUID()
+  public String getLoanerUuid()
   {
-    return loanerUUID;
+    return loanerUuid;
   }
 
-  public void setLoanerUUID(String loanerUUID)
+  public void setLoanerUuid(String loanerUuid)
   {
-    this.loanerUUID = loanerUUID;
+    this.loanerUuid = loanerUuid;
   }
 
   public String getIsbn()

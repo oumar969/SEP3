@@ -12,7 +12,7 @@ public class Review {
   private String uuid;
 
   public Review () {
-    uuid = UUID.randomUUID().toString();
+    this.uuid = UUID.randomUUID().toString();
   }
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -26,7 +26,7 @@ public class Review {
   private int score;
 
   @Column(nullable = false)
-  private String reviewerUUID;
+  private String reviewerUuid;
 
   @Column
   private String comment;
@@ -41,14 +41,14 @@ public class Review {
     this.score = score;
   }
 
-  public String getReviewerUUID()
+  public String getReviewerUuid()
   {
-    return reviewerUUID;
+    return reviewerUuid;
   }
 
-  public void setReviewerUUID(String reviewerUUID)
+  public void setReviewerUuid(String reviewerUuid)
   {
-    this.reviewerUUID = reviewerUUID;
+    this.reviewerUuid = reviewerUuid;
   }
 
   public String getComment()

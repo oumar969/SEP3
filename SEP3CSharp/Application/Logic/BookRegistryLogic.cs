@@ -44,7 +44,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         var genreToUse = dto.Genre ?? existing.Genre;
         var isbnToUse = dto.Isbn ?? existing.Isbn;
         var descriptionToUse = dto.Description ?? existing.Description;
-        var reviewToUse = dto.Review ?? existing.Review;
+        var reviewToUse = dto.Review ?? existing.Reviews;
 
         if (titleToUse.Length > 10) throw new Exception($"{dto.Title} cannot be longer than 10 characters.");
 
@@ -107,7 +107,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         if (bookRegistry == null) throw new Exception($"Book with UUID {uuid} not found");
 
         return new BookBasicDto(bookRegistry.Title, bookRegistry.Author, bookRegistry.Genre, bookRegistry.Isbn,
-            bookRegistry.Description, bookRegistry.Review);
+            bookRegistry.Description, bookRegistry.Reviews);
     }
 
     private void ValidateBookRegistry(BookRegistry bookRegistry)

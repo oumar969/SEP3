@@ -54,7 +54,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"loanerUUID\": \"yeaaah boiii\"\n}\n"
+									"raw": "{\n  \"loanerUuid\": \"yeaaah boiii\"\n}\n"
 								},
 								"url": {
 									"raw": "{{base_url}}/books/book/ca92dc18-2da7-40dc-b398-e740115663ef",
