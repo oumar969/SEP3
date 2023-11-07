@@ -1,8 +1,12 @@
+using System.Text;
 using Application.Logic;
 using Application.LogicInterfaces;
+using Domain.Auth;
 using Domain.Models;
 using FileData;
 using JavaPersistenceClient.DAOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +21,23 @@ builder.Services.AddScoped<IGenericDao<User>, UserDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<IGenericDao<BookRegistry>, BookRegistryDao>();
 builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
+//builder.Services.AddScoped<IAuthService, AuthService>();
 
+AuthorizationPolicies.AddPolicies(builder.Services);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
 
 var app = builder.Build();
 
@@ -31,6 +51,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
