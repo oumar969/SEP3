@@ -2,7 +2,8 @@ package com.via.sep3java.entity;
 
 import com.via.sep3java.service.ISBN;
 import jakarta.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class BookRegistry
@@ -18,6 +19,10 @@ public class BookRegistry
 
   @Column(nullable = false)
   private String description;
+
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bookRegistry")
+  private List<Review> reviews = new ArrayList<>();
+
 
   // Default constructor is required by JPA specifications
   public BookRegistry() {

@@ -19,10 +19,6 @@ public class BookRegistryController
   @Autowired
   private BookRegistryRepository repository;
 
-//  @ExceptionHandler(PropertyValueException.class)
-//  public ResponseEntity<String> handlePropertyValueException(PropertyValueException ex) {
-//    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request data: " + ex.getMessage());
-//  }
   @PostMapping("/register")
   public BookRegistry registerBook(@Valid @RequestBody BookRegistry bookRegistry) {
     return repository.save(bookRegistry);
