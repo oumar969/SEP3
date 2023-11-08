@@ -8,10 +8,10 @@ Console.WriteLine("Hello, World! Testing here...");
 
 BookRegistryDao bookRegistryDao = new();
 await bookRegistryDao.CreateAsync(new BookRegistry(
-    "Test Title v3.0",
-    "Test Author huhu",
-    "Test Genre",
-    "Test Isbn vvv2",
-    "Test DescriptionaaA",
-    "Test Review"
+    "UNITtests Title v3.0",
+    "UNITtests Author huhu",
+    "UNITtests Genre",
+    "UNITtests Isbn vvv2",
+    "UNITtests DescriptionaaA",
+    "UNITtests Review"
 ));

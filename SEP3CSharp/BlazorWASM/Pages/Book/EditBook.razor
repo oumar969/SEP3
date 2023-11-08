@@ -1,9 +1,10 @@
-﻿@page "/EditPost/{id:int}"
+﻿@page "/EditBook/{id:int}"
 @using Domain.DTOs
 @using Domain.Models
+@using HttpClients.ClientInterfaces
 @using Microsoft.AspNetCore.Components
 @attribute [Authorize]
-@inject IPostService postService;
+@inject IBookService bookService;
 @inject IUserService userService;
 @inject NavigationManager navMgr;
 
@@ -22,15 +23,36 @@
     }
     else
     {
-        <h3>Update Post</h3>
+        <h3>Update Book</h3>
         <div class="form-group field">
             <label>Title:</label>
             <input type="text" @bind="dto.Title"/>
         </div>
         <div class="form-group field">
-            <label>Body:</label>
-            <input type="text" @bind="dto.Body"/>
+            <label>Author:</label>
+            <input type="text" @bind="dto.Author"/>
         </div>
+        <div class="form-group field">
+            <label>Isbn:</label>
+            <input type="text" @bind="dto.Isbn"/>
+            
+        </div><div class="form-group field">
+                  <label>Genre:</label>
+                  <input type="text" @bind="dto.Genre"/>
+              </div>
+        <div class="form-group field">
+            <label>Location:</label>
+            <input type="text" @bind="dto.Location"/>
+        </div>
+        <div class="form-group field">
+            <label>Description:</label>
+            <input type="text" @bind="dto.Description"/>
+        </div>
+        <div class="form-group field">
+            <label>Review:</label>
+            <input type="text" @bind="dto.Review"/>
+        </div>
+        
 
         <div class="button-row">
             <button @onclick="UpdateAsync" class="acceptbtn">Update</button>
@@ -45,40 +67,44 @@
 @code {
 
     [Parameter]
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     private BookUpdateDto dto = null!;
     private string msg = "";
     private ICollection<User>? users;
 
-    protected override async Task OnInitializedAsync()
-    {
-        msg = "";
-        try
-        {
-            users = await userService.GetUsers();
-            BookBasicDto postData = await postService.GetByIdAsync(Id);
-            var currentlyAssigned = users.First(user => user.UserName.Equals(postData.OwnerName));
-
-            dto = new BookUpdateDto(Id)
-            {
-                Title = postData.Title,
-                Body = postData.Body,
-                OwnerId = currentlyAssigned.Id
-            };
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            msg = e.Message;
-        }
-    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     msg = "";
+    //     try
+    //     {
+    //         users = await userService.GetUsers();
+    //         BookBasicDto bookData = await bookService.GetByIdAsync(Id);
+    //         var currentlyAssigned = users.First(user => user.FirstName.Equals(bookData.Borrower));
+    //
+    //         dto = new BookUpdateDto(Id)
+    //         {
+    //             Title = bookData.Title,
+    //             Author = bookData.Author,
+    //             Isbn = bookData.Isbn,
+    //                Genre = bookData.Genre,
+    //             Description = bookData.Description,
+    //             Review = bookData.Review,
+    //             Borrower = bookData.Borrower
+    //         };
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Console.WriteLine(e);
+    //         msg = e.Message;
+    //     }
+    // }
 
     private async Task UpdateAsync()
     {
         try
         {
-            await postService.UpdateAsync(dto);
+            await bookService.UpdateAsync(dto);
             navMgr.NavigateTo("/MyPosts");
         }
         catch (Exception e)

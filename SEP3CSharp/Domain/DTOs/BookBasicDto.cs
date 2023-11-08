@@ -1,4 +1,6 @@
-﻿namespace Domain.DTOs;
+﻿using Domain.Models;
+
+namespace Domain.DTOs;
 
 public class BookBasicDto : BookRegistryDto
 {
@@ -19,4 +21,5 @@ public class BookBasicDto : BookRegistryDto
     public string Isbn { get; }
     public string Description { get; }
     public string Review { get; }
+    public User Borrower { get; set; }
 }

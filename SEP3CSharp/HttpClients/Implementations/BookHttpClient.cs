@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net.Http.Json;
+using System.Text;
 using Domain.DTOs;
 using Domain.Models;
 using HttpClients.ClientInterfaces;
@@ -14,9 +15,15 @@ public class BookHttpClient : IBookService
         this.client = client;
     }
     
-    public Task CreateAsync(BookRegistryCreationDto dto)
+    public async Task CreateAsync(BookRegistryCreationDto dto)
     {
-        throw new NotImplementedException();
+        HttpResponseMessage response = await client.PostAsJsonAsync("/books",dto);
+        string content = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(content);
+        }
+        
     }
 
     public Task<ICollection<Book>> GetAsync(string? userName, int? userId, bool? completedStatus, string? titleContains)

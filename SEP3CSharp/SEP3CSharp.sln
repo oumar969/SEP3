@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWASM", "BlazorWASM\BlazorWASM.csproj", "{6F1459BF-58FC-4439-9C45-F370AD71CC2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{1CAC9ECB-F4FC-4F81-8050-FEB99EE489EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNITtests", "UNITtests\UNITtests.csproj", "{1CAC9ECB-F4FC-4F81-8050-FEB99EE489EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
