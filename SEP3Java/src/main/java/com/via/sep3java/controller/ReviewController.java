@@ -23,7 +23,7 @@ public class ReviewController
 
   @PutMapping("/update/{uuid}")
   public ResponseEntity<?> updateReview(@PathVariable String uuid, @RequestBody Map<String, String> body) {
-    Review review = reviewRepository.findByUUID(uuid);
+    Review review = reviewRepository.findByUuid(uuid);
     if (review == null) {
       return new ResponseEntity<>("Review with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
     }
@@ -41,7 +41,7 @@ public class ReviewController
 
   @DeleteMapping("/delete/{uuid}")
   public ResponseEntity<?> deleteReview(@PathVariable String uuid) {
-    Review review = reviewRepository.findByUUID(uuid);
+    Review review = reviewRepository.findByUuid(uuid);
     if (review == null) {
       return new ResponseEntity<>("Review with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
     }

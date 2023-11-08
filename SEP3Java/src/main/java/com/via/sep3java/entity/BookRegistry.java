@@ -1,6 +1,6 @@
 package com.via.sep3java.entity;
 
-import com.via.sep3java.service.ISBN;
+import com.via.sep3java.service.ISBNServices;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,19 +14,43 @@ public class BookRegistry
   @Column(nullable = false)
   private String title;
 
-  @Column(nullable = false)
+  @Column
   private String author;
 
-  @Column(nullable = false)
+  @Column
   private String description;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bookRegistry")
-  private List<Review> reviews = new ArrayList<>();
+  @Column
+  private String genre;
 
+  @Column
+  private String reviews;
+
+//  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bookRegistry")
+//  private List<Review> reviews = new ArrayList<>();
+
+  public String getGenre()
+  {
+    return genre;
+  }
+
+  public void setGenre(String genre)
+  {
+    this.genre = genre;
+  }
+
+  public String getReviews()
+  {
+    return reviews;
+  }
+
+  public void setReviews(String reviews)
+  {
+    this.reviews = reviews;
+  }
 
   // Default constructor is required by JPA specifications
   public BookRegistry() {
-    this.isbn = ISBN.Generate();
   }
 
   public String getDescription()

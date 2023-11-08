@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface ReviewRepository extends CrudRepository<Review, String>
 {
-  List<Review> findAllByIsbn(String isbn);
-  Review findByUUID(String uuid);
+  Review findByUuid(String uuid);
 }

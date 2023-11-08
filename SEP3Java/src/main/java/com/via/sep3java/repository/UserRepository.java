@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, String>
 {
-    User findByUUID(String uuid);
+    User findByUuid(String uuid);
 
 
 
