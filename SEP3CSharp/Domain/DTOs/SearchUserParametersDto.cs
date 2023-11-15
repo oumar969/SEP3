@@ -1,11 +1,11 @@
 ﻿namespace Domain.DTOs;
 
-public class SearchUserParametersDto : ISearchParametersDto
+public class SearchUserParametersDto
 {
-    public SearchUserParametersDto(string? usernameContains)
+    public SearchUserParametersDto(string? email)
     {
-        UsernameContains = usernameContains;
+        Email = email;
     }
 
-    public string? UsernameContains { get; }
+    public string? Email { get; set; }
 }

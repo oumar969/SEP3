@@ -18,7 +18,7 @@ public class UserLogic : IUserLogic
 
     public async Task<User> CreateAsync(UserCreationDto dto)
     {
-        var existing = await userDao.GetByEmailAsync(dto.Email);
+        var existing = await userDao.GetAsync(new SearchUserParametersDto(dto.Email));
         if (existing != null)
 
             throw new Exception("User already exists");
@@ -38,12 +38,6 @@ public class UserLogic : IUserLogic
         return created;
     }
 
-
-    public Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters)
-    {
-        return userDao.GetAsync(searchParameters);
-    }
-
     public Task<User> UpdateAsync(int id, UserUpdateDto dto)
     {
         var toUpdate = new User
@@ -58,6 +52,12 @@ public class UserLogic : IUserLogic
     public Task DeleteAsync(int id)
     {
         throw new NotImplementedException();
+    }
+
+
+    public Task<User> GetAsync(SearchUserParametersDto searchParameters)
+    {
+        return userDao.GetAsync(searchParameters);
     }
 
     public async Task DeleteAsync(string uuid)

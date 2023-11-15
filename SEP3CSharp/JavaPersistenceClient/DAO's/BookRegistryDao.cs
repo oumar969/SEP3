@@ -50,7 +50,7 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<BookRegistry> GetAsync(SearchBookRegistryParametersDto searchParameters)
     {
         throw new NotImplementedException();
     }

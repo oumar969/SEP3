@@ -27,10 +27,19 @@ public class UserController {
 
 
     @GetMapping("/get/{uuid}")
-    public ResponseEntity<?> getUser(@PathVariable String uuid) {
+    public ResponseEntity<?> getUserByUuid(@PathVariable String uuid) {
         User existingUser = userRepository.findByUuid(uuid);
         if (existingUser == null) {
             return new ResponseEntity<>("User with UUID " + uuid + " not found.", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(existingUser, HttpStatus.OK);
+    }
+
+    @GetMapping("/get/by_email/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        User existingUser = userRepository.findByEmail(email);
+        if (existingUser == null) {
+            return new ResponseEntity<>("User with email " + email + " not found.", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(existingUser, HttpStatus.OK);
     }

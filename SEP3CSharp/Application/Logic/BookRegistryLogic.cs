@@ -16,12 +16,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         _userDao = userDao;
     }
 
-    public Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<Book> IBookRegistryLogic.CreateAsync(BookRegistryCreationDto dto)
+    Task<BookRegistry> IBookRegistryLogic.CreateAsync(BookRegistryCreationDto dto)
     {
         throw new NotImplementedException();
     }
@@ -60,9 +55,14 @@ public class BookRegistryLogic : IBookRegistryLogic
         throw new NotImplementedException();
     }
 
-    public Task<BookBasicDto> GetByIdAsync(int id)
+    public Task<BookRegistryDto> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
+    }
+
+    public Task<BookRegistry> GetAsync(SearchBookRegistryParametersDto searchParameters)
+    {
+        return _bookRegistryDao.GetAsync(searchParameters);
     }
 
     public Task<ICollection<BookRegistry>> GetAllAsync()
@@ -85,11 +85,6 @@ public class BookRegistryLogic : IBookRegistryLogic
     public Task<BookRegistry> CreateAsync(BookRegistry entity)
     {
         throw new NotImplementedException();
-    }
-
-    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
-    {
-        return _bookRegistryDao.GetAsync(searchParameters);
     }
 
 

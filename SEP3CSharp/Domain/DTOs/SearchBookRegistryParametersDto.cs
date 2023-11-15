@@ -1,6 +1,6 @@
 ﻿namespace Domain.DTOs;
 
-public class SearchBookRegistryParametersDto : ISearchParametersDto
+public class SearchBookRegistryParametersDto
 {
     public SearchBookRegistryParametersDto(string? title, string? author, string? isbn, string? genre,
         string? description, string? review)
