@@ -1,0 +1,5 @@
+
+_csharpsquid:S4136"6All 'UpdateAsync' method overloads should be adjacent.(Ž°Ò€ÿÿÿÿÿ8ÜÖ¬„»1
+Zcsharpsquid:S4136"6All 'DeleteAsync' method overloads should be adjacent.(ø³§²8ÝÖ¬„»1
+Xcsharpsquid:S112)"5'System.Exception' should not be thrown by user code.(ÞÌÖ‡8„úí„»1
+hcsharpsquid:S1075&"?Refactor your code not to use hardcoded absolute paths or URIs.(ã»è¥ùÿÿÿÿ8„úí„»1

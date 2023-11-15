@@ -1,0 +1,23 @@
+
+\csharpsquid:S4136"3All 'GetAsync' method overloads should be adjacent.(›ïËÙûÿÿÿÿ8Í‡æ„»1
+_csharpsquid:S4136"6All 'UpdateAsync' method overloads should be adjacent.(Èµ¨«üÿÿÿÿ8Ñ‡æ„»1
+Ycsharpsquid:S4136:"6All 'DeleteAsync' method overloads should be adjacent.(ä¾×}8Ñ‡æ„»1
+Zcsharpsquid:S4136U"6All 'CreateAsync' method overloads should be adjacent.(Ó•›í8Ò‡æ„»1
+]csharpsquid:S112!"5'System.Exception' should not be thrown by user code.(®Ë‘õùÿÿÿÿ8Ó‡æ„»1
+]csharpsquid:S1121"5'System.Exception' should not be thrown by user code.(âãËúÿÿÿÿ8Õ‡æ„»1
+]csharpsquid:S112Q"5'System.Exception' should not be thrown by user code.(ã¹‹üÿÿÿÿ8Õ‡æ„»1
+Xcsharpsquid:S112k"5'System.Exception' should not be thrown by user code.(€»æß8•Ç±„»1
+Xcsharpsquid:S112s"5'System.Exception' should not be thrown by user code.(¤‘¹8•Ç±„»1
+Xcsharpsquid:S112u"5'System.Exception' should not be thrown by user code.(€îÙà8–Ç±„»1
+Xcsharpsquid:S112w"5'System.Exception' should not be thrown by user code.(º«ì“8–Ç±„»1
+]csharpsquid:S112y"5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8—Ç±„»1
+]csharpsquid:S112{"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8—Ç±„»1
+Xcsharpsquid:S112€"5'System.Exception' should not be thrown by user code.(ßñ8Ö„äƒ»1
+Ycsharpsquid:S112"5'System.Exception' should not be thrown by user code.(·Ï¼ù8Ö„äƒ»1
+^csharpsquid:S112‚"5'System.Exception' should not be thrown by user code.(™ÑïÊüÿÿÿÿ8Ö„äƒ»1
+^csharpsquid:S112ƒ"5'System.Exception' should not be thrown by user code.(³«¼Šÿÿÿÿÿ8×„äƒ»1
+^csharpsquid:S112„"5'System.Exception' should not be thrown by user code.(İá÷øÿÿÿÿ8×„äƒ»1
+Ycsharpsquid:S112…"5'System.Exception' should not be thrown by user code.(Ì©8™Ç±„»1
+{csharpsquid:S4487"RRemove this unread private field '_userDao' or refactor the code to use its value.(û‚‹Óüÿÿÿÿ8Ù‡æ„»1
+Qcsharpsquid:S1481#"(Remove the unused local variable 'user'.(Û®óıÿÿÿÿ8Ú‡æ„»1
+Bcsharpsquid:S125&"Remove this commented out code.(­¼ùâ8Ú‡æ„»1
