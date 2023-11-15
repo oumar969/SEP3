@@ -6,8 +6,9 @@ public class BookRegistryCreationDto : BookRegistryDto
     {
     }
 
-    public BookRegistryCreationDto(string title, string author, string genre, string isbn, string description)
+    public BookRegistryCreationDto(int borrowerId ,string title, string author, string genre, string isbn, string description)
     {
+        BorrowerId = borrowerId;
         Title = title;
         Author = author;
         Genre = genre;
@@ -23,4 +24,5 @@ public class BookRegistryCreationDto : BookRegistryDto
     public string Isbn { get; set; }
     public string Description { get; set; }
     public string Review { get; set; }
+    public int BorrowerId { get; set; }
 }

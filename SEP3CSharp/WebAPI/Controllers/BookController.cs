@@ -34,7 +34,7 @@ public class BookController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<ICollection<Book>>> GetAsync([FromQuery] string? id, [FromQuery] string? title,
         [FromQuery] string? author, [FromQuery] string? isbn, [FromQuery] string? genre,
-        [FromQuery] string? isBorrowed /*, [FromQuery] string? bodyContains*/)
+        [FromQuery] string? isBorrowed)
     {
         try
         {

@@ -107,6 +107,4 @@ public class JwtAuthService : IAuthService
         OnAuthStateChanged.Invoke(principal);
         return Task.CompletedTask;
     }
-
-    
 }

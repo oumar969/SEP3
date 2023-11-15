@@ -25,6 +25,11 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
+    public Task<Book?> GetByIdAsync(int bookId)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<BookRegistry> CreateAsync(BookRegistry entity)
     {
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");

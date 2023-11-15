@@ -31,7 +31,8 @@ public class UserLogic : IUserLogic
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             Email = dto.Email,
-            Password = dto.Password
+            Password = dto.Password,
+            IsLibrarian = dto.IsLibrarian
         };
 
         var created = await userDao.CreateAsync(toCreate);
@@ -55,18 +56,16 @@ public class UserLogic : IUserLogic
         return userDao.UpdateAsync(toUpdate);
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        // var user = await userDao.GetByUuidAsync(id);
+        // if (user == null) throw new Exception($"Book with UUID {id} was not found!");
+        //
+        // await userDao.DeleteAsync(id);
+        
     }
 
-    public async Task DeleteAsync(string uuid)
-    {
-        var user = await userDao.GetByUuidAsync(uuid);
-        if (user == null) throw new Exception($"Book with UUID {uuid} was not found!");
-
-        await userDao.DeleteAsync(uuid);
-    }
+   
 
 
     public static void ValidateData(UserCreationDto userCreationDto)

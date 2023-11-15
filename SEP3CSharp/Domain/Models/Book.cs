@@ -9,6 +9,5 @@ public class Book
 
     public string UUID { get; }
     public string Isbn { get; set; }
-
-    public string LoanerUuid { get; set; }
+    public User LoanerUuid { get; set; }
 }
