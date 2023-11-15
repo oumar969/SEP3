@@ -1,4 +1,5 @@
 using System.Text;
+using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
 using Domain.Auth;
@@ -17,9 +18,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IUserDao, UserDao>();
+builder.Services.AddScoped<IBookRegistryDao, BookRegistryDao>();
 builder.Services.AddScoped<IGenericDao<User>, UserDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<IGenericDao<BookRegistry>, BookRegistryDao>();
+
 builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
 

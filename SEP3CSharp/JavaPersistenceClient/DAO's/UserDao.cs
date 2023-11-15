@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using FileData;
@@ -6,12 +7,17 @@ using Newtonsoft.Json;
 
 namespace JavaPersistenceClient.DAOs;
 
-public class UserDao : IGenericDao<User>
+public class UserDao : IGenericDao<User>, IUserDao
 {
     private readonly HttpClient _httpClient;
     public UserDao()
     {
         _httpClient = new HttpClient();
+    }
+
+    public Task<User> GetByEmailAsync(string email)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<User> CreateAsync(User entity)
@@ -27,6 +33,21 @@ public class UserDao : IGenericDao<User>
         var jsonResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine(jsonResponse);
         return JsonConvert.DeserializeObject<User>(jsonResponse);
+    }
+
+    public Task<User?> GetByUsernameAsync(string userName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User?> GetByIdAsync(int id)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<User> GetByUuidAsync(string uuid)
@@ -65,6 +86,11 @@ public class UserDao : IGenericDao<User>
     }
 
     public Task<User> UpdateAsync(User entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }
