@@ -18,8 +18,30 @@
             <input type="text" @bind="bookTitle"/>
         </div>
         <div>
-            <label>Write here:</label>
-            <textarea rows="8" cols="20" @bind="bookBody" style="alignment: center"></textarea>
+            <label>Isbn:</label>
+            <input type="text" @bind="bookIsbn"/>
+        </div>
+        <div>
+            <label>Author:</label>
+            <input type="text" @bind="bookAuthor"/>
+        </div>
+        <div>
+            <label>Genre:</label>
+            <input type="text" @bind="bookGenre"/>
+        </div>
+        <div>
+            <label>Reviews:</label>
+            <input type="text" @bind="bookReview"/>
+        </div>
+        <div>
+            <label>Title:</label>
+            <input type="text" @bind="bookLocation"/>
+        </div>
+        
+        
+        <div>
+            <label>discription:</label>
+            <textarea rows="8" cols="20" @bind="bookDescription" style="alignment: center"></textarea>
         </div>
 
     </div>
@@ -38,13 +60,12 @@
     //   private int? selectedUserId;
 
     private string bookTitle = "";
-    private string bookBody = "";
-    private string Author = "";
-    private string Genre = "";
-    private string Location = "";
-    private string Isbn = "";
-    private string Description = "";
-    private string Review = "";
+    private string bookAuthor = "";
+    private string bookGenre = "";
+    private string bookLocation = "";
+    private string bookIsbn = "";
+    private string bookDescription = "";
+    private string bookReview = "";
 
     private string msg = "";
 
@@ -84,15 +105,40 @@
             msg = "Title cannot be empty!";
             return;
         }
-        if (string.IsNullOrEmpty(bookBody))
+        if (string.IsNullOrEmpty(bookIsbn))
         {
-            msg = "Title cannot be empty!";
+            msg = "Isbn cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(bookAuthor))
+        {
+            msg = "Author cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(bookGenre))
+        {
+            msg = "Genre cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(bookReview))
+        {
+            msg = "Review cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(bookLocation))
+        {
+            msg = "Location cannot be empty!";
+            return;
+        }
+        if (string.IsNullOrEmpty(bookDescription))
+        {
+            msg = "Description cannot be empty!";
             return;
         }
 
         try
         {
-            if (bookBody.Length > 100)
+            if (bookDescription.Length > 100)
             {
                 msg = "Body cannot be more than 100 characters!";
                 throw new Exception(msg);

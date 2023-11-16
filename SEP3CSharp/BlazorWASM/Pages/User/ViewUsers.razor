@@ -3,8 +3,8 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components
 @attribute [Authorize]
-@* @using HttpClients.ClientInterface *@
-@* @inject IUserService userService; *@
+@using HttpClients.ClientInterfaces
+ @inject IUserService userService;
 <h3 style="text-align: center">Overview of all users</h3>
 
 
@@ -78,7 +78,7 @@ else
 
         try
         {
-    // users = await userService.GetUsers();
+             users = (ICollection<User>?)await userService.GetUsers();
         }
         catch (Exception e)
         {
