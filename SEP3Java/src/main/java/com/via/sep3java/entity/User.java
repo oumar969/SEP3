@@ -12,31 +12,31 @@ public class User
     @Id
     public String uuid;
     @Column(nullable = false)
-    public String FirstName;
+    public String firstName;
     @Column(nullable = false)
-    public String LastName;
+    public String lastName;
     @Column(nullable = false)
-    public String Password;
+    public String password;
     @Column(nullable = false)
-    public String Email;
+    public String email;
     @Column(nullable = false)
-    public String Role;
+    public String role;
 
     public User(String uuid, String firstName, String lastName, String password, String email, String role) {
         this.uuid = uuid;
-        FirstName = firstName;
-        LastName = lastName;
-        Password = password;
-        Email = email;
-        Role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
     }
 
     public User(String firstName, String lastName, String password, String email, String role) {
-        FirstName = firstName;
-        LastName = lastName;
-        Password = password;
-        Email = email;
-        Role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
     }
 
     public User() {
@@ -51,43 +51,43 @@ public class User
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        firstName = firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        lastName = lastName;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        password = password;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        email = email;
     }
 
     public String getRole() {
-        return Role;
+        return role;
     }
 
     public void setRole(String role) {
-        Role = role;
+        role = role;
     }
 
     @Override
@@ -95,23 +95,50 @@ public class User
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return uuid == user.uuid && Objects.equals(FirstName, user.FirstName) && Objects.equals(LastName, user.LastName) && Objects.equals(Password, user.Password) && Objects.equals(Email, user.Email) && Objects.equals(Role, user.Role);
+        return uuid == user.uuid && Objects.equals(firstName
+
+, user.firstName
+
+) && Objects.equals(lastName
+
+, user.lastName
+
+) && Objects.equals(password
+
+, user.password
+
+) && Objects.equals(email
+
+, user.email
+
+) && Objects.equals(role
+
+, user.role
+
+);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, FirstName, LastName, Password, Email, Role);
+        return Objects.hash(uuid, firstName, lastName
+
+, password
+
+, email
+
+, role
+
+);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "UUID=" + uuid +
-                ", FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", Password='" + Password + '\'' +
-                ", Email='" + Email + '\'' +
-                ", Role='" + Role + '\'' +
+                ", firstName ='" + firstName + '\'' +
+                ", lastName ='" + lastName + '\'' + ", password ='" + password + '\'' +
+                ", email ='" + email + '\'' +
+                ", role ='" + role + '\'' +
                 '}';
     }
 }
