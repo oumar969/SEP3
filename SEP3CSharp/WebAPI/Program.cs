@@ -8,6 +8,7 @@ using FileData;
 using JavaPersistenceClient.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -7,12 +7,19 @@
     margin: auto;
     margin-top: 90px;
     border-radius: 15px; /* Reduced border-radius */
-    background-color: #9395cc; /* Background color for the card */
+    background-color: #898aa1; /* Background color for the card */
     border: 2px solid #ddd; /* Reduced border size */
 }
 
 .form-group {
+    
     margin-top: 20px;
+    margin-bottom: 15px; /* Add margin-bottom for space between fields */
+}
+
+.form-group input {
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Add margin to the bottom of input fields */
 }
 
 .acceptbtn {
