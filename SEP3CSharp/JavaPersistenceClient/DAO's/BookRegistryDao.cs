@@ -35,7 +35,7 @@ public class BookRegistryDao : IBookRegistryDao
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
         Console.WriteLine("jsonContent11: " + jsonContent);
-        var response = await _httpClient.PostAsync(ServerOptions.serverUrl, jsonContent);
+        var response = await _httpClient.PostAsync(ServerOptions.serverUrl + "/book-registry/create", jsonContent);
         Console.WriteLine("response: " + response);
         if (!response.IsSuccessStatusCode)
             throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");

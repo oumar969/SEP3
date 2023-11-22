@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e51bc700-f65b-4074-b537-bedc9bddb2f2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IUserDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IUserDao.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/UserLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/UserLogic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/CreateUser.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/CreateUser.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/UserCreationDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/UserCreationDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/UserDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/UserDao.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Controllers/BookController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Controllers/BookController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3.postman_collection.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +34,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -41,6 +56,9 @@
         <option name="mavenHome" value="Use Maven wrapper" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -72,7 +90,8 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save",
     "spring.configuration.checksum": "0f9bd0d963b6a66c737c85903d24345c",
     "vue.rearranger.settings.migration": "true"
   },
@@ -118,7 +137,7 @@
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1700040664964" duration="3977000" />
       <workItem from="1700232603915" duration="1030000" />
-      <workItem from="1700647840870" duration="738000" />
+      <workItem from="1700647840870" duration="7101000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />

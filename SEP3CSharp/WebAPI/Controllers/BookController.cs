@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SEP3CSharp.Controllers;
 
 [ApiController]
-[Route("books")]
+[Route("book")]
 public class BookController : ControllerBase
 {
     private readonly IBookRegistryLogic _bookRegistryLogic;

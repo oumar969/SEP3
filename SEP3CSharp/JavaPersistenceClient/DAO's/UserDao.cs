@@ -85,9 +85,29 @@ public class UserDao : IGenericDao<User>, IUserDao
         }
     }
 
-    public Task<User> GetByEmailAsync(string email)
+    public async Task<User?> GetByEmailAsync(string email)
     {
-        throw new NotImplementedException();
+        var url = $"{ServerOptions.serverUrl}/user/get/by-email/{email}";
+
+        var response = await _httpClient.GetAsync(url);
+
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return JsonConvert.DeserializeObject<User>(jsonResponse);
+        }
+
+        if (response.StatusCode.ToString().Equals("NotFound")) return null;
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error getting user by Email. Status code: {response.StatusCode}");
     }
 
     public Task<User?> GetByUsernameAsync(string userName)

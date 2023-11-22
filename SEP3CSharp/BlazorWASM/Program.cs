@@ -1,6 +1,4 @@
 using BlazorWasm.Auth;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using BlazorWASM.Data;
 using Domain.Auth;
 using HttpClients.ClientInterfaces;
@@ -13,8 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddHttpClient<IUserService, UserHttpClient>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5125"); // Replace with your actual API base URL
+});
 builder.Services.AddScoped<IAuthService, JwtAuthService>();
-builder.Services.AddScoped<IUserService, UserHttpClient>();
+// builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IBookService, BookHttpClient>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
