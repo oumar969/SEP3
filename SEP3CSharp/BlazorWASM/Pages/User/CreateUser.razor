@@ -1,8 +1,9 @@
 ﻿@page "/CreateUser"
 @using Microsoft.AspNetCore.Components
 @using global::Domain.DTOs
+@using HttpClients.ClientInterfaces
 @using JavaPersistenceClient.DAOs
-@* @inject IUserService userService; *@
+ @inject IUserService userService; 
 
 <div class="card">
     <h3>Create User</h3>
@@ -49,7 +50,7 @@
 
         try
         {
-            // await userService.Create(new UserCreationDto(username,password));
+             await userService.Create(new UserCreationDto(firstName,lastName,email,password,true));
             firstName = "";
             lastName = "";
             password = "";

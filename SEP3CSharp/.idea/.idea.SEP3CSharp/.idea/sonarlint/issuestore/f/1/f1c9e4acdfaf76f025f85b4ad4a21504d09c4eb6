@@ -1,3 +1,7 @@
 
-Vcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(Œ–±®øÿÿÿÿ
-Vcsharpsquid:S112."5'System.Exception' should not be thrown by user code.(Œ–±®øÿÿÿÿ
+Vcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(Œ–±®øÿÿÿÿ
+Vcsharpsquid:S112/"5'System.Exception' should not be thrown by user code.(Œ–±®øÿÿÿÿ
+]csharpsquid:S112@"5'System.Exception' should not be thrown by user code.(Œ–±®øÿÿÿÿ8Õêò´¿1
+]csharpsquid:S112S"5'System.Exception' should not be thrown by user code.(Œ–±®øÿÿÿÿ8„µü´¿1
+]csharpsquid:S112c"5'System.Exception' should not be thrown by user code.(Œ–±®øÿÿÿÿ8¸îµ¿1
+Lcsharpsquid:S1481f"(Remove the unused local variable 'user'.(Ş‹·Ø8Èóü´¿1

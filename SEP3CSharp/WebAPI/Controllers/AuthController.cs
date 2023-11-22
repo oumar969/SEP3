@@ -32,6 +32,8 @@ public class AuthController : ControllerBase
             new Claim(ClaimTypes.Name, user.Email),
             new Claim(ClaimTypes.Role, "User"),
             new Claim(ClaimTypes.Role, "Admin"),
+            new Claim("Email", user.Email),
+            new Claim("Id", user.UUID.ToString())
         };
         return claims.ToList();
     }

@@ -19,4 +19,13 @@ public class UserCreationDto
         Password = password;
         IsLibrarian = true;
     }
+    
+    public UserCreationDto(string firstName, string lastName, string email, string password, bool isLibrarian)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        Password = password;
+        IsLibrarian = true;
+    }
 }
