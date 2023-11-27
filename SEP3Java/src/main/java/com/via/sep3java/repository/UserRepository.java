@@ -7,10 +7,10 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, String>
 {
-    User findByEmail(String email);
+//    User findByEmail(String email);
     User findByUuid(String uuid);
 //Transactional er en annotation som gør at vi kan lave transaktioner på vores database
-    @Transactional
-    void deleteByEmail(String email);
+//    @Transactional
+//    void deleteByEmail(String email);
 
 }
