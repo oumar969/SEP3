@@ -1,27 +1,26 @@
 ﻿@page "/CreateUser"
-@using Microsoft.AspNetCore.Components
-@using global::Domain.DTOs
-@using JavaPersistenceClient.DAOs
-@* @inject IUserService userService; *@
+@using HttpClients.ClientInterfaces
+@using Domain.DTOs
+@inject IUserService userService; 
 
 <div class="card">
     <h3>Create User</h3>
     <div class="form-group field">
         <div>
             <label>First name:</label>
-            <input type="text" @bind="firstName" @bind:event="oninput" />
+            <input type="text" @bind="firstName" @bind:event="oninput"/>
         </div>
         <div>
             <label>Last name:</label>
-            <input type="text" @bind="lastName" @bind:event="oninput" />
+            <input type="text" @bind="lastName" @bind:event="oninput"/>
         </div>
         <div>
             <label>Email:</label>
-            <input type="text" @bind="email" @bind:event="oninput" />
+            <input type="text" @bind="email" @bind:event="oninput"/>
         </div>
         <div>
             <label>Password:</label>
-            <input type="text" @bind="password" @bind:event="oninput" />
+            <input type="text" @bind="password" @bind:event="oninput"/>
             @if (!string.IsNullOrEmpty(resultMsg))
             {
                 <label style="color: @color">@resultMsg</label>
@@ -46,21 +45,36 @@
     private async Task Create()
     {
         resultMsg = "";
+        color = "black"; // Set a default neutral color if you have such a requirement
 
         try
         {
-            // await userService.Create(new UserCreationDto(username,password));
+    // Await the userService.Create call and ensure the parentheses encompass the entire method call
+            await userService.Create(new UserCreationDto(
+                null,
+                firstName,
+                lastName,
+                email,
+                password,
+                true
+                ));
+
+    // Clear the form fields after successful creation
             firstName = "";
             lastName = "";
+            email = "";
             password = "";
+
+    // Set the success message and color
             resultMsg = "User successfully created";
             color = "green";
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            resultMsg = e.Message;
-            color = "red";
+            Console.WriteLine(e); // Log the exception to the console
+            resultMsg = e.Message; // Set the error message from the exception
+            color = "red"; // Set the error color
         }
     }
+
 }

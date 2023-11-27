@@ -1,9 +1,9 @@
-﻿@* @using HttpClients.ClientInterface *@
-@using Microsoft.AspNetCore.Components
+﻿@using Microsoft.AspNetCore.Components
+@using HttpClients.ClientInterfaces
 
 @namespace Login
 @inject NavigationManager navMgr
-@* @inject IAuthService authService *@
+ @* /@inject IAuthService authService  *@
 
 <AuthorizeView>
     <Authorized>
@@ -24,6 +24,7 @@
     private async Task Logout()
     {
         // await authService.LogoutAsync();
+        
         navMgr.NavigateTo("/");
     }
 
