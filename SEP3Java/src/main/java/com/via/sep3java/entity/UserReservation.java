@@ -1,9 +1,6 @@
 package com.via.sep3java.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -12,17 +9,28 @@ public class UserReservation{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
+    @Column(nullable = false)
     int userId;
+    @Column(nullable = false)
     private LocalDate reservationDate;
+    @Column(nullable = false)
     private int bookId;
+    @Column
     private String bookIsbn;
+    @Column(nullable = false)
     private String bookTitle;
+    @Column
     private String bookAuthor;
+    @Column
     private String libraryLocation;
+    @Column(nullable = false)
     private String userFirstName;
+    @Column
     private String userLastName;
     private String userEmail;
+    @Column(nullable = false)
     private boolean isActive;
+    @Column(nullable = false)
     private LocalDate pickupDate;
 
 
