@@ -1,0 +1,47 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Bootstrap background color */
+}
+
+.container {
+    margin-top: 50px;
+    display: flex;
+}
+
+.contact-box,
+.about-box {
+    width: 45%;
+    margin: 0 auto; /* Center the containers */
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Light gray background color */
+}
+
+address {
+    margin: 0;
+}
+
+/* Additional styles for the about box */
+
+.about-box {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.about-box h3 {
+    color: #333;
+}
+
+.about-box p {
+    color: #555;
+}
+
+.about-box ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.about-box address {
+    font-style: normal;
+}
