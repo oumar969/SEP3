@@ -20,6 +20,7 @@ builder.Services.AddScoped<IAuthService, JwtAuthService>();
 builder.Services.AddScoped<IBookService, BookHttpClient>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
+builder.Services.AddScoped<CascadingAuthenticationState>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
 

@@ -1,23 +1,21 @@
 ﻿@inherits Microsoft.AspNetCore.Components.LayoutComponentBase
+@using Microsoft.AspNetCore.Components.Authorization
+@using Login
 
-<PageTitle>BlazorWASM</PageTitle>
+<CascadingAuthenticationState>
+    <div class="page">
+        <div class="sidebar">
+            <NavMenu/>
+        </div>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
+        <main>
+            <div class="top-row px-4">
+                <LoginButtons/>
+            </div>
+            
+            <article class="content px-4">
+                @Body
+            </article>
+        </main>
     </div>
-
-    <main>
-        <div class="top-row px-4">
-            <LoginButtons/>
-        </div>
-        
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+</CascadingAuthenticationState>

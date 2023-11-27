@@ -54,9 +54,25 @@ public class UserDao : IGenericDao<User>, IUserDao
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
     }
 
-    public Task<ICollection<User>> GetAllAsync()
+    public async Task<ICollection<User>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var url = $"{ServerOptions.serverUrl}/user/getAllAsync";
+
+        var response = await _httpClient.GetAsync(url);
+        
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return JsonConvert.DeserializeObject<ICollection<User>>(jsonResponse);
+        }
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+        throw new Exception("Error getting all users");
     }
 
     public Task<ICollection<User>> GetAsync(ISearchParametersDto searchParameters)
@@ -110,9 +126,27 @@ public class UserDao : IGenericDao<User>, IUserDao
         throw new Exception($"Error getting user by Email. Status code: {response.StatusCode}");
     }
 
-    public Task<User?> GetByUsernameAsync(string userName)
+    public async Task<User?> GetByUsernameAsync(string userName)
     {
-        throw new NotImplementedException();
+        var url = $"{ServerOptions.serverUrl}/user/getByUsername/{userName}";
+
+        var response = await _httpClient.GetAsync(url);
+
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return JsonConvert.DeserializeObject<User>(jsonResponse);
+        }
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error getting user by user name. Status code: {response.StatusCode}");
     }
 
     public Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters)

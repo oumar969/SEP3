@@ -4,6 +4,7 @@
 @inject IAuthService authService
 @inject NavigationManager navMgr
 
+<CascadingAuthenticationState>
 
 <AuthorizeView>
     <NotAuthorized>
@@ -37,6 +38,7 @@
     </Authorized>
 </AuthorizeView>
 
+</CascadingAuthenticationState>
 
 @code {
     private string userName;
