@@ -10,12 +10,13 @@ import jakarta.persistence.Column;
 @Entity
 public class Book {
   @Id
+  @Column(nullable = false)
   private String uuid;
 
   @Column(nullable = false)
   private String isbn;
 
-  @Column
+  @Column(nullable = true)
   private String loanerUuid;
 
   // Default constructor is required by JPA specifications
