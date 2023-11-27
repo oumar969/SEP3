@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="Database works :D (Shake it babyyyy)">
+    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/UserReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/UserReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699306699817</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary=".">
+      <option name="closed" value="true" />
+      <created>1701075516579</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701075516579</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +198,8 @@
     <MESSAGE value="Removed trash" />
     <MESSAGE value="Database works :D (Shake it babyyyy)" />
     <MESSAGE value="Added review to Java server" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added review to Java server" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
