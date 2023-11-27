@@ -1,16 +1,45 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components
 
 <PageTitle>Home</PageTitle>
+
 <div style="text-align: center;">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDcSGDOS0hkk5shiEcujGF_I7umVEjZ54NPw&usqp=CAU" style="height: 150px; border-radius: 90%; border: 10px solid #121236;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDcSGDOS0hkk5shiEcujGF_I7umVEjZ54NPw&usqp=CAU" style="height: 150px; border-radius: 90%; border: 10px solid #121236;">
 </div>
-<h1 align="center">VIA bibliotek </h1>
-<h4 align="center"> Velkommen til dit nye bibliotek.</h4>
 
+<h1 align="center">VIA bibliotek</h1>
+<h4 align="center">Velkommen til dit nye bibliotek.</h4>
 
-<img src="/Image/JMF96ETfn1kSViVnUou1Z0XIDwWcPpT5mrPc7-ytpAc.jpg" asp-append-version="true" width="1000px" style="display: block;margin-left: auto;margin-right: auto;" />
+<!-- Vejledning -->
+<section style="text-align: center;">
+    <h2>Har du brug for vejledning?</h2>
+    <p>Du kan altid få hjælp og vejledning i litteratursøgning, referencehåndtering, kildekritik og meget andet på dit VIA Bibliotek. Du er også altid velkommen til blot at møde op på biblioteket med dine spørgsmål.</p>
+</section>
 
+<!-- Min kontaktbibliotekar -->
+<section style="text-align: center;">
+    <h2>Min kontaktbibliotekar</h2>
+    <img src="/Image/JMF96ETfn1kSViVnUou1Z0XIDwWcPpT5mrPc7-ytpAc.jpg" asp-append-version="true" width="400px" style="border-radius: 10px;">
+</section>
 
+<!-- Om VIA Bibliotek -->
+<section style="text-align: center;">
+    <h2>Om VIA Bibliotek</h2>
+    <p>Find information omkring åbningstider, adresser, kontakt samt hvordan du bruger dit VIA Bibliotek.</p>
+        <img src="/Image/JMF96ETfn1kSViVnUou1Z0XIDwWcPpT5mrPc7-ytpAc.jpg" asp-append-version="true" width="400px" style="border-radius: 10px;">
+</section>
 
+<!-- Kurser -->
+<section style="text-align: center;">
+    <h2>Kurser</h2>
+    <p>Deltag i et af VIA Biblioteks kurser og workshops og få ny viden. VIA Bibliotek udbyder løbende en række gratis kurser, og flere af dem afvikles online.</p>
+        <img src="/Image/JMF96ETfn1kSViVnUou1Z0XIDwWcPpT5mrPc7-ytpAc.jpg" asp-append-version="true" width="400px" style="border-radius: 10px;">
+    <a href="/kurser">Se VIA Biblioteks kurser</a>
+</section>
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+<!-- SurveyPrompt -->
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code {
+ 
+}

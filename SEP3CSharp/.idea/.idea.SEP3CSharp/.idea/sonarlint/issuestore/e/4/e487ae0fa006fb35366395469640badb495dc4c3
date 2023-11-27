@@ -1,0 +1,5 @@
+
+lcsharpsquid:S1118"OAdd a 'protected' constructor or the 'static' keyword to the class declaration.(Ô√∂ê
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(õá§ì
+ccsharpsquid:S2223"FChange the visibility of 'serverUrl' or make it 'const' or 'readonly'.(õá§ì
+\csharpsquid:S1075"?Refactor your code not to use hardcoded absolute paths or URIs.(õá§ì
