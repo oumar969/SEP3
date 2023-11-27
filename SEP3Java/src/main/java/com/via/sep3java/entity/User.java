@@ -6,138 +6,139 @@ import jakarta.persistence.Id;
 
 import java.util.Objects;
 
-@Entity public class User
+@Entity
+public class User
 {
-  @Id public String uuid;
-  @Column(nullable = false) public String firstName;
-  @Column(nullable = false) public String lastName;
-  @Column(nullable = false) public String password;
-  @Column(nullable = false) public String email;
-  @Column(nullable = false) public String isLibrarian;
+    @Id
+    public String uuid;
+    @Column(nullable = false)
+    public String firstName;
+    @Column(nullable = false)
+    public String lastName;
+    @Column(nullable = false)
+    public String password;
+    @Column(nullable = false)
+    public String email;
+    @Column(nullable = false)
+    public String role;
 
-  public User(String uuid, String firstName, String lastName, String password,
-      String email, String isLibrarian)
-  {
-    this.uuid = uuid;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.password = password;
-    this.email = email;
-    this.isLibrarian = isLibrarian;
-  }
+    public User(String uuid, String firstName, String lastName, String password, String email, String role) {
+        this.uuid = uuid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 
-  public User()
-  {
-  }
+    public User(String firstName, String lastName, String password, String email, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 
-  public String getUuid()
-  {
-    return String.valueOf(uuid);
-  }
+    public User() {
+    }
 
-  public void setUuid(String uuid)
-  {
-    this.uuid = uuid;
-  }
+    public String getUuid() {
+        return String.valueOf(uuid);
+    }
 
-  public String getFirstName()
-  {
-    return firstName;
-  }
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
-  public void setFirstName(String firstName)
-  {
-    this.firstName = firstName;
-  }
+    public String getFirstName() {
+        return firstName;
+    }
 
-  public String getLastName()
-  {
-    return lastName;
-  }
+    public void setFirstName(String firstName) {
+        firstName = firstName;
+    }
 
-  public void setLastName(String lastName)
-  {
-    this.lastName = lastName;
-  }
+    public String getLastName() {
+        return lastName;
+    }
 
-  public String getPassword()
-  {
-    return password;
-  }
+    public void setLastName(String lastName) {
+        lastName = lastName;
+    }
 
-  public void setPassword(String password)
-  {
-    this.password = password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public String getEmail()
-  {
-    return email;
-  }
+    public void setPassword(String password) {
+        password = password;
+    }
 
-  public void setEmail(String email)
-  {
-    this.email = email;
-  }
+    public String getEmail() {
+        return email;
+    }
 
-  public String getIsLibrarian()
-  {
-    return isLibrarian;
-  }
+    public void setEmail(String email) {
+        email = email;
+    }
 
-  public void setIsLibrarian(String isLibrarian)
-  {
-    this.isLibrarian = isLibrarian;
-  }
+    public String getRole() {
+        return role;
+    }
 
-  @Override public boolean equals(Object o)
-  {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
-    User user = (User) o;
-    return uuid == user.uuid && Objects.equals(firstName
+    public void setRole(String role) {
+        role = role;
+    }
 
-        , user.firstName
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return uuid == user.uuid && Objects.equals(firstName
 
-    ) && Objects.equals(lastName
+, user.firstName
 
-        , user.lastName
+) && Objects.equals(lastName
 
-    ) && Objects.equals(password
+, user.lastName
 
-        , user.password
+) && Objects.equals(password
 
-    ) && Objects.equals(email
+, user.password
 
-        , user.email
+) && Objects.equals(email
 
-    ) && Objects.equals(isLibrarian
+, user.email
 
-        , user.isLibrarian
+) && Objects.equals(role
 
-    );
-  }
+, user.role
 
-  @Override public int hashCode()
-  {
-    return Objects.hash(uuid, firstName, lastName
+);
+    }
 
-        , password
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, firstName, lastName
 
-        , email
+, password
 
-        , isLibrarian
+, email
 
-    );
-  }
+, role
 
-  @Override public String toString()
-  {
-    return "User{" + "UUID=" + uuid + ", firstName ='" + firstName + '\''
-        + ", lastName ='" + lastName + '\'' + ", password ='" + password + '\''
-        + ", email ='" + email + '\'' + ", isLibrarian ='" + isLibrarian + '\''
-        + '}';
-  }
+);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "UUID=" + uuid +
+                ", firstName ='" + firstName + '\'' +
+                ", lastName ='" + lastName + '\'' + ", password ='" + password + '\'' +
+                ", email ='" + email + '\'' +
+                ", role ='" + role + '\'' +
+                '}';
+    }
 }

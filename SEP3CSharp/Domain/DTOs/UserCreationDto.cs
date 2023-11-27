@@ -2,21 +2,21 @@
 
 public class UserCreationDto
 {
-    public UserCreationDto(string uuid, string firstName, string lastName, string email, string password,
-        bool isLibrarian)
+    public string UUID { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public bool IsLibrarian { get; set; }
+
+    
+    public UserCreationDto(string uuid,string firstName, string lastName, string email, string password, bool isLibrarian)
     {
         UUID = uuid;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Password = password;
-        IsLibrarian = isLibrarian;
+        IsLibrarian = true;
     }
-
-    public string? UUID { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public bool IsLibrarian { get; set; }
 }

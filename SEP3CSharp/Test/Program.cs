@@ -8,7 +8,7 @@ Console.WriteLine("Hello, World! Testing here...");
 
 BookRegistryDao bookRegistryDao = new();
 await bookRegistryDao.CreateAsync(new BookRegistry(
-    "Test Title v3.01",
+    "Test Title v3.0",
     "Test Author huhu",
     "Test Genre",
     "Test Isbn vvv2",
@@ -22,6 +22,6 @@ await user.CreateAsync(new User(
     "Oumar",
     "Ammar",
     "Oumar@via.dk",
-    "12345678d9",
+    "123456789",
     true
-));
+    ));
