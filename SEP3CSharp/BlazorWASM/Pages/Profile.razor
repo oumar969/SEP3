@@ -1,10 +1,14 @@
 ﻿@page "/Profile"
 @using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Authorization
 @using HttpClients.ClientInterfaces
 
 @inject IUserService userClient
-<h3>Profile</h3>
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
+'<h3>Profile</h3>
+<AuthorizeView Roles="user"> @* Profile-side skal vises som en del af din MainLayout-side, når brugeren har rollen "user", *@
+    <Authorized>
 <div class="card">
     <div class="card-body">
         <p> <strong>Uuid: </strong>@uuid</p>
@@ -14,7 +18,12 @@
         <p> <strong>FEE: </strong>@fee</p>
     </div>
 </div>
-
+</Authorized>
+    <NotAuthorized>
+        <!-- Optional: Show a message or redirect to another page for non-authorized users -->
+        <p>You are not authorized to view this page.</p>
+    </NotAuthorized>
+</AuthorizeView>
 @code {
     [Parameter]
     public string Email { get; set; }
