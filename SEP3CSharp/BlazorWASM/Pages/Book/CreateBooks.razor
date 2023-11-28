@@ -1,58 +1,43 @@
 ﻿@page "/CreateBook"
 @using System.Security.Claims
 @using Domain.DTOs
-@using Microsoft.AspNetCore.Components
 @attribute [Authorize]
-@* @using HttpClients.ClientInterface *@
-@* @inject IUserService userService; *@
-@* @inject IBookService postService; *@
 @inject NavigationManager navMgr
 
-<h3>Create Books</h3>
+<div class="book-form-card">
+    <h3 class="book-form-title">Create Book</h3>
 
-<div class="card">
-    <h3>Create Book</h3>
-    <div class="form-group field">
-        <div>
-            <label>Title:</label>
-            <input type="text" @bind="bookTitle"/>
-        </div>
-        <div>
-            <label>Isbn:</label>
-            <input type="text" @bind="bookIsbn"/>
-        </div>
-        <div>
-            <label>Author:</label>
-            <input type="text" @bind="bookAuthor"/>
-        </div>
-        <div>
-            <label>Genre:</label>
-            <input type="text" @bind="bookGenre"/>
-        </div>
-        <div>
-            <label>Reviews:</label>
-            <input type="text" @bind="bookReview"/>
-        </div>
-        <div>
-            <label>Location:</label>
-            <input type="text" @bind="bookLocation"/>
-        </div>
-        
-        
-        <div>
-            <label>discription:</label>
-            <textarea rows="4" cols="20" @bind="bookDescription" style="alignment: center"></textarea>
-        </div>
-
+    <div class="book-form-field">
+        <label class="book-form-label">ISBN</label>
+        <input type="text" class="book-form-input" @bind="bookIsbn"/>
     </div>
 
-    <div class="button-row">
-        @if (!string.IsNullOrEmpty(msg))
-        {
-            <label style="color: red">@msg</label>
-        }
-        <button @onclick="Create" class="acceptbtn">Create</button>
+    <div class="book-form-field">
+        <label class="book-form-label">Title</label>
+        <input type="text" class="book-form-input" @bind="bookTitle"/>
     </div>
+
+    <div class="book-form-field">
+        <label class="book-form-label">Author</label>
+        <input type="text" class="book-form-input" @bind="bookAuthor"/>
+    </div>
+
+    <div class="book-form-field">
+        <label class="book-form-label">Genre</label>
+        <input type="text" class="book-form-input" @bind="bookGenre"/>
+    </div>
+
+    <div class="book-form-field">
+        <label class="book-form-label">Description</label>
+        <textarea class="book-form-input" rows="4" @bind="bookDescription"></textarea>
+    </div>
+
+    @if (!string.IsNullOrEmpty(msg))
+    {
+        <div class="book-form-error">@msg</div>
+    }
+
+    <button @onclick="Create" class="book-form-button">Create</button>
 </div>
 
 @code {
@@ -62,10 +47,10 @@
     private string bookTitle = "";
     private string bookAuthor = "";
     private string bookGenre = "";
-    private string bookLocation = "";
+    private readonly string bookLocation = "";
     private string bookIsbn = "";
     private string bookDescription = "";
-    private string bookReview = "";
+    private readonly string bookReview = "";
 
     private string msg = "";
 
