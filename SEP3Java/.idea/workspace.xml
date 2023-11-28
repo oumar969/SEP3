@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/via/sep3java/JpaTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/via/sep3java/JpaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/via/sep3java/JpaTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,56 +84,8 @@
       <recent name="com.via.sep3java.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JpaTest.testUserEntity">
-    <configuration name="BookControllerJUnitTest.testCreateBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.BookControllerJUnitTest" />
-      <option name="METHOD_NAME" value="testCreateBook" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BookControllerTest.testCreateBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.BookControllerTest" />
-      <option name="METHOD_NAME" value="testCreateBook" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JpaConfig.testCreateBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaConfig" />
-      <option name="METHOD_NAME" value="testCreateBook" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JpaTest.TestInjection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.JpaTest.setFirstName_ValidFirstName_ShouldNotThrowException">
+    <configuration name="JpaTest.setEmail_InvalidEmail_ShouldThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SEP3Java" />
       <extension name="coverage">
         <pattern>
@@ -146,13 +95,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.via.sep3java" />
       <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
-      <option name="METHOD_NAME" value="TestInjection" />
+      <option name="METHOD_NAME" value="setEmail_InvalidEmail_ShouldThrowException" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JpaTest.testUserEntity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JpaTest.setEmail_ValidEmail_ShouldNotThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SEP3Java" />
       <extension name="coverage">
         <pattern>
@@ -162,7 +111,55 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.via.sep3java" />
       <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
-      <option name="METHOD_NAME" value="testUserEntity" />
+      <option name="METHOD_NAME" value="setEmail_ValidEmail_ShouldNotThrowException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JpaTest.setFirstName_ValidFirstName_ShouldNotThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
+      <option name="METHOD_NAME" value="setFirstName_ValidFirstName_ShouldNotThrowException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JpaTest.testBookEntity1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
+      <option name="METHOD_NAME" value="testBookEntity1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JpaTest.testBookRepositoryInjection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
+      <option name="METHOD_NAME" value="testBookRepositoryInjection" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -178,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JpaTest.testUserEntity" />
-        <item itemvalue="JUnit.JpaTest.TestInjection" />
-        <item itemvalue="JUnit.BookControllerJUnitTest.testCreateBook" />
-        <item itemvalue="JUnit.BookControllerTest.testCreateBook" />
-        <item itemvalue="JUnit.JpaConfig.testCreateBook" />
+        <item itemvalue="JUnit.JpaTest.setFirstName_ValidFirstName_ShouldNotThrowException" />
+        <item itemvalue="JUnit.JpaTest.setEmail_InvalidEmail_ShouldThrowException" />
+        <item itemvalue="JUnit.JpaTest.setEmail_ValidEmail_ShouldNotThrowException" />
+        <item itemvalue="JUnit.JpaTest.testBookEntity1" />
+        <item itemvalue="JUnit.JpaTest.testBookRepositoryInjection" />
       </list>
     </recent_temporary>
   </component>
@@ -204,6 +201,7 @@
       <workItem from="1699262752240" duration="6887000" />
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
+      <workItem from="1701175016300" duration="5404000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />
