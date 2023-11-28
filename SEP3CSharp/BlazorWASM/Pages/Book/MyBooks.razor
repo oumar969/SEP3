@@ -2,7 +2,6 @@
 @using System.Security.Claims
 @using Domain.Models
 @using HttpClients.ClientInterfaces
-@using Microsoft.AspNetCore.Components
 
 @attribute [Authorize]
 @inject IBookService bookService; 
@@ -66,7 +65,7 @@ else
                 <td>@item.UUID</td>
                 <td>@item.Isbn</td>
                 <td>@item.LoanerUuid</td>
-                
+
                 <td>
                     <img src="image/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditPost/{item.LoanerUuid}"))"/>
                 </td>
@@ -117,12 +116,12 @@ else
     {
         try
         {
-            bool? completedFilterValue = null;
-            books = await bookService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter, authorContains, isbnContains, genreContains,descriptionContains);
-            var list = new List<Book>(books!);
-            //list.RemoveAll(book => book.LoanerUuid != int.Parse(user.FindFirst("Id").Value));
-            list.Sort(CompareById);
-            books = list;
+    // bool? completedFilterValue = null;
+    // books = await bookService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter, authorContains, isbnContains, genreContains,descriptionContains);
+    // var list = new List<Book>(books!);
+    // //list.RemoveAll(book => book.LoanerUuid != int.Parse(user.FindFirst("Id").Value));
+    // list.Sort(CompareById);
+    // books = list;
         }
         catch (Exception e)
         {
@@ -139,8 +138,8 @@ else
             await bookService.DeleteAsync(bookId);
 
             var list = new List<Book>(books!);
-            // list.RemoveAll(book => book.UUID == bookId);
-            // books = list.AsEnumerable();
+    // list.RemoveAll(book => book.UUID == bookId);
+    // books = list.AsEnumerable();
         }
         catch (Exception e)
         {

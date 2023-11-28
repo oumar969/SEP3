@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/ReservationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/ReviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/UserReservation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/ReservationRepository.java" beforeDir="false" />
-    </list>
+    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,7 +119,7 @@
       <workItem from="1699262752240" duration="6887000" />
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
-      <workItem from="1701096767865" duration="23000" />
+      <workItem from="1701096767865" duration="365000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />
@@ -190,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701078466566</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK">
+      <option name="closed" value="true" />
+      <created>1701096834368</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701096834368</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,9 +209,10 @@
     <MESSAGE value="Removed trash" />
     <MESSAGE value="Database works :D (Shake it babyyyy)" />
     <MESSAGE value="Added review to Java server" />
-    <MESSAGE value="." />
     <MESSAGE value="new postman collection" />
-    <option name="LAST_COMMIT_MESSAGE" value="new postman collection" />
+    <MESSAGE value="." />
+    <MESSAGE value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
+    <option name="LAST_COMMIT_MESSAGE" value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
