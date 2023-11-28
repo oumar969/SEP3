@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text.Json;
 using Domain;
 using Domain.DTOs;
@@ -18,7 +19,7 @@ public class UserHttpClient : IUserService
 
     public async Task<User> Create(UserCreationDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/users", dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/user", dto);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -34,7 +35,7 @@ public class UserHttpClient : IUserService
 
     public async Task<IEnumerable<User>> GetUsers(string? usernameContains = null)
     {
-        string uri = "/users";
+        string uri = "/user";
         if (!string.IsNullOrEmpty(usernameContains))
         {
             uri += $"?username={usernameContains}";
@@ -52,5 +53,28 @@ public class UserHttpClient : IUserService
             PropertyNameCaseInsensitive = true
         })!;
         return users;
+    }
+
+    public async Task<UserInformationDto> GetByIdAsync(string id)
+    {
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",JwtAuthService.Jwt);
+
+        var response = await client.GetAsync($"/user/{id}");
+        
+        var content =  await response.Content.ReadAsStringAsync();
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(content);
+        }
+
+        var reply =  JsonSerializer.Deserialize<UserInformationDto>(content, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        
+
+        return reply;
+        
     }
 }

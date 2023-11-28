@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="button-row">
-        <button @onclick="Create" disabled="@(string.IsNullOrEmpty(email))" class="acceptbtn">Create</button>
+        <button @onclick="Create" disabled="@(string.IsNullOrEmpty(password))" class="acceptbtn">Create</button>
     </div>
 </div>
 
@@ -51,12 +51,11 @@
         {
     // Await the userService.Create call and ensure the parentheses encompass the entire method call
             await userService.Create(new UserCreationDto(
-                null,
                 firstName,
                 lastName,
                 email,
                 password,
-                true
+                false
                 ));
 
     // Clear the form fields after successful creation

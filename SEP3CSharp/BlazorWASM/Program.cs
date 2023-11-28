@@ -11,18 +11,29 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddHttpClient<IUserService, UserHttpClient>(client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5125"); // Replace with your actual API base URL
-});
+
 builder.Services.AddScoped<IAuthService, JwtAuthService>();
-// builder.Services.AddScoped<IUserService, UserHttpClient>();
+builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IBookService, BookHttpClient>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<CascadingAuthenticationState>();
+
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+
 AuthorizationPolicies.AddPolicies(builder.Services);
 
+builder.Services.AddScoped(
+    sp => 
+        new HttpClient { 
+            BaseAddress = new Uri("https://localhost:5125") 
+        }
+);
+var client = new HttpClient
+{
+    BaseAddress = new Uri("https://localhost:5125")
+};
 
 var app = builder.Build();
 
@@ -30,9 +41,11 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    app.UseHttpsRedirection();
+
 }
+
 
 app.UseHttpsRedirection();
 

@@ -1,4 +1,6 @@
-﻿namespace Domain.DTOs;
+﻿using Newtonsoft.Json;
+
+namespace Domain.DTOs;
 
 public class UserCreationDto
 {
@@ -18,5 +20,18 @@ public class UserCreationDto
         Email = email;
         Password = password;
         IsLibrarian = true;
+    }
+    [JsonConstructor]
+    public UserCreationDto(string firstName, string lastName, string email, string password, bool isLibrarian)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        Password = password;
+        IsLibrarian = false;
+    }
+
+    public UserCreationDto()
+    {
     }
 }
