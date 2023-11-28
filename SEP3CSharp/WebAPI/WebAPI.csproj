@@ -7,6 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="GraphQL" Version="7.6.1" />
+        <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="7.6.0" />
+        <PackageReference Include="GraphQL.Server.Ui.Playground" Version="7.6.0" />
         <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.6.0" />
         <PackageReference Include="HotChocolate.AspNetCore" Version="14.0.0-p.15" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
@@ -21,11 +24,8 @@
     <ItemGroup>
         <ProjectReference Include="..\Application\Application.csproj"/>
         <ProjectReference Include="..\JavaPersistenceClient\JavaPersistenceClient.csproj"/>
+        <ProjectReference Include="..\Types\Types.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Mutations\" />
-      <Folder Include="Schema\" />
-    </ItemGroup>
 
 </Project>

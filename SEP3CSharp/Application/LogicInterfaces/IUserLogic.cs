@@ -9,4 +9,6 @@ public interface IUserLogic
     public Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters);
     public Task<User> UpdateAsync(string uuid, UserUpdateDto dto);
     public Task DeleteAsync(string uuid);
+    public Task<ICollection<User>> GetAllUsersAsync();
+    
 }

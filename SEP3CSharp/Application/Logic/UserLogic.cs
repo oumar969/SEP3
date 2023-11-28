@@ -51,6 +51,12 @@ public class UserLogic : IUserLogic
         // await userDao.DeleteAsync(id);
     }
 
+    public Task<ICollection<User>> GetAllUsersAsync()
+    {
+        
+        throw new NotImplementedException();
+    }
+
     public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
     {
         var toUpdate = new User
