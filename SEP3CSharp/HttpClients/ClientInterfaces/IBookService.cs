@@ -9,8 +9,12 @@ public interface IBookService
     Task<ICollection<Book>> GetAsync(
         string? userName, 
         int? userId, 
-        bool? completedStatus, 
-        string? titleContains
+        string? titleContains,
+        string? authorContains,
+        string? isbnContains,
+        string? genreContains,
+        string? descriptionContains
+        
     );
     
     Task UpdateAsync(BookUpdateDto dto);

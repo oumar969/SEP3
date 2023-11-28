@@ -26,10 +26,12 @@ public class BookHttpClient : IBookService
         
     }
 
-    public Task<ICollection<Book>> GetAsync(string? userName, int? userId, bool? completedStatus, string? titleContains)
+    public Task<ICollection<Book>> GetAsync(string? userName, int? userId, string? titleContains, string? authorContains, string? isbnContains,
+        string? genreContains, string? descriptionContains)
     {
         throw new NotImplementedException();
     }
+    
 
     public async Task UpdateAsync(BookUpdateDto dto)
     {

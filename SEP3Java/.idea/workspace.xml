@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/via/sep3java/JpaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/via/sep3java/JpaTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,11 +18,17 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="1060ca31-7aa2-45c8-b3e1-ad0d575ca9d2" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -36,6 +39,9 @@
         <option name="mavenHome" value="Use Maven wrapper" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -67,7 +73,8 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;0f9bd0d963b6a66c737c85903d24345c&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -84,87 +91,7 @@
       <recent name="com.via.sep3java.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JpaTest.setFirstName_ValidFirstName_ShouldNotThrowException">
-    <configuration name="JpaTest.setEmail_InvalidEmail_ShouldThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
-      <option name="METHOD_NAME" value="setEmail_InvalidEmail_ShouldThrowException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JpaTest.setEmail_ValidEmail_ShouldNotThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
-      <option name="METHOD_NAME" value="setEmail_ValidEmail_ShouldNotThrowException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JpaTest.setFirstName_ValidFirstName_ShouldNotThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
-      <option name="METHOD_NAME" value="setFirstName_ValidFirstName_ShouldNotThrowException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JpaTest.testBookEntity1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
-      <option name="METHOD_NAME" value="testBookEntity1" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JpaTest.testBookRepositoryInjection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SEP3Java" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.via.sep3java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.via.sep3java" />
-      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.JpaTest" />
-      <option name="METHOD_NAME" value="testBookRepositoryInjection" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="Sep3JavaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="SEP3Java" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.via.sep3java.Sep3JavaApplication" />
@@ -173,15 +100,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.JpaTest.setFirstName_ValidFirstName_ShouldNotThrowException" />
-        <item itemvalue="JUnit.JpaTest.setEmail_InvalidEmail_ShouldThrowException" />
-        <item itemvalue="JUnit.JpaTest.setEmail_ValidEmail_ShouldNotThrowException" />
-        <item itemvalue="JUnit.JpaTest.testBookEntity1" />
-        <item itemvalue="JUnit.JpaTest.testBookRepositoryInjection" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -201,7 +119,7 @@
       <workItem from="1699262752240" duration="6887000" />
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
-      <workItem from="1701175016300" duration="5404000" />
+      <workItem from="1701096767865" duration="365000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />
@@ -251,21 +169,21 @@
       <option name="project" value="LOCAL" />
       <updated>1699306699817</updated>
     </task>
-    <task id="LOCAL-00007" summary=".">
+    <task id="LOCAL-00007" summary="new postman collection">
       <option name="closed" value="true" />
-      <created>1701075516579</created>
+      <created>1701078466566</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1701075516579</updated>
+      <updated>1701078466566</updated>
     </task>
-    <task id="LOCAL-00008" summary=".">
+    <task id="LOCAL-00008" summary="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK">
       <option name="closed" value="true" />
-      <created>1701077749275</created>
+      <created>1701096834368</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1701077749275</updated>
+      <updated>1701096834368</updated>
     </task>
     <option name="localTasksCounter" value="9" />
     <servers />
@@ -291,8 +209,10 @@
     <MESSAGE value="Removed trash" />
     <MESSAGE value="Database works :D (Shake it babyyyy)" />
     <MESSAGE value="Added review to Java server" />
+    <MESSAGE value="new postman collection" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
+    <option name="LAST_COMMIT_MESSAGE" value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
