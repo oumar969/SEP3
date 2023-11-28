@@ -1,4 +1,5 @@
-﻿body {
+﻿
+body {
     background-color: #86a5bd;
 }
 
@@ -23,17 +24,6 @@ p {
     font-size: 20px;
 }
 
-section {
-    margin: 20px;
-}
-
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 10px;
-}
-
 a {
     color: #007bff;
     text-decoration: none;
@@ -45,5 +35,22 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 
- 
+.box {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+.box img {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+}

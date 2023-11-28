@@ -7,7 +7,7 @@
 @inject IBookService bookService; 
 @inject NavigationManager navMgr;
 
-<h3>Posts</h3>
+<h3>Books</h3>
 <div class="filter-bar">
     <div class="filters-container">
         <img src="image/@(doShowFilters ? "clear_" : "")funnel.png" class="funnel" @onclick="@(() => doShowFilters = !doShowFilters)" alt="Funnel"/>
@@ -67,7 +67,7 @@ else
                 <td>@item.LoanerUuid</td>
 
                 <td>
-                    <img src="image/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditPost/{item.LoanerUuid}"))"/>
+                    <img src="image/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditBook/{item.LoanerUuid}"))"/>
                 </td>
                 @* <td> *@
                 @*     <label @onclick="@(() => RemovePost(item.Id))" style="cursor:pointer; color: red; font-weight: bold"> *@
@@ -130,7 +130,7 @@ else
         }
     }
 
-    private async Task RemovePost(int bookId)
+    private async Task RemoveBook(int bookId)
     {
         msg = "";
         try

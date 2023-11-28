@@ -663,18 +663,10 @@ Y
 )BlazorWASM/Data/WeatherForecastService.cs,f\b\fb8d2fc72f9554a37b1bd7efb1d91bccbddec42e
 U
 %BlazorWASM/Auth/CustomAuthProvider.cs,b\d\bd5ffd23a66762056a94f125b010d616007948cc
-O
-BlazorWASM/Pages/Lendings.razor,e\0\e069394ef5218a9cca1144023fb6ff9e1a4060e1
-S
-#BlazorWASM/Pages/Lendings.razor.css,6\2\629a755849a794d6e468573e03865e9b455a986b
 N
 BlazorWASM/Pages/Contact.razor,4\1\410e107dfa9cad62fccf2f1ff026227136eaf1b5
 R
 "BlazorWASM/Pages/Contact.razor.css,6\a\6a33c8fed4ef845ea6de331cba236c73d4f9edec
-P
- BlazorWASM/Pages/ContactUs.razor,9\8\989b8614d72c7f611c268d00c1d043f359fa059b
-T
-$BlazorWASM/Pages/ContactUs.razor.css,d\d\dd73baf512ba3011f3da0bb44fc62d5701b26400
 L
 BlazorWASM/Pages/About.razor,7\8\78a83c91b393758794e366a044290c0d220ce8dd
 P
@@ -3069,3 +3061,5 @@ N
 BlazorWASM/Pages/Profile.razor,7\0\7057eed4c03eff11249388ac818bd10885df71a0
 Q
 !Domain/DTOs/UserInformationDto.cs,f\d\fdcebef702e05310ac73a0fb32181ddfb1f8195b
+R
+"BlazorWASM/Pages/profile.razor.css,3\e\3eca58d774f75f4a3278f7967f5b6fd08874a935
