@@ -23,6 +23,7 @@ builder.Services.AddScoped<IUserDao, UserDao>();
 builder.Services.AddScoped<IBookRegistryDao, BookRegistryDao>();
 builder.Services.AddScoped<IGenericDao<User>, UserDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IGenericDao<BookRegistry>, BookRegistryDao>();
 
 builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
@@ -31,12 +32,11 @@ builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
 
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters()
+    options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidateAudience = true,

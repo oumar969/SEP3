@@ -11,7 +11,7 @@
     <NotAuthorized>
         <div class="lg-container">
             <p class="lb-button" @onclick="Login">Login</p>
-            <p class="lb-button">Register</p>
+            <p class="lb-button" @onclick="Register">Register</p>
         </div>
     </NotAuthorized>
 </AuthorizeView>
@@ -20,6 +20,7 @@
 
     private void Login()
     {
+        Console.WriteLine("login ui hereerere");
         navMgr.NavigateTo("/Login");
     }
 
@@ -28,6 +29,11 @@
     // await authService.LogoutAsync();
 
         navMgr.NavigateTo("/");
+    }
+
+    private void Register()
+    {
+        navMgr.NavigateTo("/Register");
     }
 
 }

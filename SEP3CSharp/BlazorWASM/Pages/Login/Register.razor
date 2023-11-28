@@ -1,126 +1,60 @@
 ﻿@page "/register"
-@using WebApi.Services
-@using Microsoft.AspNetCore.Components
 @using Domain.Models
-@* @inject IAuthService authService *@
 @inject NavigationManager navMgr
 
-<h3>Register</h3>
+<div class="login-card">
+    <h3 class="login-title">Register</h3>
 
-@if (ShowErrors)
-{
-    <div class="alert alert-danger" role="alert">
-        <p>@Message</p>
-    </div>
-}
-
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Please enter your details</h5>
-        <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <InputText Id="firstName" class="form-control" @bind-Value="RegisterModel.FirstName" />
-                <ValidationMessage For="@(() => RegisterModel.FirstName)" />
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <InputText Id="lastName" class="form-control" @bind-Value="RegisterModel.LastName" />
-                <ValidationMessage For="@(() => RegisterModel.LastName)" />
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <InputText Id="email" class="form-control" @bind-Value="RegisterModel.Email" />
-                <ValidationMessage For="@(() => RegisterModel.Email)" />
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.Password" />
-                <ValidationMessage For="@(() => RegisterModel.Password)" />
-            </div>
-            <div class="form-group">
-                <label for="password">Confirm Password</label>
-                <InputText Id="password" type="password" class="form-control" @bind-Value="RegisterModel.ConfirmPassword" />
-                <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)" />
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </EditForm>
-    </div>
-</div>
-
-<div class="card">
-    <h3>Please login</h3>
-    <div class="field">
-        <label>User name:</label>
-        <input type="text" @bind="userName" />
-    </div>
-    <div class="field">
-        <label style="text-align: center">Password:</label>
-        <input type="password" @bind="password" />
-    </div>
-    @if (!string.IsNullOrEmpty(errorLabel))
+    @if (ShowErrors)
     {
-        <div class="field">
-            <label style="color: red">
-                @errorLabel
-            </label>
+        <div class="login-error">
+            <span>@Message</span>
         </div>
     }
-    <div class="field">
-        <button class="loginbtn" @onclick="LoginAsync">Log in</button>
-    </div>
+
+    <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration" class="login-form">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
+        <div class="login-field">
+            <label for="firstName">First Name</label>
+            <input id="firstName" class="login-input" @bind="RegisterModel.FirstName" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => RegisterModel.FirstName)"/>
+        </div>
+        <div class="login-field">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" class="login-input" @bind="RegisterModel.LastName" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => RegisterModel.LastName)"/>
+        </div>
+        <div class="login-field">
+            <label for="email">Email</label>
+            <input id="email" class="login-input" type="email" @bind="RegisterModel.Email" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => RegisterModel.Email)"/>
+        </div>
+        <div class="login-field">
+            <label for="password">Password</label>
+            <input id="password" class="login-input" type="password" @bind="RegisterModel.Password" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => RegisterModel.Password)"/>
+        </div>
+        <div class="login-field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" class="login-input" type="password" @bind="RegisterModel.ConfirmPassword" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)"/>
+        </div>
+        <div class="login-field">
+            <button type="submit" class="login-button">Register</button>
+        </div>
+    </EditForm>
 </div>
 
 @code {
-    private string userName;
-    private string password;
-    private string errorLabel;
-
-    private bool ShowErrors { get; set; }
-    private string Message { get; set; }
-    private RegisterModel RegisterModel { get; set; } = new RegisterModel();
+    private bool ShowErrors { get; } // Make sure setters are present if you intend to modify these properties.
+    private string Message { get; }
+    private RegisterModel RegisterModel { get; } = new();
 
     private async Task HandleRegistration()
     {
-        ShowErrors = false; // Reset the error display
-        try
-        {
-            // Your registration logic here
-            // Example: await authService.RegisterAsync(RegisterModel);
-            // Assuming RegisterAsync returns without throwing an exception on success
-            // You can modify it based on your actual registration logic
-
-            // After successful registration, you can automatically log in the user if needed
-            
-    //await authService.LoginAsync(RegisterModel.Email, RegisterModel.Password);
-            navMgr.NavigateTo("/");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            ShowErrors = true;
-            Message = $"Error: {e.Message}";
-        }
+    // Registration logic goes here
     }
 
-    private async Task LoginAsync()
-    {
-        ShowErrors = false; // Reset the error display
-        try
-        {
-           // await authService.LoginAsync(userName, password);
-            navMgr.NavigateTo("/");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            ShowErrors = true;
-            Message = $"Error: {e.Message}";
-        }
-    }
 }
-
