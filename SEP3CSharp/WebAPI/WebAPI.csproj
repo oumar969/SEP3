@@ -7,14 +7,25 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.6.0" />
+        <PackageReference Include="HotChocolate.AspNetCore" Version="14.0.0-p.15" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.13" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.6.23329.4">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Application\Application.csproj"/>
         <ProjectReference Include="..\JavaPersistenceClient\JavaPersistenceClient.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Mutations\" />
+      <Folder Include="Schema\" />
     </ItemGroup>
 
 </Project>
