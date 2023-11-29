@@ -243,10 +243,6 @@ h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/e/5/e5b688f97c56539
 h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/d/6/d6e6cf8f85d785aa0e72e5caf0368822cb9cd6ce,1\b\1ba100bfc922576e410e6be91eb92c61c8fca501
 Ž
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/7/d/7d41f83a6c2b8f71441bcce184522850625f5601,4\f\4f9f346eb3e97d927ff69e0521a7618fa807b053
-Z
-*BlazorWASM/Pages/User/CreateUser.razor.css,3\8\38338b45a6b23f3fdfba0b1773d4757fea7870fd
-V
-&BlazorWASM/Pages/User/CreateUser.razor,4\9\4996eb129e705bc782c10a2c1ee2dcb496667eac
 S
 #BlazorWASM/Shared/NavMenu.razor.css,8\4\84a87a99a18da06cbcac620990d072d867349370
 V
@@ -257,8 +253,6 @@ E
 BlazorWASM/Program.cs,5\8\580323f0a31b0b0460a7db1fa858f4faa3d8e70c
 M
 BlazorWASM/Pages/Error.cshtml,1\c\1ccec67640edd1c29776f8d1cb79c2e05c1263f9
-P
- BlazorWASM/Pages/FetchData.razor,e\e\eee4fc236142f3ded37f94ccd3a5526bde6fa061
 ˜
 h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/1/8/18a3db2ee12427c9e46eb675ed788b08a76b4fb5,d\a\da1553f27d6c378f679ab90f8daba6b8486560b8
 ˜
@@ -623,8 +617,6 @@ O
 h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/0/3/03589567a7d28a4c5cca75b4bf28d8329cbfe2ef,4\9\492182eb1d0251440c62647eec554a45cd285697
 ˜
 h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/c/e/cef00d1d96059f0e8336e73dbbd2804e64bb61c1,5\9\59d4c5571bcf17b833186f4cc24895597ff7b829
-Y
-)BlazorWASM/Data/WeatherForecastService.cs,f\b\fb8d2fc72f9554a37b1bd7efb1d91bccbddec42e
 U
 %BlazorWASM/Auth/CustomAuthProvider.cs,b\d\bd5ffd23a66762056a94f125b010d616007948cc
 N
@@ -1156,14 +1148,6 @@ h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/5/2/521bd5bf4d69f3c
 ˜
 h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/7/8/78a83c91b393758794e366a044290c0d220ce8dd,4\9\49a1e8dd7ad983f2d5fbe2ab5f5914a585eb8666
 Ž
-^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/d/d/dd73baf512ba3011f3da0bb44fc62d5701b26400,8\8\889f33b5e30653154b5e94af40940376ef971493
-˜
-h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/d/d/dd73baf512ba3011f3da0bb44fc62d5701b26400,8\2\822fdb1a548f0bb88f1b43e6dd0df96f8673d925
-˜
-h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/9/8/989b8614d72c7f611c268d00c1d043f359fa059b,e\1\e11561f8d0d840fd265abec35868740d0fcf0ddb
-Ž
-^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/9/8/989b8614d72c7f611c268d00c1d043f359fa059b,a\6\a63b5a0492585884782bc0eb19dedeeb338c1476
-Ž
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/6/a/6a33c8fed4ef845ea6de331cba236c73d4f9edec,a\f\af582a0162642b2e03e1ebb996f7f6a96bc82c2b
 ˜
 h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/6/a/6a33c8fed4ef845ea6de331cba236c73d4f9edec,a\f\af732e2c6455a7868c3a068e5b915476d42da3ed
@@ -1211,12 +1195,8 @@ h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/1/4/143095fd9c02797
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/f/f/ffc0a9c96838bed50a1aef92889d521ae04ed1b3,2\7\2715d65e18384aa4d1d12f602eb486b4c9bb986f
 Ž
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/f/b/fb4ecfb1a6c45885d87976567e965051cc96c7c1,8\0\804d2f0fa86f4522d73892c0b986f840fd7a9c76
-˜
-h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/6/2/629a755849a794d6e468573e03865e9b455a986b,f\9\f9a6113d85169b59189e1b703b022f858e1ccd9e
 Ž
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/c/8/c8f370100b70a9bb64bd75383809a831fdfcbda3,4\6\46ad4f553ca9e4acf658405bb20b957a58dafe9c
-Ž
-^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/e/0/e069394ef5218a9cca1144023fb6ff9e1a4060e1,a\d\ad1f682bb8a560199b42452ad14340c683024dce
 Ž
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/c/3/c33c5b20a583a339a7bb2d6e6c7af1e38caa80e7,e\4\e456b4373b343ffabafee258bacbc00543fdb6de
 Ž
@@ -1227,8 +1207,6 @@ h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/6/2/629a755849a794d
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/c/c/ccf06a1b6cf1b27d5a2e6cd33ee73cde3ae65114,c\6\c625d1bbf1a54b2d28e346cc0435d18d957dedc0
 Ž
 ^.idea/.idea.SEP3CSharp/.idea/sonarlint/issuestore/c/c/cc2e8437dc8607ecbcb12e84abf2821a314b3613,6\a\6a6257269d4108f323bbb3f9a8190c62e0028802
-˜
-h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/e/0/e069394ef5218a9cca1144023fb6ff9e1a4060e1,9\1\91f06dcff29b74832d3bf9f0a01c570934b7f4ea
 ˜
 h.idea/.idea.SEP3CSharp/.idea/sonarlint/securityhotspotstore/8/9/892d4b54537d4d2bf2208909d7f0a111679eb62a,b\0\b05ad26b9de426e2c8d71778e3fced58bbfdf745
 Ž
@@ -3023,3 +3001,7 @@ Q
 !Domain/DTOs/UserInformationDto.cs,f\d\fdcebef702e05310ac73a0fb32181ddfb1f8195b
 R
 "BlazorWASM/Pages/profile.razor.css,3\e\3eca58d774f75f4a3278f7967f5b6fd08874a935
+R
+"Application/Logic/UserValidator.cs,7\6\7658a52091ff0a813ab4aaf795350e44c55ba44b
+U
+%Application/DAOInterfaces/IUserDao.cs,f\6\f62af5c2f7139fb16fafd85bc30c5552effed1e6
