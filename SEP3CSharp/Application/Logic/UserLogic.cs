@@ -68,6 +68,10 @@ public class UserLogic : IUserLogic
         return userDao.UpdateAsync(toUpdate);
     }
 
+    public async Task<User?> GetByUuidAsync(string uuid)
+    {
+        return await userDao.GetByUuidAsync(uuid);
+    }
 
     public static void ValidateData(UserCreationDto userCreationDto)
     {

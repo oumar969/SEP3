@@ -4,7 +4,7 @@ using GraphQL.Types;
 namespace Types;
 
 
-public class UserType : ObjectGraphType<User>
+public class UserType : ObjectGraphType<User>, IGraphType, IGraphType
 {
     public UserType()
     {

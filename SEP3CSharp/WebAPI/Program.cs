@@ -1,7 +1,7 @@
 using System.Text;
 
 
-/*
+
 
 
 using Application.DaoInterfaces;
@@ -13,6 +13,7 @@ using FileData;
 using JavaPersistenceClient.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using WebAPI.Schema;
 using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,10 @@ builder.Services.AddScoped<IGenericDao<BookRegistry>, BookRegistryDao>();
 
 builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services
+    .AddGraphQLServer().AddQueryType<Query>().AddMutationType<Mutation>();
+
 
 AuthorizationPolicies.AddPolicies(builder.Services);
 
@@ -67,27 +72,7 @@ app.MapControllers();
 
 app.UseAuthentication();
 
+// Add GraphQL endpoint
+app.MapGraphQL();
+
 app.Run();
-
-*/
-
-
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-
-namespace RealEstate.API
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseUrls("http://localhost:5125/")
-                .Build();
-    }
-}
