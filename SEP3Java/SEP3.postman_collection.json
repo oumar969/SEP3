@@ -14,7 +14,7 @@
 					"name": "Book",
 					"item": [
 						{
-							"name": "book add",
+							"name": "book create",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -26,16 +26,16 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"isbn\": \"\"\n}\n"
+									"raw": "{\n  \"isbn\": \"2459399083527\"\n}\n"
 								},
 								"url": {
-									"raw": "{{base_url}}/books/book",
+									"raw": "{{base_url}}/book/create",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
-										"books",
-										"book"
+										"book",
+										"create"
 									]
 								}
 							},
@@ -99,7 +99,7 @@
 					"name": "Book Registry",
 					"item": [
 						{
-							"name": "book register",
+							"name": "book-registry create",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -166,8 +166,97 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Review",
+					"item": [
+						{
+							"name": "review create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"isbn\": \"2459399083527\",\n  \"reviewerUuid\": \"3123-f1d21f1\",\n  \"score\": 8,\n  \"comment\": \"haha lol\"\n}\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/book/create",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"book",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "review update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"score\": 5,\n  \"comment\": \"yeaaah boiii this good shit\"\n}\n"
+								},
+								"url": {
+									"raw": "{{base_url}}/books/book/ca92dc18-2da7-40dc-b398-e740115663ef",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"books",
+										"book",
+										"ca92dc18-2da7-40dc-b398-e740115663ef"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "review delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/books/book/5c71c78c-e46c-4c9e-b151-1e1dc92c8e42",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"books",
+										"book",
+										"5c71c78c-e46c-4c9e-b151-1e1dc92c8e42"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
+		},
+		{
+			"name": "CSharp WebAPI",
+			"item": []
 		}
 	],
 	"event": [

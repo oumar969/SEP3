@@ -8,4 +8,7 @@ public class SearchUserParametersDto : ISearchParametersDto
     }
 
     public string? UsernameContains { get; }
+    
+    public string? FirstNameContains { get; }
+    public string? LastNameContains { get; }
 }

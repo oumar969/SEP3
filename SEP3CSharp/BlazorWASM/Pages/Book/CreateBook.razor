@@ -1,58 +1,48 @@
 ﻿@page "/CreateBook"
 @using System.Security.Claims
 @using Domain.DTOs
-@using Microsoft.AspNetCore.Components
 @attribute [Authorize]
-@* @using HttpClients.ClientInterface *@
-@* @inject IUserService userService; *@
-@* @inject IBookService postService; *@
 @inject NavigationManager navMgr
 
-<h3>Create Books</h3>
+<div class="book-form-card">
+    <h3 class="book-form-title">Registrer Bog</h3>
 
-<div class="card">
-    <h3>Create Book</h3>
-    <div class="form-group field">
-        <div>
-            <label>Title:</label>
-            <input type="text" @bind="bookTitle"/>
-        </div>
-        <div>
-            <label>Isbn:</label>
-            <input type="text" @bind="bookIsbn"/>
-        </div>
-        <div>
-            <label>Author:</label>
-            <input type="text" @bind="bookAuthor"/>
-        </div>
-        <div>
-            <label>Genre:</label>
-            <input type="text" @bind="bookGenre"/>
-        </div>
-        <div>
-            <label>Reviews:</label>
-            <input type="text" @bind="bookReview"/>
-        </div>
-        <div>
-            <label>Location:</label>
-            <input type="text" @bind="bookLocation"/>
-        </div>
-        
-        
-        <div>
-            <label>discription:</label>
-            <textarea rows="4" cols="20" @bind="bookDescription" style="alignment: center"></textarea>
-        </div>
-
+    <div class="book-form-field">
+        <label class="book-form-label">ISBN</label>
+        <input type="text" class="book-form-input" @bind="bookIsbn"/>
     </div>
 
-    <div class="button-row">
-        @if (!string.IsNullOrEmpty(msg))
-        {
-            <label style="color: red">@msg</label>
-        }
-        <button @onclick="Create" class="acceptbtn">Create</button>
+    <div class="book-form-field">
+        <label class="book-form-label">Titel</label>
+        <input type="text" class="book-form-input" @bind="bookTitle"/>
     </div>
+
+    <div class="book-form-field">
+        <label class="book-form-label">Forfatter</label>
+        <input type="text" class="book-form-input" @bind="bookAuthor"/>
+    </div>
+
+    <div class="book-form-field">
+        <label class="book-form-label">Genre</label>
+        <input type="text" class="book-form-input" @bind="bookGenre"/>
+    </div>
+
+    <div class="book-form-field">
+        <label class="book-form-label">Beskrivelse</label>
+        <textarea class="book-form-input" rows="4" @bind="bookDescription"></textarea>
+    </div>
+
+    <div class="book-form-field">
+        <label class="book-form-label">Antal bøger på lager</label>
+        <input type="text" class="book-form-input" @bind="stockNumber"/>
+    </div>
+
+    @if (!string.IsNullOrEmpty(msg))
+    {
+        <div class="book-form-error">@msg</div>
+    }
+
+    <button @onclick="Create" class="book-form-button">Registrer</button>
 </div>
 
 @code {
@@ -62,10 +52,9 @@
     private string bookTitle = "";
     private string bookAuthor = "";
     private string bookGenre = "";
-    private string bookLocation = "";
     private string bookIsbn = "";
     private string bookDescription = "";
-    private string bookReview = "";
+    private int stockNumber;
 
     private string msg = "";
 
@@ -102,37 +91,32 @@
 
         if (string.IsNullOrEmpty(bookTitle))
         {
-            msg = "Title cannot be empty!";
+            msg = "Angiv venlist en titel.";
             return;
         }
         if (string.IsNullOrEmpty(bookIsbn))
         {
-            msg = "Isbn cannot be empty!";
+            msg = "Angiv venlist et ISBN.";
             return;
         }
         if (string.IsNullOrEmpty(bookAuthor))
         {
-            msg = "Author cannot be empty!";
+            msg = "Angiv venlist en forfatter.";
             return;
         }
         if (string.IsNullOrEmpty(bookGenre))
         {
-            msg = "Genre cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookReview))
-        {
-            msg = "Review cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookLocation))
-        {
-            msg = "Location cannot be empty!";
+            msg = "Angiv venlist en genre.";
             return;
         }
         if (string.IsNullOrEmpty(bookDescription))
         {
-            msg = "Description cannot be empty!";
+            msg = "Angiv venlist en beskrivelse af bogen.";
+            return;
+        }
+        if (stockNumber.Equals(null))
+        {
+            msg = "Angiv venlist antal bøger.";
             return;
         }
 
