@@ -2,9 +2,9 @@
 
 namespace Domain.DTOs;
 
-public class BookBasicDto : BookRegistryDto
+public class BookRegistry : BookRegistryDto
 {
-    public BookBasicDto(string id,string title, string author, string genre, string isbn,
+    public BookRegistry(string id,string title, string author, string genre, string isbn,
         string description, string review)
     {
         Id = id;
@@ -16,13 +16,13 @@ public class BookBasicDto : BookRegistryDto
         Review = review;
     }
 
-    public BookBasicDto(string id, string isbn, User borrower)
+    public BookRegistry(string id, string isbn, User borrower)
     {
         Id = id;
         Isbn = isbn;
         BorrowerId = borrower;
     }
-    public BookBasicDto(string title, string author, string genre, string isbn,
+    public BookRegistry(string title, string author, string genre, string isbn,
         string description, string review)
     {
         Title = title;

@@ -5,11 +5,11 @@ using Domain.Models;
 
 namespace WebAPI.Schema;
 
-public class Mutation
+public class UserMutation
 {
     private readonly IUserLogic _userLogic;
 
-    public Mutation(IUserLogic userLogic)
+    public UserMutation(IUserLogic userLogic)
     {
         _userLogic = userLogic;
     }

@@ -3,6 +3,7 @@ using System.Text;
 using Domain.DTOs;
 using Domain.Models;
 using HttpClients.ClientInterfaces;
+using BookRegistry = Domain.DTOs.BookRegistry;
 
 namespace HttpClients.Implementations;
 
@@ -36,7 +37,7 @@ public class BookHttpClient : IBookService
         
     }
 
-    public Task<BookBasicDto> GetByIdAsync(int id)
+    public Task<BookRegistry> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }

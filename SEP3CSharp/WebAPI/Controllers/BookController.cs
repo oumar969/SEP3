@@ -2,6 +2,7 @@
 using Domain.DTOs;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using BookRegistry = Domain.DTOs.BookRegistry;
 
 namespace SEP3CSharp.Controllers;
 
@@ -81,7 +82,7 @@ public class BookController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<BookBasicDto>> GetById([FromRoute] int id)
+    public async Task<ActionResult<BookRegistry>> GetById([FromRoute] int id)
     {
         try
         {

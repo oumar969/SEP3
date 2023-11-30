@@ -3,6 +3,7 @@ using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Newtonsoft.Json;
+using BookRegistry = Domain.Models.BookRegistry;
 
 namespace JavaPersistenceClient.DAOs;
 
@@ -28,6 +29,29 @@ public class BookRegistryDao : IBookRegistryDao
     public Task<Book?> GetByIdAsync(int bookId)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<BookRegistry> GetByIsbnAsync(string isbn)
+    {
+        var url = $"{ServerOptions.serverUrl}/book/getByIsbn/{isbn}";
+
+        var response = await _httpClient.GetAsync(url);
+
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
+        }
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
     }
 
     public async Task<BookRegistry> CreateAsync(BookRegistry entity)
@@ -59,6 +83,7 @@ public class BookRegistryDao : IBookRegistryDao
     {
         throw new NotImplementedException();
     }
+    
 
 
     public Task<Book> UpdateAsync(Book entity)

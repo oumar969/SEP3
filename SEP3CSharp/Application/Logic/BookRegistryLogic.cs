@@ -2,6 +2,7 @@
 using Application.LogicInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using BookRegistry = Domain.DTOs.BookRegistry;
 
 namespace Application.Logic;
 
@@ -21,9 +22,12 @@ public class BookRegistryLogic : IBookRegistryLogic
         throw new NotImplementedException();
     }
 
-    Task<Book> IBookRegistryLogic.CreateAsync(BookRegistryCreationDto dto)
+    async Task<Domain.Models.BookRegistry> IBookRegistryLogic.CreateAsync(BookRegistryCreationDto dto)
     {
-        throw new NotImplementedException();
+        ValidateBookRegistry(dto);
+        var bookRegistry = new Domain.Models.BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
+        var created = await _bookRegistryDao.CreateAsync(bookRegistry);
+        return created;    
     }
 
     public async Task UpdateAsync(BookUpdateDto dto)
@@ -48,7 +52,7 @@ public class BookRegistryLogic : IBookRegistryLogic
 
         if (titleToUse.Length > 10) throw new Exception($"{dto.Title} cannot be longer than 10 characters.");
 
-        BookRegistry updated = new(titleToUse, authorToUse, genreToUse, isbnToUse, descriptionToUse, reviewToUse);
+        Domain.Models.BookRegistry updated = new(titleToUse, authorToUse, genreToUse, isbnToUse, descriptionToUse, reviewToUse);
 
         ValidateBookRegistry(updated);
 
@@ -60,17 +64,33 @@ public class BookRegistryLogic : IBookRegistryLogic
         throw new NotImplementedException();
     }
 
-    public Task<BookBasicDto> GetByIdAsync(int id)
+    public async Task<BookRegistry> GetByIsbnAsync(string id)
+    {
+        return await _bookRegistryDao.GetByIsbnAsync(id);
+    }
+
+    public Task<BookRegistry> GetAllBooksAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<ICollection<BookRegistry>> GetAllAsync()
+    public Task<BookRegistry> GetByTitleAsync(string title)
     {
         throw new NotImplementedException();
     }
 
-    public Task<BookRegistry> UpdateAsync(BookRegistry entity)
+    public Task<BookRegistry> GetByAuthorAsync(string author)
+    {
+        throw new NotImplementedException();
+    }
+    
+
+    public Task<ICollection<Domain.Models.BookRegistry>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Domain.Models.BookRegistry> UpdateAsync(Domain.Models.BookRegistry entity)
     {
         throw new NotImplementedException();
     }
@@ -81,36 +101,32 @@ public class BookRegistryLogic : IBookRegistryLogic
         if (book == null) throw new Exception($"Book with UUID {uuid} was not found!");
         await _bookRegistryDao.DeleteAsync(uuid);
     }
+    
 
-    public Task<BookRegistry> CreateAsync(BookRegistry entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<ICollection<Domain.Models.BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
     {
         return _bookRegistryDao.GetAsync(searchParameters);
     }
 
 
-    public async Task<BookRegistry> CreateAsync(BookRegistryCreationDto dto)
+    public async Task<Domain.Models.BookRegistry> CreateAsync(BookRegistryCreationDto dto)
     {
         ValidateBookRegistry(dto);
-        var bookRegistry = new BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
+        var bookRegistry = new Domain.Models.BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
         var created = await _bookRegistryDao.CreateAsync(bookRegistry);
         return created;
     }
 
-    public async Task<BookBasicDto> GetByUuidAsync(string uuid)
+    public async Task<BookRegistry> GetByUuidAsync(string uuid)
     {
         var bookRegistry = await _bookRegistryDao.GetByUuidAsync(uuid);
         if (bookRegistry == null) throw new Exception($"Book with UUID {uuid} not found");
 
-        return new BookBasicDto(bookRegistry.Title, bookRegistry.Author, bookRegistry.Genre, bookRegistry.Isbn,
+        return new BookRegistry(bookRegistry.Title, bookRegistry.Author, bookRegistry.Genre, bookRegistry.Isbn,
             bookRegistry.Description, bookRegistry.Reviews);
     }
 
-    private void ValidateBookRegistry(BookRegistry bookRegistry)
+    private void ValidateBookRegistry(Domain.Models.BookRegistry bookRegistry)
     {
         if (string.IsNullOrWhiteSpace(bookRegistry.Title)) throw new Exception("Book title is required.");
 
@@ -128,7 +144,6 @@ public class BookRegistryLogic : IBookRegistryLogic
         if (string.IsNullOrEmpty(dto.Title)) throw new Exception("Title cannot be empty.");
         if (string.IsNullOrEmpty(dto.Author)) throw new Exception("Author cannot be empty.");
         if (string.IsNullOrEmpty(dto.Genre)) throw new Exception("Genre cannot be empty.");
-        if (string.IsNullOrEmpty(dto.Location)) throw new Exception("Location cannot be empty.");
         if (string.IsNullOrEmpty(dto.Isbn)) throw new Exception("ISBN cannot be empty.");
         if (string.IsNullOrEmpty(dto.Description)) throw new Exception("Description cannot be empty.");
     }

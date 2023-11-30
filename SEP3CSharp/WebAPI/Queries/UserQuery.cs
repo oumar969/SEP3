@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Schema;
 
-public class Query
+public class UserQuery
 {
     private readonly IUserLogic _userLogic;
 
-    public Query(IUserLogic userLogic)
+    public UserQuery(IUserLogic userLogic)
     {
         _userLogic = userLogic;
     }

@@ -35,7 +35,7 @@ builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services
-    .AddGraphQLServer().AddQueryType<Query>().AddMutationType<Mutation>();
+    .AddGraphQLServer().AddQueryType<UserQuery>().AddMutationType<UserMutation>();
 
 
 AuthorizationPolicies.AddPolicies(builder.Services);

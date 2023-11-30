@@ -24,9 +24,9 @@
     </ItemGroup>
 
 
+
     <ItemGroup>
-      <Folder Include="Mutations\" />
-      <Folder Include="Queries\" />
+      <Folder Include="Schema\" />
     </ItemGroup>
 
 </Project>
