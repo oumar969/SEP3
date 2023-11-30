@@ -35,8 +35,9 @@
                         </small>
                     </p>
                 </div>
-                <div class="card-footer d-flex justify-content-end">
-                    <button class="btn btn-primary" @onclick="() => LoanBook(book)" disabled="@book.StockCount == 0">Loan Book</button>
+                <div class="card-footer d-flex justify-content-end" style="gap: 14px;">
+                    <button class="btn btn-primary bg-danger border-danger" @onclick="() => LoanBook(book)">Slet Bog</button>
+                    <button class="btn btn-primary" @onclick="() => LoanBook(book)" disabled="@book.StockCount == 0">Lån Bog</button>
                 </div>
             </div>
         </div>
@@ -80,6 +81,11 @@
             "Review 2"
         }
     };
+
+    private void deleteBook(Book book)
+    {
+    // bookService.DeleteBook(book);
+    }
 
 
     protected override Task OnInitializedAsync()

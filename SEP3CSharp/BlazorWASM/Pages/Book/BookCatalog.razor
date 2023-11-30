@@ -6,16 +6,20 @@
 
 <div class="row align-items-center justify-content-between">
     <div class="col">
-        <h3 class="mb-4">Book Catalog</h3>
+        <h3 class="mb-4">Bog Katalog</h3>
     </div>
     <div class="col-auto">
-        <button type="button" class="btn btn-primary">Register New Book</button>
+        <button type="button" class="btn btn-primary" @onclick="RegisterBook">Registrer Ny Bog</button>
     </div>
 </div>
 
-@if (filteredBooks == null)
+@if (books == null)
 {
-    <p>Loading books...</p>
+    <p>Kunne ikke indlæse bøger</p>
+}
+else if (filteredBooks == null)
+{
+    <p>Indlæser bøger...</p>
 }
 else
 {
@@ -23,8 +27,8 @@ else
         <div class="search-bar mb-4">
             <div class="d-flex flex-wrap align-items-end">
                 <div class="flex-grow-1 me-2">
-                    <label for="searchField" class="form-label">Search</label>
-                    <input type="text" id="searchField" class="form-control" placeholder="Search by title or author..." @bind="searchTerm" @bind:event="oninput"/>
+                    <label for="searchField" class="form-label">Søg</label>
+                    <input type="text" id="searchField" class="form-control" placeholder="Søg efter titel eller forfatter..." @bind="searchTerm" @bind:event="oninput"/>
                 </div>
                 <div class="me-2">
                     <label for="genreSelect" class="form-label">Genre</label>
@@ -37,7 +41,7 @@ else
                 </div>
                 <div class="form-check mb-3">
                     <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
-                    <label class="form-check-label" for="myLoansCheck">My loans</label>
+                    <label class="form-check-label" for="myLoansCheck">Mine lån</label>
                 </div>
             </div>
         </div>
@@ -66,7 +70,7 @@ else
     private bool myLoans;
 
     private List<Book> filteredBooks = new();
-    private readonly List<string> genres = new() { "All", "Classic", "Historical", "Fiction", "Science Fiction", "Fantasy" };
+    private readonly List<string> genres = new() { "Alle", "Klassisk", "Historie", "Fiktion", "Science Fiction", "Fantasy" };
 
     private string _searchTerm;
 
@@ -83,7 +87,7 @@ else
         }
     }
 
-    private string _selectedGenre = "All"; // Initialize with "All" to show all genres by default
+    private string _selectedGenre = "Alle"; // Initialize with "All" to show all genres by default
 
     private string selectedGenre
     {
@@ -103,7 +107,7 @@ else
         LoadSampleBooks();
     // Assuming that at initialization, we want to filter books with default values.
     // If the initial values for searchTerm and selectedGenre are not "", "All", you should set them before calling FilterBooks.
-        selectedGenre = "All"; // Default value, adjust if needed
+        selectedGenre = "Alle"; // Default value, adjust if needed
         searchTerm = ""; // Default value, adjust if needed
         FilterBooks();
         return base.OnInitializedAsync();
@@ -113,7 +117,7 @@ else
     private void FilterBooks()
     {
         filteredBooks = books
-            .Where(b => (selectedGenre == "All" || b.Genre == selectedGenre) &&
+            .Where(b => (selectedGenre == "Alle" || b.Genre == selectedGenre) &&
                         (string.IsNullOrEmpty(searchTerm) || b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                          b.Author.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
             .OrderBy(b => b.Title)
@@ -159,6 +163,11 @@ else
                 Reviews = GenerateRandomReviews()
             });
         }
+    }
+
+    private void RegisterBook()
+    {
+        navMgr.NavigateTo("/CreateBook");
     }
 
     private string GenerateRandomISBN()
