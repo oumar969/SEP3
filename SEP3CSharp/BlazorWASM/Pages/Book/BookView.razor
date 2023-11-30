@@ -1,0 +1,107 @@
+@page "/BookView"
+@using HttpClients.ClientInterfaces
+@inject IBookService bookService
+
+<h3 class="mb-4">Book</h3>
+
+
+<div class="container my-4">
+    <div class="card mb-3 rounded">
+        <!-- Added rounded class here -->
+        <div class="row g-0">
+            <div class="col-md">
+                <img src="@book.ImageUrl" class="img-fluid h-100" alt="Book Image"/> <!-- Removed rounded-start class -->
+            </div>
+            <div class="vr"/>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title">@book.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
+                    <p class="card-text">@book.Description</p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <strong>Genre:</strong> @book.Genre
+                        </small>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <strong>ISBN:</strong> @book.ISBN
+                        </small>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <strong>In Stock:</strong>
+                            <span class="@(book.StockCount == 0 ? "text-danger" : "")">@book.StockCount</span>
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-end">
+                    <button class="btn btn-primary" @onclick="() => LoanBook(book)" disabled="@book.StockCount == 0">Loan Book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (book.Reviews.Any())
+    {
+        <div class="card rounded mt-4">
+            <!-- Add margin-top for spacing from the above content -->
+            <div class="card-body">
+                <h5 class="mb-3">Reviews</h5> <!-- Add margin-bottom to space out the title from the list -->
+                <ul class="list-group list-group-flush">
+                    <!-- Use list-group for styling individual items -->
+                    @foreach (var review in book.Reviews)
+                    {
+                        <li class="list-group-item">
+                            <!-- list-group-item gives padding and proper styling -->
+                            <!-- You can add more styling here if you want to customize further -->
+                            @review
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+
+
+@code {
+
+    private readonly Book book = new()
+    {
+        ISBN = "1234567890",
+        Title = "Example Book Title",
+        Author = "Author Name",
+        Genre = "Fiction",
+        Description = "This is an example book description.",
+        ImageUrl = "Image/book-placeholder.png",
+        Reviews = new List<string>
+        {
+            "Review 1",
+            "Review 2"
+        }
+    };
+
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private void LoanBook(Book book)
+    {
+    // Logic to loan the book
+    }
+
+    public class Book
+    {
+        public string ISBN { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Genre { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public int StockCount { get; set; }
+        public List<string> Reviews { get; set; }
+    }
+
+}
