@@ -3043,3 +3043,23 @@ V
 &BlazorWASM/Pages/Login/Login.razor.css,7\3\73dc32a2408aabfd96cdb1d21e5df9f0fef66826
 R
 "Application/Logic/UserValidator.cs,7\6\7658a52091ff0a813ab4aaf795350e44c55ba44b
+N
+Domain/DTOs/BookRegistryDto.cs,c\d\cdbd078561b6e97cf2255e71d90e1043db4bc10a
+S
+#Domain/DTOs/ISearchParametersDto.cs,7\5\756875c272dd181e3120272e45ffcfe145e070de
+S
+#Domain/DTOs/BookRegistryBasicDto.cs,0\b\0b0a3d5aa8f46cc75c34844b9195d53a7d2c2d6f
+R
+"Application/Logic/BookValidator.cs,f\4\f43dced802f73cb0117cb445ea024d681d2b9274
+P
+ Application/Logic/BookUpdater.cs,8\7\8701f221a8c7f988fa6bbce88afd73a69d4bef28
+F
+Unit-Test/UnitTest1.cs,f\3\f3cc9df00488f5f0551e8b281417d898b38604ae
+C
+Unit-Test/Usings.cs,a\d\add55eb553bc59e33eff72351bc07b2d7e1f0afe
+I
+Unit-Test/UserUnitTest.cs,d\8\d8703caa21676698a79c73d690662e0f98e4d4f4
+O
+Unit-Test/UserLogic_UnitTest.cs,0\0\00820b8284530bcc71d13dc9f292756a7533342e
+S
+#Unit-Test/BookRegistryLogicTests.cs,6\5\652b3eda7b0229de85260f547a3b5dc3275326da

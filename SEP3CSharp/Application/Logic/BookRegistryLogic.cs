@@ -20,7 +20,7 @@ public class BookRegistryLogic : IBookRegistryLogic
     {
         throw new NotImplementedException();
     }
-
+    
     Task<Book> IBookRegistryLogic.CreateAsync(BookRegistryCreationDto dto)
     {
         throw new NotImplementedException();
@@ -54,45 +54,29 @@ public class BookRegistryLogic : IBookRegistryLogic
 
         await _bookRegistryDao.UpdateAsync(updated);
     }
+    
 
-    public Task DeleteAsync(int id)
+    public async Task<BookBasicDto> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var bookRegistry = await _bookRegistryDao.GetByIdAsync(id);
+        if (bookRegistry == null) throw new Exception($"Book with ID {id} not found");
+
+        return new BookBasicDto(bookRegistry.UUID,bookRegistry.Isbn, bookRegistry.LoanerUuid);
     }
 
-    public Task<BookBasicDto> GetByIdAsync(int id)
+    public async Task<ICollection<BookRegistry>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _bookRegistryDao.GetAllAsync();
     }
+    
 
-    public Task<ICollection<BookRegistry>> GetAllAsync()
+    public async Task DeleteAsync(int uuid)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<BookRegistry> UpdateAsync(BookRegistry entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task DeleteAsync(string uuid)
-    {
-        var book = await _bookRegistryDao.GetByUuidAsync(uuid);
+        var book = await _bookRegistryDao.GetByUuidAsync(uuid.ToString());
         if (book == null) throw new Exception($"Book with UUID {uuid} was not found!");
-        await _bookRegistryDao.DeleteAsync(uuid);
+        await _bookRegistryDao.DeleteAsync(uuid.ToString());
     }
-
-    public Task<BookRegistry> CreateAsync(BookRegistry entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
-    {
-        return _bookRegistryDao.GetAsync(searchParameters);
-    }
-
-
+    
     public async Task<BookRegistry> CreateAsync(BookRegistryCreationDto dto)
     {
         ValidateBookRegistry(dto);
