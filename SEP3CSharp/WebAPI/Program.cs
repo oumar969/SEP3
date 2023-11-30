@@ -75,4 +75,9 @@ app.UseAuthentication();
 // Add GraphQL endpoint
 app.MapGraphQL();
 
+app.UseGraphQLPlayground();
+//app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+
+
 app.Run();
+

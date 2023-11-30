@@ -19,4 +19,10 @@ public class Query
     {
         return await _userLogic.GetByUuidAsync(uuid);
     }
+    
+    public async Task<IEnumerable<User>> GetAllUsers()
+    {
+        return await _userLogic.GetAllUsersAsync();
+    }
+    
 }

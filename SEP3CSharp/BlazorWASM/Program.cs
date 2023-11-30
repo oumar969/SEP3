@@ -4,6 +4,10 @@ using Domain.Auth;
 using HttpClients.ClientInterfaces;
 using HttpClients.Implementations;
 using Microsoft.AspNetCore.Components.Authorization;
+using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
+using GraphQL.Client.Serializer.Newtonsoft;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<CascadingAuthenticationState>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
+builder.Services.AddScoped<IGraphQLClient>(s => new GraphQLHttpClient("http://localhost:5125/graphql", new NewtonsoftJsonSerializer()));
 
 var app = builder.Build();
 

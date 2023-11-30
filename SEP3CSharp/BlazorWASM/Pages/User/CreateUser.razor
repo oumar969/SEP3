@@ -1,7 +1,11 @@
 ﻿@page "/CreateUser"
 @using HttpClients.ClientInterfaces
 @using Domain.DTOs
+@using Domain.Models
+@using GraphQL
+@using GraphQL.Client.Abstractions
 @inject IUserService userService; 
+@inject IGraphQLClient graphqlClient;
 
 <div class="card">
     <h3>Create User</h3>
@@ -40,41 +44,67 @@
     private string password = "";
     private string resultMsg = "";
     private string color = "";
-
-
+    
     private async Task Create()
     {
         resultMsg = "";
-        color = "black"; // Set a default neutral color if you have such a requirement
+        color = "black";
+
+        var createUserMutation = new GraphQLRequest
+        {
+            Query = @"
+        mutation ($firstName: String!, $lastName: String!, $email: String!, $password: String!, $isLibrarian: Boolean!) {
+            createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password, isLibrarian: $isLibrarian) {
+                firstName
+                lastName
+                email
+            }
+        }",
+            Variables = new 
+            { 
+                firstName = firstName, 
+                lastName = lastName, 
+                email = email, 
+                password = password, 
+                isLibrarian = true 
+            }
+        };
 
         try
         {
-    // Await the userService.Create call and ensure the parentheses encompass the entire method call
-            await userService.Create(new UserCreationDto(
-                null,
-                firstName,
-                lastName,
-                email,
-                password,
-                true
-                ));
+            var response = await graphqlClient.SendMutationAsync<Data>(createUserMutation);
+            if (response.Errors != null && response.Errors.Length > 0)
+            {
+                resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
+                color = "red";
+                return;
+            }
 
-    // Clear the form fields after successful creation
-            firstName = "";
-            lastName = "";
-            email = "";
-            password = "";
+            if (response.Data != null)
+            {
+                firstName = "";
+                lastName = "";
+                email = "";
+                password = "";
 
-    // Set the success message and color
-            resultMsg = "User successfully created";
-            color = "green";
+                resultMsg = "Brugeren er oprettet";
+                color = "green";
+            }
         }
         catch (Exception e)
         {
-            Console.WriteLine(e); // Log the exception to the console
-            resultMsg = e.Message; // Set the error message from the exception
-            color = "red"; // Set the error color
+            Console.WriteLine(e);
+            resultMsg = "Exception: " + e.Message; 
+            color = "red";
+
         }
     }
 
+    class Data
+    {
+        public User CreateUser { get; set; }
+    }
+
+
 }
+
