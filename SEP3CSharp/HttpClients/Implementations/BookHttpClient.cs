@@ -3,7 +3,6 @@ using System.Text;
 using Domain.DTOs;
 using Domain.Models;
 using HttpClients.ClientInterfaces;
-using BookRegistry = Domain.DTOs.BookRegistry;
 
 namespace HttpClients.Implementations;
 

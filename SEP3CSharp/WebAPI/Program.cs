@@ -35,8 +35,7 @@ builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services
-    .AddGraphQLServer().AddQueryType<UserQuery>().AddMutationType<UserMutation>();
-
+    .AddGraphQLServer().AddQueryType<UserQuery>().AddMutationType<Mutation>();
 
 AuthorizationPolicies.AddPolicies(builder.Services);
 
@@ -76,7 +75,6 @@ app.UseAuthentication();
 app.MapGraphQL();
 
 app.UseGraphQLPlayground();
-//app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
 
 
 app.Run();

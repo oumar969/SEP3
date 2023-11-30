@@ -53,13 +53,13 @@
         var createUserMutation = new GraphQLRequest
         {
             Query = @"
-        mutation ($firstName: String!, $lastName: String!, $email: String!, $password: String!, $isLibrarian: Boolean!) {
-            createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password, isLibrarian: $isLibrarian) {
-                firstName
-                lastName
-                email
-            }
-        }",
+                mutation ($firstName: String!, $lastName: String!, $email: String!, $password: String!, $isLibrarian: Boolean!) {
+                   createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password, isLibrarian: $isLibrarian) {
+                         firstName
+                         lastName
+                         email
+                      }
+                }",
             Variables = new 
             { 
                 firstName = firstName, 

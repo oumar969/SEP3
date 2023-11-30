@@ -2,7 +2,6 @@
 using Application.LogicInterfaces;
 using Domain.DTOs;
 using Domain.Models;
-using BookRegistry = Domain.DTOs.BookRegistry;
 
 namespace Application.Logic;
 
@@ -11,12 +10,13 @@ public class BookRegistryLogic : IBookRegistryLogic
     private readonly IBookRegistryDao _bookRegistryDao;
     private readonly IUserDao _userDao;
 
+    
     public BookRegistryLogic(IBookRegistryDao bookRegistryDao, IUserDao userDao)
     {
         _bookRegistryDao = bookRegistryDao;
         _userDao = userDao;
     }
-
+    
     public Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
     {
         throw new NotImplementedException();
@@ -24,11 +24,14 @@ public class BookRegistryLogic : IBookRegistryLogic
 
     async Task<Domain.Models.BookRegistry> IBookRegistryLogic.CreateAsync(BookRegistryCreationDto dto)
     {
+
         ValidateBookRegistry(dto);
-        var bookRegistry = new Domain.Models.BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
-        var created = await _bookRegistryDao.CreateAsync(bookRegistry);
+        
+        var newBookRegistry = new BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
+        var created = await _bookRegistryDao.CreateAsync(newBookRegistry);
         return created;    
     }
+    
 
     public async Task UpdateAsync(BookUpdateDto dto)
     {
@@ -63,23 +66,15 @@ public class BookRegistryLogic : IBookRegistryLogic
     {
         throw new NotImplementedException();
     }
-
+/*
     public async Task<BookRegistry> GetByIsbnAsync(string id)
     {
         return await _bookRegistryDao.GetByIsbnAsync(id);
     }
+*/
 
-    public Task<BookRegistry> GetAllBooksAsync()
-    {
-        throw new NotImplementedException();
-    }
 
-    public Task<BookRegistry> GetByTitleAsync(string title)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<BookRegistry> GetByAuthorAsync(string author)
+    public Task<BookRegistry> GetBookByTitleAsyncTask(string title)
     {
         throw new NotImplementedException();
     }
@@ -107,24 +102,21 @@ public class BookRegistryLogic : IBookRegistryLogic
     {
         return _bookRegistryDao.GetAsync(searchParameters);
     }
-
+/*
 
     public async Task<Domain.Models.BookRegistry> CreateAsync(BookRegistryCreationDto dto)
     {
+        var existing = await _bookRegistryDao.GetByBookTitleAsync(dto.Title);
+        
+        if (existing != null) throw new Exception("Book already exists");
+
         ValidateBookRegistry(dto);
         var bookRegistry = new Domain.Models.BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
         var created = await _bookRegistryDao.CreateAsync(bookRegistry);
         return created;
     }
+    */
 
-    public async Task<BookRegistry> GetByUuidAsync(string uuid)
-    {
-        var bookRegistry = await _bookRegistryDao.GetByUuidAsync(uuid);
-        if (bookRegistry == null) throw new Exception($"Book with UUID {uuid} not found");
-
-        return new BookRegistry(bookRegistry.Title, bookRegistry.Author, bookRegistry.Genre, bookRegistry.Isbn,
-            bookRegistry.Description, bookRegistry.Reviews);
-    }
 
     private void ValidateBookRegistry(Domain.Models.BookRegistry bookRegistry)
     {

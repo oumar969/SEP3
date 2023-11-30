@@ -12,9 +12,7 @@ public class UserQuery
     {
         _userLogic = userLogic;
     }
-
-    public string Welcome => "Welcome to Hot Chocolate!";
-
+    
     public async Task<User?> GetUserByUuid(string uuid)
     {
         return await _userLogic.GetByUuidAsync(uuid);

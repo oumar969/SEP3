@@ -1,6 +1,5 @@
 ﻿using Domain.DTOs;
 using Domain.Models;
-using BookRegistry = Domain.DTOs.BookRegistry;
 
 namespace HttpClients.ClientInterfaces;
 

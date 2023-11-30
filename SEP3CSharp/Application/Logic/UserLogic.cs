@@ -38,6 +38,7 @@ public class UserLogic : IUserLogic
     }
 
 
+
     public Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters)
     {
         return userDao.GetAsync(searchParameters);
