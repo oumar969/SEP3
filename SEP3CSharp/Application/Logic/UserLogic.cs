@@ -44,12 +44,12 @@ public class UserLogic : IUserLogic
         return userDao.GetAsync(searchParameters);
     }
 
-    public async Task DeleteAsync(string uuid)
+    public async Task DeleteAsync(string id)
     {
-        // var user = await userDao.GetByUuidAsync(id);
-        // if (user == null) throw new Exception($"Book with UUID {id} was not found!");
-        //
-        // await userDao.DeleteAsync(id);
+        var user = await userDao.GetByUuidAsync(id);
+        if (user == null) throw new Exception($"User with UUID {id} was not found!");
+        
+        await userDao.DeleteAsync(id);
     }
 
     public Task<ICollection<User>> GetAllUsersAsync()

@@ -41,8 +41,13 @@ public class BookHttpClient : IBookService
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        HttpResponseMessage response = await client.DeleteAsync($"books/{id}");
+        string content = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(content);
+        }
     }
 }

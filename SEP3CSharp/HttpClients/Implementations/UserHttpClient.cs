@@ -53,4 +53,14 @@ public class UserHttpClient : IUserService
         })!;
         return users;
     }
+
+    public async Task DeleteUser(string id)
+    {
+        HttpResponseMessage response = await client.DeleteAsync($"user/{id}");
+        string content = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(content);
+        }
+    }
 }

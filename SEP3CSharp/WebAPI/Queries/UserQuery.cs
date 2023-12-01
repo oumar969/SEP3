@@ -23,4 +23,9 @@ public class UserQuery
         return await _userLogic.GetAllUsersAsync();
     }
     
+    public async Task DeleteUser(string uuid)
+    {
+        await _userLogic.DeleteAsync(uuid);
+    }
+    
 }

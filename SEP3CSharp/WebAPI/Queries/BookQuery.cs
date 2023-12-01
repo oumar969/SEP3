@@ -11,5 +11,14 @@ public class BookQuery
     {
         _bookRegistryLogic = bookRegistryLogic;
     }
+    
+    public async Task DeleteBookRegistry(string isbn)
+    {
+        await _bookRegistryLogic.DeleteAsync((isbn));
+    }
+    
+    
+    
+    
 
 }

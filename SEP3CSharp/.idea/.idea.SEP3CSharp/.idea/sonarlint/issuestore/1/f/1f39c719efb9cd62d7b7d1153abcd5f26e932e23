@@ -6,6 +6,6 @@ jcsharpsquid:S927S"GRename parameter 'entity' to 'user' to match the interfac
 Xcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(Ã³ù²8Ò·—‚Á1
 Xcsharpsquid:S1126"5'System.Exception' should not be thrown by user code.(½ ÿ«8Ó·—‚Á1
 ]csharpsquid:S112K"5'System.Exception' should not be thrown by user code.(‡‘¾òûÿÿÿÿ8Ô·—‚Á1
-Xcsharpsquid:S112d"5'System.Exception' should not be thrown by user code.(°Ä†£8Õ·—‚Á1
+Xcsharpsquid:S112e"5'System.Exception' should not be thrown by user code.(°Ä†£8¬Œ˜¥Â1
 ]csharpsquid:S112~"5'System.Exception' should not be thrown by user code.(˜Ã•‘ýÿÿÿÿ8Ö·—‚Á1
 Ycsharpsquid:S112•"5'System.Exception' should not be thrown by user code.(ÔÑ¢§8Ø·—‚Á1

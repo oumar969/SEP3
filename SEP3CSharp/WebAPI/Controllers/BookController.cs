@@ -36,7 +36,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPatch]
-    public async Task<ActionResult> UpdateAsync([FromBody] BookUpdateDto dto)
+    public async Task<ActionResult> UpdateAsync([FromBody] BookRegistryUpdateDto dto)
     {
         try
         {
@@ -51,7 +51,7 @@ public class BookController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult> DeleteAsync([FromRoute] int id)
+    public async Task<ActionResult> DeleteAsync([FromRoute] string id)
     {
         try
         {

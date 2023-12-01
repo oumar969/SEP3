@@ -2,6 +2,7 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using FileData;
 using Newtonsoft.Json;
 using BookRegistry = Domain.Models.BookRegistry;
 
@@ -14,6 +15,35 @@ public class BookRegistryDao : IBookRegistryDao
     public BookRegistryDao()
     {
         _httpClient = new HttpClient();
+    }
+
+    async Task<BookRegistry> IGenericDao<BookRegistry>.CreateAsync(BookRegistry entity)
+    {
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
+        Console.WriteLine("jsonContent11: " + jsonContent);
+        var response = await _httpClient.PostAsync("http://localhost:7777/book_registry/register", jsonContent);
+        Console.WriteLine("response: " + response);
+        if (!response.IsSuccessStatusCode)
+            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
+
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(jsonResponse);
+        return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);    }
+
+    public Task<BookRegistry> GetByUuidAsync(string uuid)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ICollection<BookRegistry>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
+    {
+        throw new NotImplementedException();
     }
 
     public Task<BookRegistry> UpdateAsync(BookRegistry entity)
@@ -53,7 +83,6 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
     }
     
-
     public async Task<BookRegistry> GetByIsbnAsync(string isbn)
     {
         var url = $"{ServerOptions.serverUrl}/book/getByIsbn/{isbn}";
@@ -77,7 +106,7 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
     }
 
-    public async Task<BookRegistry> CreateAsync(BookRegistry entity)
+     async Task<BookRegistry> CreateAsync(BookRegistry entity)
     {
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
@@ -91,31 +120,5 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine(jsonResponse);
         return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
     }
-
-    public Task<BookRegistry> GetByUuidAsync(string uuid)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ICollection<BookRegistry>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
-    {
-        throw new NotImplementedException();
-    }
-    
-
-
-    public Task<Book> UpdateAsync(Book entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
+     
 }
