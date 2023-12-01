@@ -1,4 +1,9 @@
 using System.Text;
+
+
+
+
+
 using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
@@ -8,6 +13,7 @@ using FileData;
 using JavaPersistenceClient.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using WebAPI.Schema;
 using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +34,9 @@ builder.Services.AddScoped<IGenericDao<BookRegistry>, BookRegistryDao>();
 
 builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services
+    .AddGraphQLServer().AddQueryType<UserQuery>().AddMutationType<Mutation>();
 
 AuthorizationPolicies.AddPolicies(builder.Services);
 
@@ -70,4 +79,11 @@ app.MapControllers();
 
 app.UseAuthentication();
 
+// Add GraphQL endpoint
+app.MapGraphQL();
+
+app.UseGraphQLPlayground();
+
+
 app.Run();
+

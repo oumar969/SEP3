@@ -1,8 +1,15 @@
 ﻿@page "/CreateBook"
 @using System.Security.Claims
 @using Domain.DTOs
+@using GraphQL.Client.Abstractions
+@using Microsoft.AspNetCore.Components
 @attribute [Authorize]
+ @using HttpClients.ClientInterfaces
+@* @inject IUserService userService; *@
+ @* @inject IBookService postService; *@
 @inject NavigationManager navMgr
+@inject IGraphQLClient graphqlClient;
+
 
 <div class="book-form-card">
     <h3 class="book-form-title">Registrer Bog</h3>
@@ -46,9 +53,6 @@
 </div>
 
 @code {
-    // private ICollection<User>? users;
-    //   private int? selectedUserId;
-
     private string bookTitle = "";
     private string bookAuthor = "";
     private string bookGenre = "";
@@ -65,29 +69,18 @@
     ClaimsPrincipal user;
     BookRegistryCreationDto dto;
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     msg = "";
-    //     authState = await AuthState;
-    //     user = authState.User;
-    //     
-    //     try
-    //     {
-    //     //    users = await userService.GetUsers();
-    //         
-    //         
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         Console.WriteLine(e);
-    //         msg = e.Message;
-    //      
-    //     }
-    // }
+   
 
+ 
     private async Task Create()
     {
         msg = "";
+    
+        
+        if (!ValidateTheBook())
+        {
+            return;
+        }
 
         if (string.IsNullOrEmpty(bookTitle))
         {
@@ -119,27 +112,13 @@
             msg = "Angiv venlist antal bøger.";
             return;
         }
+        if (bookDescription.Length > 100)
+        {
+            msg = "Body cannot be more than 100 characters!";
+            return false;
+        }
 
-        try
-        {
-            if (bookDescription.Length > 100)
-            {
-                msg = "Body cannot be more than 100 characters!";
-                throw new Exception(msg);
-            }
-            var id = int.Parse(user.FindFirst("Id").Value);
-    // dto = new(id, bookTitle, bookBody);
-    // await postService.CreateAsync(dto);
-            navMgr.NavigateTo("/");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-    //     msg = e.Message;
-    //    msg = user.ToString();
-    //     msg = (user.FindFirst("Id").Value);
-            msg = dto.ToString();
-        }
+        return true;
     }
 
 }

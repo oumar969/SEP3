@@ -14,7 +14,7 @@ public class UserCreationDto
     
     public UserCreationDto(string uuid,string firstName, string lastName, string email, string password, bool isLibrarian)
     {
-        UUID = uuid;
+        UUID = Guid.NewGuid().ToString();
         FirstName = firstName;
         LastName = lastName;
         Email = email;

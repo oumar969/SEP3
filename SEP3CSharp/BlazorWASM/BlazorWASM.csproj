@@ -20,4 +20,10 @@
       <PackageReference Include="NUnit" Version="4.0.0" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <PackageReference Include="GraphQL.Client" Version="6.0.2" />
+      <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.0.2" />
+    </ItemGroup>
+
 </Project>

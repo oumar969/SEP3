@@ -19,7 +19,7 @@ public interface IBookService
     
     Task UpdateAsync(BookUpdateDto dto);
 
-    Task<BookBasicDto> GetByIdAsync(int id);
+    Task<BookRegistry> GetByIdAsync(int id);
     Task DeleteAsync(int id);
 
 

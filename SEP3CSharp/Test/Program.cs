@@ -6,15 +6,15 @@ using JavaPersistenceClient.DAOs;
 
 Console.WriteLine("Hello, World! Testing here...");
 
-BookRegistryDao bookRegistryDao = new();
-await bookRegistryDao.CreateAsync(new BookRegistry(
-    "Test Title v3.0",
-    "Test Author huhu",
-    "Test Genre",
-    "Test Isbn vvv2",
-    "Test DescriptionaaA",
-    "Test Review"
-));
+// BookRegistryDao bookRegistryDao = new();
+// await bookRegistryDao.CreateAsync(new BookRegistry(
+//     "Test Title v3.0",
+//     "Test Author huhu",
+//     "Test Genre",
+//     "Test Isbn vvv2",
+//     "Test DescriptionaaA",
+//     "Test Review"
+// ));
 
 
 UserDao user = new();
