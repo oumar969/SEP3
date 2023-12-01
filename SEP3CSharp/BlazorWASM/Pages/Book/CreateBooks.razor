@@ -73,73 +73,21 @@
     ClaimsPrincipal user;
     BookRegistryCreationDto dto;
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     msg = "";
-    //     authState = await AuthState;
-    //     user = authState.User;
-    //     
-    //     try
-    //     {
-    //     //    users = await userService.GetUsers();
-    //         
-    //         
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         Console.WriteLine(e);
-    //         msg = e.Message;
-    //      
-    //     }
-    // }
+   
 
+ 
     private async Task Create()
     {
         msg = "";
-
-        if (string.IsNullOrEmpty(bookTitle))
+    
+        
+        if (!ValidateTheBook())
         {
-            msg = "Title cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookIsbn))
-        {
-            msg = "Isbn cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookAuthor))
-        {
-            msg = "Author cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookGenre))
-        {
-            msg = "Genre cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookReview))
-        {
-            msg = "Review cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookLocation))
-        {
-            msg = "Location cannot be empty!";
-            return;
-        }
-        if (string.IsNullOrEmpty(bookDescription))
-        {
-            msg = "Description cannot be empty!";
             return;
         }
 
         try
         {
-            if (bookDescription.Length > 100)
-            {
-                msg = "Body cannot be more than 100 characters!";
-                throw new Exception(msg);
-            }
             var id = int.Parse(user.FindFirst("Id").Value);
     // dto = new(id, bookTitle, bookBody);
     // await postService.CreateAsync(dto);
@@ -148,11 +96,63 @@
         catch (Exception e)
         {
             Console.WriteLine(e);
-    //     msg = e.Message;
-    //    msg = user.ToString();
-    //     msg = (user.FindFirst("Id").Value);
+    // msg = e.Message;
+    // msg = user.ToString();
+    // msg = (user.FindFirst("Id").Value);
             msg = dto.ToString();
         }
+    }
+
+    
+    
+    
+    
+    
+    
+    private bool ValidateTheBook()
+    {
+        if (string.IsNullOrEmpty(bookTitle))
+        {
+            msg = "Title cannot be empty!";
+            return false;
+        }
+        if (string.IsNullOrEmpty(bookIsbn))
+        {
+            msg = "Isbn cannot be empty!";
+            return false;
+        }
+        if (string.IsNullOrEmpty(bookAuthor))
+        {
+            msg = "Author cannot be empty!";
+            return false;
+        }
+        if (string.IsNullOrEmpty(bookGenre))
+        {
+            msg = "Genre cannot be empty!";
+            return false;
+        }
+        if (string.IsNullOrEmpty(bookReview))
+        {
+            msg = "Review cannot be empty!";
+            return false;
+        }
+        if (string.IsNullOrEmpty(bookLocation))
+        {
+            msg = "Location cannot be empty!";
+            return false;
+        }
+        if (string.IsNullOrEmpty(bookDescription))
+        {
+            msg = "Description cannot be empty!";
+            return false;
+        }
+        if (bookDescription.Length > 100)
+        {
+            msg = "Body cannot be more than 100 characters!";
+            return false;
+        }
+
+        return true;
     }
 
 }
