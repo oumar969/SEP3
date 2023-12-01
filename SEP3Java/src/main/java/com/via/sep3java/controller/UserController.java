@@ -7,17 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping(value = "/user") public class UserController
-{
+@RestController
+@RequestMapping(value = "/user")
+public class UserController {
 
-    @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @PostMapping("/create") public ResponseEntity<?> addUser(
-            @RequestBody User user)
-    {
+    @PostMapping("/create")
+    public ResponseEntity<?> addUser(
+            @RequestBody User user) {
         User existingUser = userRepository.findByUuid(user.getUuid());
-        if (existingUser != null)
-        {
+        if (existingUser != null) {
             return new ResponseEntity<>(
                     "User with UUID " + user.getUuid() + " already exists.",
                     HttpStatus.BAD_REQUEST);
@@ -29,36 +30,38 @@ import org.springframework.web.bind.annotation.*;
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
-    @GetMapping("/get/{uuid}") public ResponseEntity<?> getUser(
-            @PathVariable String uuid)
-    {
+    @GetMapping("/get/all")
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/get/{uuid}")
+    public ResponseEntity<?> getUser(
+            @PathVariable String uuid) {
         User existingUser = userRepository.findByUuid(uuid);
-        if (existingUser == null)
-        {
+        if (existingUser == null) {
             return new ResponseEntity<>("User with UUID " + uuid + " not found.",
                     HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(existingUser, HttpStatus.OK);
     }
 
-    @GetMapping("/get/by-email/{email}") public ResponseEntity<?> getUserByEmail(
-            @PathVariable String email)
-    {
+    @GetMapping("/get/byEmail/{email}")
+    public ResponseEntity<?> getUserByEmail(
+            @PathVariable String email) {
         User existingUser = userRepository.findByEmail(email);
-        if (existingUser == null)
-        {
+        if (existingUser == null) {
             return new ResponseEntity<>("User with Email " + email + " not found.",
                     HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(existingUser, HttpStatus.OK);
     }
 
-    @PutMapping("/edit/{uuid}") public ResponseEntity<?> editUser(
-            @PathVariable String uuid, @RequestBody User user)
-    {
+    @PutMapping("/edit/{uuid}")
+    public ResponseEntity<?> editUser(
+            @PathVariable String uuid, @RequestBody User user) {
         User existingUser = userRepository.findByUuid(uuid);
-        if (existingUser == null)
-        {
+        if (existingUser == null) {
             return new ResponseEntity<>("User with UUID " + uuid + " not found.",
                     HttpStatus.NOT_FOUND);
         }
@@ -72,12 +75,11 @@ import org.springframework.web.bind.annotation.*;
         return new ResponseEntity<>(existingUser, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{uuid}") public ResponseEntity<?> deleteUser(
-            @PathVariable String uuid)
-    {
+    @DeleteMapping("/delete/{uuid}")
+    public ResponseEntity<?> deleteUser(
+            @PathVariable String uuid) {
         User existingUser = userRepository.findByUuid(uuid);
-        if (existingUser == null)
-        {
+        if (existingUser == null) {
             return new ResponseEntity<>("User with UUID " + uuid + " not found.",
                     HttpStatus.NOT_FOUND);
         }

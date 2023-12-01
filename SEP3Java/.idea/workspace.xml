@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/resources/images/book-placeholder.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3.postman_collection.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +32,6 @@
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
-  </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="1060ca31-7aa2-45c8-b3e1-ad0d575ca9d2" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -126,7 +122,7 @@
       <workItem from="1699262752240" duration="6887000" />
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
-      <workItem from="1701096767865" duration="4511000" />
+      <workItem from="1701096767865" duration="365000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />
