@@ -1,6 +1,7 @@
 ﻿@page "/Login"
 @using Microsoft.AspNetCore.Components
-@* @inject IAuthService authService *@
+@using HttpClients.ClientInterfaces
+@inject IAuthService authService
 @inject NavigationManager navMgr
 
 <CascadingAuthenticationState>
@@ -47,8 +48,8 @@
         errorLabel = "";
         try
         {
-    // await authService.LoginAsync(userName, password);
-    // navMgr.NavigateTo("/");
+    await authService.LoginAsync(userName, password);
+    navMgr.NavigateTo("/");
         }
         catch (Exception e)
         {

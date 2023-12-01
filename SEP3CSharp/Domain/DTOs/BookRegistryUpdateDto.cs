@@ -1,16 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Domain.Models;
+﻿using Domain.Models;
 
 namespace Domain.DTOs;
 
-public class BookUpdateDto
+public class BookRegistryUpdateDto
 {
-    public BookUpdateDto(string uuid)
+    public BookRegistryUpdateDto(string isbn)
     {
-        UUID = uuid;
+        Isbn = isbn;
     }
 
-    public string UUID { get; set; }
+    public BookRegistryUpdateDto(string isbn, string title, string author, string genre, string description)
+    {
+        Isbn = isbn;
+        Title = title;
+        Author = author;
+        Genre = genre;
+        Description = description;
+    }
+
     public string Title { get; set; }
     public string Author { get; set; }
     public string Genre { get; set; }

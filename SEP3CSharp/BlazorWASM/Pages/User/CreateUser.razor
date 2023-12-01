@@ -1,0 +1,75 @@
+﻿@page "/CreateUser"
+@using HttpClients.ClientInterfaces
+@using GraphQL.Client.Abstractions
+@using Domain.DTOs
+@inject IUserService userService; 
+@inject IGraphQLClient graphqlClient;
+
+<div class="card">
+    <h3>Create User</h3>
+    <div class="form-group field">
+        <div>
+            <label>First name:</label>
+            <input type="text" @bind="firstName" @bind:event="oninput"/>
+        </div>
+        <div>
+            <label>Last name:</label>
+            <input type="text" @bind="lastName" @bind:event="oninput"/>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="text" @bind="email" @bind:event="oninput"/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="text" @bind="password" @bind:event="oninput"/>
+            @if (!string.IsNullOrEmpty(resultMsg))
+            {
+                <label style="color: @color">@resultMsg</label>
+            }
+        </div>
+    </div>
+    <div class="button-row">
+        <button @onclick="Create" disabled="@(string.IsNullOrEmpty(email))" class="acceptbtn">Create</button>
+    </div>
+</div>
+
+
+@code {
+    private string firstName = "";
+    private string lastName = "";
+    private string email = "";
+    private string password = "";
+    private string resultMsg = "";
+    private string color = "";
+    private readonly bool isLibrarian = false;
+
+    private async Task Create()
+    {
+        resultMsg = "";
+        color = "black";
+
+        try
+        {
+            var userCreatedMsg = await userService.Create(new UserCreationDto(firstName, lastName, email, password, isLibrarian));
+
+            if (userCreatedMsg.Equals("ok"))
+            {
+                resultMsg = "Brugeren blev oprettet";
+                color = "green";
+            }
+            else
+            {
+                resultMsg = "Brugeren blev ikke oprettet, " + userCreatedMsg;
+                color = "red";
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            resultMsg = "Exception: " + e.Message;
+            color = "red";
+        }
+    }
+
+}

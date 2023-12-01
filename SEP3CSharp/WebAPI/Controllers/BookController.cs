@@ -15,22 +15,7 @@ public class BookController : ControllerBase
     {
         _bookRegistryLogic = bookRegistryLogic;
     }
-
-    [HttpPost]
-    public async Task<ActionResult<Book>> CreateAsync([FromBody] BookRegistryCreationDto dto)
-    {
-        try
-        {
-            var created = await _bookRegistryLogic.CreateAsync(dto);
-            return Created($"/books/{created.UUID}", created);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
-        }
-    }
-
+    
     [HttpGet]
     public async Task<ActionResult<ICollection<Book>>> GetAsync([FromQuery] string? id, [FromQuery] string? title,
         [FromQuery] string? author, [FromQuery] string? isbn, [FromQuery] string? genre,
@@ -51,7 +36,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPatch]
-    public async Task<ActionResult> UpdateAsync([FromBody] BookUpdateDto dto)
+    public async Task<ActionResult> UpdateAsync([FromBody] BookRegistryUpdateDto dto)
     {
         try
         {
@@ -66,7 +51,7 @@ public class BookController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult> DeleteAsync([FromRoute] int id)
+    public async Task<ActionResult> DeleteAsync([FromRoute] string id)
     {
         try
         {
@@ -80,18 +65,5 @@ public class BookController : ControllerBase
         }
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<BookBasicDto>> GetById([FromRoute] int id)
-    {
-        try
-        {
-            var result = await _bookRegistryLogic.GetByIdAsync(id);
-            return Ok(result);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return StatusCode(500, e.Message);
-        }
-    }
+
 }

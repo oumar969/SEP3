@@ -1,10 +1,12 @@
 ﻿@page "/register"
 @using Domain.Models
-@using Microsoft.AspNetCore.Components
+@using HttpClients.ClientInterfaces
+@using Domain.DTOs
 @inject NavigationManager navMgr
+@inject IUserService userService; 
 
 <div class="login-card">
-    <h3 class="login-title">Register</h3>
+    <h3 class="login-title">Registrer</h3>
 
     @if (ShowErrors)
     {
@@ -13,37 +15,42 @@
         </div>
     }
 
-    <EditForm Model="RegisterModel" OnValidSubmit="HandleRegistration" class="login-form">
+    <EditForm Model="registerModel" OnValidSubmit="HandleRegistration" class="login-form">
         <DataAnnotationsValidator/>
         <ValidationSummary/>
 
         <div class="login-field">
-            <label for="firstName">First Name</label>
-            <input id="firstName" class="login-input" @bind="RegisterModel.FirstName" @bind:event="oninput"/>
-            <ValidationMessage For="@(() => RegisterModel.FirstName)"/>
+            <label for="firstName">Fornavn</label>
+            <input id="firstName" class="login-input" @bind="registerModel.FirstName" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => registerModel.FirstName)"/>
         </div>
         <div class="login-field">
-            <label for="lastName">Last Name</label>
-            <input id="lastName" class="login-input" @bind="RegisterModel.LastName" @bind:event="oninput"/>
-            <ValidationMessage For="@(() => RegisterModel.LastName)"/>
+            <label for="lastName">Efternavn</label>
+            <input id="lastName" class="login-input" @bind="registerModel.LastName" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => registerModel.LastName)"/>
         </div>
         <div class="login-field">
             <label for="email">Email</label>
-            <input id="email" class="login-input" type="email" @bind="RegisterModel.Email" @bind:event="oninput"/>
-            <ValidationMessage For="@(() => RegisterModel.Email)"/>
+            <input id="email" class="login-input" type="email" @bind="registerModel.Email" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => registerModel.Email)"/>
         </div>
         <div class="login-field">
-            <label for="password">Password</label>
-            <input id="password" class="login-input" type="password" @bind="RegisterModel.Password" @bind:event="oninput"/>
-            <ValidationMessage For="@(() => RegisterModel.Password)"/>
+            <label for="password">Kodeord</label>
+            <input id="password" class="login-input" type="password" @bind="registerModel.Password" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => registerModel.Password)"/>
         </div>
         <div class="login-field">
-            <label for="confirmPassword">Confirm Password</label>
-            <input id="confirmPassword" class="login-input" type="password" @bind="RegisterModel.ConfirmPassword" @bind:event="oninput"/>
-            <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)"/>
+            <label for="confirmPassword">Bekræft Kodeord</label>
+            <input id="confirmPassword" class="login-input" type="password" @bind="registerModel.ConfirmPassword" @bind:event="oninput"/>
+            <ValidationMessage For="@(() => registerModel.ConfirmPassword)"/>
+        </div>
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="registerModel.IsLibrarian"/>
+            <label class="form-check-label" for="myLoansCheck">Er biblioteks personale</label>
+            <ValidationMessage For="@(() => registerModel.IsLibrarian)"/>
         </div>
         <div class="login-field">
-            <button type="submit" class="login-button">Register</button>
+            <button type="submit" class="login-button">Registrer</button>
         </div>
     </EditForm>
 </div>
@@ -51,11 +58,33 @@
 @code {
     private bool ShowErrors { get; } // Make sure setters are present if you intend to modify these properties.
     private string Message { get; }
-    private RegisterModel RegisterModel { get; } = new();
+    private RegisterModel registerModel { get; } = new();
+
 
     private async Task HandleRegistration()
     {
-    // Registration logic goes here
+        Console.WriteLine("handling registration");
+        try
+        {
+            var userCreatedMsg = await userService.Create(new UserCreationDto(
+                registerModel.FirstName, registerModel.LastName, registerModel.Email, registerModel.Password, registerModel.IsLibrarian));
+
+            if (userCreatedMsg.Equals("ok"))
+            {
+                Console.WriteLine("created user");
+    // fix
+            }
+            else
+            {
+                Console.WriteLine("did not create user");
+    // fix
+            }
+        }
+        catch
+            (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
 }

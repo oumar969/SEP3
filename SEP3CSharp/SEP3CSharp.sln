@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{23F79EE2-DCF0-4B4D-A7B9-C24E085794C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClients", "HttpClients\HttpClients.csproj", "{1FCBD320-9B74-4C33-8FE6-A37F35E4843A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphqlClient", "GraphqlClient\GraphqlClient.csproj", "{1FCBD320-9B74-4C33-8FE6-A37F35E4843A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavaPersistenceClient", "JavaPersistenceClient\JavaPersistenceClient.csproj", "{E53EC328-AF52-4D5D-B4F5-0038BE0A4132}"
 EndProject
@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWASM", "BlazorWASM\BlazorWASM.csproj", "{6F1459BF-58FC-4439-9C45-F370AD71CC2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{1CAC9ECB-F4FC-4F81-8050-FEB99EE489EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{5121B306-87FF-4984-8ACB-FC4E0F9D94F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,9 +44,9 @@ Global
 		{6F1459BF-58FC-4439-9C45-F370AD71CC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F1459BF-58FC-4439-9C45-F370AD71CC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F1459BF-58FC-4439-9C45-F370AD71CC2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CAC9ECB-F4FC-4F81-8050-FEB99EE489EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CAC9ECB-F4FC-4F81-8050-FEB99EE489EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CAC9ECB-F4FC-4F81-8050-FEB99EE489EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CAC9ECB-F4FC-4F81-8050-FEB99EE489EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5121B306-87FF-4984-8ACB-FC4E0F9D94F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5121B306-87FF-4984-8ACB-FC4E0F9D94F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5121B306-87FF-4984-8ACB-FC4E0F9D94F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5121B306-87FF-4984-8ACB-FC4E0F9D94F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
