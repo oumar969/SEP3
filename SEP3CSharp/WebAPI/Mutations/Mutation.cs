@@ -1,15 +1,13 @@
-﻿using Domain.DTOs;
-using Application.LogicInterfaces;
-using System.Threading.Tasks;
+﻿using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Models;
-using BookRegistry = Domain.Models.BookRegistry;
 
 namespace WebAPI.Schema;
 
 public class Mutation
 {
-    private readonly IUserLogic _userLogic;
     private readonly IBookRegistryLogic _bookRegistryLogic;
+    private readonly IUserLogic _userLogic;
 
     public Mutation(IUserLogic userLogic, IBookRegistryLogic bookRegistryLogic)
     {
@@ -18,8 +16,9 @@ public class Mutation
     }
 
     /* BOOK REGISTRY */
-    
-    public async Task<BookRegistry> CreateBookRegistry(string title, string author, string genre, string isbn, string description)
+
+    public async Task<BookRegistry> CreateBookRegistry(string title, string author, string genre, string isbn,
+        string description)
     {
         var bookRegistry = new BookRegistryCreationDto(
             title,
@@ -31,20 +30,21 @@ public class Mutation
 
         return await _bookRegistryLogic.CreateAsync(bookRegistry);
     }
-    
+
     public async Task DeleteBookRegistry(string isbn)
     {
-        await _bookRegistryLogic.DeleteAsync((isbn));
+        await _bookRegistryLogic.DeleteAsync(isbn);
     }
-    
-    
+
+
     /*Book*/
     public async Task DeleteBook(string id)
     {
-        await _bookRegistryLogic.DeleteAsync((id));
+        await _bookRegistryLogic.DeleteAsync(id);
     }
-    
-    public async Task<BookRegistry> EditRegistryBook(string isbn, string title, string author, string genre, string description)
+
+    public async Task<BookRegistry> EditRegistryBook(string isbn, string title, string author, string genre,
+        string description)
     {
         var bookRegistry = new BookRegistryUpdateDto(
             isbn,
@@ -54,17 +54,16 @@ public class Mutation
             description
         );
 
-        return await _bookRegistryLogic.EditAsync(Convert.ToInt32(isbn),bookRegistry);
-
+        return await _bookRegistryLogic.EditAsync(Convert.ToInt32(isbn), bookRegistry);
     }
-    
+
     /*USER*/
-    
+
     public async Task<User> CreateUser(string firstName, string lastName, string email, string password,
         bool isLibrarian)
     {
         var userCreationDto = new UserCreationDto(
-            null, 
+            null,
             firstName,
             lastName,
             email,
@@ -74,14 +73,9 @@ public class Mutation
 
         return await _userLogic.CreateAsync(userCreationDto);
     }
-    
+
     public async Task DeleteUser(string id)
-    { 
+    {
         await _userLogic.DeleteAsync(id);
     }
-    
-    
-    
-    
-
 }

@@ -1,9 +1,7 @@
 ﻿@page "/CreateUser"
 @using HttpClients.ClientInterfaces
-@using Domain.DTOs
-@using Domain.Models
-@using GraphQL
 @using GraphQL.Client.Abstractions
+@using Domain.DTOs
 @inject IUserService userService; 
 @inject IGraphQLClient graphqlClient;
 
@@ -44,67 +42,34 @@
     private string password = "";
     private string resultMsg = "";
     private string color = "";
-    
+    private readonly bool isLibrarian = false;
+
     private async Task Create()
     {
         resultMsg = "";
         color = "black";
 
-        var createUserMutation = new GraphQLRequest
-        {
-            Query = @"
-                mutation ($firstName: String!, $lastName: String!, $email: String!, $password: String!, $isLibrarian: Boolean!) {
-                   createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password, isLibrarian: $isLibrarian) {
-                         firstName
-                         lastName
-                         email
-                      }
-                }",
-            Variables = new 
-            { 
-                firstName = firstName, 
-                lastName = lastName, 
-                email = email, 
-                password = password, 
-                isLibrarian = true 
-            }
-        };
-
         try
         {
-            var response = await graphqlClient.SendMutationAsync<Data>(createUserMutation);
-            if (response.Errors != null && response.Errors.Length > 0)
-            {
-                resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
-                color = "red";
-                return;
-            }
+            var userCreatedMsg = await userService.Create(new UserCreationDto(firstName, lastName, email, password, isLibrarian));
 
-            if (response.Data != null)
+            if (userCreatedMsg.Equals("ok"))
             {
-                firstName = "";
-                lastName = "";
-                email = "";
-                password = "";
-
-                resultMsg = "Brugeren er oprettet";
+                resultMsg = "Brugeren blev oprettet";
                 color = "green";
+            }
+            else
+            {
+                resultMsg = "Brugeren blev ikke oprettet, " + userCreatedMsg;
+                color = "red";
             }
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            resultMsg = "Exception: " + e.Message; 
+            resultMsg = "Exception: " + e.Message;
             color = "red";
-
         }
     }
 
-    class Data
-    {
-        public User CreateUser { get; set; }
-    }
-
-
 }
-

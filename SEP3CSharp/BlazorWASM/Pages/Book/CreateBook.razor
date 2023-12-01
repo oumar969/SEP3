@@ -2,11 +2,9 @@
 @using System.Security.Claims
 @using Domain.DTOs
 @using GraphQL.Client.Abstractions
-@using Microsoft.AspNetCore.Components
 @attribute [Authorize]
- @using HttpClients.ClientInterfaces
 @* @inject IUserService userService; *@
- @* @inject IBookService postService; *@
+@* @inject IBookService postService; *@
 @inject NavigationManager navMgr
 @inject IGraphQLClient graphqlClient;
 
@@ -69,18 +67,10 @@
     ClaimsPrincipal user;
     BookRegistryCreationDto dto;
 
-   
 
- 
     private async Task Create()
     {
         msg = "";
-    
-        
-        if (!ValidateTheBook())
-        {
-            return;
-        }
 
         if (string.IsNullOrEmpty(bookTitle))
         {
@@ -115,10 +105,8 @@
         if (bookDescription.Length > 100)
         {
             msg = "Body cannot be more than 100 characters!";
-            return false;
+            return;
         }
-
-        return true;
     }
 
 }

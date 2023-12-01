@@ -59,7 +59,7 @@ public class UserDao : IGenericDao<User>, IUserDao
         var url = $"{ServerOptions.serverUrl}/user/getAllAsync";
 
         var response = await _httpClient.GetAsync(url);
-        
+
         Console.WriteLine($"GET request to {url}");
         Console.WriteLine($"Response status code: {response.StatusCode}");
         if (response.IsSuccessStatusCode)
@@ -70,6 +70,7 @@ public class UserDao : IGenericDao<User>, IUserDao
 
             return JsonConvert.DeserializeObject<ICollection<User>>(jsonResponse);
         }
+
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");
         throw new Exception("Error getting all users");
@@ -87,18 +88,18 @@ public class UserDao : IGenericDao<User>, IUserDao
 
     public async Task DeleteAsync(string uuid)
     {
-           var url = $"{ServerOptions.serverUrl}/user/delete/{uuid}";
-    
-            var response = await _httpClient.DeleteAsync(url);
-    
-            Console.WriteLine($"DELETE request to {url}");
-            Console.WriteLine($"Response status code: {response.StatusCode}");
-            if (response.IsSuccessStatusCode) return;
-    
-            var errorResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Error Response: {errorResponse}");
-    
-            throw new Exception($"Error deleting user. Status code: {response.StatusCode}");
+        var url = $"{ServerOptions.serverUrl}/user/delete/{uuid}";
+
+        var response = await _httpClient.DeleteAsync(url);
+
+        Console.WriteLine($"DELETE request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode) return;
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error deleting user. Status code: {response.StatusCode}");
     }
 
     public async Task<User?> GetByEmailAsync(string email)
