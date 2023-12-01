@@ -1,18 +1,19 @@
-﻿@using Microsoft.AspNetCore.Components
-@namespace Login
+﻿@namespace Login
 @inject NavigationManager navMgr
 @* /@inject IAuthService authService  *@
 
 <AuthorizeView>
     <Authorized>
         <div class="lg-container">
-            <p class="lb-button" @onclick="Logout">Logout</p>
+            <p class="lb-button" @onclick="Register">Opret bruger</p>
+            <p class="lb-button" @onclick="Register">Rediger bruger</p>
+            <p class="lb-button" @onclick="Logout">Log ud</p>
         </div>
     </Authorized>
     <NotAuthorized>
         <div class="lg-container">
+            <p class="lb-button" @onclick="Register">Opret bruger</p>
             <p class="lb-button" @onclick="Login">Login</p>
-            <p class="lb-button" @onclick="Register">Register</p>
         </div>
     </NotAuthorized>
 </AuthorizeView>
@@ -21,7 +22,6 @@
 
     private void Login()
     {
-        Console.WriteLine("login ui hereerere");
         navMgr.NavigateTo("/Login");
     }
 

@@ -1,32 +1,55 @@
 @page "/BookCatalog"
 @using HttpClients.ClientInterfaces
 @inject IBookService bookService
+@inject NavigationManager navMgr
 
-<h3 class="mb-4">Book Catalog</h3>
 
-@if (filteredBooks == null)
+<div class="row align-items-center justify-content-between">
+    <div class="col">
+        <h3 class="mb-4">Bog Katalog</h3>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn btn-primary" @onclick="RegisterBook">Registrer Ny Bog</button>
+    </div>
+</div>
+
+@if (books == null)
 {
-    <p>Loading books...</p>
+    <p>Kunne ikke indlæse bøger</p>
+}
+else if (filteredBooks == null)
+{
+    <p>Indlæser bøger...</p>
 }
 else
 {
     <div class="container">
         <div class="search-bar mb-4">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search by title or author..." @bind="searchTerm" @bind:event="oninput"/>
-                <select class="form-select" @bind="selectedGenre">
-                    @foreach (var genre in genres)
-                    {
-                        <option value="@genre">@genre</option>
-                    }
-                </select>
+            <div class="d-flex flex-wrap align-items-end">
+                <div class="flex-grow-1 me-2">
+                    <label for="searchField" class="form-label">Søg</label>
+                    <input type="text" id="searchField" class="form-control" placeholder="Søg efter titel eller forfatter..." @bind="searchTerm" @bind:event="oninput"/>
+                </div>
+                <div class="me-2">
+                    <label for="genreSelect" class="form-label">Genre</label>
+                    <select id="genreSelect" class="form-select" @bind="selectedGenre">
+                        @foreach (var genre in genres)
+                        {
+                            <option value="@genre">@genre</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
+                    <label class="form-check-label" for="myLoansCheck">Mine lån</label>
+                </div>
             </div>
         </div>
         <div class="row">
             @foreach (var book in filteredBooks)
             {
                 <div class="col-md-3">
-                    <div class="card mb-4 shadow-sm">
+                    <div class="card mb-4 shadow-sm" style="cursor: pointer;" @onclick="OpenBookView">
                         <img class="bd-placeholder-img card-img-top" width="100%" height="300" src="@(!string.IsNullOrEmpty(book.ImageUrl) ? book.ImageUrl : "Image/book-placeholder.png")" alt="Book image">
                         <div class="card-body">
                             <h5 class="card-title">@book.Title</h5>
@@ -44,8 +67,10 @@ else
     private List<Book> books;
     private readonly Random random = new();
 
+    private bool myLoans;
+
     private List<Book> filteredBooks = new();
-    private readonly List<string> genres = new() { "All", "Classic", "Historical", "Fiction", "Science Fiction", "Fantasy" };
+    private readonly List<string> genres = new() { "Alle", "Klassisk", "Historie", "Fiktion", "Science Fiction", "Fantasy" };
 
     private string _searchTerm;
 
@@ -62,7 +87,7 @@ else
         }
     }
 
-    private string _selectedGenre = "All"; // Initialize with "All" to show all genres by default
+    private string _selectedGenre = "Alle"; // Initialize with "All" to show all genres by default
 
     private string selectedGenre
     {
@@ -82,7 +107,7 @@ else
         LoadSampleBooks();
     // Assuming that at initialization, we want to filter books with default values.
     // If the initial values for searchTerm and selectedGenre are not "", "All", you should set them before calling FilterBooks.
-        selectedGenre = "All"; // Default value, adjust if needed
+        selectedGenre = "Alle"; // Default value, adjust if needed
         searchTerm = ""; // Default value, adjust if needed
         FilterBooks();
         return base.OnInitializedAsync();
@@ -92,11 +117,18 @@ else
     private void FilterBooks()
     {
         filteredBooks = books
-            .Where(b => (selectedGenre == "All" || b.Genre == selectedGenre) &&
+            .Where(b => (selectedGenre == "Alle" || b.Genre == selectedGenre) &&
                         (string.IsNullOrEmpty(searchTerm) || b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
                          b.Author.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
             .OrderBy(b => b.Title)
             .ToList();
+    }
+
+    private void OpenBookView()
+    {
+        Console.WriteLine("OpenBookView1");
+        navMgr.NavigateTo("/BookView");
+        Console.WriteLine("OpenBookView2");
     }
 
     private void LoadSampleBooks()
@@ -131,6 +163,11 @@ else
                 Reviews = GenerateRandomReviews()
             });
         }
+    }
+
+    private void RegisterBook()
+    {
+        navMgr.NavigateTo("/CreateBook");
     }
 
     private string GenerateRandomISBN()
