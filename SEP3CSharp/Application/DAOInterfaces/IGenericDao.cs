@@ -1,4 +1,5 @@
 using Domain.DTOs;
+using Domain.Models;
 
 namespace FileData;
 
@@ -10,7 +11,7 @@ public interface IGenericDao<TEntity>
     // Read
     Task<TEntity> GetByUuidAsync(string uuid);
     Task<ICollection<TEntity>> GetAllAsync();
-    Task<ICollection<TEntity>> GetAsync(ISearchParametersDto searchParameters);
+    Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters);
 
     // Update
     Task<TEntity> UpdateAsync(TEntity entity);

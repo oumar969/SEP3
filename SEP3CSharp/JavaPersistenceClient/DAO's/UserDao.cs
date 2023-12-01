@@ -76,7 +76,7 @@ public class UserDao : IGenericDao<User>, IUserDao
         throw new Exception("Error getting all users");
     }
 
-    public Task<ICollection<User>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters)
     {
         throw new NotImplementedException();
     }
@@ -104,7 +104,7 @@ public class UserDao : IGenericDao<User>, IUserDao
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        var url = $"{ServerOptions.serverUrl}/user/get/by-email/{email}";
+        var url = $"{ServerOptions.serverUrl}/user/getByEmail/{email}";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -155,13 +155,68 @@ public class UserDao : IGenericDao<User>, IUserDao
         throw new NotImplementedException();
     }
 
-    public Task<User?> GetByIdAsync(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var url = $"{ServerOptions.serverUrl}/user/getById/{id}";
+
+        var response = await _httpClient.GetAsync(url);
+
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return JsonConvert.DeserializeObject<User>(jsonResponse);
+        }
+
+        if (response.StatusCode.ToString().Equals("NotFound"))
+            return null;
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error getting user by ID. Status code: {response.StatusCode}");
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var url = $"{ServerOptions.serverUrl}/book/delete/{id}"; 
+
+        var response = await _httpClient.DeleteAsync(url);
+
+        Console.WriteLine($"DELETE request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+
+        if (response.IsSuccessStatusCode)
+            return;
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");    }
+
+    public Task<ICollection<User>> GetAllUsersAsync()
+    {
+        var url = $"{ServerOptions.serverUrl}/user/getAllUsers"; 
+        
+        var response = _httpClient.GetAsync(url).Result;
+        
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = response.Content.ReadAsStringAsync().Result;
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return Task.FromResult(JsonConvert.DeserializeObject<ICollection<User>>(jsonResponse));
+        }
+        var errorResponse = response.Content.ReadAsStringAsync().Result;
+        Console.WriteLine($"Error Response: {errorResponse}");
+        throw new Exception("Error getting all users");
     }
 }

@@ -16,10 +16,10 @@ public class BookRegistryCreationDto
     }
 
 
-    public string Title { get; }
-    public string Author { get; }
-    public string Genre { get; }
-    public string Isbn { get; }
-    public string Description { get; }
-    public string Review { get; }
+    public string Title { get; init; }
+    public string Author { get; init; }
+    public string Genre { get; init;}
+    public string Isbn { get; init;}
+    public string Description { get;init; }
+    public string Review { get; init;}
 }

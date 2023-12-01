@@ -9,6 +9,7 @@ public interface IBookRegistryLogic
     Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters);
     Task UpdateAsync(BookRegistryUpdateDto dto);
     Task DeleteAsync(string id);
+    Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync();
     
     Task<BookRegistry> EditAsync(int isbn, BookRegistryUpdateDto dto);
 }
