@@ -1,10 +1,9 @@
 ﻿@page "/register"
 @using Domain.Models
-@using Microsoft.AspNetCore.Components
 @inject NavigationManager navMgr
 
 <div class="login-card">
-    <h3 class="login-title">Register</h3>
+    <h3 class="login-title">Registrer</h3>
 
     @if (ShowErrors)
     {
@@ -18,12 +17,12 @@
         <ValidationSummary/>
 
         <div class="login-field">
-            <label for="firstName">First Name</label>
+            <label for="firstName">Fornavn</label>
             <input id="firstName" class="login-input" @bind="RegisterModel.FirstName" @bind:event="oninput"/>
             <ValidationMessage For="@(() => RegisterModel.FirstName)"/>
         </div>
         <div class="login-field">
-            <label for="lastName">Last Name</label>
+            <label for="lastName">Efternavn</label>
             <input id="lastName" class="login-input" @bind="RegisterModel.LastName" @bind:event="oninput"/>
             <ValidationMessage For="@(() => RegisterModel.LastName)"/>
         </div>
@@ -33,17 +32,17 @@
             <ValidationMessage For="@(() => RegisterModel.Email)"/>
         </div>
         <div class="login-field">
-            <label for="password">Password</label>
+            <label for="password">Kodeord</label>
             <input id="password" class="login-input" type="password" @bind="RegisterModel.Password" @bind:event="oninput"/>
             <ValidationMessage For="@(() => RegisterModel.Password)"/>
         </div>
         <div class="login-field">
-            <label for="confirmPassword">Confirm Password</label>
+            <label for="confirmPassword">Bekræft Kodeord</label>
             <input id="confirmPassword" class="login-input" type="password" @bind="RegisterModel.ConfirmPassword" @bind:event="oninput"/>
             <ValidationMessage For="@(() => RegisterModel.ConfirmPassword)"/>
         </div>
         <div class="login-field">
-            <button type="submit" class="login-button">Register</button>
+            <button type="submit" class="login-button">Registrer</button>
         </div>
     </EditForm>
 </div>

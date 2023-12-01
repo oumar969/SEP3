@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/resources/images/book-placeholder.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/About.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/About.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Contact.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Contact.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Register.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Register.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Profile.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Profile.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/ViewUsers.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/ViewUsers.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Shared/NavMenu.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SEP3.postman_collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/SEP3.postman_collection.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
     </list>
@@ -126,7 +129,7 @@
       <workItem from="1699262752240" duration="6887000" />
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
-      <workItem from="1701096767865" duration="4511000" />
+      <workItem from="1701096767865" duration="7418000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />

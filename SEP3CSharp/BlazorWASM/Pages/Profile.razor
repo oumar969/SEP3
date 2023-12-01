@@ -1,51 +1,54 @@
 ﻿@page "/Profile"
-@using Microsoft.AspNetCore.Components
-@using Microsoft.AspNetCore.Components.Authorization
 @using HttpClients.ClientInterfaces
 
 @inject IUserService userClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
-'<h3>Profile</h3>
-<AuthorizeView Roles="user"> @* Profile-side skal vises som en del af din MainLayout-side, når brugeren har rollen "user", *@
+<h3>Profil</h3>
+<AuthorizeView Roles="user">
+    @* Profile-side skal vises som en del af din MainLayout-side, når brugeren har rollen "user", *@
     <Authorized>
-<div class="card">
-    <div class="card-body">
-        <p> <strong>Uuid: </strong>@uuid</p>
-        <p ><strong>EMAIL: </strong> @Email</p>
-        <p> <strong>FIRSTNAME: </strong>@firstName</p>
-        <p> <strong>LASTNAME: </strong>@lastName</p>
-        <p> <strong>FEE: </strong>@fee</p>
-    </div>
-</div>
-</Authorized>
+        <div class="card">
+            <div class="card-body">
+                <p>
+                    <strong>Email: </strong> @Email
+                </p>
+                <p>
+                    <strong>Navn: </strong>@firstName
+                </p>
+                <p>
+                    <strong>Efternavn: </strong>@lastName
+                </p>
+            </div>
+        </div>
+    </Authorized>
     <NotAuthorized>
         <!-- Optional: Show a message or redirect to another page for non-authorized users -->
-        <p>You are not authorized to view this page.</p>
+        <p>Login for at se denne side.</p>
     </NotAuthorized>
 </AuthorizeView>
+
 @code {
+
     [Parameter]
     public string Email { get; set; }
+
     private string uuid;
     private string firstName;
     private string lastName;
     private double fee;
-    
-     protected override async Task OnInitializedAsync()
-        {
-            var user = await userClient.GetByIdAsync(Email);
-            Email = user.Email;
-            firstName = user.FirstName;
-            lastName = user.LastName;
-            uuid = user.Uuid;
-            fee = user.Fee;
-    
-            // var ratingDto = await _ratingClient.GetRatingMeanBySubject(Email);
-            // rating = ratingDto.Rating;
-    
-    
-        }
-        
-    
+
+    protected override async Task OnInitializedAsync()
+    {
+    // var user = await userClient.GetByIdAsync(Email);
+    // Email = user.Email;
+    // firstName = user.FirstName;
+    // lastName = user.LastName;
+    // uuid = user.Uuid;
+    // fee = user.Fee;
+
+    // var ratingDto = await _ratingClient.GetRatingMeanBySubject(Email);
+    // rating = ratingDto.Rating;
+    }
+
 }
