@@ -19,7 +19,7 @@ public class BookRegistryLogic : IBookRegistryLogic
     
     public Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
     {
-        throw new NotImplementedException();
+        return _bookRegistryDao.GetAsync(searchRegistryParameters);
     }
 
     public async Task UpdateAsync(BookRegistryUpdateDto dto)
@@ -134,24 +134,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         return await _bookRegistryDao.GetByIsbnAsync(id);
     }
 */
-
-
-    public Task<BookRegistry> GetBookByTitleAsyncTask(string title)
-    {
-        throw new NotImplementedException();
-    }
     
-
-    public Task<ICollection<Domain.Models.BookRegistry>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Domain.Models.BookRegistry> UpdateAsync(Domain.Models.BookRegistry entity)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task DeleteAsync(string uuid)
     {
         var book = await _bookRegistryDao.GetByUuidAsync(uuid);
@@ -159,18 +142,17 @@ public class BookRegistryLogic : IBookRegistryLogic
         await _bookRegistryDao.DeleteAsync(uuid);
     }
 
+    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
+    {
+        return _bookRegistryDao.GetAllAsync();
+    }
+
     public Task<BookRegistry> EditAsync(int id, BookRegistryUpdateDto dto)
     {
         throw new NotImplementedException();
     }
 
-
-    public Task<ICollection<Domain.Models.BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
-    {
-        return _bookRegistryDao.GetAsync(searchParameters);
-    }
-/*
-
+    /*
     public async Task<Domain.Models.BookRegistry> CreateAsync(BookRegistryCreationDto dto)
     {
         var existing = await _bookRegistryDao.GetByBookTitleAsync(dto.Title);
@@ -183,8 +165,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         return created;
     }
     */
-
-
+    
     private void ValidateBookRegistry(Domain.Models.BookRegistry bookRegistry)
     {
         if (string.IsNullOrWhiteSpace(bookRegistry.Title)) throw new Exception("Book title is required.");
@@ -206,4 +187,6 @@ public class BookRegistryLogic : IBookRegistryLogic
         if (string.IsNullOrEmpty(dto.Isbn)) throw new Exception("ISBN cannot be empty.");
         if (string.IsNullOrEmpty(dto.Description)) throw new Exception("Description cannot be empty.");
     }
+    
+    
 }

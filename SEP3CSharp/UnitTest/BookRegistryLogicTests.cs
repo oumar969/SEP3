@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿
 using Application.DaoInterfaces;
 using Application.Logic;
+using Application.LogicInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 using Moq;
-using NUnit.Framework;
 
 namespace Unit_Test
 {
@@ -30,14 +28,13 @@ namespace Unit_Test
                 Isbn = "ISBN",
                 Description = "Description",
                 Review = "Review",
-                Location = "Library" // Add a valid location
             };
 
             bookRegistryDaoMock.Setup(x => x.CreateAsync(It.IsAny<BookRegistry>()))
                 .ReturnsAsync(new BookRegistry(creationDto.Title, creationDto.Author, creationDto.Genre, creationDto.Isbn, creationDto.Description, creationDto.Review));
 
             // Act
-            var createdBookRegistry = await bookRegistryLogic.CreateAsync(creationDto);
+            var createdBookRegistry = await ((IBookRegistryLogic)bookRegistryLogic).CreateAsync(creationDto);
 
             // Assert
             Assert.IsNotNull(createdBookRegistry);
@@ -45,4 +42,5 @@ namespace Unit_Test
         }
         //Todo Add more test cases as needed
     }
+    
 }

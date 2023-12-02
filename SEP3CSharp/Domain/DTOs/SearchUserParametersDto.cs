@@ -22,5 +22,5 @@ public class SearchUserParametersDto : ISearchParametersDto
     public string? UsernameContains { get; }
     
     public string? FirstNameContains { get; set; }
-    public string? LastNameContains { get; }
+    public string? LastNameContains { get; init; }
 }

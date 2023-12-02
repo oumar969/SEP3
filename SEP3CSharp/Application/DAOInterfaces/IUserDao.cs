@@ -14,4 +14,5 @@ public interface IUserDao : IGenericDao<User>
     Task<User?> GetByIdAsync(int id);
     Task<User> UpdateAsync(User user);
     Task DeleteAsync(int id);
+    Task<ICollection<User>> GetAllUsersAsync();
 }

@@ -1,10 +1,12 @@
 
-mcsharpsquid:S927?"JRename parameter 'title' to 'dtoTitle' to match the interface declaration.(ûµê8˜îÄ¨Â1
-qcsharpsquid:S927V"IRename parameter 'isbn' to 'bookIsbn' to match the interface declaration.(â´æÔüÿÿÿÿ8¤ØÉ¨Â1
-Xcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8Ÿü¼¨Â1
-Xcsharpsquid:S112S"5'System.Exception' should not be thrown by user code.(½ ÿ«8ÊÖ·¨Â1
-Xcsharpsquid:S112j"5'System.Exception' should not be thrown by user code.(½ ÿ«8Ÿü¼¨Â1
-Xcsharpsquid:S112u"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8æ¡Ï¨Â1
-Scsharpsquid:S1144m"/Remove the unused private method 'CreateAsync'.(É•¨Ã8ç¡Ï¨Â1
-ccsharpsquid:S1075"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8 ü¼¨Â1
-ccsharpsquid:S1075r"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8ç¡Ï¨Â1
+mcsharpsquid:S927^"JRename parameter 'title' to 'dtoTitle' to match the interface declaration.(ûµê8ñ˜ÆµÂ1
+qcsharpsquid:S927z"IRename parameter 'isbn' to 'bookIsbn' to match the interface declaration.(â´æÔüÿÿÿÿ8ò˜ÆµÂ1
+Xcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8 ¾ì¬Â1
+]csharpsquid:S112;"5'System.Exception' should not be thrown by user code.(îë›¦ÿÿÿÿÿ8ô˜ÆµÂ1
+Xcsharpsquid:S112W"5'System.Exception' should not be thrown by user code.(ç¹ª8ô˜ÆµÂ1
+Xcsharpsquid:S112r"5'System.Exception' should not be thrown by user code.(½ ÿ«8õ˜ÆµÂ1
+Ycsharpsquid:S112"5'System.Exception' should not be thrown by user code.(½ ÿ«8õ˜ÆµÂ1
+Ycsharpsquid:S112™"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8¶Ü‚­Â1
+Tcsharpsquid:S1144‘"/Remove the unused private method 'CreateAsync'.(É•¨Ã8÷˜ÆµÂ1
+ccsharpsquid:S1075"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8¤¾ì¬Â1
+dcsharpsquid:S1075–"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8·Ü‚­Â1

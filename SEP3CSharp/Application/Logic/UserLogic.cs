@@ -38,6 +38,7 @@ public class UserLogic : IUserLogic
     }
 
 
+
     public Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters)
     {
         return userDao.GetAsync(searchParameters);
@@ -47,12 +48,13 @@ public class UserLogic : IUserLogic
     {
         var user = await userDao.GetByUuidAsync(id);
         if (user == null) throw new Exception($"User with UUID {id} was not found!");
-
+        
         await userDao.DeleteAsync(id);
     }
 
     public Task<ICollection<User>> GetAllUsersAsync()
     {
+        
         throw new NotImplementedException();
     }
 
