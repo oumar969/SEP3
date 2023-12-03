@@ -5,25 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientOptions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/GraphqlClient.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/UserHttpClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/BlazorWASM.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/BlazorWASM.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/CreateBook.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/CreateBook.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Register.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Register.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/CreateUser.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/CreateUser.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/Models/RegisterModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/Models/RegisterModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/HttpClients/ClientInterfaces/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/HttpClients/ClientInterfaces/IBookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IBookService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/HttpClients/ClientInterfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/HttpClients/HttpClients.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/HttpClients/Implementations/BookHttpClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/BookHttpClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/HttpClients/Implementations/JwtAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/JwtAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/HttpClients/Implementations/UserHttpClient.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/SEP3CSharp.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/SEP3CSharp.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/via/sep3java/ISBNServicesTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,9 +53,6 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="1060ca31-7aa2-45c8-b3e1-ad0d575ca9d2" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -97,35 +77,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Oumar/OneDrive/Documents/GitHub/SEP3/SEP3Java",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "spring.configuration.checksum": "0f9bd0d963b6a66c737c85903d24345c",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Oumar/OneDrive/Documents/GitHub/SEP3/SEP3Java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0f9bd0d963b6a66c737c85903d24345c&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "h2"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.via.sep3java.controller" />
@@ -133,7 +113,71 @@
       <recent name="com.via.sep3java.entity" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.Sep3JavaApplication">
+    <configuration name="ISBNServicesTest.testGenerateISBN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testGenerateISBN" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ISBNServicesTest.testGenerateMultipleISBNs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testGenerateMultipleISBNs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ISBNServicesTest.testInvalidISBN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testInvalidISBN" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ISBNServicesTest.testNullISBN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testNullISBN" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Sep3JavaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="SEP3Java" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.via.sep3java.Sep3JavaApplication" />
@@ -142,6 +186,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ISBNServicesTest.testGenerateISBN" />
+        <item itemvalue="JUnit.ISBNServicesTest.testNullISBN" />
+        <item itemvalue="JUnit.ISBNServicesTest.testInvalidISBN" />
+        <item itemvalue="JUnit.ISBNServicesTest.testGenerateMultipleISBNs" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -254,7 +306,8 @@
     <MESSAGE value="new postman collection" />
     <MESSAGE value="." />
     <MESSAGE value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
-    <option name="LAST_COMMIT_MESSAGE" value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
+    <MESSAGE value="Add some controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add some controllers" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
