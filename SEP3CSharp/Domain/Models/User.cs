@@ -23,4 +23,10 @@ public class User
     [JsonProperty("email")] public string Email { get; set; }
     [JsonProperty("password")] public string Password { get; set; }
     [JsonProperty("isLibrarian")] public bool IsLibrarian { get; set; }
+
+    public override string ToString()
+    {
+        return
+            $"{nameof(UUID)}: {UUID}, {nameof(FirstName)}: {FirstName}, {nameof(LastName)}: {LastName}, {nameof(Email)}: {Email}, {nameof(Password)}: {Password}, {nameof(IsLibrarian)}: {IsLibrarian}";
+    }
 }

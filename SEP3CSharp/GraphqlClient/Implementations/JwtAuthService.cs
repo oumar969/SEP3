@@ -3,6 +3,10 @@ using System.Text;
 using System.Text.Json;
 using Domain.DTOs;
 using Domain.Models;
+using GraphQL;
+using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
+using GraphQL.Client.Serializer.Newtonsoft;
 using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
@@ -10,35 +14,76 @@ namespace HttpClients.Implementations;
 public class JwtAuthService : IAuthService
 {
     private readonly HttpClient client = new();
+    private readonly IGraphQLClient graphqlClient;
+
+    public JwtAuthService()
+    {
+        client.DefaultRequestHeaders.Add("Accept", "application/json");
+        graphqlClient = new GraphQLHttpClient(ClientOptions.serverUrl, new NewtonsoftJsonSerializer());
+    }
 
     public static string? Jwt { get; private set; } = "";
 
     public async Task RegisterAsync(User user)
     {
-        string userAsJson = JsonSerializer.Serialize(user);
+        var userAsJson = JsonSerializer.Serialize(user);
         StringContent content = new(userAsJson, Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await client.PostAsync("https://localhost:7130/auth/register", content);
-        string responseContent = await response.Content.ReadAsStringAsync();
+        var response = await client.PostAsync("https://localhost:7130/auth/register", content);
+        var responseContent = await response.Content.ReadAsStringAsync();
 
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new Exception(responseContent);
-        }
+        if (!response.IsSuccessStatusCode) throw new Exception(responseContent);
     }
 
     public Task<ClaimsPrincipal> GetAuthAsync()
     {
-        ClaimsPrincipal principal = CreateClaimsPrincipal();
+        var principal = CreateClaimsPrincipal();
         return Task.FromResult(principal);
     }
 
     public Action<ClaimsPrincipal> OnAuthStateChanged { get; set; } = null!;
 
+    public async Task<UserLoginDto> LoginAsync(string email, string password)
+    {
+        Console.WriteLine("here1");
+        var loginMutation = new GraphQLRequest
+        {
+            Query = @"
+            mutation ($email: String!, $password: String!) {
+                login(email: $email, password: $password) {
+                    token
+                    success
+                }
+            }",
+            Variables = new
+            {
+                email,
+                password
+            }
+        };
+        Console.WriteLine("here2");
+        var response = await graphqlClient.SendMutationAsync<UserAuthGraphqlDto>(loginMutation);
+        Console.WriteLine("here3");
+        Console.WriteLine("response.Data : " + response.Data);
+        if (response.Errors != null && response.Errors.Length > 0)
+            return new UserLoginDto(email, password, null, false);
+        var loginResponse = response.Data;
+        return new UserLoginDto(email, password, null);
+    }
+
+
+    public Task LogoutAsync()
+    {
+        Jwt = null;
+        ClaimsPrincipal principal = new();
+        OnAuthStateChanged.Invoke(principal);
+        return Task.CompletedTask;
+    }
+
     private static IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
     {
-        string payload = jwt.Split('.')[1];
-        byte[] jsonBytes = ParseBase64WithoutPadding(payload);
-        Dictionary<string, object>? keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
+        var payload = jwt.Split('.')[1];
+        var jsonBytes = ParseBase64WithoutPadding(payload);
+        var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
         return keyValuePairs!.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString()!));
     }
 
@@ -59,12 +104,9 @@ public class JwtAuthService : IAuthService
 
     private static ClaimsPrincipal CreateClaimsPrincipal()
     {
-        if (string.IsNullOrEmpty(Jwt))
-        {
-            return new ClaimsPrincipal();
-        }
+        if (string.IsNullOrEmpty(Jwt)) return new ClaimsPrincipal();
 
-        IEnumerable<Claim> claims = ParseClaimsFromJwt(Jwt);
+        var claims = ParseClaimsFromJwt(Jwt);
 
         ClaimsIdentity identity = new(claims, "jwt");
 
@@ -72,39 +114,8 @@ public class JwtAuthService : IAuthService
         return principal;
     }
 
-    public async Task LoginAsync(string username, string password)
+    private class UserAuthGraphqlDto
     {
-        UserLoginDto userLoginDto = new()
-        {
-            Username = username,
-            Password = password
-        };
-
-        string userAsJson = JsonSerializer.Serialize(userLoginDto);
-        StringContent content = new(userAsJson, Encoding.UTF8, "application/json");
-//BUG figure out how to hardcode port
-        
-        HttpResponseMessage response = await client.PostAsync("https://localhost:7130/auth/login", content);
-        string responseContent = await response.Content.ReadAsStringAsync();
-
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new Exception(responseContent);
-        }
-
-        string token = responseContent;
-        Jwt = token;
-
-        ClaimsPrincipal principal = CreateClaimsPrincipal();
-
-        OnAuthStateChanged.Invoke(principal);
-    }
-
-    public Task LogoutAsync()
-    {
-        Jwt = null;
-        ClaimsPrincipal principal = new();
-        OnAuthStateChanged.Invoke(principal);
-        return Task.CompletedTask;
+        public UserLoginDto Login { get; set; }
     }
 }

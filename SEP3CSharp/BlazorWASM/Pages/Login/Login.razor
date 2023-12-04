@@ -1,5 +1,4 @@
 ﻿@page "/Login"
-@using Microsoft.AspNetCore.Components
 @using HttpClients.ClientInterfaces
 @inject IAuthService authService
 @inject NavigationManager navMgr
@@ -12,7 +11,7 @@
                 <h3 class="login-title">Please login</h3>
                 <div class="login-field">
                     <label for="username">Email</label>
-                    <input type="text" id="username" @bind="userName" class="login-input"/>
+                    <input type="text" id="username" @bind="email" class="login-input"/>
                 </div>
                 <div class="login-field">
                     <label for="password">Password</label>
@@ -39,7 +38,7 @@
 </CascadingAuthenticationState>
 
 @code {
-    private string userName;
+    private string email;
     private string password;
     private string errorLabel;
 
@@ -48,8 +47,9 @@
         errorLabel = "";
         try
         {
-    await authService.LoginAsync(userName, password);
-    navMgr.NavigateTo("/");
+            Console.WriteLine("here0");
+            await authService.LoginAsync(email, password);
+            navMgr.NavigateTo("/");
         }
         catch (Exception e)
         {

@@ -1,9 +1,4 @@
 using System.Text;
-
-
-
-
-
 using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
@@ -36,7 +31,7 @@ builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services
-    .AddGraphQLServer().AddQueryType<UserQuery>().AddMutationType<Mutation>();
+    .AddGraphQLServer().AddQueryType<UserQuery>().AddMutationType<UserMutation>();
 
 AuthorizationPolicies.AddPolicies(builder.Services);
 
@@ -86,4 +81,3 @@ app.UseGraphQLPlayground();
 
 
 app.Run();
-

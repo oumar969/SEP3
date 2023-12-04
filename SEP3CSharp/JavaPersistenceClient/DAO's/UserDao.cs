@@ -56,7 +56,7 @@ public class UserDao : IGenericDao<User>, IUserDao
 
     public async Task<ICollection<User>> GetAllAsync()
     {
-        var url = $"{ServerOptions.serverUrl}/user/getAllAsync";
+        var url = $"{ServerOptions.serverUrl}/user/get/all";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -184,7 +184,7 @@ public class UserDao : IGenericDao<User>, IUserDao
 
     public async Task DeleteAsync(int id)
     {
-        var url = $"{ServerOptions.serverUrl}/book/delete/{id}"; 
+        var url = $"{ServerOptions.serverUrl}/book/delete/{id}";
 
         var response = await _httpClient.DeleteAsync(url);
 
@@ -197,14 +197,15 @@ public class UserDao : IGenericDao<User>, IUserDao
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");
 
-        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");    }
+        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
+    }
 
     public Task<ICollection<User>> GetAllUsersAsync()
     {
-        var url = $"{ServerOptions.serverUrl}/user/getAllUsers"; 
-        
+        var url = $"{ServerOptions.serverUrl}/user/getAllUsers";
+
         var response = _httpClient.GetAsync(url).Result;
-        
+
         Console.WriteLine($"GET request to {url}");
         Console.WriteLine($"Response status code: {response.StatusCode}");
         if (response.IsSuccessStatusCode)
@@ -215,6 +216,7 @@ public class UserDao : IGenericDao<User>, IUserDao
 
             return Task.FromResult(JsonConvert.DeserializeObject<ICollection<User>>(jsonResponse));
         }
+
         var errorResponse = response.Content.ReadAsStringAsync().Result;
         Console.WriteLine($"Error Response: {errorResponse}");
         throw new Exception("Error getting all users");

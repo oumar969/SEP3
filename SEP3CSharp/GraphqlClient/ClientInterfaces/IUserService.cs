@@ -14,5 +14,6 @@ public interface IUserService
     {
         public User CreateUser { get; set; }
         public User DeleteUser { get; set; }
+        public User Login { get; set; }
     }
 }
