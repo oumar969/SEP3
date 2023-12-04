@@ -81,10 +81,30 @@ public class UserDao : IGenericDao<User>, IUserDao
         throw new NotImplementedException();
     }
 
-    public Task<User> UpdateAsync(User entity)
+    public async Task<User> UpdateAsync(User entity)
     {
-        throw new NotImplementedException();
-    }
+        var url = $"{ServerOptions.serverUrl}/user/update";
+            
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+        var response = await _httpClient.PutAsync(url, jsonContent);
+
+        Console.WriteLine($"PUT request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return JsonConvert.DeserializeObject<User>(jsonResponse);
+        }
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error updating user. Status code: {response.StatusCode}");
+    }   
 
     public async Task DeleteAsync(string uuid)
     {

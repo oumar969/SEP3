@@ -1,6 +1,7 @@
 ﻿using Application.LogicInterfaces;
 using Domain.Models;
 using System.Threading.Tasks;
+using Domain.DTOs;
 
 namespace WebAPI.Schema;
 
@@ -26,6 +27,14 @@ public class UserQuery
     public async Task DeleteUser(string uuid)
     {
         await _userLogic.DeleteAsync(uuid);
+    }
+    
+    
+    public async Task<User> EditUser(string uuid, string firstName, string lastName, string email, string password, bool isLibrarian)
+    {
+        var userUpdateDto = new UserUpdateDto(firstName, lastName, email, password, isLibrarian);
+
+        return await _userLogic.UpdateAsync(uuid, userUpdateDto);
     }
     
 }

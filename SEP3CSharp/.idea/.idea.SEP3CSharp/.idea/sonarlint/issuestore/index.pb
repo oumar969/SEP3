@@ -3089,3 +3089,11 @@ N
 GraphqlClient/ClientOptions.cs,5\e\5e596cbd6131de699da72f8010688b364b91f3ac
 H
 UnitTest/UnitTest.csproj,6\5\6582b9c120bfa2ec5c5927fe7ef221c9293bedd1
+K
+WebAPI/Queries/BookQuery.cs,5\5\55e5ad64128ccb07b78685e30a8e3c010d3525ac
+G
+WebAPI/Queries/Query.cs,b\b\bbec8deb88fb92845ed723174ee2697b1bbedd66
+T
+$Domain/DTOs/BookRegistryUpdateDto.cs,e\4\e45977aa6e29a5efe4cd164f930ca92a901c5c67
+M
+WebAPI/Queries/ReviewQuery.cs,8\4\845dc4ceb139bd85aec624b5c0e29bff17e3a50a
