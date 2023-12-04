@@ -5,6 +5,7 @@ using WebApi.Services;
 
 namespace WebAPI.Schema;
 
+[ExtendObjectType(OperationTypeNames.Mutation)]
 public class UserMutation
 {
     private readonly IAuthService _authService;

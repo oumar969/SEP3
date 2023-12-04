@@ -1,9 +1,8 @@
 ﻿using Application.LogicInterfaces;
-using Domain.DTOs;
-using Domain.Models;
 
 namespace WebAPI.Schema;
 
+[ExtendObjectType(OperationTypeNames.Query)]
 public class BookQuery
 {
     private readonly IBookRegistryLogic _bookRegistryLogic;
@@ -12,26 +11,4 @@ public class BookQuery
     {
         _bookRegistryLogic = bookRegistryLogic;
     }
-    
-    public async Task DeleteBookRegistry(string isbn)
-    {
-        await _bookRegistryLogic.DeleteAsync((isbn));
-    }
-    
-    public async Task<BookRegistry> EditBookRegistry(string isbn, string title, string author, string genre, string description)
-    {
-        var bookRegistry = new BookRegistryUpdateDto(
-            isbn,
-            title,
-            author,
-            genre,
-            description
-        );
-
-        return await _bookRegistryLogic.EditAsync(Convert.ToInt32(isbn), bookRegistry);
-    }
-    
-    
-    
-
 }

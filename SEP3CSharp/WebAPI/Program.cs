@@ -8,6 +8,7 @@ using FileData;
 using JavaPersistenceClient.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using WebAPI.Queries;
 using WebAPI.Schema;
 using WebApi.Services;
 
@@ -31,7 +32,9 @@ builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 //builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services
-    .AddGraphQLServer().AddQueryType<UserQuery>().AddMutationType<UserMutation>();
+    .AddGraphQLServer().AddQueryType<Query>().AddType<UserQuery>().AddType<BookQuery>().AddMutationType<Mutation>()
+    .AddType<BookMutation>().AddType<BookRegistryMutation>().AddType<UserMutation>();
+
 
 AuthorizationPolicies.AddPolicies(builder.Services);
 

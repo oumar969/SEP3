@@ -1,13 +1,6 @@
-﻿using WebAPI.Schema;
+﻿namespace WebAPI.Queries;
 
-namespace WebAPI.Queries;
-
+[ObjectType(OperationTypeNames.Query)]
 public class Query
 {
-    public UserQuery User { get; }
-
-    public Query(UserQuery userQuery)
-    {
-        User = userQuery;
-    }
 }
