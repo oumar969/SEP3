@@ -1,15 +1,13 @@
-﻿using Domain.DTOs;
-using Application.LogicInterfaces;
-using System.Threading.Tasks;
+﻿using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Models;
-using BookRegistry = Domain.Models.BookRegistry;
 
 namespace WebAPI.Schema;
 
 public class Mutation
 {
-    private readonly IUserLogic _userLogic;
     private readonly IBookRegistryLogic _bookRegistryLogic;
+    private readonly IUserLogic _userLogic;
 
     public Mutation(IUserLogic userLogic, IBookRegistryLogic bookRegistryLogic)
     {
@@ -37,8 +35,8 @@ public class Mutation
     {
         await _bookRegistryLogic.DeleteAsync(isbn);
     }
-    
-    
+
+
     /*Book*/
     public async Task DeleteBook(string id)
     {
@@ -58,7 +56,7 @@ public class Mutation
 
         return await _bookRegistryLogic.EditAsync(Convert.ToInt32(isbn), bookRegistry);
     }
-    
+
     /*USER*/
 
     public async Task<User> CreateUser(string firstName, string lastName, string email, string password,
@@ -76,13 +74,8 @@ public class Mutation
         return await _userLogic.CreateAsync(userCreationDto);
     }
 
-    public async Task DeleteUser(string id)
+    public async Task DeleteUser(string uuid)
     {
-        await _userLogic.DeleteAsync(id);
+        await _userLogic.DeleteAsync(uuid);
     }
-    
-    
-    
-    
-
 }

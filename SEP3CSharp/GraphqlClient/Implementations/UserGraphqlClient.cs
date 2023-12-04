@@ -9,12 +9,12 @@ using HttpClients.ClientInterfaces;
 
 namespace HttpClients.Implementations;
 
-public class UserHttpClient : IUserService
+public class UserGraphqlClient : IUserService
 {
     private readonly HttpClient client;
     private readonly IGraphQLClient graphqlClient;
 
-    public UserHttpClient(HttpClient client)
+    public UserGraphqlClient(HttpClient client)
     {
         this.client = client;
         graphqlClient = new GraphQLHttpClient(ClientOptions.serverUrl, new NewtonsoftJsonSerializer());
@@ -36,12 +36,30 @@ public class UserHttpClient : IUserService
         return users;
     }
 
-    public async Task DeleteUser(string id)
+    public async Task<string> Delete(string uuid)
     {
-        var response = await client.DeleteAsync($"user/{id}");
-        var content = await response.Content.ReadAsStringAsync();
-        if (!response.IsSuccessStatusCode) throw new Exception(content);
+        var deleteUserMutation = new GraphQLRequest
+        {
+            Query = @"
+            mutation ($uuid: String!) {
+                deleteUser(uuid: $uuid) {
+                    success
+                    message
+                }
+            }",
+            Variables = new
+            {
+                uuid
+            }
+        };
+        var response = await graphqlClient.SendMutationAsync<UserGraphqlDto>(deleteUserMutation);
+        var resultMsg = "ok";
+
+        if (response.Errors != null && response.Errors.Length > 0)
+            resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
+        return resultMsg;
     }
+
 
     public async Task<string> Create(UserCreationDto dto)
     {
@@ -64,7 +82,7 @@ public class UserHttpClient : IUserService
                 isLibrarian = dto.IsLibrarian
             }
         };
-        var response = await graphqlClient.SendMutationAsync<Data>(createUserMutation);
+        var response = await graphqlClient.SendMutationAsync<UserGraphqlDto>(createUserMutation);
         var resultMsg = "ok";
 
         if (response.Errors != null && response.Errors.Length > 0)
@@ -72,8 +90,9 @@ public class UserHttpClient : IUserService
         return resultMsg;
     }
 
-    private class Data
+    private class UserGraphqlDto
     {
         public User CreateUser { get; set; }
+        public User DeleteUser { get; set; }
     }
 }
