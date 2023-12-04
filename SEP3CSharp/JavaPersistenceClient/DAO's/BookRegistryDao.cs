@@ -4,7 +4,6 @@ using Domain.DTOs;
 using Domain.Models;
 using FileData;
 using Newtonsoft.Json;
-using BookRegistry = Domain.Models.BookRegistry;
 
 namespace JavaPersistenceClient.DAOs;
 
@@ -22,14 +21,15 @@ public class BookRegistryDao : IBookRegistryDao
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
         Console.WriteLine("jsonContent11: " + jsonContent);
-        var response = await _httpClient.PostAsync("http://localhost:7777/book_registry/register", jsonContent);
+        var response = await _httpClient.PostAsync("http://localhost:7777/book-registry/create", jsonContent);
         Console.WriteLine("response: " + response);
         if (!response.IsSuccessStatusCode)
             throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);    }
+        return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
+    }
 
     public Task<BookRegistry> GetByUuidAsync(string uuid)
     {
@@ -71,7 +71,7 @@ public class BookRegistryDao : IBookRegistryDao
 
     public async Task DeleteAsync(string uuid)
     {
-        var url = $"{ServerOptions.serverUrl}/books/delete/{uuid}"; 
+        var url = $"{ServerOptions.serverUrl}/books/delete/{uuid}";
 
         var response = await _httpClient.DeleteAsync(url);
 
@@ -84,13 +84,9 @@ public class BookRegistryDao : IBookRegistryDao
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");
 
-        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");    
+        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
     }
 
-    public Task<Book?> GetByIdAsync(int bookId)
-    {
-        throw new NotImplementedException();
-    }
     public async Task<BookRegistry> GetByBookTitleAsync(string title)
     {
         var url = $"{ServerOptions.serverUrl}/book/getByTitle/{title}";
@@ -112,11 +108,6 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine($"Error Response: {errorResponse}");
 
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
-    }
-
-    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<BookRegistry> GetByIsbnAsync(string isbn)
@@ -142,8 +133,18 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
     }
 
-     async Task<BookRegistry> CreateAsync(BookRegistry entity)
-    { 
+    public Task<Book?> GetByIdAsync(int bookId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    private async Task<BookRegistry> CreateAsync(BookRegistry entity)
+    {
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
         Console.WriteLine("jsonContent11: " + jsonContent);
@@ -156,5 +157,4 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine(jsonResponse);
         return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
     }
-     
 }

@@ -1,4 +1,3 @@
-using Application.Logic;
 using Application.LogicInterfaces;
 using Domain.DTOs;
 using Domain.Models;
@@ -10,14 +9,16 @@ public class BookRegistryMutation
 {
     private readonly IBookRegistryLogic _bookRegistryLogic;
 
-    public BookRegistryMutation(BookRegistryLogic bookRegistryLogic)
+    public BookRegistryMutation(IBookRegistryLogic bookRegistryLogic)
     {
+        Console.WriteLine("bookregmuttt");
         _bookRegistryLogic = bookRegistryLogic;
     }
 
     public async Task<BookRegistry> CreateBookRegistry(string title, string author, string genre, string isbn,
         string description)
     {
+        Console.WriteLine("create book mutation");
         var bookRegistry = new BookRegistryCreationDto(
             title,
             author,
@@ -25,7 +26,7 @@ public class BookRegistryMutation
             isbn,
             description
         );
-
+        Console.WriteLine("create book mutation 2");
         return await _bookRegistryLogic.CreateAsync(bookRegistry);
     }
 

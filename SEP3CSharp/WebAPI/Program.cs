@@ -3,8 +3,6 @@ using Application.DaoInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
 using Domain.Auth;
-using Domain.Models;
-using FileData;
 using JavaPersistenceClient.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -23,13 +21,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserDao, UserDao>();
 builder.Services.AddScoped<IBookRegistryDao, BookRegistryDao>();
-builder.Services.AddScoped<IGenericDao<User>, UserDao>();
+// builder.Services.AddScoped<IBookDao, BookDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IGenericDao<BookRegistry>, BookRegistryDao>();
-
 builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
-//builder.Services.AddScoped<IAuthService, AuthService>();
+// builder.Services.AddScoped<IBookLogic, BookLogic>();
 
 builder.Services
     .AddGraphQLServer().AddQueryType<Query>().AddType<UserQuery>().AddType<BookQuery>().AddMutationType<Mutation>()
