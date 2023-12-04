@@ -8,5 +8,11 @@ public interface IUserService
     Task<string> Create(UserCreationDto dto);
     Task<IEnumerable<User>> GetUsers(string? usernameContains = null);
 
-    Task DeleteUser(string id);
+    Task<string> Delete(string uuid);
+
+    class UserGraphqlDto
+    {
+        public User CreateUser { get; set; }
+        public User DeleteUser { get; set; }
+    }
 }

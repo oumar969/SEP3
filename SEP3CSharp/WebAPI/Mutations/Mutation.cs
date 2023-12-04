@@ -10,11 +10,13 @@ public class Mutation
 {
     private readonly IUserLogic _userLogic;
     private readonly IBookRegistryLogic _bookRegistryLogic;
+    private readonly IBookLogic _bookLogic;
 
-    public Mutation(IUserLogic userLogic, IBookRegistryLogic bookRegistryLogic)
+    public Mutation(IUserLogic userLogic, IBookRegistryLogic bookRegistryLogic, IBookLogic bookLogic)
     {
         _userLogic = userLogic;
         _bookRegistryLogic = bookRegistryLogic;
+        _bookLogic = bookLogic;
     }
 
     /* BOOK REGISTRY */
@@ -76,11 +78,15 @@ public class Mutation
         return await _userLogic.CreateAsync(userCreationDto);
     }
 
-    public async Task DeleteUser(string id)
+    public async Task DeleteUser(string uuid)
     {
-        await _userLogic.DeleteAsync(id);
+        await _userLogic.DeleteAsync(uuid);
     }
     
+    public async Task<Book?> LoanBook(Book book, User user)
+    {
+        return await _bookLogic.LoanAsync(book, user);
+    }
     
     
     

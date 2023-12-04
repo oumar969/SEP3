@@ -12,13 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddHttpClient<IUserService, UserHttpClient>(client =>
+builder.Services.AddHttpClient<IUserService, UserGraphqlClient>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5125"); // Replace with your actual API base URL
 });
 builder.Services.AddScoped<IAuthService, JwtAuthService>();
 // builder.Services.AddScoped<IUserService, UserHttpClient>();
-builder.Services.AddScoped<IBookService, BookHttpClient>();
+builder.Services.AddScoped<IBookService, BookGraphqlClient>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<CascadingAuthenticationState>();
