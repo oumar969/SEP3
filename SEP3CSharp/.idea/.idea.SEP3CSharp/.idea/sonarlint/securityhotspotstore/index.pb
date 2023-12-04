@@ -1471,3 +1471,7 @@ M
 UnitTest/UserValidatorTest.cs,4\e\4e644f3e1a7fa27e11d77d507622c6378d2de06f
 H
 UnitTest/UnitTest.csproj,6\5\6582b9c120bfa2ec5c5927fe7ef221c9293bedd1
+H
+UnitTest/GlobalUsings.cs,e\6\e6c47c2a6a38dc4594c0a34f8251ea71c3490254
+M
+WebAPI/Queries/ReviewQuery.cs,8\4\845dc4ceb139bd85aec624b5c0e29bff17e3a50a

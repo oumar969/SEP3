@@ -71,7 +71,7 @@ public class BookRegistryDao : IBookRegistryDao
 
     public async Task DeleteAsync(string uuid)
     {
-        var url = $"{ServerOptions.serverUrl}/books/delete/{uuid}"; // Opdater URL'en efter behov
+        var url = $"{ServerOptions.serverUrl}/books/delete/{uuid}"; 
 
         var response = await _httpClient.DeleteAsync(url);
 
