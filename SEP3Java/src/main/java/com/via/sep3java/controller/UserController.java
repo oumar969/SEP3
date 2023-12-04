@@ -75,6 +75,24 @@ public class UserController {
         return new ResponseEntity<>(existingUser, HttpStatus.OK);
     }
 
+    @PutMapping("/edit/{email}")
+    public ResponseEntity<?> editUserByEmail(
+            @PathVariable String email, @RequestBody User user) {
+        User existingUser = userRepository.findByEmail(email);
+        if (existingUser == null) {
+            return new ResponseEntity<>("User with Email " + email + " not found.",
+                    HttpStatus.NOT_FOUND);
+        }
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setIsLibrarian(user.getIsLibrarian());
+        //existingUser.setUuid(user.getUuid());
+        userRepository.save(existingUser);
+        return new ResponseEntity<>(existingUser, HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{uuid}")
     public ResponseEntity<?> deleteUser(
             @PathVariable String uuid) {
