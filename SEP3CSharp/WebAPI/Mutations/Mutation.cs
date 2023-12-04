@@ -22,7 +22,7 @@ public class Mutation
 
     /* BOOK REGISTRY */
 
-    public async Task<BookRegistry> CreateBookRegistry(string title, string author, string genre, string isbn,
+    public async Task<BookRegistry> CreateBookRegistry(string isbn, string title, string author, string genre,
         string description)
     {
         var bookRegistry = new BookRegistryCreationDto(
@@ -32,7 +32,7 @@ public class Mutation
             isbn,
             description
         );
-
+        
         return await _bookRegistryLogic.CreateAsync(bookRegistry);
     }
 

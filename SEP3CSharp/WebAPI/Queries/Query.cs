@@ -1,4 +1,6 @@
-﻿namespace WebAPI.Schema;
+﻿using WebAPI.Schema;
+
+namespace WebAPI.Queries;
 
 public class Query
 {
