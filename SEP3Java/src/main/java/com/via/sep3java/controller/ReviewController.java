@@ -67,15 +67,15 @@ public class ReviewController {
         return new ResponseEntity<>(review, HttpStatus.OK);
     }
 
-    @GetMapping("/get/byBook/{bookUuid}")
-    public ResponseEntity<?> getReviewByBook(
-            @PathVariable String bookUuid) {
-        Review review = reviewRepository.findByBookUuid(bookUuid);
-        if (review == null) {
-            return new ResponseEntity<>("Review with Book UUID " + bookUuid + " not found.",
-                    HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(review, HttpStatus.OK);
-    }
+//    @GetMapping("/get/byBook/{bookUuid}")
+//    public ResponseEntity<?> getReviewByBook(
+//            @PathVariable String bookUuid) {
+//        Review review = reviewRepository.findByBookUuid(bookUuid);
+//        if (review == null) {
+//            return new ResponseEntity<>("Review with Book UUID " + bookUuid + " not found.",
+//                    HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(review, HttpStatus.OK);
+//    }
 
 }
