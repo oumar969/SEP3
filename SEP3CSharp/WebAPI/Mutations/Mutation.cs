@@ -11,10 +11,9 @@ public class Mutation
 {
     private readonly IBookRegistryLogic _bookRegistryLogic;
     private readonly IUserLogic _userLogic;
-    private readonly IBookRegistryLogic _bookRegistryLogic;
     private readonly IBookLogic _bookLogic;
 
-    public Mutation(IUserLogic userLogic, IBookRegistryLogic bookRegistryLogic)
+    public Mutation(IUserLogic userLogic, IBookRegistryLogic bookRegistryLogic, IBookLogic bookLogic)
     {
         _userLogic = userLogic;
         _bookRegistryLogic = bookRegistryLogic;
