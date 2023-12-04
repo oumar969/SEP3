@@ -2,12 +2,14 @@
 @using System.Security.Claims
 @using Domain.DTOs
 @using GraphQL.Client.Abstractions
+@using HttpClients.ClientInterfaces
 @using Microsoft.AspNetCore.Components
 @attribute [Authorize]
 @* @inject IUserService userService; *@
 @* @inject IBookService postService; *@
 @inject NavigationManager navMgr
 @inject IGraphQLClient graphqlClient;
+@inject IBookRegistryService bookRegistryService;
 
 
 <div class="book-form-card">
@@ -58,6 +60,7 @@
     private string bookIsbn = "";
     private string bookDescription = "";
     private int stockNumber;
+    private string color;
 
     private string msg = "";
 
@@ -72,42 +75,75 @@
     private async Task Create()
     {
         msg = "";
+        color = "black";
+        
+        if (!BookRegistryValidator())
+        {
+            return; 
+        }
+        
+        try
+        {
+            var BookRegistryCreatedMsg = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription));
+            if (BookRegistryCreatedMsg.Equals("ok"))
+            {
+                msg = "BookRegistry blev oprettet";
+                color = "green";
+            }
+            else
+            {
+                msg = "BookRegistry blev ikke oprettet, " + BookRegistryCreatedMsg;
+                color = "red";
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = "Exception: " + e.Message;
+            color = "red";
+        }
+    }
 
+    
+    private bool BookRegistryValidator()
+    {
         if (string.IsNullOrEmpty(bookTitle))
         {
             msg = "Angiv venlist en titel.";
-            return;
+            return false;
         }
         if (string.IsNullOrEmpty(bookIsbn))
         {
             msg = "Angiv venlist et ISBN.";
-            return;
+            return false;
         }
         if (string.IsNullOrEmpty(bookAuthor))
         {
             msg = "Angiv venlist en forfatter.";
-            return;
+            return false;
         }
         if (string.IsNullOrEmpty(bookGenre))
         {
             msg = "Angiv venlist en genre.";
-            return;
+            return false;
         }
         if (string.IsNullOrEmpty(bookDescription))
         {
             msg = "Angiv venlist en beskrivelse af bogen.";
-            return;
+            return false;
         }
         if (stockNumber.Equals(null))
         {
             msg = "Angiv venlist antal bøger.";
-            return;
+            return false;
         }
         if (bookDescription.Length > 100)
         {
             msg = "Body cannot be more than 100 characters!";
-            return;
+            return false;
         }
+        
+        return true; // Validation passed
     }
 
 }
