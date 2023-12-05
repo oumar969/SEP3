@@ -94,7 +94,39 @@ public class BookGraphqlClient : IBookService
         throw new NotImplementedException();
     }
 
-    // Implement other methods similarly...
+    public async Task<string> LoanBook(Book book, User user)
+    {
+        var loanBookMutation = new GraphQLRequest
+        {
+            Query = @"
+                mutation ($bookId: Int!, $userId: Int!) {
+                    loanBook(bookId: $bookId, userId: $userId) {
+                        title
+                        author
+                        isbn
+                        genre
+                        description
+                        loanedTo {
+                            firstName
+                            lastName
+                            email
+                        }
+                    }
+                }",
+            Variables = new
+            {
+                bookId = book.UUID,
+                userId = user.UUID
+            }
+        };
+        var response = await graphqlClient.SendMutationAsync<BookGraphqlDto>(loanBookMutation);
+        var resultMsg = "ok";
+        
+        if (response.Errors != null && response.Errors.Length > 0)
+            resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
+        
+        return resultMsg;
+    }
 
     private class BookGraphqlDto
     {

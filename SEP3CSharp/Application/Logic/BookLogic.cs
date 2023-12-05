@@ -13,13 +13,17 @@ public class BookLogic : IBookLogic
         _bookDao = bookDao;
     }
 
-    public async Task<Book?> LoanAsync(Book book, User user)
+    public async Task<Book?> LoanAsync(string bookId, string userId)
     {
-        return await _bookDao.LoanAsync(book, user);
+        return await _bookDao.LoanAsync(bookId, userId);
     }
 
     public async Task<Book?> DeliverAsync(Book book, User user)
     {
+        if (!book.LoanerUuid.Equals(user.UUID))
+        {
+            throw new Exception("This book is currently not loaned by you.");
+        }
         return await _bookDao.DeliverAsync(book, user);
     }
 
@@ -33,9 +37,10 @@ public class BookLogic : IBookLogic
         throw new NotImplementedException();
     }
 
-    public Task<Book> CreateAsync(Book book)
+    public async Task<Book> CreateAsync(string isbn)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("lgoc");
+        return await _bookDao.CreateAsync(isbn);
     }
 
     public Task<Book> DeleteAsync(string uuid)

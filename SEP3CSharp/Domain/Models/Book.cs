@@ -12,7 +12,6 @@ public class Book
     }
 
     [JsonProperty("uuid")] public string UUID { get; set; }
-    
     [JsonProperty("isbn")]public string Isbn { get; set; }
     [JsonProperty("loanerUuid")] public string LoanerUuid { get; set; }
 }

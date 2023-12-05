@@ -1,5 +1,6 @@
 using System.Text;
 using Application.DaoInterfaces;
+using Application.DAOInterfaces;
 using Application.Logic;
 using Application.LogicInterfaces;
 using Domain.Auth;
@@ -19,13 +20,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddScoped<IUserDao, UserDao>();
 builder.Services.AddScoped<IBookRegistryDao, BookRegistryDao>();
-// builder.Services.AddScoped<IBookDao, BookDao>();
+builder.Services.AddScoped<IBookDao, BookDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
-// builder.Services.AddScoped<IBookLogic, BookLogic>();
+builder.Services.AddScoped<IBookLogic, BookLogic>();
 
 builder.Services
     .AddGraphQLServer().AddQueryType<Query>().AddType<UserQuery>().AddType<BookQuery>().AddMutationType<Mutation>()
