@@ -18,13 +18,21 @@ public class UserDao : IGenericDao<User>, IUserDao
 
     public async Task<User> CreateAsync(User entity)
     {
+        if (entity.UUID == null)
+        {
+            entity.UUID = Guid.NewGuid().ToString();
+        }
+
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
         Console.WriteLine("jsonContent11: " + jsonContent);
         var response = await _httpClient.PostAsync(ServerOptions.serverUrl + "/user/create", jsonContent);
         Console.WriteLine("response: " + response);
         if (!response.IsSuccessStatusCode)
+        {
             throw new Exception($"Error creating user: {JsonConvert.SerializeObject(response)}");
+            return null;
+        }
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine(jsonResponse);
@@ -84,7 +92,7 @@ public class UserDao : IGenericDao<User>, IUserDao
     public async Task<User> UpdateAsync(User entity)
     {
         var url = $"{ServerOptions.serverUrl}/user/update";
-            
+
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         var response = await _httpClient.PutAsync(url, jsonContent);
 
@@ -104,7 +112,7 @@ public class UserDao : IGenericDao<User>, IUserDao
         Console.WriteLine($"Error Response: {errorResponse}");
 
         throw new Exception($"Error updating user. Status code: {response.StatusCode}");
-    }   
+    }
 
     public async Task DeleteAsync(string uuid)
     {

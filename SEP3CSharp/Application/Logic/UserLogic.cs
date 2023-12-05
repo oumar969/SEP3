@@ -16,16 +16,15 @@ public class UserLogic : IUserLogic
     }
 
 
-    public async Task<User> CreateAsync(UserCreationDto dto)
+    public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
     {
         var existing = await userDao.GetByEmailAsync(dto.Email);
         if (existing != null) throw new Exception("User already exists");
 
         ValidateData(dto);
 
-        var toCreate = new User
+        User newUser = new User()
         {
-            UUID = dto.UUID,
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             Email = dto.Email,
@@ -33,8 +32,10 @@ public class UserLogic : IUserLogic
             IsLibrarian = dto.IsLibrarian
         };
 
-        var created = await userDao.CreateAsync(toCreate);
-        return created;
+        var created = await userDao.CreateAsync(newUser);
+
+        dto.IsSuccessful = true;
+        return dto;
     }
 
 

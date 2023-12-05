@@ -26,7 +26,7 @@ public class UserMutation
         return userLoginDto;
     }
 
-    public async Task<User> CreateUser(string firstName, string lastName, string email, string password,
+    public async Task<UserCreationDto> CreateUser(string firstName, string lastName, string email, string password,
         bool isLibrarian)
     {
         var userCreationDto = new UserCreationDto(

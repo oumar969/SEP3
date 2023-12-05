@@ -61,7 +61,7 @@ public class UserGraphqlClient : IUserService
     }
 
 
-    public async Task<User> Create(UserCreationDto dto)
+    public async Task<UserCreationDto> Create(UserCreationDto dto)
     {
         var createUserMutation = new GraphQLRequest
         {
@@ -71,6 +71,9 @@ public class UserGraphqlClient : IUserService
                          firstName
                          lastName
                          email
+                         password
+                         isLibrarian
+                         isSuccessful
                       }
                 }",
             Variables = new
@@ -84,16 +87,15 @@ public class UserGraphqlClient : IUserService
         };
         var response = await graphqlClient.SendMutationAsync<CreateUserResponse>(createUserMutation);
         Console.WriteLine("response.Data 1: " + response.Data);
-        var resultMsg = "ok";
 
         if (response.Errors != null && response.Errors.Length > 0)
-            resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
-        return (User)response.Data?.CreateUser;
+            throw new Exception(string.Join(", ", response.Errors.Select(e => e.Message)));
+        return response.Data?.CreateUser;
     }
 
     private class CreateUserResponse
     {
-        public User CreateUser { get; set; }
+        public UserCreationDto CreateUser { get; set; }
     }
 
     private class DeleteUserResponse

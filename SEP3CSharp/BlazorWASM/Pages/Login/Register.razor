@@ -10,17 +10,17 @@
     <h3 class="login-title">Registrer</h3>
 
     @if (ShowErrors)
-       {
-           <div class="login-error">
-               <span>@Message</span>
-           </div>
-       }
-       else if (ShowSuccess)
-       {
-           <div class="login-success">
-               <span>Brugeren blev oprettet</span>
-           </div>
-       }
+    {
+        <div class="login-error">
+            <span>@Message</span>
+        </div>
+    }
+    else if (ShowSuccess)
+    {
+        <div class="login-success">
+            <span>Brugeren blev oprettet</span>
+        </div>
+    }
 
     <EditForm Model="registerModel" OnValidSubmit="HandleRegistration" class="login-form">
         <DataAnnotationsValidator/>
@@ -74,22 +74,21 @@
         Console.WriteLine("handling registration");
         try
         {
-            var userCreatedMsg = await userService.Create(new UserCreationDto(
+            UserCreationDto userCreatedDto = await userService.Create(new UserCreationDto(
                 registerModel.FirstName, registerModel.LastName, registerModel.Email, registerModel.Password, registerModel.IsLibrarian));
 
-            if (userCreatedMsg.Equals("ok"))
+            if (userCreatedDto.IsSuccessful)
             {
                 Console.WriteLine("created user");
                 ShowSuccess = true;
                 ShowErrors = false;
-    // fix
             }
             else
             {
                 Console.WriteLine("did not create user");
                 ShowSuccess = false;
                 ShowErrors = true;
-                Message = "Brugeren blev ikke oprettet: " + userCreatedMsg;    // fix
+                Message = "Brugeren blev ikke oprettet";
             }
         }
         catch
@@ -98,7 +97,8 @@
             Console.WriteLine(e);
             ShowSuccess = false;
             ShowErrors = true;
-            Message = "Fejl under oprettelse af bruger: " + e.Message;        }
+            Message = "Fejl under oprettelse af bruger: " + e.Message;
+        }
     }
 
 }
