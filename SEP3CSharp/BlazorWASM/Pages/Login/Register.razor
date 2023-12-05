@@ -10,11 +10,17 @@
     <h3 class="login-title">Registrer</h3>
 
     @if (ShowErrors)
-    {
-        <div class="login-error">
-            <span>@Message</span>
-        </div>
-    }
+       {
+           <div class="login-error">
+               <span>@Message</span>
+           </div>
+       }
+       else if (ShowSuccess)
+       {
+           <div class="login-success">
+               <span>Brugeren blev oprettet</span>
+           </div>
+       }
 
     <EditForm Model="registerModel" OnValidSubmit="HandleRegistration" class="login-form">
         <DataAnnotationsValidator/>
@@ -57,8 +63,9 @@
 </div>
 
 @code {
-    private bool ShowErrors { get; } // Make sure setters are present if you intend to modify these properties.
-    private string Message { get; }
+    private bool ShowErrors { get; set; }
+    private bool ShowSuccess { get; set; }
+    private string Message { get; set; }
     private RegisterModel registerModel { get; } = new();
 
 
@@ -73,19 +80,25 @@
             if (userCreatedMsg.Equals("ok"))
             {
                 Console.WriteLine("created user");
+                ShowSuccess = true;
+                ShowErrors = false;
     // fix
             }
             else
             {
                 Console.WriteLine("did not create user");
-    // fix
+                ShowSuccess = false;
+                ShowErrors = true;
+                Message = "Brugeren blev ikke oprettet: " + userCreatedMsg;    // fix
             }
         }
         catch
             (Exception e)
         {
             Console.WriteLine(e);
-        }
+            ShowSuccess = false;
+            ShowErrors = true;
+            Message = "Fejl under oprettelse af bruger: " + e.Message;        }
     }
 
 }

@@ -25,7 +25,7 @@ public class BookRegistryController {
         return bookRegistryRepository.save(bookRegistry);
     }
 
-    @GetMapping("/get/all")
+    @GetMapping("/getAll")
     public Iterable<BookRegistry> getAllBookRegistries() {
         return bookRegistryRepository.findAll();
     }

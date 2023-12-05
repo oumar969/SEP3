@@ -38,6 +38,12 @@
     text-align: center;
 }
 
+.book-form-success {
+    color: green;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
 .book-form-button {
     width: 100%;
     padding: 10px 20px;

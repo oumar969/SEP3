@@ -1,4 +1,5 @@
 ﻿using Application.LogicInterfaces;
+using Domain.Models;
 
 namespace WebAPI.Schema;
 
@@ -10,5 +11,10 @@ public class BookQuery
     public BookQuery(IBookRegistryLogic bookRegistryLogic)
     {
         _bookRegistryLogic = bookRegistryLogic;
+    }
+    
+    public async Task<IEnumerable<BookRegistry>> GetAllBook()
+    {
+        return await _bookRegistryLogic.GetAllBookRegistriesAsync();
     }
 }
