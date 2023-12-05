@@ -3097,3 +3097,17 @@ T
 $Domain/DTOs/BookRegistryUpdateDto.cs,e\4\e45977aa6e29a5efe4cd164f930ca92a901c5c67
 M
 WebAPI/Queries/ReviewQuery.cs,8\4\845dc4ceb139bd85aec624b5c0e29bff17e3a50a
+V
+&BlazorWASM/Pages/User/CreateUser.razor,4\9\4996eb129e705bc782c10a2c1ee2dcb496667eac
+b
+2GraphqlClient/Implementations/BookGraphqlClient.cs,7\f\7f587ff003ff9b94969ddd88190a52a1ee8dfc64
+Z
+*BlazorWASM/Pages/Book/CreateBook.razor.css,4\0\40e37e5e601dd0f7dd6a181365e5a23c3033f3f0
+W
+'BlazorWASM/Pages/Book/SuccessPage.razor,7\a\7a13075deaa5e33a78753d9751325f32292a1717
+h
+8GraphqlClient/Implementations/BookRegistryGraphClient.cs,8\4\84a80bcc43f65618e9c2dcd45d64af45a617d1d3
+Z
+*BlazorWASM/Pages/User/CreateUser.razor.css,3\8\38338b45a6b23f3fdfba0b1773d4757fea7870fd
+Y
+)BlazorWASM/Pages/Login/Register.razor.css,0\b\0b4ded8fa1b085821985ae32339876c7fea79804
