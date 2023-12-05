@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +59,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Oumar/OneDrive/Documents/GitHub/SEP3/SEP3Java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/artes/Documents/GitHub/SEP3/SEP3Java/src/main/java/com/via/sep3java/data/library.mv.db&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -117,6 +113,8 @@
       <workItem from="1699262752240" duration="6887000" />
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
+      <workItem from="1701205051299" duration="8719000" />
+      <workItem from="1701341595769" duration="20193000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />

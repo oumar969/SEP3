@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/book_registry")
+@RequestMapping("/book-registry")
 public class BookRegistryController
 {
   @Autowired
   private BookRegistryRepository bookRegistryRepository;
 
-  @PostMapping("/register")
+  @PostMapping("/create")
   public BookRegistry registerBook(@Valid @RequestBody BookRegistry bookRegistry) {
     if (bookRegistry.getIsbn() == null || bookRegistry.getIsbn().isEmpty()){
       bookRegistry.setIsbn(ISBNServices.Generate());
