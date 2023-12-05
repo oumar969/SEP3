@@ -31,13 +31,19 @@
                     <p class="card-text">
                         <small class="text-muted">
                             <strong>In Stock:</strong>
-                            <span class="@(book.StockCount == 0 ? "text-danger" : "")">@book.StockCount</span>
+                            <span class="@(bookCount == 0 ? "text-danger" : "")">@bookCount</span>
                         </small>
                     </p>
                 </div>
-                <div class="card-footer d-flex justify-content-end" style="gap: 14px;">
-                    <button class="btn btn-primary bg-danger border-danger" @onclick="() => LoanBook(book)">Slet Bog</button>
-                    <button class="btn btn-primary" @onclick="() => LoanBook(book)" disabled="@book.StockCount == 0">Lån Bog</button>
+                <div class="card-footer d-flex justify-content-between" style="gap: 14px;">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-danger shadow-none" @onclick="RemoveBook">-</button>
+                        <button type="button" class="btn btn-outline-success shadow-none" @onclick="AddBook">+</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary bg-danger border-danger" @onclick="() => LoanBook(book)">Slet Bog</button>
+                        <button class="btn btn-primary" @onclick="() => LoanBook(book)" disabled="@(bookCount == 0)">Lån Bog</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,6 +93,21 @@
     // bookService.DeleteBook(book);
     }
 
+    private int bookCount = 0;
+
+    private void AddBook()
+    {
+        bookCount++;
+    }
+
+    private void RemoveBook()
+    {
+        if (bookCount > 0)
+        {
+            bookCount--;
+        }
+    }
+
 
     protected override Task OnInitializedAsync()
     {
@@ -106,7 +127,6 @@
         public string Genre { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public int StockCount { get; set; }
         public List<string> Reviews { get; set; }
     }
 
