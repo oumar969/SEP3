@@ -1,16 +1,44 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components
 
 <PageTitle>Home</PageTitle>
 <div style="text-align: center;">
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDcSGDOS0hkk5shiEcujGF_I7umVEjZ54NPw&usqp=CAU" style="height: 150px; border-radius: 90%; border: 10px solid #121236;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDcSGDOS0hkk5shiEcujGF_I7umVEjZ54NPw&usqp=CAU" style="height: 150px; border-radius: 90%; border: 10px solid #121236;">
 </div>
-<h1 align="center">VIA bibliotek </h1>
-<h4 align="center"> Velkommen til dit nye bibliotek.</h4>
+<h1 style="text-align: center;">VIA Bibliotek</h1>
+<h2 style="text-align: center;">Velkommen til VIA Bibliotek</h2>
+<p style="text-align: center;">VIA Bibliotek er et fælles bibliotek for VIA University College. Vi har biblioteker på alle vores campusser i Aarhus, Horsens, Herning, Holstebro, Randers, Silkeborg og Viborg. På vores biblioteker kan du låne bøger, tidsskrifter, film og spil. Du kan også få adgang til e-bøger og e-tidsskrifter. Vi har åbent for alle, og du er altid velkommen til at besøge os.</p>
+<div class="container">
+    
+    <div class="box">
+        <img src="/Image/online-vejledning.jpg" asp-append-version="true" alt="Contact Librarian Image">
+        <h2>Online vejledning</h2>
+        <p>Har du brug for hjælp til at komme i gang med at bruge bibliotekets ressourcer, så kan du kontakte os på biblioteket. Vi kan hjælpe dig med at finde litteratur, bruge databaser, referencehåndtering og meget mere.</p>
+        <a href="/kontakt">Kontakt din bibliotekar</a>
+    </div>
+    
+    <div class="box">
+        <img src="/Image/JMF96ETfn1kSViVnUou1Z0XIDwWcPpT5mrPc7-ytpAc.jpg" asp-append-version="true" alt="About Library Image">
+        <h2>Om VIA Bibliotek</h2>
+        <p>Find information omkring åbningstider, adresser, kontakt samt hvordan du bruger dit VIA Bibliotek.</p>
+    </div>
 
+    <div class="box">
+        <img src="/Image/Kurser-og-efteruddannelse-aspect-ratio-1204-594.jpg" asp-append-version="true" alt="Courses Image">
+        <h2>Kurser</h2>
+        <p>Deltag i et af VIA Biblioteks kurser og workshops og få ny viden. VIA Bibliotek udbyder løbende en række gratis kurser, og flere af dem afvikles online.</p>
+        <a href="/kurser">Se VIA Biblioteks kurser</a>
+    </div>
+    <div class="box">
+        <h2>Har du brug for vejledning?</h2>
+        <p>Du kan altid få hjælp og vejledning i litteratursøgning, referencehåndtering, kildekritik og meget andet på dit VIA Bibliotek. Du er også altid velkommen til blot at møde op på biblioteket med dine spørgsmål.</p>
+    </div>
+    <div class="box">
+        <h2>Har du brug for hjælp?</h2>
+        <p>Har du brug for hjælp til at komme i gang med at bruge bibliotekets ressourcer, så kan du kontakte os på biblioteket. Vi kan hjælpe dig med at finde litteratur, bruge databaser, referencehåndtering og meget mere.</p>
+</div>
+</div>
 
-<img src="/Image/JMF96ETfn1kSViVnUou1Z0XIDwWcPpT5mrPc7-ytpAc.jpg" asp-append-version="true" width="1000px" style="display: block;margin-left: auto;margin-right: auto;" />
-
-
-
-
-<SurveyPrompt Title="How is Blazor working for you?"/>
+@code {
+ 
+}

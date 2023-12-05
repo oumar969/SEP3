@@ -1,35 +1,25 @@
 package com.via.sep3java.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.UUID;
 
-@Entity
-public class Review {
-  @Id
-  private String uuid;
+@Entity public class Review
+{
+  @Id private String uuid;
+  @Column(nullable = false) private String isbn;
+  @Column(nullable = false) @Min(1) @Max(10) private int score;
+  @Column(nullable = false) private String reviewerUuid;
+  @Column private String comment;
 
-  public Review () {
+  public Review()
+  {
     this.uuid = UUID.randomUUID().toString();
   }
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "isbn")
-  private BookRegistry bookRegistry;
-
-
-  @Column(nullable = false)
-  @Min(1)
-  @Max(10)
-  private int score;
-
-  @Column(nullable = false)
-  private String reviewerUuid;
-
-  @Column
-  private String comment;
 
   public int getScore()
   {
@@ -59,5 +49,22 @@ public class Review {
   public void setComment(String comment)
   {
     this.comment = comment;
+  }
+
+  public String getIsbn()
+  {
+    return isbn;
+  }
+
+  public void setIsbn(String isbn)
+  {
+    this.isbn = isbn;
+  }
+
+  @Override public String toString()
+  {
+    return "Review{" + "uuid='" + uuid + '\'' + ", isbn='" + isbn + '\''
+        + ", score=" + score + ", reviewerUuid='" + reviewerUuid + '\''
+        + ", comment='" + comment + '\'' + '}';
   }
 }

@@ -1,45 +1,44 @@
 ﻿@page "/Login"
-@using WebApi.Services
-@using Microsoft.AspNetCore.Components
+@using HttpClients.ClientInterfaces
 @inject IAuthService authService
 @inject NavigationManager navMgr
 
+<CascadingAuthenticationState>
 
-<AuthorizeView>
-    <NotAuthorized>
-        <div class="card">
-            <h3>Please login</h3>
-            <div class="field">
-                <label>User name:</label>
-                <input type="text" @bind="userName"/>
-            </div>
-            <div class="field">
-                <label style="text-align: center">Password:</label>
-                <input type="password" @bind="password"/>
-            </div>
-            @if (!string.IsNullOrEmpty(errorLabel))
-            {
-                <div class="field">
-                    <label style="color: red">
-                        @errorLabel
-                    </label>
+    <AuthorizeView>
+        <NotAuthorized>
+            <div class="login-card">
+                <h3 class="login-title">Please login</h3>
+                <div class="login-field">
+                    <label for="username">Email</label>
+                    <input type="text" id="username" @bind="email" class="login-input"/>
                 </div>
-            }
-            <div class="field">
-                <button class="loginbtn" @onclick="LoginAsync">Log in</button>
+                <div class="login-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" @bind="password" class="login-input"/>
+                </div>
+                @if (!string.IsNullOrEmpty(errorLabel))
+                {
+                    <div class="login-error">
+                        <span>@errorLabel</span>
+                    </div>
+                }
+                <div class="login-field">
+                    <button class="login-button" @onclick="LoginAsync">Log in</button>
+                </div>
             </div>
-        </div>
-    </NotAuthorized>
-    <Authorized>
-        <div class="card">
-            <h3>Hello, @context.User.Identity.Name</h3>
-        </div>
-    </Authorized>
-</AuthorizeView>
+        </NotAuthorized>
+        <Authorized>
+            <div class="login-card">
+                <h3>Hello, @context.User.Identity.Name</h3>
+            </div>
+        </Authorized>
+    </AuthorizeView>
 
+</CascadingAuthenticationState>
 
 @code {
-    private string userName;
+    private string email;
     private string password;
     private string errorLabel;
 
@@ -48,7 +47,8 @@
         errorLabel = "";
         try
         {
-            await authService.LoginAsync(userName, password);
+            Console.WriteLine("here0");
+            await authService.LoginAsync(email, password);
             navMgr.NavigateTo("/");
         }
         catch (Exception e)

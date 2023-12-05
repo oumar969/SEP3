@@ -1,32 +1,56 @@
-.card {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    width: 350px;
-    padding: 25px;
+
+.login-card {
+    max-width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.login-title {
+    margin-bottom: 20px;
     text-align: center;
-    margin: auto;
-    margin-top: 50px;
-    background-color: #9395cc; /* Baggrundsfarve til kortet */
-    border-radius: 40px; /* Afrundede kanter */
-    border: 6px solid #ddd; /* Kortkant */
+    color: #333;
 }
 
-.field {
-    margin-top: 20px;
-    border-radius:30px;
+.login-field {
+    margin-bottom: 15px;
 }
 
-.loginbtn {
-    background-color: #007bff;
+.login-field label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.login-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-error {
+    color: red;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px 20px;
     border: none;
-    border-radius:30px;
-    padding: 20px 40px;
-    color: #fff; /* Tekstfarve */
-    cursor: pointer; /* Ændrer markøren ved hover */
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.loginbtn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-    background-color: #4c51af; /* Ændrer baggrundsfarve ved hover */
+.login-button:hover {
+    background-color: #4cae4c;
 }

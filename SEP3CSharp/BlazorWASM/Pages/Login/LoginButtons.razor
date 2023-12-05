@@ -1,16 +1,21 @@
-﻿@* @using HttpClients.ClientInterface *@
-@using Microsoft.AspNetCore.Components
-
+﻿@using Microsoft.AspNetCore.Components
 @namespace Login
 @inject NavigationManager navMgr
-@* @inject IAuthService authService *@
+@* /@inject IAuthService authService  *@
 
 <AuthorizeView>
     <Authorized>
-        <img class="icon" src="image/Logout.png" @onclick="Logout"/>
+        <div class="lg-container">
+            <p class="lb-button" @onclick="Register">Opret bruger</p>
+            <p class="lb-button" @onclick="Register">Rediger bruger</p>
+            <p class="lb-button" @onclick="Logout">Log ud</p>
+        </div>
     </Authorized>
     <NotAuthorized>
-        <img class="icon" src="image/Login.png" @onclick="Login"/>
+        <div class="lg-container">
+            <p class="lb-button" @onclick="Register">Opret bruger</p>
+            <p class="lb-button" @onclick="Login">Login</p>
+        </div>
     </NotAuthorized>
 </AuthorizeView>
 
@@ -23,8 +28,14 @@
 
     private async Task Logout()
     {
-        // await authService.LogoutAsync();
+    // await authService.LogoutAsync();
+
         navMgr.NavigateTo("/");
+    }
+
+    private void Register()
+    {
+        navMgr.NavigateTo("/Register");
     }
 
 }

@@ -1,13 +1,18 @@
-﻿namespace Domain.Models;
+﻿using Newtonsoft.Json;
+
+namespace Domain.Models;
 
 public class Book
 {
-    public Book(string isbn)
+    public Book(string isbn, string uuid, string loanerUuid)
     {
         Isbn = isbn;
+        UUID = uuid;
+        LoanerUuid = loanerUuid;
     }
 
-    public string UUID { get; }
-    public string Isbn { get; set; }
-    public User LoanerUuid { get; set; }
+    [JsonProperty("uuid")] public string UUID { get; set; }
+    
+    [JsonProperty("isbn")]public string Isbn { get; set; }
+    [JsonProperty("loanerUuid")] public string LoanerUuid { get; set; }
 }

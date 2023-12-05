@@ -11,31 +11,39 @@
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <span class="oi oi-home" aria-hidden="true"></span> Hjem
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="BookCatalog">
+                <span class="oi oi-paperclip" aria-hidden="true"></span> Bog Katalog
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="CreateUser">
-                <span class="oi oi-plus" aria-hidden="true"></span> Create User
+            <NavLink class="nav-link" href="Contact">
+                <span class="oi oi-zoom-in" aria-hidden="true"></span> Kontakt
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="ViewUsers">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Show Users
+            <NavLink class="nav-link" href="About">
+                <span class="oi oi-paperclip" aria-hidden="true"></span> Om
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="CreateBook">
-                <span class="oi oi-paperclip" aria-hidden="true"></span> Create Book
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="MyBooks">
-                <span class="oi oi-zoom-in" aria-hidden="true"></span> Show Books
-            </NavLink>
-        </div>
-        
-        
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="Profile">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Profil
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="ViewUsers">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Brugere
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
     </nav>
 </div>
 

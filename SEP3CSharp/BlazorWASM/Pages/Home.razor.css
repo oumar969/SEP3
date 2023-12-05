@@ -1,16 +1,56 @@
-﻿body
-{
+﻿
+body {
     background-color: #86a5bd;
 }
+
 h1 {
     color: #3d3d93;
     text-align: center;
     margin-top: 100px;
     font-size: 60px;
 }
+
+h2 {
+    color: #3d3d93;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
 p {
     color: #3d3d93;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
     font-size: 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.box {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+.box img {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
 }

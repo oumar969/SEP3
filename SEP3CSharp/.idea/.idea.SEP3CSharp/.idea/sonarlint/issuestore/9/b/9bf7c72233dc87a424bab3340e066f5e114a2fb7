@@ -1,23 +1,31 @@
 
-\csharpsquid:S4136"3All 'GetAsync' method overloads should be adjacent.(›ïËÙûÿÿÿÿ8‘¸¦—½1
-_csharpsquid:S4136"6All 'UpdateAsync' method overloads should be adjacent.(Èµ¨«üÿÿÿÿ8‘¸¦—½1
-Ycsharpsquid:S4136:"6All 'DeleteAsync' method overloads should be adjacent.(ä¾×}8’¸¦—½1
-Zcsharpsquid:S4136U"6All 'CreateAsync' method overloads should be adjacent.(Ó•›í8’¸¦—½1
-]csharpsquid:S112!"5'System.Exception' should not be thrown by user code.(®Ë‘õùÿÿÿÿ8’¸¦—½1
-]csharpsquid:S1121"5'System.Exception' should not be thrown by user code.(âãËúÿÿÿÿ8“¸¦—½1
-]csharpsquid:S112Q"5'System.Exception' should not be thrown by user code.(ã¹‹üÿÿÿÿ8“¸¦—½1
-Xcsharpsquid:S112k"5'System.Exception' should not be thrown by user code.(€»æß8•Ç±„»1
-Xcsharpsquid:S112s"5'System.Exception' should not be thrown by user code.(¤‘¹8•Ç±„»1
-Xcsharpsquid:S112u"5'System.Exception' should not be thrown by user code.(€îÙà8–Ç±„»1
-Xcsharpsquid:S112w"5'System.Exception' should not be thrown by user code.(º«ì“8–Ç±„»1
-]csharpsquid:S112y"5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8—Ç±„»1
-]csharpsquid:S112{"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8—Ç±„»1
-Xcsharpsquid:S112€"5'System.Exception' should not be thrown by user code.(ßñ8Ö„äƒ»1
-Ycsharpsquid:S112"5'System.Exception' should not be thrown by user code.(·Ï¼ù8Ö„äƒ»1
-^csharpsquid:S112‚"5'System.Exception' should not be thrown by user code.(™ÑïÊüÿÿÿÿ8Ö„äƒ»1
-^csharpsquid:S112ƒ"5'System.Exception' should not be thrown by user code.(³«¼Šÿÿÿÿÿ8×„äƒ»1
-^csharpsquid:S112„"5'System.Exception' should not be thrown by user code.(İá÷øÿÿÿÿ8×„äƒ»1
-Ycsharpsquid:S112…"5'System.Exception' should not be thrown by user code.(Ì©8™Ç±„»1
-{csharpsquid:S4487"RRemove this unread private field '_userDao' or refactor the code to use its value.(û‚‹Óüÿÿÿÿ8Ù‡æ„»1
-Qcsharpsquid:S1481#"(Remove the unused local variable 'user'.(Û®óıÿÿÿÿ8–¸¦—½1
-Bcsharpsquid:S125&"Remove this commented out code.(­¼ùâ8—¸¦—½1
+_csharpsquid:S4136"6All 'UpdateAsync' method overloads should be adjacent.(î¹™ßüÿÿÿÿ8ÇŠÆµÂ1
+ccsharpsquid:S41365"?All 'ValidateBookRegistry' method overloads should be adjacent.(ÎÕÖ½8ÈŠÆµÂ1
+fcsharpsquid:S927Š"CRename parameter 'uuid' to 'id' to match the interface declaration.(ĞÊ©Z8ÉŠÆµÂ1
+lcsharpsquid:S927–"CRename parameter 'id' to 'isbn' to match the interface declaration.(ğÖ¡şÿÿÿÿ8ÊŠÆµÂ1
+Xcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(œŸÀà8ËŠÆµÂ1
+]csharpsquid:S112-"5'System.Exception' should not be thrown by user code.(œ—”¶üÿÿÿÿ8ÌŠÆµÂ1
+Xcsharpsquid:S1127"5'System.Exception' should not be thrown by user code.(¤‘¹8ÌŠÆµÂ1
+Xcsharpsquid:S1129"5'System.Exception' should not be thrown by user code.(€îÙà8ÍŠÆµÂ1
+Xcsharpsquid:S112;"5'System.Exception' should not be thrown by user code.(º«ì“8ÍŠÆµÂ1
+]csharpsquid:S112="5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8ÎŠÆµÂ1
+]csharpsquid:S112?"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8ÏŠÆµÂ1
+]csharpsquid:S112R"5'System.Exception' should not be thrown by user code.(®Ë‘õùÿÿÿÿ8ĞŠÆµÂ1
+]csharpsquid:S112b"5'System.Exception' should not be thrown by user code.(âãËúÿÿÿÿ8ÑŠÆµÂ1
+Xcsharpsquid:S112q"5'System.Exception' should not be thrown by user code.(Ğ…‚8ÑŠÆµÂ1
+^csharpsquid:S112"5'System.Exception' should not be thrown by user code.(ã¹‹üÿÿÿÿ8ÒŠÆµÂ1
+Ycsharpsquid:S112«"5'System.Exception' should not be thrown by user code.(¤‘¹8ÓŠÆµÂ1
+Ycsharpsquid:S112­"5'System.Exception' should not be thrown by user code.(€îÙà8ÓŠÆµÂ1
+Ycsharpsquid:S112¯"5'System.Exception' should not be thrown by user code.(º«ì“8ÔŠÆµÂ1
+^csharpsquid:S112±"5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8ÔŠÆµÂ1
+^csharpsquid:S112³"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8ÕŠÆµÂ1
+Xcsharpsquid:S112¸"5'System.Exception' should not be thrown by user code.(ßñ8ÕŠÆµÂ1
+Ycsharpsquid:S112¹"5'System.Exception' should not be thrown by user code.(·Ï¼ù8ÖŠÆµÂ1
+^csharpsquid:S112º"5'System.Exception' should not be thrown by user code.(™ÑïÊüÿÿÿÿ8×ŠÆµÂ1
+^csharpsquid:S112»"5'System.Exception' should not be thrown by user code.(İá÷øÿÿÿÿ8çŠÆµÂ1
+Ycsharpsquid:S112¼"5'System.Exception' should not be thrown by user code.(Ì©8÷ŠÆµÂ1
+{csharpsquid:S4487"RRemove this unread private field '_userDao' or refactor the code to use its value.(û‚‹Óüÿÿÿÿ8”ÇäşÁ1
+Qcsharpsquid:S1481T"(Remove the unused local variable 'user'.(Û®óıÿÿÿÿ8ˆ‹ÆµÂ1
+Bcsharpsquid:S125W"Remove this commented out code.(­¼ùâ8Š‹ÆµÂ1
+Hcsharpsquid:S125…"Remove this commented out code.(ÒÌâ–øÿÿÿÿ8‹‹ÆµÂ1
+Hcsharpsquid:S125"Remove this commented out code.(ÒÌâ–øÿÿÿÿ8Œ‹ÆµÂ1

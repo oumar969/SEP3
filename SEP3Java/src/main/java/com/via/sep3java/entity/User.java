@@ -8,7 +8,8 @@ import java.util.Objects;
 
 @Entity public class User
 {
-    @Id public String uuid;
+    @Id
+    @Column(nullable = false) public String uuid;
     @Column(nullable = false) public String firstName;
     @Column(nullable = false) public String lastName;
     @Column(nullable = false) public String password;

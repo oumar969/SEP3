@@ -1,27 +1,28 @@
 ﻿@page "/CreateUser"
-@using Microsoft.AspNetCore.Components
-@using global::Domain.DTOs
-@using JavaPersistenceClient.DAOs
-@* @inject IUserService userService; *@
+@using HttpClients.ClientInterfaces
+@using GraphQL.Client.Abstractions
+@using Domain.DTOs
+@inject IUserService userService; 
+@inject IGraphQLClient graphqlClient;
 
 <div class="card">
     <h3>Create User</h3>
     <div class="form-group field">
         <div>
             <label>First name:</label>
-            <input type="text" @bind="firstName" @bind:event="oninput" />
+            <input type="text" @bind="firstName" @bind:event="oninput"/>
         </div>
         <div>
             <label>Last name:</label>
-            <input type="text" @bind="lastName" @bind:event="oninput" />
+            <input type="text" @bind="lastName" @bind:event="oninput"/>
         </div>
         <div>
             <label>Email:</label>
-            <input type="text" @bind="email" @bind:event="oninput" />
+            <input type="text" @bind="email" @bind:event="oninput"/>
         </div>
         <div>
             <label>Password:</label>
-            <input type="text" @bind="password" @bind:event="oninput" />
+            <input type="text" @bind="password" @bind:event="oninput"/>
             @if (!string.IsNullOrEmpty(resultMsg))
             {
                 <label style="color: @color">@resultMsg</label>
@@ -41,26 +42,34 @@
     private string password = "";
     private string resultMsg = "";
     private string color = "";
-
+    private readonly bool isLibrarian = false;
 
     private async Task Create()
     {
         resultMsg = "";
+        color = "black";
 
         try
         {
-            // await userService.Create(new UserCreationDto(username,password));
-            firstName = "";
-            lastName = "";
-            password = "";
-            resultMsg = "User successfully created";
-            color = "green";
+            var userCreatedMsg = await userService.Create(new UserCreationDto(firstName, lastName, email, password, isLibrarian));
+
+            if (userCreatedMsg.Equals("ok"))
+            {
+                resultMsg = "Brugeren blev oprettet";
+                color = "green";
+            }
+            else
+            {
+                resultMsg = "Brugeren blev ikke oprettet, " + userCreatedMsg;
+                color = "red";
+            }
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            resultMsg = e.Message;
+            resultMsg = "Exception: " + e.Message;
             color = "red";
         }
     }
+
 }

@@ -19,15 +19,13 @@ public class UserLogic : IUserLogic
     public async Task<User> CreateAsync(UserCreationDto dto)
     {
         var existing = await userDao.GetByEmailAsync(dto.Email);
-        if (existing != null)
-
-            throw new Exception("User already exists");
-
+        if (existing != null) throw new Exception("User already exists");
 
         ValidateData(dto);
 
         var toCreate = new User
         {
+            UUID = dto.UUID,
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             Email = dto.Email,
@@ -45,28 +43,34 @@ public class UserLogic : IUserLogic
         return userDao.GetAsync(searchParameters);
     }
 
-    public Task<User> UpdateAsync(int id, UserUpdateDto dto)
+    public async Task DeleteAsync(string uuid)
+    {
+        var user = await userDao.GetByUuidAsync(uuid);
+        if (user == null) throw new Exception($"User with UUID {uuid} was not found!");
+
+        await userDao.DeleteAsync(uuid);
+    }
+
+    public Task<ICollection<User>> GetAllUsersAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
     {
         var toUpdate = new User
         {
-            UUID = id, FirstName = dto.FirstName, LastName = dto.LastName, Password = dto.Password, Email = dto.Email,
+            UUID = uuid, FirstName = dto.FirstName, LastName = dto.LastName, Password = dto.Password, Email = dto.Email,
             IsLibrarian = dto.IsLibrarian
         };
 
         return userDao.UpdateAsync(toUpdate);
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task<User?> GetByUuidAsync(string uuid)
     {
-        // var user = await userDao.GetByUuidAsync(id);
-        // if (user == null) throw new Exception($"Book with UUID {id} was not found!");
-        //
-        // await userDao.DeleteAsync(id);
-        
+        return await userDao.GetByUuidAsync(uuid);
     }
-
-   
-
 
     public static void ValidateData(UserCreationDto userCreationDto)
     {

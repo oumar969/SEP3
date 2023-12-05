@@ -1,154 +1,157 @@
-﻿@* @page "/MyBooks" *@
-@* @using System.Security.Claims *@
-@* @using Domain.Models *@
-@* @using Microsoft.AspNetCore.Components *@
-@* / *@
-@* @attribute [Authorize] *@
-@* $1$ @inject IBookService postService; #1# *@
-@* @inject NavigationManager navMgr; *@
-@* *@
-@* <h3>Posts</h3> *@
-@* <div class="filter-bar"> *@
-@*     <div class="filters-container"> *@
-@*         <img src="image/@(doShowFilters ? "clear_" : "")funnel.png" class="funnel" @onclick="@(() => doShowFilters = !doShowFilters)" alt="Funnel"/> *@
-@*         @if (doShowFilters) *@
-@*         { *@
-@*             <div class="filter"> *@
-@*                 <label>Title contains:</label> *@
-@*                 <input type="text" @bind="titleContainsFilter"/> *@
-@*             </div> *@
-@*             <div> *@
-@*                 @if (!string.IsNullOrEmpty(msg)) *@
-@*                 { *@
-@*                     <label style="color: red">@msg</label> *@
-@*                 } *@
-@* *@
-@*             </div> *@
-@*         } *@
-@*     </div> *@
-@* </div> *@
-@* *@
-@* <div> *@
-@*     <button @onclick="Loadbooks">Load</button> *@
-@* </div> *@
-@* *@
-@* @if (books == null) *@
-@* { *@
-@* } *@
-@* else if (!books.Any()) *@
-@* { *@
-@*     <p>No Books to display</p> *@
-@* } *@
-@* else *@
-@* { *@
-@*     <table class="table"> *@
-@*         <thead> *@
-@*         <tr> *@
-@*             <th>Book ID</th> *@
-@*             <th>Borrower</th> *@
-@*             <th>Title</th> *@
-@*             <th>Author</th> *@
-@*             <th>ISBN</th> *@
-@*             <th>Genre</th> *@
-@*             <th>Edit</th> *@
-@*             <th>Delete?</th> *@
-@*         </tr> *@
-@*         </thead> *@
-@*         <tbody> *@
-@*         @foreach (var item in books) *@
-@*         { *@
-@*             <tr> *@
-@*                 <td>@item.UUID</td> *@
-@*                 <td>@item.Owner.UserName</td> *@
-@*                 <td>@item.Title</td> *@
-@*                 <td>@item.Body</td> *@
-@*                 <td> *@
-@*                     <img src="image/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditPost/{item.Id}"))"/> *@
-@*                 </td> *@
-@*                 <td> *@
-@*                     <label @onclick="@(() => RemovePost(item.Id))" style="cursor:pointer; color: red; font-weight: bold"> *@
-@*                         &#x2717; *@
-@*                     </label> *@
-@*                 </td> *@
-@*             </tr> *@
-@*         } *@
-@*         </tbody> *@
-@*     </table> *@
-@* } *@
-@* @if (!string.IsNullOrEmpty(msg)) *@
-@* { *@
-@*     <label style="color: red">@msg</label> *@
-@* } *@
-@* *@
-@* @code { *@
-@* *@
-@*     [CascadingParameter] *@
-@*     public Task<AuthenticationState> AuthState { get; set; } = null!; *@
-@* *@
-@*     AuthenticationState authState; *@
-@*     ClaimsPrincipal user; *@
-@* *@
-@*     private ICollection<Book>? books; *@
-@*     private string msg = ""; *@
-@*     private bool doShowFilters; *@
-@* *@
-@*     private string? usernameFilter; *@
-@*     private int? userIdFilter; *@
-@*     private string? titleContainsFilter; *@
-@*     private string? bodyContainsFilter; *@
-@* *@
-@*     protected override async Task OnInitializedAsync() *@
-@*     { *@
-@*         authState = await AuthState; *@
-@*         user = authState.User; *@
-@*         await Loadbooks(); *@
-@*     } *@
-@* *@
-@*     private async Task Loadbooks() *@
-@*     { *@
-@*         try *@
-@*         { *@
-@*             bool? completedFilterValue = null; *@
-@*             books = await bookService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter /*, bodyContainsFilter*/); *@
-@* *@
-@* *@
-@*             var list = new List<Book>(books!); *@
-@*             list.RemoveAll(post => post.Owner.Id != int.Parse(user.FindFirst("Id").Value)); *@
-@*             list.Sort(CompareById); *@
-@*             books = list.AsEnumerable(); *@
-@*         } *@
-@*         catch (Exception e) *@
-@*         { *@
-@*             Console.WriteLine(e); *@
-@*             msg = e.Message; *@
-@*         } *@
-@*     } *@
-@* *@
-@*     private async Task RemovePost(int postId) *@
-@*     { *@
-@*         msg = ""; *@
-@*         try *@
-@*         { *@
-@*             await postService.DeleteAsync(postId); *@
-@* *@
-@*             var list = new List<Book>(books!); *@
-@*             list.RemoveAll(post => post.Id == postId); *@
-@*             books = list.AsEnumerable(); *@
-@*         } *@
-@*         catch (Exception e) *@
-@*         { *@
-@*             Console.WriteLine(e); *@
-@*             msg = e.Message; *@
-@*         } *@
-@*     } *@
-@* *@
-@*     private int CompareById(Book x, Book y) *@
-@*     { *@
-@*         if (x.Id > y.Id) *@
-@*         { *@
-@*             return 1; *@
-@*         } *@
-@*         return -1; *@
-@*     } *@
-@* *@
-@* } *@
+﻿@page "/MyBooks"
+@using System.Security.Claims
+@using Domain.Models
+@using HttpClients.ClientInterfaces
+@using Microsoft.AspNetCore.Components
+
+@attribute [Authorize]
+@inject IBookService bookService; 
+@inject NavigationManager navMgr;
+
+<h3>Books</h3>
+<div class="filter-bar">
+    <div class="filters-container">
+        <img src="image/@(doShowFilters ? "clear_" : "")funnel.png" class="funnel" @onclick="@(() => doShowFilters = !doShowFilters)" alt="Funnel"/>
+        @if (doShowFilters)
+        {
+            <div class="filter">
+                <label>Title contains:</label>
+                <input type="text" @bind="titleContainsFilter"/>
+            </div>
+            <div>
+                @if (!string.IsNullOrEmpty(msg))
+                {
+                    <label style="color: red">@msg</label>
+                }
+
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <button @onclick="Loadbooks">Load</button>
+</div>
+
+@if (books == null)
+{
+}
+else if (!books.Any())
+{
+    <p>No Books to display</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Borrower</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Genre</th>
+            <th>Edit</th>
+            <th>Delete?</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in books)
+        {
+            <tr>
+                <td>@item.UUID</td>
+                @* <td>@item.Owner.UserName</td> *@
+                @* <td>@item.Title</td> *@
+                @* <td>@item.Body</td> *@
+                <td>@item.UUID</td>
+                <td>@item.Isbn</td>
+                <td>@item.LoanerUuid</td>
+
+                <td>
+                    <img src="image/edit.gif" class="funnel" @onclick="@(() => navMgr.NavigateTo($"/EditBook/{item.LoanerUuid}"))"/>
+                </td>
+                @* <td> *@
+                @*     <label @onclick="@(() => RemovePost(item.Id))" style="cursor:pointer; color: red; font-weight: bold"> *@
+                @*         &#x2717; *@
+                @*     </label> *@
+                @* </td> *@
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+@if (!string.IsNullOrEmpty(msg))
+{
+    <label style="color: red">@msg</label>
+}
+
+@code {
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    AuthenticationState authState;
+    ClaimsPrincipal user;
+
+    private ICollection<Book>? books;
+    private string msg = "";
+    private bool doShowFilters;
+
+    private string? usernameFilter;
+    private int? userIdFilter;
+    private string? titleContainsFilter;
+    private string? bodyContainsFilter;
+    private string? isbnContains;
+    private string? genreContains;
+    private string? descriptionContains;
+    private string? authorContains;
+
+    protected override async Task OnInitializedAsync()
+    {
+        authState = await AuthState;
+        user = authState.User;
+        await Loadbooks();
+    }
+
+    private async Task Loadbooks()
+    {
+        try
+        {
+    // bool? completedFilterValue = null;
+    // books = await bookService.GetAsync(usernameFilter, userIdFilter, titleContainsFilter, authorContains, isbnContains, genreContains,descriptionContains);
+    // var list = new List<Book>(books!);
+    // //list.RemoveAll(book => book.LoanerUuid != int.Parse(user.FindFirst("Id").Value));
+    // list.Sort(CompareById);
+    // books = list;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    private async Task RemoveBook(int bookId)
+    {
+        msg = "";
+        try
+        {
+            await bookService.DeleteAsync(bookId);
+
+            var list = new List<Book>(books!);
+    // list.RemoveAll(book => book.UUID == bookId);
+    // books = list.AsEnumerable();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+        }
+    }
+
+    private int CompareById(Book x, Book y)
+    {
+        return string.Compare(x.UUID, y.UUID, StringComparison.Ordinal);
+    }
+
+}
