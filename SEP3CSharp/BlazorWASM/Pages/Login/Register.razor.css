@@ -38,6 +38,12 @@
     margin-bottom: 15px;
     text-align: center;
 }
+.login-success {
+    color: green;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold; /* Gør teksten fed for at fremhæve succes */
+}
 
 .login-button {
     width: 100%;

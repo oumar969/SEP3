@@ -42,7 +42,16 @@ public class JwtAuthService : IAuthService
 
     public Action<ClaimsPrincipal> OnAuthStateChanged { get; set; } = null!;
 
-    public async Task<UserLoginDto> LoginAsync(string email, string password)
+
+    public Task LogoutAsync()
+    {
+        Jwt = null;
+        ClaimsPrincipal principal = new(new ClaimsIdentity());
+        OnAuthStateChanged?.Invoke(principal);
+        return Task.CompletedTask;
+    }
+
+    public async Task<UserLoginDto> LoginAsync(UserLoginDto dto)
     {
         Console.WriteLine("here1");
         var loginMutation = new GraphQLRequest
@@ -50,33 +59,33 @@ public class JwtAuthService : IAuthService
             Query = @"
             mutation ($email: String!, $password: String!) {
                 login(email: $email, password: $password) {
+                    email
+                    password
                     token
                     success
                 }
             }",
             Variables = new
             {
-                email,
-                password
+                email = dto.Email,
+                password = dto.Password
             }
         };
         Console.WriteLine("here2");
-        var response = await graphqlClient.SendMutationAsync<UserAuthGraphqlDto>(loginMutation);
+        var response = await graphqlClient.SendMutationAsync<AuthUserResponse>(loginMutation);
         Console.WriteLine("here3");
-        Console.WriteLine("response.Data : " + response.Data);
+        Console.WriteLine("response.Data 1: " + response.Data);
+        Console.WriteLine("response.Data 2 : " + response.Data?.Login?.Token);
+        Console.WriteLine("response.Data 3 : " + response.Data?.Login?.Success);
         if (response.Errors != null && response.Errors.Length > 0)
-            return new UserLoginDto(email, password, null, false);
-        var loginResponse = response.Data;
-        return new UserLoginDto(email, password, null);
-    }
+            return response.Data?.Login;
 
+        Jwt = response.Data?.Login?.Token;
 
-    public Task LogoutAsync()
-    {
-        Jwt = null;
-        ClaimsPrincipal principal = new();
-        OnAuthStateChanged.Invoke(principal);
-        return Task.CompletedTask;
+        ClaimsPrincipal principal = CreateClaimsPrincipal();
+        OnAuthStateChanged?.Invoke(principal);
+
+        return response.Data?.Login;
     }
 
     private static IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
@@ -114,7 +123,7 @@ public class JwtAuthService : IAuthService
         return principal;
     }
 
-    private class UserAuthGraphqlDto
+    private class AuthUserResponse
     {
         public UserLoginDto Login { get; set; }
     }

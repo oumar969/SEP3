@@ -29,7 +29,18 @@
             }
         </div>
     </div>
-    <div class="button-row">
+            @if (!string.IsNullOrEmpty(msg))
+        {
+           @if (msg.Contains("Error:"))
+           {
+               <div class="book-form-error">@msg</div>
+           }
+           else
+           {
+               <div class="book-form-success">@msg</div>
+           }
+        }    
+            <div class="button-row">
         <button @onclick="Create" disabled="@(string.IsNullOrEmpty(email))" class="acceptbtn">Create</button>
     </div>
 </div>
@@ -43,6 +54,7 @@
     private string resultMsg = "";
     private string color = "";
     private readonly bool isLibrarian = false;
+    private string msg = "";
 
     private async Task Create()
     {
@@ -55,12 +67,12 @@
 
             if (userCreatedMsg.Equals("ok"))
             {
-                resultMsg = "Brugeren blev oprettet";
+                msg = "Brugeren blev oprettet";
                 color = "green";
             }
             else
             {
-                resultMsg = "Brugeren blev ikke oprettet, " + userCreatedMsg;
+                msg = "Brugeren blev ikke oprettet, " + userCreatedMsg;
                 color = "red";
             }
         }
