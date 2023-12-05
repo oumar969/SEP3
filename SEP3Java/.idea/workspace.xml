@@ -7,7 +7,7 @@
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +22,37 @@
       </list>
     </option>
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="qraphQL" />
+                    <option name="lastUsedInstant" value="1701429916" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1701429915" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/.." />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -37,6 +63,9 @@
         <option name="mavenHome" value="Use Maven wrapper" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -59,7 +88,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/artes/Documents/GitHub/SEP3/SEP3Java/src/main/java/com/via/sep3java/data/library.mv.db&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Oumar/OneDrive/Documents/GitHub/SEP3/SEP3Java&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -85,7 +114,71 @@
       <recent name="com.via.sep3java.entity" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.Sep3JavaApplication">
+    <configuration name="ISBNServicesTest.testGenerateISBN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testGenerateISBN" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ISBNServicesTest.testGenerateMultipleISBNs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testGenerateMultipleISBNs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ISBNServicesTest.testInvalidISBN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testInvalidISBN" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ISBNServicesTest.testNullISBN" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SEP3Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.via.sep3java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.via.sep3java" />
+      <option name="MAIN_CLASS_NAME" value="com.via.sep3java.ISBNServicesTest" />
+      <option name="METHOD_NAME" value="testNullISBN" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Sep3JavaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="SEP3Java" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.via.sep3java.Sep3JavaApplication" />
@@ -94,6 +187,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ISBNServicesTest.testGenerateISBN" />
+        <item itemvalue="JUnit.ISBNServicesTest.testNullISBN" />
+        <item itemvalue="JUnit.ISBNServicesTest.testInvalidISBN" />
+        <item itemvalue="JUnit.ISBNServicesTest.testGenerateMultipleISBNs" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -113,8 +214,8 @@
       <workItem from="1699262752240" duration="6887000" />
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
-      <workItem from="1701205051299" duration="8719000" />
-      <workItem from="1701341595769" duration="20193000" />
+      <workItem from="1701096767865" duration="7418000" />
+      <workItem from="1701679883710" duration="1195000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />
@@ -164,15 +265,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699306699817</updated>
     </task>
-    <task id="LOCAL-00007" summary=".">
+    <task id="LOCAL-00007" summary="new postman collection">
       <option name="closed" value="true" />
-      <created>1701075516579</created>
+      <created>1701078466566</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1701075516579</updated>
+      <updated>1701078466566</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK">
+      <option name="closed" value="true" />
+      <created>1701096834368</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701096834368</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,8 +305,11 @@
     <MESSAGE value="Removed trash" />
     <MESSAGE value="Database works :D (Shake it babyyyy)" />
     <MESSAGE value="Added review to Java server" />
+    <MESSAGE value="new postman collection" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
+    <MESSAGE value="Add some controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add some controllers" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
