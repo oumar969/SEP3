@@ -46,9 +46,16 @@
     </div>
 
     @if (!string.IsNullOrEmpty(msg))
-    {
-        <div class="book-form-error">@msg</div>
-    }
+       {
+           @if (msg.Contains("Error:"))
+           {
+               <div class="book-form-error">@msg</div>
+           }
+           else
+           {
+               <div class="book-form-success">@msg</div>
+           }
+       }
 
     <button @onclick="Create" class="book-form-button">Registrer</button>
 </div>
@@ -142,8 +149,13 @@
             msg = "Body cannot be more than 100 characters!";
             return false;
         }
+        if(bookIsbn.Length <= 13)
+        {
+            msg = "ISBN skal være 13 cifre";
+            return false;
+        }
         
-        return true; // Validation passed
+        return true; 
     }
 
 }

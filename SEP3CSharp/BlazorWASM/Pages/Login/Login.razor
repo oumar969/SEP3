@@ -1,5 +1,7 @@
 ﻿@page "/Login"
 @using HttpClients.ClientInterfaces
+@using Microsoft.AspNetCore.Components
+@using Domain.DTOs
 @inject IAuthService authService
 @inject NavigationManager navMgr
 
@@ -48,8 +50,17 @@
         try
         {
             Console.WriteLine("here0");
-            await authService.LoginAsync(email, password);
-            navMgr.NavigateTo("/");
+            var response = await authService.LoginAsync(new UserLoginDto(email, password));
+
+            if (response.Success)
+            {
+                Console.WriteLine("here1");
+                navMgr.NavigateTo("/");
+            }
+            else
+            {
+                errorLabel = "Invalid login credentials. Please try again.";
+            }
         }
         catch (Exception e)
         {

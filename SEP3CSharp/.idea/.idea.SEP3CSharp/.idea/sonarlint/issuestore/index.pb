@@ -3111,3 +3111,11 @@ Z
 *BlazorWASM/Pages/User/CreateUser.razor.css,3\8\38338b45a6b23f3fdfba0b1773d4757fea7870fd
 Y
 )BlazorWASM/Pages/Login/Register.razor.css,0\b\0b4ded8fa1b085821985ae32339876c7fea79804
+^
+.GraphqlClient/ClientInterfaces/IAuthService.cs,4\8\48bb0e95c4596c22efb0e78aefbe95e5166135dd
+K
+Domain/DTOs/UserLoginDto.cs,8\0\80201652356bf26acc9e9d3cc24caff9d699cc18
+P
+ WebAPI/Mutations/BookMutation.cs,2\2\22b8477e4d36ae475cfc474e0deecbaff9056a39
+X
+(WebAPI/Mutations/BookRegistryMutation.cs,b\9\b94a2204dae40b6397e0bb5527323c09259e0284
