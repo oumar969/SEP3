@@ -23,9 +23,7 @@ builder.Services.AddHttpClient<IBookRegistryService, BookRegistryGraphClient>(cl
 });
 
 builder.Services.AddScoped<IAuthService, JwtAuthService>();
-// builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IBookService, BookGraphqlClient>();
-
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<CascadingAuthenticationState>();
 AuthorizationPolicies.AddPolicies(builder.Services);

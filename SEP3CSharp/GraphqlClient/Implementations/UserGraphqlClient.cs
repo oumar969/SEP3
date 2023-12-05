@@ -52,7 +52,7 @@ public class UserGraphqlClient : IUserService
                 uuid
             }
         };
-        var response = await graphqlClient.SendMutationAsync<UserGraphqlDto>(deleteUserMutation);
+        var response = await graphqlClient.SendMutationAsync<DeleteUserResponse>(deleteUserMutation);
         var resultMsg = "ok";
 
         if (response.Errors != null && response.Errors.Length > 0)
@@ -61,7 +61,7 @@ public class UserGraphqlClient : IUserService
     }
 
 
-    public async Task<string> Create(UserCreationDto dto)
+    public async Task<User> Create(UserCreationDto dto)
     {
         var createUserMutation = new GraphQLRequest
         {
@@ -82,17 +82,22 @@ public class UserGraphqlClient : IUserService
                 isLibrarian = dto.IsLibrarian
             }
         };
-        var response = await graphqlClient.SendMutationAsync<UserGraphqlDto>(createUserMutation);
+        var response = await graphqlClient.SendMutationAsync<CreateUserResponse>(createUserMutation);
+        Console.WriteLine("response.Data 1: " + response.Data);
         var resultMsg = "ok";
 
         if (response.Errors != null && response.Errors.Length > 0)
             resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
-        return resultMsg;
+        return (User)response.Data?.CreateUser;
     }
 
-    private class UserGraphqlDto
+    private class CreateUserResponse
     {
         public User CreateUser { get; set; }
+    }
+
+    private class DeleteUserResponse
+    {
         public User DeleteUser { get; set; }
     }
 }
