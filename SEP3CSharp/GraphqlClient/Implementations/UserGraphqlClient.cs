@@ -60,6 +60,40 @@ public class UserGraphqlClient : IUserService
         return resultMsg;
     }
 
+    public async Task<User> GetUserDataAsync(string _email)
+    {
+        var getUserDataQuery = new GraphQLRequest
+        {
+            Query = @"
+                    query ($email: String!) {
+                        userByEmail(email: $email) {
+                            firstName
+                            lastName
+                            email
+                            uuid
+                        }
+                    }",
+            Variables = new
+            {
+                email= _email
+            }
+        };
+
+        var response = await graphqlClient.SendQueryAsync<GetUserDataResponse>(getUserDataQuery);
+        
+        Console.WriteLine("asddas 11" + response.Data?.GetUserByEmail.Email);
+        
+        var resultMsg = "ok";
+
+        if (response.Errors != null && response.Errors.Length > 0)
+        {
+            resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
+            throw new Exception(resultMsg);
+        }
+
+        return response.Data?.GetUserByEmail;
+    }
+
 
     public async Task<User> Create(UserCreationDto dto)
     {
@@ -99,5 +133,10 @@ public class UserGraphqlClient : IUserService
     private class DeleteUserResponse
     {
         public User DeleteUser { get; set; }
+    }
+    
+    private class GetUserDataResponse
+    {
+        public User GetUserByEmail { get; set; }
     }
 }

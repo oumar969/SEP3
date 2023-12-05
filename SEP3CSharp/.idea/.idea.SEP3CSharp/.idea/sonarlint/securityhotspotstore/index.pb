@@ -1491,3 +1491,9 @@ K
 Domain/DTOs/UserLoginDto.cs,8\0\80201652356bf26acc9e9d3cc24caff9d699cc18
 X
 (WebAPI/Mutations/BookRegistryMutation.cs,b\9\b94a2204dae40b6397e0bb5527323c09259e0284
+^
+.GraphqlClient/ClientInterfaces/IUserService.cs,4\5\45376f662447e0ef7bfb966aab429d9c3e17b419
+b
+2GraphqlClient/Implementations/UserGraphqlClient.cs,3\b\3bbee35d436e7e35064fa0996217a8e87c13da34
+P
+ WebAPI/Mutations/UserMutation.cs,f\0\f013f36557405e35184d502bfa0fbc45c13fd8c3

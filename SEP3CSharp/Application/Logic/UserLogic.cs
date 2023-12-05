@@ -56,6 +56,13 @@ public class UserLogic : IUserLogic
         throw new NotImplementedException();
     }
 
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        User? user = await userDao.GetByEmailAsync(email);
+        Console.WriteLine(user + "UserLogic");
+        return user;
+    }
+
     public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
     {
         var toUpdate = new User

@@ -3119,3 +3119,7 @@ P
  WebAPI/Mutations/BookMutation.cs,2\2\22b8477e4d36ae475cfc474e0deecbaff9056a39
 X
 (WebAPI/Mutations/BookRegistryMutation.cs,b\9\b94a2204dae40b6397e0bb5527323c09259e0284
+b
+2GraphqlClient/Implementations/UserGraphqlClient.cs,3\b\3bbee35d436e7e35064fa0996217a8e87c13da34
+P
+ WebAPI/Mutations/UserMutation.cs,f\0\f013f36557405e35184d502bfa0fbc45c13fd8c3

@@ -11,5 +11,6 @@ public interface IUserLogic
     public Task<User> UpdateAsync(string uuid, UserUpdateDto dto);
     public Task DeleteAsync(string id);
     public Task<ICollection<User>> GetAllUsersAsync();
+    public Task<User?> GetByEmailAsync(string email);
     
 }

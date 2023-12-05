@@ -20,11 +20,19 @@
                 <p>
                     <strong>Efternavn: </strong>@lastName
                 </p>
+                <p>
+                    <strong>UUID: </strong>@uuid
+                </p>
+                <p>
+                    <strong>bøde: </strong>@fee
+                </p>
+                <p>
+                    <strong>Antal af lånebøger: </strong>@bookCount
+                </p>
             </div>
         </div>
     </Authorized>
     <NotAuthorized>
-        <!-- Optional: Show a message or redirect to another page for non-authorized users -->
         <p>Login for at se denne side.</p>
     </NotAuthorized>
 </AuthorizeView>
@@ -38,18 +46,36 @@
     private string firstName;
     private string lastName;
     private double fee;
-
+    private string bookCount;
+    
     protected override async Task OnInitializedAsync()
     {
-    // var user = await userClient.GetByIdAsync(Email);
-    // Email = user.Email;
-    // firstName = user.FirstName;
-    // lastName = user.LastName;
-    // uuid = user.Uuid;
-    // fee = user.Fee;
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
 
-    // var ratingDto = await _ratingClient.GetRatingMeanBySubject(Email);
-    // rating = ratingDto.Rating;
+        if (user.Identity.IsAuthenticated)
+        {
+            var userDetails = await userClient.GetUserDataAsync(user.Identity.Name);
+
+            // Email = userDetails.Email;
+            // firstName = userDetails.FirstName;
+            // lastName = userDetails.LastName;
+            //fee = userDetails.Fee;
+            //bookCount = userDetails.BookCount;
+        }
     }
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    // // var user = await userClient.GetByIdAsync(Email);
+    // // Email = user.Email;
+    // // firstName = user.FirstName;
+    // // lastName = user.LastName;
+    // // uuid = user.Uuid;
+    // // fee = user.Fee;
+    //
+    // // var ratingDto = await _ratingClient.GetRatingMeanBySubject(Email);
+    // // rating = ratingDto.Rating;
+    // }
 
 }

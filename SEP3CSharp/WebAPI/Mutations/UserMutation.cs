@@ -45,4 +45,6 @@ public class UserMutation
     {
         await _userLogic.DeleteAsync(uuid);
     }
+    
+    
 }
