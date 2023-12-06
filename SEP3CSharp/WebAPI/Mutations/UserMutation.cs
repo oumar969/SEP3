@@ -3,7 +3,7 @@ using Domain.DTOs;
 using Domain.Models;
 using WebApi.Services;
 
-namespace WebAPI.Schema;
+namespace WebAPI.Mutations;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
 public class UserMutation

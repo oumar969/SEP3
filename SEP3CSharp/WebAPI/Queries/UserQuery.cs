@@ -2,7 +2,7 @@
 using Domain.DTOs;
 using Domain.Models;
 
-namespace WebAPI.Schema;
+namespace WebAPI.Queries;
 
 [ExtendObjectType(OperationTypeNames.Query)]
 public class UserQuery
@@ -25,7 +25,7 @@ public class UserQuery
     }
 
     
-    public async Task<User?> GetUserByEmail(string email)
+    public async Task<User?> UserByEmail(string email)
     {
         return await _userLogic.GetByEmailAsync(email);
         // User? user = await _userLogic.GetByEmailAsync(email);

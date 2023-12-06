@@ -2,7 +2,7 @@
 using Application.LogicInterfaces;
 using Domain.Models;
 
-namespace WebAPI.Schema;
+namespace WebAPI.Mutations;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
 public class BookMutation

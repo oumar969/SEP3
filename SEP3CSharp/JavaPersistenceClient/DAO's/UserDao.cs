@@ -183,7 +183,7 @@ public class UserDao : IUserDao
             return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
 
-        if (response.StatusCode.ToString().Equals("NotFound")) return null;
+        //if (response.StatusCode.ToString().Equals("NotFound")) return null;
 
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");

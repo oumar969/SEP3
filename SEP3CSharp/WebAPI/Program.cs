@@ -8,8 +8,8 @@ using JavaPersistenceClient.DAOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Queries;
-using WebAPI.Schema;
 using WebApi.Services;
+using WebAPI.Mutations;
 
 var builder = WebApplication.CreateBuilder(args);
 

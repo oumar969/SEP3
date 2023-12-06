@@ -2,6 +2,7 @@
 @using HttpClients.ClientInterfaces
 @using Microsoft.AspNetCore.Components
 @using Newtonsoft.Json
+@using System.Security.Claims
 
 @inject IUserService userClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -13,7 +14,7 @@
         <div class="card">
             <div class="card-body">
                 <p>
-                    <strong>Email: </strong> @Email
+                    <strong>Email: </strong>@user.Identity.Name
                 </p>
                 <p>
                     <strong>Navn: </strong>@firstName
@@ -48,16 +49,18 @@
     private string lastName;
     private double fee;
     private string bookCount;
+    private AuthenticationState authState;
+    private ClaimsPrincipal user;
     
     protected override async Task OnInitializedAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
+        authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        user = authState.User;
 
         if (user.Identity.IsAuthenticated)
         {
             var userDetails = await userClient.GetUserDataAsync(user.Identity.Name);
-            // Console.WriteLine($"UserDetails: {JsonConvert.SerializeObject(userDetails)}");
+            //Console.WriteLine(userDetails.Email);
 
             if (userDetails != null)
             {

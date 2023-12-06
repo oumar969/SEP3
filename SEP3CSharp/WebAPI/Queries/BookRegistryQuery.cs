@@ -1,7 +1,7 @@
 ﻿using Application.LogicInterfaces;
 using Domain.Models;
 
-namespace WebAPI.Schema;
+namespace WebAPI.Queries;
 
 [ExtendObjectType(OperationTypeNames.Query)]
 public class BookRegistryQuery
