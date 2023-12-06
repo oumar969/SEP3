@@ -22,7 +22,7 @@ public class UserGraphqlClient : IUserService
 
     public async Task<IEnumerable<User>> GetUsers(string? usernameContains = null)
     {
-        var getUserDataQuery = new GraphQLRequest
+        var graphQlRequest = new GraphQLRequest
         {
             Query = @"
                     query {
@@ -37,7 +37,7 @@ public class UserGraphqlClient : IUserService
         };
 
         Console.WriteLine("asddas 11");
-        var response = await graphqlClient.SendQueryAsync<GetUsersDataRespnse>(getUserDataQuery);
+        var response = await graphqlClient.SendQueryAsync<GetUsersDataRespnse>(graphQlRequest);
 
         if (response.Errors != null && response.Errors.Length > 0)
         {
