@@ -3,6 +3,8 @@
 @using Microsoft.AspNetCore.Components
 @inject IBookService bookService
 @inject NavigationManager navMgr
+@inject IUserService userClient
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 
 <div class="row align-items-center justify-content-between">
@@ -103,15 +105,20 @@ else
         }
     }
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        Console.WriteLine("user: " + user.Identity?.Name);
+        var userDetails = await userClient.GetUserByEmailAsync(user.Identity?.Name.ToString());
+        Console.WriteLine("userDetails: " + userDetails);
+
         LoadSampleBooks();
     // Assuming that at initialization, we want to filter books with default values.
     // If the initial values for searchTerm and selectedGenre are not "", "All", you should set them before calling FilterBooks.
         selectedGenre = "Alle"; // Default value, adjust if needed
         searchTerm = ""; // Default value, adjust if needed
         FilterBooks();
-        return base.OnInitializedAsync();
     }
 
     // FilterBooks method remains unchanged

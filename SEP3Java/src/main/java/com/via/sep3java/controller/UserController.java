@@ -59,9 +59,10 @@ import java.util.List;
     return new ResponseEntity<>(existingUser, HttpStatus.OK);
   }
 
-  @GetMapping("/get/byEmail/{email}") public ResponseEntity<?> getUserByEmail(
+  @GetMapping("/get/by-email/{email}") public ResponseEntity<?> getUserByEmail(
       @PathVariable String email)
   {
+    System.out.println("get user by email");
     User existingUser = userRepository.findByEmail(email);
     if (existingUser == null)
     {

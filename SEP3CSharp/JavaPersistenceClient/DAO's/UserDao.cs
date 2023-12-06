@@ -168,7 +168,7 @@ public class UserDao : IUserDao
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        var url = $"{ServerOptions.serverUrl}/user/getByEmail/{email}";
+        var url = $"{ServerOptions.serverUrl}/user/get/by-email/{email}";
         Console.WriteLine("url: watin");
         var response = await _httpClient.GetAsync(url);
 

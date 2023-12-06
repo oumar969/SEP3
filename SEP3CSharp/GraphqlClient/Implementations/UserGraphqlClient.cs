@@ -60,7 +60,7 @@ public class UserGraphqlClient : IUserService
         return resultMsg;
     }
 
-    public async Task<User> GetUserDataAsync(string _email)
+    public async Task<User> GetUserByEmailAsync(string _email)
     {
         var getUserDataQuery = new GraphQLRequest
         {
@@ -71,6 +71,7 @@ public class UserGraphqlClient : IUserService
                             lastName
                             email
                             uuid
+                            isLibrarian
                         }
                     }",
             Variables = new
@@ -91,7 +92,7 @@ public class UserGraphqlClient : IUserService
             throw new Exception(resultMsg);
         }
 
-        return response.Data?.GetUserByEmail;
+        return response.Data?.UserByEmail;
     }
 
 
@@ -153,6 +154,6 @@ public class UserGraphqlClient : IUserService
 
     private class GetUserDataResponse
     {
-        public User GetUserByEmail { get; set; }
+        public User UserByEmail { get; set; }
     }
 }

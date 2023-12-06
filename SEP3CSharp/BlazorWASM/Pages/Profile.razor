@@ -51,7 +51,7 @@
     private string bookCount;
     private AuthenticationState authState;
     private ClaimsPrincipal user;
-    
+
     protected override async Task OnInitializedAsync()
     {
         authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -59,8 +59,8 @@
 
         if (user.Identity.IsAuthenticated)
         {
-            var userDetails = await userClient.GetUserDataAsync(user.Identity.Name);
-            //Console.WriteLine(userDetails.Email);
+            var userDetails = await userClient.GetUserByEmailAsync(user.Identity.Name);
+    //Console.WriteLine(userDetails.Email);
 
             if (userDetails != null)
             {
@@ -68,13 +68,12 @@
                 firstName = userDetails.FirstName;
                 lastName = userDetails.LastName;
                 uuid = userDetails.UUID;
-                
             }
-             // Email = userDetails.Email;
-             // firstName = userDetails.FirstName;
-             // lastName = userDetails.LastName;
-            // fee = userDetails.Fee;
-            // bookCount = userDetails.BookCount;
+    // Email = userDetails.Email;
+    // firstName = userDetails.FirstName;
+    // lastName = userDetails.LastName;
+    // fee = userDetails.Fee;
+    // bookCount = userDetails.BookCount;
         }
     }
 
