@@ -68,7 +68,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         await _bookRegistryDao.DeleteAsync(uuid);
     }
 
-    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
+    public Task<IEnumerable<BookRegistry>> GetAllBookRegistriesAsync()
     {
         return _bookRegistryDao.GetAllAsync();
     }

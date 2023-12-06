@@ -43,7 +43,7 @@ public class BookDao : IBookDao
         throw new NotImplementedException();
     }
 
-    public Task<ICollection<Book>> GetAllAsync()
+    public Task<IEnumerable<Book>> GetAllAsync()
     {
         throw new NotImplementedException();
     }

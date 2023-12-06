@@ -1,6 +1,7 @@
 @page "/BookCatalog"
 @using HttpClients.ClientInterfaces
 @using Microsoft.AspNetCore.Components
+@using Domain.Models
 @inject IBookService bookService
 @inject NavigationManager navMgr
 @inject IUserService userClient
@@ -73,7 +74,7 @@ else
 }
 
 @code {
-    private List<Book> books;
+    private IEnumerable<BookRegistry> books;
     private readonly Random random = new();
     private bool isLibrarian;
 
