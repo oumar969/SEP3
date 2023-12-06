@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/book-registry")
@@ -30,7 +31,7 @@ public class BookRegistryController {
         return bookRegistryRepository.findAll();
     }
 
-    @GetMapping("/get/{isbn}")
+    @GetMapping("/getByIsbn/{isbn}")
     public ResponseEntity<?> getBookRegistry(@PathVariable String isbn) {
         BookRegistry existingBookRegistry = bookRegistryRepository.findByIsbn(isbn);
         if (existingBookRegistry == null) {
@@ -65,5 +66,13 @@ public class BookRegistryController {
         return new ResponseEntity<>("Book with ISBN " + isbn + " deleted successfully.", HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/delete/{uuid}")
+    public ResponseEntity<?> deleteBookRegistryByUuid(@PathVariable String uuid) {
+        BookRegistry bookRegistry = (BookRegistry) bookRegistryRepository.findAllById(Collections.singleton(uuid));
+        if (bookRegistry == null) {
+            return new ResponseEntity<>("Book with uuid " + uuid + " not found.", HttpStatus.NOT_FOUND);
+        }
+        bookRegistryRepository.delete(bookRegistry);
+        return new ResponseEntity<>("Book with uuid " + uuid + " deleted successfully.", HttpStatus.OK);
+    }
 }
