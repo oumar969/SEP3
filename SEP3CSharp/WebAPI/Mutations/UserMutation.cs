@@ -43,8 +43,16 @@ public class UserMutation
         return await _userLogic.CreateAsync(userCreationDto);
     }
 
-    public async Task DeleteUser(string uuid)
+    public async Task<bool> DeleteUser(string uuid)
     {
-        await _userLogic.DeleteAsync(uuid);
+        try
+        {
+            await _userLogic.DeleteAsync(uuid);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }
