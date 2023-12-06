@@ -1497,3 +1497,5 @@ b
 2GraphqlClient/Implementations/UserGraphqlClient.cs,3\b\3bbee35d436e7e35064fa0996217a8e87c13da34
 P
  WebAPI/Mutations/UserMutation.cs,f\0\f013f36557405e35184d502bfa0fbc45c13fd8c3
+_
+/GraphqlClient/Implementations/JwtAuthService.cs,3\9\39b8aa6e51b3d425d6b73c6d44039aa9559de10e

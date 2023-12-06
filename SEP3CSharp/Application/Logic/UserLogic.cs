@@ -23,15 +23,8 @@ public class UserLogic : IUserLogic
 
         ValidateData(dto);
 
-        var toCreate = new User
-        {
-            UUID = dto.UUID,
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Email = dto.Email,
-            Password = dto.Password,
-            IsLibrarian = dto.IsLibrarian
-        };
+        var toCreate = new User(dto.UUID, dto.FirstName, dto.LastName, dto.Email, dto.Password, dto.IsLibrarian);
+        
 
         var created = await userDao.CreateAsync(toCreate);
         return created;
@@ -58,18 +51,16 @@ public class UserLogic : IUserLogic
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        User? user = await userDao.GetByEmailAsync(email);
-        Console.WriteLine(user + "UserLogic");
-        return user;
+        return await userDao.GetByEmailAsync(email);
+        // User? user = await userDao.GetByEmailAsync(email);
+        // Console.WriteLine(user + "UserLogic");
+        // return user;
     }
 
     public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
     {
-        var toUpdate = new User
-        {
-            UUID = uuid, FirstName = dto.FirstName, LastName = dto.LastName, Password = dto.Password, Email = dto.Email,
-            IsLibrarian = dto.IsLibrarian
-        };
+        var toUpdate = new User(dto.UUID, dto.FirstName, dto.LastName, dto.Email, dto.Password, dto.IsLibrarian);
+        
 
         return userDao.UpdateAsync(toUpdate);
     }

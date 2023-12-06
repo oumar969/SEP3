@@ -27,9 +27,10 @@ public class UserQuery
     
     public async Task<User?> GetUserByEmail(string email)
     {
-        User? user = await _userLogic.GetByEmailAsync(email);
-        Console.WriteLine("userQuery" + user);
-        return user;
+        return await _userLogic.GetByEmailAsync(email);
+        // User? user = await _userLogic.GetByEmailAsync(email);
+        // Console.WriteLine("userQuery" + user);
+        // return user;
     }
 
   }

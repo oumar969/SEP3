@@ -81,7 +81,7 @@ public class UserGraphqlClient : IUserService
 
         var response = await graphqlClient.SendQueryAsync<GetUserDataResponse>(getUserDataQuery);
         
-        Console.WriteLine("asddas 11" + response.Data?.GetUserByEmail.Email);
+        // Console.WriteLine("asddas 11" + response.Data?.GetUserByEmail.Email);
         
         var resultMsg = "ok";
 
