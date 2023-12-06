@@ -46,7 +46,7 @@ public class UserController {
         return new ResponseEntity<>(existingUser, HttpStatus.OK);
     }
 
-    @GetMapping("/get/byEmail/{email}")
+    @GetMapping("/getByEmail/{email}")
     public ResponseEntity<?> getUserByEmail(
             @PathVariable String email) {
         User existingUser = userRepository.findByEmail(email);

@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/UserLoginDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/UserLoginDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/JwtAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/JwtAuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookRegistryDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookRegistryDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/UserMutation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/UserMutation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +53,6 @@
         </option>
       </RecentBranches>
     </option>
-  </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="1060ca31-7aa2-45c8-b3e1-ad0d575ca9d2" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -315,7 +309,8 @@
     <MESSAGE value="." />
     <MESSAGE value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
     <MESSAGE value="Add some controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add some controllers" />
+    <MESSAGE value="getAll fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="getAll fixed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
