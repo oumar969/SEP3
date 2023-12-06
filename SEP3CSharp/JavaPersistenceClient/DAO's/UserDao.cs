@@ -266,7 +266,7 @@ public class UserDao : IUserDao
 
     public Task<ICollection<User>> GetAllUsersAsync()
     {
-        var url = $"{ServerOptions.serverUrl}/user/getAllUsers";
+        var url = $"{ServerOptions.serverUrl}/user/get/all";
 
         var response = _httpClient.GetAsync(url).Result;
 

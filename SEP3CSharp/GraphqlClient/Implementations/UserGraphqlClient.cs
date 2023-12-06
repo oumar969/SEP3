@@ -22,18 +22,29 @@ public class UserGraphqlClient : IUserService
 
     public async Task<IEnumerable<User>> GetUsers(string? usernameContains = null)
     {
-        var uri = "/users";
-        if (!string.IsNullOrEmpty(usernameContains)) uri += $"?username={usernameContains}";
-        var response = await client.GetAsync(uri);
-        var result = await response.Content.ReadAsStringAsync();
-        if (!response.IsSuccessStatusCode) throw new Exception(result);
-
-        Console.WriteLine(result);
-        var users = JsonSerializer.Deserialize<IEnumerable<User>>(result, new JsonSerializerOptions
+        var graphQlRequest = new GraphQLRequest
         {
-            PropertyNameCaseInsensitive = true
-        })!;
-        return users;
+            Query = @"
+                    query {
+                        allUsers {
+                            firstName
+                            lastName
+                            email
+                            uuid
+                            isLibrarian
+                        }
+                    }",
+        };
+
+        Console.WriteLine("asddas 11");
+        var response = await graphqlClient.SendQueryAsync<GetUsersDataRespnse>(graphQlRequest);
+
+        if (response.Errors != null && response.Errors.Length > 0)
+        {
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        }
+
+        return response.Data?.AllUsers;
     }
 
     public async Task<string> Delete(string uuid)
@@ -155,5 +166,10 @@ public class UserGraphqlClient : IUserService
     private class GetUserDataResponse
     {
         public User UserByEmail { get; set; }
+    }
+
+    private class GetUsersDataRespnse
+    {
+        public IEnumerable<User> AllUsers { get; set; }
     }
 }

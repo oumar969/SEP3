@@ -19,8 +19,9 @@ public class UserQuery
         return await _userLogic.GetByUuidAsync(uuid);
     }
 
-    public async Task<IEnumerable<User>> GetAllUsers()
+    public async Task<IEnumerable<User>> allUsers()
     {
+        Console.WriteLine("here xD1");
         return await _userLogic.GetAllUsersAsync();
     }
 

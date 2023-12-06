@@ -12,9 +12,10 @@ public class BookRegistryQuery
     {
         _bookRegistryLogic = bookRegistryLogic;
     }
-    
-    public async Task<IEnumerable<BookRegistry>> GetAllBook()
+
+    public async Task<IEnumerable<BookRegistry>> allBookRegistries()
     {
+        Console.WriteLine("allBookRegistries 1");
         return await _bookRegistryLogic.GetAllBookRegistriesAsync();
     }
     

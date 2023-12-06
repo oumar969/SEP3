@@ -36,7 +36,7 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public async Task<ICollection<BookRegistry>> GetAllAsync()
+    public async Task<IEnumerable<BookRegistry>> GetAllAsync()
     {
         var url = $"{ServerOptions.serverUrl}/book-registry/get/all";
 

@@ -29,12 +29,7 @@ public class BookRegistryMutation
         Console.WriteLine("create book mutation 2");
         return await _bookRegistryLogic.CreateAsync(bookRegistry);
     }
-    
-    public async Task<ICollection<BookRegistry>> getAllBookRegistry()
-    {
-        Console.WriteLine("get all book mutation");
-        return await _bookRegistryLogic.GetAllBookRegistriesAsync();
-    }
+
 
     public async Task <BookRegistry>DeleteBookRegistry(string isbn)
     {

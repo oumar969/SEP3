@@ -10,7 +10,7 @@ public interface IGenericDao<TEntity>
 
     // Read
     Task<TEntity> GetByUuidAsync(string uuid);
-    Task<ICollection<TEntity>> GetAllAsync();
+    Task<IEnumerable<TEntity>> GetAllAsync();
     Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters);
 
     // Update
