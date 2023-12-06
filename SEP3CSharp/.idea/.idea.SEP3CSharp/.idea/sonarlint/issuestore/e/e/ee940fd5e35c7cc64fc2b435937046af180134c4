@@ -1,2 +1,6 @@
 
-Bcsharpsquid:S125"Remove this commented out code.(À‡«8ÕâÕïÀ1
+rcsharpsquid:S927"JRename parameter 'email' to 'username' to match the interface declaration.(˜à¡Õùÿÿÿÿ8İı„İÃ1
+lcsharpsquid:S927."JRename parameter 'email' to 'username' to match the interface declaration.(¤úô8ßı„İÃ1
+}csharpsquid:S1450"TRemove the field 'users' and declare it as a local variable in the relevant methods.(´åÏüÿÿÿÿ8àı„İÃ1
+]csharpsquid:S1127"5'System.Exception' should not be thrown by user code.(ÚÎŸıÿÿÿÿ8áı„İÃ1
+Xcsharpsquid:S1129"5'System.Exception' should not be thrown by user code.(Ûëœÿ8âı„İÃ1

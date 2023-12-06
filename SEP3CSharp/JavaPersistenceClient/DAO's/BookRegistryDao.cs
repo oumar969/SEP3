@@ -38,7 +38,7 @@ public class BookRegistryDao : IBookRegistryDao
 
     public async Task<ICollection<BookRegistry>> GetAllAsync()
     {
-        var url = $"{ServerOptions.serverUrl}/book/getAll";
+        var url = $"{ServerOptions.serverUrl}/book-registry/get/all";
 
         var response = await _httpClient.GetAsync(url);
 

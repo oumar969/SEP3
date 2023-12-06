@@ -18,23 +18,19 @@ public class UserQuery
     {
         return await _userLogic.GetByUuidAsync(uuid);
     }
-
+    
     public async Task<IEnumerable<User>> GetAllUsers()
     {
         return await _userLogic.GetAllUsersAsync();
     }
 
-    public async Task DeleteUser(string uuid)
+    
+    public async Task<User?> GetUserByEmail(string email)
     {
-        await _userLogic.DeleteAsync(uuid);
+        return await _userLogic.GetByEmailAsync(email);
+        // User? user = await _userLogic.GetByEmailAsync(email);
+        // Console.WriteLine("userQuery" + user);
+        // return user;
     }
 
-
-    public async Task<User> EditUser(string uuid, string firstName, string lastName, string email, string password,
-        bool isLibrarian)
-    {
-        var userUpdateDto = new UserUpdateDto(firstName, lastName, email, password, isLibrarian);
-
-        return await _userLogic.UpdateAsync(uuid, userUpdateDto);
-    }
-}
+  }

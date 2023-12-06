@@ -16,26 +16,18 @@ public class UserLogic : IUserLogic
     }
 
 
-    public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
+    public async Task<User> CreateAsync(UserCreationDto dto)
     {
         var existing = await userDao.GetByEmailAsync(dto.Email);
         if (existing != null) throw new Exception("User already exists");
 
         ValidateData(dto);
 
-        User newUser = new User()
-        {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Email = dto.Email,
-            Password = dto.Password,
-            IsLibrarian = dto.IsLibrarian
-        };
+        var toCreate = new User(dto.UUID, dto.FirstName, dto.LastName, dto.Email, dto.Password, dto.IsLibrarian);
+        
 
-        var created = await userDao.CreateAsync(newUser);
-
-        dto.IsSuccessful = true;
-        return dto;
+        var created = await userDao.CreateAsync(toCreate);
+        return created;
     }
 
 
@@ -57,13 +49,18 @@ public class UserLogic : IUserLogic
         throw new NotImplementedException();
     }
 
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        return await userDao.GetByEmailAsync(email);
+        // User? user = await userDao.GetByEmailAsync(email);
+        // Console.WriteLine(user + "UserLogic");
+        // return user;
+    }
+
     public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
     {
-        var toUpdate = new User
-        {
-            UUID = uuid, FirstName = dto.FirstName, LastName = dto.LastName, Password = dto.Password, Email = dto.Email,
-            IsLibrarian = dto.IsLibrarian
-        };
+        var toUpdate = new User(dto.UUID, dto.FirstName, dto.LastName, dto.Email, dto.Password, dto.IsLibrarian);
+        
 
         return userDao.UpdateAsync(toUpdate);
     }

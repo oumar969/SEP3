@@ -13,14 +13,14 @@ public class BookLogic : IBookLogic
         _bookDao = bookDao;
     }
 
-    public async Task<Book?> LoanAsync(Book book, User user)
+    public async Task<Book?> LoanAsync(string bookId, string userId)
     {
-        return await _bookDao.LoanAsync(book, user);
+        return await _bookDao.LoanAsync(bookId, userId);
     }
 
-    public async Task<Book?> DeliverAsync(Book book, User user)
+    public async Task<Book?> DeliverAsync(string bookId, string userId)
     {
-        return await _bookDao.DeliverAsync(book, user);
+        return await _bookDao.DeliverAsync(bookId, userId);
     }
 
     public Task<Book?> GetByUuidAsync(string uuid)
@@ -28,14 +28,15 @@ public class BookLogic : IBookLogic
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Book>> GetAllBooksAsync()
+    public async Task<IEnumerable<Book>> GetAllBooksAsync(string isbn)
     {
-        throw new NotImplementedException();
+        return await _bookDao.GetAllAsync(isbn);
     }
 
-    public Task<Book> CreateAsync(Book book)
+    public async Task<Book> CreateAsync(string isbn)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("lgoc");
+        return await _bookDao.CreateAsync(isbn);
     }
 
     public Task<Book> DeleteAsync(string uuid)
