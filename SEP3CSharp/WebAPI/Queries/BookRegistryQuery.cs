@@ -12,8 +12,8 @@ public class BookRegistryQuery
     {
         _bookRegistryLogic = bookRegistryLogic;
     }
-    
-    public async Task<IEnumerable<BookRegistry>> GetAllBook()
+
+    public async Task<IEnumerable<BookRegistry>> allBooks()
     {
         return await _bookRegistryLogic.GetAllBookRegistriesAsync();
     }

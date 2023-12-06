@@ -59,7 +59,7 @@ public class UserLogic : IUserLogic
 
     public Task<ICollection<User>> GetAllUsersAsync()
     {
-        throw new NotImplementedException();
+        return userDao.GetAllUsersAsync();
     }
 
     public async Task<User?> GetByEmailAsync(string email)

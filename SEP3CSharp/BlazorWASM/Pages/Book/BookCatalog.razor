@@ -11,9 +11,12 @@
     <div class="col">
         <h3 class="mb-4">Bog Katalog</h3>
     </div>
-    <div class="col-auto">
-        <button type="button" class="btn btn-primary" @onclick="RegisterBook">Registrer Ny Bog</button>
-    </div>
+    @if (isLibrarian)
+    {
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary" @onclick="RegisterBook">Registrer Ny Bog</button>
+        </div>
+    }
 </div>
 
 @if (books == null)
@@ -42,10 +45,13 @@ else
                         }
                     </select>
                 </div>
-                <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
-                    <label class="form-check-label" for="myLoansCheck">Mine lån</label>
-                </div>
+                @if (!isLibrarian)
+                {
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
+                        <label class="form-check-label" for="myLoansCheck">Mine lån</label>
+                    </div>
+                }
             </div>
         </div>
         <div class="row">
@@ -69,6 +75,7 @@ else
 @code {
     private List<Book> books;
     private readonly Random random = new();
+    private bool isLibrarian;
 
     private bool myLoans;
 
@@ -109,6 +116,8 @@ else
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
+        isLibrarian = user.IsInRole("Librarian");
+        Console.WriteLine("is librarian: " + isLibrarian);
         Console.WriteLine("user: " + user.Identity?.Name);
         var userDetails = await userClient.GetUserByEmailAsync(user.Identity?.Name.ToString());
         Console.WriteLine("userDetails: " + userDetails);
