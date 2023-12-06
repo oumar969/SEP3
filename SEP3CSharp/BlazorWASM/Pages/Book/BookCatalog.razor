@@ -11,9 +11,9 @@
 @inject BookStateService bookStateService
 
 
-<div class="row align-items-center justify-content-between">
+<div class="row align-items-center justify-content-between mb-4">
     <div class="col">
-        <h3 class="mb-4">Bog Katalog</h3>
+        <h3>Bog Katalog</h3>
     </div>
     @if (isLibrarian)
     {
@@ -49,13 +49,17 @@ else
                         }
                     </select>
                 </div>
-                @if (!isLibrarian)
-                {
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
-                        <label class="form-check-label" for="myLoansCheck">Mine lån</label>
-                    </div>
-                }
+                <AuthorizeView>
+                    <Authorized>
+                        @if (!isLibrarian)
+                        {
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
+                                <label class="form-check-label" for="myLoansCheck">Mine lån</label>
+                            </div>
+                        }
+                    </Authorized>
+                </AuthorizeView>
             </div>
         </div>
         <div class="row">
