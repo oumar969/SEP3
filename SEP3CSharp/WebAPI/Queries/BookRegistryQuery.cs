@@ -17,4 +17,9 @@ public class BookRegistryQuery
     {
         return await _bookRegistryLogic.GetAllBookRegistriesAsync();
     }
+    
+    public async Task<BookRegistry> GetBookByIsbn(string isbn)
+    {
+        return await _bookRegistryLogic.GetBookRegistryByIsbnAsync(isbn);
+    }
 }

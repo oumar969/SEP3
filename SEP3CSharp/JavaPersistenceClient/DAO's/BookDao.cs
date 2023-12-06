@@ -81,10 +81,26 @@ public class BookDao : IBookDao
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(string uuid)
+    public async Task<Book> DeleteAsync(string isbn)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("delete book dao");
+        var url = $"{ServerOptions.serverUrl}/book/deleteByIsbn/{isbn}";
+
+        var response = await _httpClient.DeleteAsync(url);
+
+        Console.WriteLine($"DELETE request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+
+        if (response.IsSuccessStatusCode)
+            return JsonConvert.DeserializeObject<Book>(await response.Content.ReadAsStringAsync());
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error deleting book. Status code: {response.StatusCode}");
     }
+    
+    
 
     public async Task<Book?> LoanAsync(string bookId, string userId)
     {

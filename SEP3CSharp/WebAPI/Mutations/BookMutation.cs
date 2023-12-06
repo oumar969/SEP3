@@ -25,9 +25,10 @@ public class BookMutation
         return await _bookLogic.DeliverAsync(bookId, userId);
     }
 
-    public async Task DeleteBook(string isbn)
+    public async Task<Book?> DeleteBook(string isbn)
     {
-        await _bookLogic.DeleteAsync(isbn);
+        Console.WriteLine("delete book mutation");
+      return await _bookLogic.DeleteAsync(isbn);
     }
 
     public async Task<Book?> LoanBook(string bookId, string userId)

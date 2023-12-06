@@ -17,4 +17,9 @@ public class BookQuery
     {
         return await _bookLogic.GetAllBooksAsync(isbn);
     }
+    
+    public async Task<IEnumerable<Book>> GetAllBooksByIsbn(string isbn)
+    {
+        return await _bookLogic.GetAllBooksAsync(isbn);
+    }
 }

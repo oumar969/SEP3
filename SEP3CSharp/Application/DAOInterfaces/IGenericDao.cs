@@ -17,5 +17,5 @@ public interface IGenericDao<TEntity>
     Task<TEntity> UpdateAsync(TEntity entity);
 
     // Delete
-    Task DeleteAsync(string uuid);
+    Task<Book> DeleteAsync(string uuid);
 }

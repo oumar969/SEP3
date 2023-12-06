@@ -1,12 +1,14 @@
 
-mcsharpsquid:S927Z"JRename parameter 'title' to 'dtoTitle' to match the interface declaration.(ûµê8¼Ê¹ÉÃ1
-qcsharpsquid:S927q"IRename parameter 'isbn' to 'bookIsbn' to match the interface declaration.(â´æÔüÿÿÿÿ8½Ê¹ÉÃ1
+hcsharpsquid:S927H"ERename parameter 'isbn' to 'uuid' to match the interface declaration.(ßØÖ…8ïáñÿÃ1
+mcsharpsquid:S927p"JRename parameter 'title' to 'dtoTitle' to match the interface declaration.(ûµê8îáñÿÃ1
+rcsharpsquid:S927‡"IRename parameter 'isbn' to 'bookIsbn' to match the interface declaration.(â´æÔüÿÿÿÿ8õÓ¯Ä1
 Xcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8İÑ³´Ã1
 ]csharpsquid:S112;"5'System.Exception' should not be thrown by user code.(îë›¦ÿÿÿÿÿ8¾Ê¹ÉÃ1
-Xcsharpsquid:S112W"5'System.Exception' should not be thrown by user code.(ç¹ª8¾Ê¹ÉÃ1
-Xcsharpsquid:S112n"5'System.Exception' should not be thrown by user code.(½ ÿ«8¿Ê¹ÉÃ1
-Ycsharpsquid:S112…"5'System.Exception' should not be thrown by user code.(½ ÿ«8ÀÊ¹ÉÃ1
-Ycsharpsquid:S112š"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8ÀÊ¹ÉÃ1
-Tcsharpsquid:S1144’"/Remove the unused private method 'CreateAsync'.(åãëÂ8ÃÊ¹ÉÃ1
+Xcsharpsquid:S112W"5'System.Exception' should not be thrown by user code.(ç¹ª8¶Š€Ä1
+Xcsharpsquid:S112k"5'System.Exception' should not be thrown by user code.(ç¹ª8Û³´Ä1
+Ycsharpsquid:S112„"5'System.Exception' should not be thrown by user code.(½ ÿ«8ñáñÿÃ1
+Ycsharpsquid:S112œ"5'System.Exception' should not be thrown by user code.(½ ÿ«8ñáñÿÃ1
+Ycsharpsquid:S112±"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8­¹…Ä1
+Tcsharpsquid:S1144©"/Remove the unused private method 'CreateAsync'.(åãëÂ8òáñÿÃ1
 hcsharpsquid:S1075"?Refactor your code not to use hardcoded absolute paths or URIs.(ìâŠıøÿÿÿÿ8ÅÊ¹ÉÃ1
-dcsharpsquid:S1075—"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8È´Ã1
+dcsharpsquid:S1075®"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8óáñÿÃ1

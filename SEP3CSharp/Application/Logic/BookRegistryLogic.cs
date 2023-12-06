@@ -61,11 +61,11 @@ public class BookRegistryLogic : IBookRegistryLogic
     }
 */
 
-    public async Task DeleteAsync(string uuid)
+    public async Task<BookRegistry> DeleteAsync(string isbn)
     {
-        var book = await _bookRegistryDao.GetByUuidAsync(uuid);
-        if (book == null) throw new Exception($"Book with UUID {uuid} was not found!");
-        await _bookRegistryDao.DeleteAsync(uuid);
+        var book = await _bookRegistryDao.GetByIsbnAsync(isbn);
+        if (book == null) throw new Exception($"Book with UUID {isbn} was not found!");
+        return await _bookRegistryDao.DeleteAsync(isbn);
     }
 
     public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
@@ -76,6 +76,11 @@ public class BookRegistryLogic : IBookRegistryLogic
     public Task<BookRegistry> EditAsync(int id, BookRegistryUpdateDto dto)
     {
         throw new NotImplementedException();
+    }
+
+    public Task<BookRegistry> GetBookRegistryByIsbnAsync(string isbn)
+    {
+        return _bookRegistryDao.GetByIsbnAsync(isbn);
     }
 
     private void ValidateBookRegistry(BookRegistryUpdateDto bookRegistry)

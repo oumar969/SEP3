@@ -25,7 +25,7 @@ public class BookLogic : IBookLogic
 
     public Task<Book?> GetByUuidAsync(string uuid)
     {
-        throw new NotImplementedException();
+        return _bookDao.GetByUuidAsync(uuid);
     }
 
     public async Task<IEnumerable<Book>> GetAllBooksAsync(string isbn)
@@ -39,8 +39,8 @@ public class BookLogic : IBookLogic
         return await _bookDao.CreateAsync(isbn);
     }
 
-    public Task<Book> DeleteAsync(string uuid)
+    public async Task<Book> DeleteAsync(string isbn)
     {
-        throw new NotImplementedException();
+        return await _bookDao.DeleteAsync(isbn);
     }
 }

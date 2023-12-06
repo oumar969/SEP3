@@ -69,9 +69,9 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public async Task DeleteAsync(string uuid)
+    async Task<Book> IGenericDao<BookRegistry>.DeleteAsync(string isbn)
     {
-        var url = $"{ServerOptions.serverUrl}/books/delete/{uuid}";
+        var url = $"{ServerOptions.serverUrl}/book/delete/{isbn}";
 
         var response = await _httpClient.DeleteAsync(url);
 
@@ -79,7 +79,27 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine($"Response status code: {response.StatusCode}");
 
         if (response.IsSuccessStatusCode)
-            return;
+            return null;
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
+        
+    }
+    public async Task<BookRegistry> DeleteAsync(string isbn)
+    {
+        var url = $"{ServerOptions.serverUrl}/book-registry/delete/{isbn}";
+
+        var response = await _httpClient.DeleteAsync(url);
+
+        Console.WriteLine($"DELETE request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            return null; // or return any relevant data depending on your requirements
+        }
 
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");
@@ -87,9 +107,11 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
     }
 
+    
+
     public async Task<BookRegistry> GetByBookTitleAsync(string title)
     {
-        var url = $"{ServerOptions.serverUrl}/book/getByTitle/{title}";
+        var url = $"{ServerOptions.serverUrl}/book-registry/getByTitle/{title}";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -112,7 +134,8 @@ public class BookRegistryDao : IBookRegistryDao
 
     public async Task<BookRegistry> GetByIsbnAsync(string isbn)
     {
-        var url = $"{ServerOptions.serverUrl}/book/getByIsbn/{isbn}";
+        Console.WriteLine("get by isbn");
+        var url = $"{ServerOptions.serverUrl}/book-registry/getByIsbn/{isbn}";
 
         var response = await _httpClient.GetAsync(url);
 
