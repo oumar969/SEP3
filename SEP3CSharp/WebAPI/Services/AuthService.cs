@@ -26,10 +26,8 @@ public class AuthService : IAuthService
         {
             Console.WriteLine("login auth service 1");
             var user = await ValidateUser(email, password);
-            Console.WriteLine("login auth service 2");
-            var token = GenerateJwt(user);
-            Console.WriteLine("token: " + token);
-            return new UserLoginDto(email, password, token);
+            Console.WriteLine("login auth service 2 user: " + user);
+            return user;
         }
         catch (Exception e)
         {
@@ -43,20 +41,49 @@ public class AuthService : IAuthService
         throw new NotImplementedException();
     }
 
-    public Task<User> ValidateUser(string email, string password)
+    public Task<UserLoginDto> ValidateUser(string email, string password)
     {
         try
         {
             users = userDao.GetAllAsync().Result;
-            Console.WriteLine("users: " + users);
             var existingUser = users.FirstOrDefault(u =>
                 u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            UserLoginDto userLoginDto;
+            if (existingUser == null)
+            {
+                userLoginDto = new UserLoginDto(
+                    email,
+                    password,
+                    "",
+                    false,
+                    "Bruger findes ikke"
+                );
+            }
 
-            if (existingUser == null) throw new Exception("Bruger ikke fundet");
+            else if (!existingUser.Password.Equals(password))
+            {
+                userLoginDto = new UserLoginDto(
+                    email,
+                    password,
+                    "",
+                    false,
+                    "Forkert kodeord"
+                );
+            }
+            else
+            {
+                userLoginDto = new UserLoginDto(
+                    email,
+                    password,
+                    GenerateJwt(existingUser),
+                    true,
+                    "Login succesfuldt"
+                );
+            }
 
-            if (!existingUser.Password.Equals(password)) throw new Exception("Forkert kodeord");
             Console.WriteLine("existingUser: " + existingUser);
-            return Task.FromResult(existingUser);
+
+            return Task.FromResult(userLoginDto);
         }
         catch (Exception e)
         {

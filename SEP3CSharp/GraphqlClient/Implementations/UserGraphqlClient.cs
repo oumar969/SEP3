@@ -75,14 +75,14 @@ public class UserGraphqlClient : IUserService
                     }",
             Variables = new
             {
-                email= _email
+                email = _email
             }
         };
 
+        Console.WriteLine("asddas 11");
         var response = await graphqlClient.SendQueryAsync<GetUserDataResponse>(getUserDataQuery);
-        
-        // Console.WriteLine("asddas 11" + response.Data?.GetUserByEmail.Email);
-        
+
+
         var resultMsg = "ok";
 
         if (response.Errors != null && response.Errors.Length > 0)
@@ -136,7 +136,7 @@ public class UserGraphqlClient : IUserService
     {
         public User DeleteUser { get; set; }
     }
-    
+
     private class GetUserDataResponse
     {
         public User GetUserByEmail { get; set; }

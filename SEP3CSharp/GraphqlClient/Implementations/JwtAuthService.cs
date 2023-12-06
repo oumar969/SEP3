@@ -63,6 +63,7 @@ public class JwtAuthService : IAuthService
                     password
                     token
                     success
+                    errMsg
                 }
             }",
             Variables = new
@@ -74,9 +75,11 @@ public class JwtAuthService : IAuthService
         Console.WriteLine("here2");
         var response = await graphqlClient.SendMutationAsync<AuthUserResponse>(loginMutation);
         Console.WriteLine("here3");
-        Console.WriteLine("response.Data 1: " + response.Data);
+        Console.WriteLine("response.Data 0: " + response.Data);
+        Console.WriteLine("response.Data 1: " + response.Data?.Login.ToString());
         Console.WriteLine("response.Data 2 : " + response.Data?.Login?.Token);
         Console.WriteLine("response.Data 3 : " + response.Data?.Login?.Success);
+        Console.WriteLine("response.Data 4 : " + response.Data?.Login?.ErrMsg);
         if (response.Errors != null && response.Errors.Length > 0)
             return response.Data?.Login;
 

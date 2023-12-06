@@ -23,6 +23,7 @@ public class UserMutation
         Console.WriteLine("login mutation");
         var userLoginDto = await _authService.LoginAsync(email, password);
         Console.WriteLine("userLoginDto: " + userLoginDto);
+        Console.WriteLine("errMsg: " + userLoginDto.ErrMsg);
         return userLoginDto;
     }
 
@@ -45,6 +46,4 @@ public class UserMutation
     {
         await _userLogic.DeleteAsync(uuid);
     }
-    
-    
 }
