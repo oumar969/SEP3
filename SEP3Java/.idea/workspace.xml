@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IGenericDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IGenericDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/BookRegistryLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/BookRegistryLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IBookRegistryLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IBookRegistryLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookRegistryDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookRegistryDao.cs" afterDir="false" />
+    <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +53,6 @@
         </option>
       </RecentBranches>
     </option>
-  </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="1060ca31-7aa2-45c8-b3e1-ad0d575ca9d2" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -220,7 +215,7 @@
       <workItem from="1699435552670" duration="2306000" />
       <workItem from="1701072434189" duration="727000" />
       <workItem from="1701096767865" duration="7418000" />
-      <workItem from="1701679883710" duration="10407000" />
+      <workItem from="1701679883710" duration="1507000" />
     </task>
     <task id="LOCAL-00001" summary="Java server update">
       <option name="closed" value="true" />
@@ -286,15 +281,7 @@
       <option name="project" value="LOCAL" />
       <updated>1701096834368</updated>
     </task>
-    <task id="LOCAL-00009" summary="Fixes">
-      <option name="closed" value="true" />
-      <created>1701867976930</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1701867976930</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,11 +306,11 @@
     <MESSAGE value="Database works :D (Shake it babyyyy)" />
     <MESSAGE value="Added review to Java server" />
     <MESSAGE value="new postman collection" />
+    <MESSAGE value="." />
     <MESSAGE value="Whole java server now works &lt;3&lt;3&lt;3&lt;3 jeg siger bare JA TAK" />
     <MESSAGE value="Add some controllers" />
-    <MESSAGE value="." />
-    <MESSAGE value="Fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixes" />
+    <MESSAGE value="getAll fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="getAll fixed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SEP3Java$Sep3JavaApplication.ic" NAME="Sep3JavaApplication Coverage Results" MODIFIED="1698963180246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
