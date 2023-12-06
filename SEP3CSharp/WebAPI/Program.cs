@@ -30,7 +30,7 @@ builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 builder.Services.AddScoped<IBookLogic, BookLogic>();
 
 builder.Services
-    .AddGraphQLServer().AddQueryType<Query>().AddType<UserQuery>().AddType<BookQuery>().AddMutationType<Mutation>()
+    .AddGraphQLServer().AddQueryType<Query>().AddType<UserQuery>().AddType<BookQuery>().AddType<BookRegistryQuery>().AddMutationType<Mutation>()
     .AddType<BookMutation>().AddType<BookRegistryMutation>().AddType<UserMutation>();
 
 

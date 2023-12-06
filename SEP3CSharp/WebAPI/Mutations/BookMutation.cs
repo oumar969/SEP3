@@ -20,9 +20,9 @@ public class BookMutation
         return await _bookLogic.CreateAsync(isbn);
     }
 
-    public async Task<Book> DeliverBookAsync(Book book, User user)
+    public async Task<Book> DeliverBookAsync(string bookId, string userId)
     {
-        return await _bookLogic.DeliverAsync(book, user);
+        return await _bookLogic.DeliverAsync(bookId, userId);
     }
 
     public async Task DeleteBook(string isbn)

@@ -48,6 +48,29 @@ public class BookDao : IBookDao
         throw new NotImplementedException();
     }
 
+    public async Task<IEnumerable<Book>> GetAllAsync(string isbn)
+    {
+        var url = $"{ServerOptions.serverUrl}/book/get/all/{isbn}";
+
+        var response = await _httpClient.GetAsync(url);
+
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return JsonConvert.DeserializeObject<List<Book>>(jsonResponse);
+        }
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Error Response: {errorResponse}");
+
+        throw new Exception($"Error getting all book registries. Status code: {response.StatusCode}");
+    }
+
     public Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters)
     {
         throw new NotImplementedException();
@@ -79,13 +102,13 @@ public class BookDao : IBookDao
         return JsonConvert.DeserializeObject<Book>(jsonResponse);
     }
 
-    public async Task<Book?> DeliverAsync(Book book, User user)
+    public async Task<Book?> DeliverAsync(string bookId, string userId)
     {
-        string userId = "{ \"loanerUuid\": \"" + null + "\"}";
-        var jsonContent = new StringContent(userId, Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(book));
+        string jsonBody = "{ \"loanerUuid\": \"" + null + "\"}";
+        var jsonContent = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(bookId));
         Console.WriteLine("jsonContent11: " + jsonContent);
-        var response = await _httpClient.PutAsync("http://localhost:7777/book/update/" + book.UUID, jsonContent);
+        var response = await _httpClient.PutAsync("http://localhost:7777/book/update/" + bookId, jsonContent);
         Console.WriteLine("response: " + response);
         if (!response.IsSuccessStatusCode)
             throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
