@@ -30,6 +30,7 @@ public class UserMutation
     public async Task<UserCreationDto> CreateUser(string firstName, string lastName, string email, string password,
         bool isLibrarian)
     {
+        Console.WriteLine("creater user mut");
         var userCreationDto = new UserCreationDto(
             null,
             firstName,

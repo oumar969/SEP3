@@ -18,15 +18,17 @@ public class UserLogic : IUserLogic
 
     public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
     {
+        Console.WriteLine("dto0: " + dto);
         var existing = await userDao.GetByEmailAsync(dto.Email);
-        if (existing != null) throw new Exception("User already exists");
+        if (existing != null)
+        {
+            dto.ErrMsg = "Email already exists";
+            dto.IsSuccessful = false;
+        }
 
         ValidateData(dto);
-
-        var toCreate = new User(dto.UUID, dto.FirstName, dto.LastName, dto.Email, dto.Password, dto.IsLibrarian);
-
-
-        var created = await userDao.CreateAsync(toCreate);
+        Console.WriteLine("dto1: " + dto);
+        var created = await userDao.CreateAsync(dto);
 
         UserCreationDto userCreationDto = new UserCreationDto(
             created.UUID,
@@ -34,7 +36,9 @@ public class UserLogic : IUserLogic
             created.LastName,
             created.Email,
             created.Password,
-            created.IsLibrarian
+            created.IsLibrarian,
+            created.IsSuccessful,
+            created.ErrMsg
         );
         return userCreationDto;
     }
@@ -81,31 +85,28 @@ public class UserLogic : IUserLogic
 
     public static void ValidateData(UserCreationDto userCreationDto)
     {
-        var firstName = userCreationDto.FirstName;
-        var lastName = userCreationDto.LastName;
-        var email = userCreationDto.Email;
-        var password = userCreationDto.Password;
-
-        if (string.IsNullOrWhiteSpace(firstName))
+        if (string.IsNullOrWhiteSpace(userCreationDto.FirstName))
             throw new Exception("First Name is required");
 
-        if (string.IsNullOrWhiteSpace(lastName))
+        if (string.IsNullOrWhiteSpace(userCreationDto.LastName))
             throw new Exception("Last Name is required");
 
-        if (string.IsNullOrWhiteSpace(email))
+        if (string.IsNullOrWhiteSpace(userCreationDto.Email))
             throw new Exception("Email is required");
 
-        if (string.IsNullOrWhiteSpace(password))
+        if (string.IsNullOrWhiteSpace(userCreationDto.Password))
             throw new Exception("Password is required");
 
-        if (firstName.Length < 3 || lastName.Length < 3)
+        if (userCreationDto.FirstName.Length < 3 || userCreationDto.LastName.Length < 3)
             throw new Exception("Both First Name and Last Name must be at least 3 characters long");
 
-        if (email.Length < 5 || !IsValidEmail(email))
+        if (userCreationDto.Email.Length < 5 || !IsValidEmail(userCreationDto.Email))
             throw new Exception("Email is not valid");
 
-        if (password.Length < 8)
+        if (userCreationDto.Password.Length < 8)
+        {
             throw new Exception("Password must be at least 8 characters long");
+        }
     }
 
     public static bool IsValidEmail(string email)

@@ -108,6 +108,7 @@ public class UserGraphqlClient : IUserService
                          password
                          isLibrarian
                          isSuccessful
+                         errMsg
                       }
                 }",
             Variables = new
@@ -119,11 +120,24 @@ public class UserGraphqlClient : IUserService
                 isLibrarian = dto.IsLibrarian
             }
         };
+        Console.WriteLine("gg wp nice vape nation");
         var response = await graphqlClient.SendMutationAsync<CreateUserResponse>(createUserMutation);
-        Console.WriteLine("response.Data 1: " + response.Data);
+        Console.WriteLine("response.Data 1: " + response.Data?.CreateUser.ToString());
+        Console.WriteLine("response.Data 2: " + response.Data?.CreateUser.IsSuccessful);
 
         if (response.Errors != null && response.Errors.Length > 0)
-            throw new Exception(string.Join(", ", response.Errors.Select(e => e.Message)));
+        {
+            return new UserCreationDto(
+                dto.FirstName,
+                dto.LastName,
+                dto.Email,
+                dto.Password,
+                dto.IsLibrarian,
+                false,
+                "Error creating user: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        }
+
+        ;
         return response.Data?.CreateUser;
     }
 

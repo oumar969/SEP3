@@ -74,6 +74,10 @@
         Console.WriteLine("handling registration");
         try
         {
+            if (!IsValidtInput())
+            {
+                return;
+            }
             UserCreationDto userCreatedDto = await userService.Create(new UserCreationDto(
                 registerModel.FirstName, registerModel.LastName, registerModel.Email, registerModel.Password, registerModel.IsLibrarian));
 
@@ -88,7 +92,7 @@
                 Console.WriteLine("did not create user");
                 ShowSuccess = false;
                 ShowErrors = true;
-                Message = "Brugeren blev ikke oprettet";
+                Message = userCreatedDto.ErrMsg;
             }
         }
         catch
@@ -100,5 +104,52 @@
             Message = "Fejl under oprettelse af bruger: " + e.Message;
         }
     }
+
+    private bool IsValidtInput()
+    {
+        if (string.IsNullOrWhiteSpace(registerModel.FirstName))
+        {
+            Message = "Fornavn skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.LastName))
+        {
+            Message = "Efternavn skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.Email))
+        {
+            Message = "Email skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.Password))
+        {
+            Message = "Kodeord skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.ConfirmPassword))
+        {
+            Message = "Bekræft kodeord skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (registerModel.Password.Length < 8)
+        {
+            Message = "Kodeord skal være mindst 8 karakterer langt";
+            ShowErrors = true;
+        }
+        else if (registerModel.Password != registerModel.ConfirmPassword)
+        {
+            Message = "Kodeord og bekræft kodeord skal være ens";
+            ShowErrors = true;
+        }
+        else
+        {
+            ShowErrors = false;
+            return true;
+        }
+        return false;
+    }
+
+}
 
 }
