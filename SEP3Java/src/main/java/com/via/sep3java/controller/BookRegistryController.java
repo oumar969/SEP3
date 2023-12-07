@@ -56,7 +56,7 @@ public class BookRegistryController {
         return new ResponseEntity<>("Book with ISBN " + isbn + " updated successfully.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{isbn}")
+    @DeleteMapping("/deleteByIsbn/{isbn}")
     public ResponseEntity<?> deleteBookRegistry(@PathVariable String isbn) {
         BookRegistry bookRegistry = bookRegistryRepository.findByIsbn(isbn);
         if (bookRegistry == null) {
@@ -66,7 +66,7 @@ public class BookRegistryController {
         return new ResponseEntity<>("Book with ISBN " + isbn + " deleted successfully.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{uuid}")
+    @DeleteMapping("/deleteByUuid/{uuid}")
     public ResponseEntity<?> deleteBookRegistryByUuid(@PathVariable String uuid) {
         BookRegistry bookRegistry = (BookRegistry) bookRegistryRepository.findAllById(Collections.singleton(uuid));
         if (bookRegistry == null) {
