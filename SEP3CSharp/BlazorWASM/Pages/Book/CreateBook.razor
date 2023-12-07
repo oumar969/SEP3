@@ -10,6 +10,7 @@
 @inject NavigationManager navMgr
 @inject IGraphQLClient graphqlClient;
 @inject IBookRegistryService bookRegistryService;
+@inject IBookService bookService;
 
 
 <div class="book-form-card">
@@ -91,16 +92,26 @@
 
         try
         {
-            var BookRegistryCreatedMsg = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription));
-            if (BookRegistryCreatedMsg.Equals("ok"))
+            BookRegistryCreationDto bookRegistryCreated = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription, "", false, ""));
+            Console.WriteLine(bookRegistryCreated.Title);
+            if (false)
             {
                 msg = "BookRegistry blev oprettet";
                 color = "green";
+
+                for (int i = 0; i < stockNumber; i++)
+                {
+                    var bookCreated = await bookService.CreateAsync(new BookCreationDto(null, bookIsbn, null));
+                    Console.WriteLine("bookCreated:");
+                    Console.WriteLine(bookCreated.IsSuccesful);
+                    Console.WriteLine(bookCreated.Message);
+                }
+
                 navMgr.NavigateTo("/BookCatalog");
             }
             else
             {
-                msg = "BookRegistry blev ikke oprettet, " + BookRegistryCreatedMsg;
+                msg = "BookRegistry blev ikke oprettet, " + bookRegistryCreated;
                 color = "red";
             }
         }

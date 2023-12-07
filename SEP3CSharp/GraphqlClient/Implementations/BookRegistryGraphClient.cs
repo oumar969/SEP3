@@ -20,18 +20,20 @@ public class BookRegistryGraphClient : IBookRegistryService
         graphqlClient = new GraphQLHttpClient(ClientOptions.serverUrl, new NewtonsoftJsonSerializer());
     }
 
-    public async Task<string> Create(BookRegistryCreationDto dto)
+    public async Task<BookRegistryCreationDto> Create(BookRegistryCreationDto dto)
     {
         var createBookRegistryMutation = new GraphQLRequest
         {
             Query = @"
-            mutation CreateBookRegistry($title: String!, $author: String!, $genre: String!, $isbn: String!, $description: String!) {
+            mutation ($title: String!, $author: String!, $genre: String!, $isbn: String!, $description: String!) {
                 createBookRegistry(title: $title, author: $author, genre: $genre, isbn: $isbn, description: $description) {
                     title
                     author
                     genre
                     isbn
                     description
+                    isSuccessful
+                    message
                 }
             }",
             Variables = new
@@ -44,12 +46,12 @@ public class BookRegistryGraphClient : IBookRegistryService
             }
         };
 
-        var response = await graphqlClient.SendMutationAsync<BookRegistryCreationDto>(createBookRegistryMutation);
-        var resultMsg = "ok";
+        var response = await graphqlClient.SendMutationAsync<CreateBookRegistryRespnse>(createBookRegistryMutation);
+        Console.WriteLine("Res gg2: " + response.Data?.CreateBookRegistry);
 
         if (response.Errors != null && response.Errors.Length > 0)
-            resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
-        return resultMsg;
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        return response.Data?.CreateBookRegistry;
     }
 
     public async Task<IEnumerable<BookRegistry>> GetBookRegistries()
@@ -64,7 +66,7 @@ public class BookRegistryGraphClient : IBookRegistryService
                     genre
                     isbn
                     description
-                }
+                },
             }"
         };
 
@@ -79,5 +81,10 @@ public class BookRegistryGraphClient : IBookRegistryService
     private class GetUsersDataRespnse
     {
         public IEnumerable<BookRegistry> AllBookRegistries { get; set; }
+    }
+
+    private class CreateBookRegistryRespnse
+    {
+        public BookRegistryCreationDto CreateBookRegistry { get; set; }
     }
 }

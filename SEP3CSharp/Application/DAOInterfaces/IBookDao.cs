@@ -1,13 +1,15 @@
-﻿using Domain.Models;
+﻿using Domain.DTOs;
+using Domain.Models;
 using FileData;
 
 namespace Application.DAOInterfaces;
 
-public interface IBookDao : IGenericDao<Book>
+public interface IBookDao
 {
-    Task<Book?> LoanAsync(string bookId, string userId);
-    Task<Book?> DeliverAsync(string bookId, string userId);
-    Task<Book> CreateAsync(string isbn);
+    Task<Book> LoanAsync(string bookId, string userId);
+    Task<Book> DeliverAsync(string bookId, string userId);
+    Task<BookCreationDto> CreateAsync(string isbn);
     Task<IEnumerable<Book>> GetAllAsync(string isbn);
-    Task<Book?> DeleteAsync(string id);
+    Task<Book> DeleteAsync(string id);
+    Task<Book> GetByUuidAsync(string uuid);
 }

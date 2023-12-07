@@ -14,15 +14,16 @@ import javax.validation.Valid;
 {
   @Autowired private BookRegistryRepository bookRegistryRepository;
 
-  @PostMapping("/create") public BookRegistry registerBook(
+  @PostMapping("/create") public ResponseEntity<?> registerBook(
       @Valid @RequestBody BookRegistry bookRegistry)
   {
     if (bookRegistry.getIsbn() == null || bookRegistry.getIsbn().isEmpty())
     {
       bookRegistry.setIsbn(ISBNServices.Generate());
     }
+    bookRegistryRepository.save(bookRegistry);
 
-    return bookRegistryRepository.save(bookRegistry);
+    return new ResponseEntity<>(bookRegistry, HttpStatus.OK);
   }
 
   @GetMapping("/get/all") public Iterable<BookRegistry> getAllBookRegistries()

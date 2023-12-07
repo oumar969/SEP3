@@ -1,5 +1,6 @@
 ﻿using Application.DAOInterfaces;
 using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Models;
 
 namespace Application.Logic;
@@ -23,7 +24,7 @@ public class BookLogic : IBookLogic
         return await _bookDao.DeliverAsync(bookId, userId);
     }
 
-    public Task<Book?> GetByUuidAsync(string uuid)
+    public Task<Book> GetByUuidAsync(string uuid)
     {
         return _bookDao.GetByUuidAsync(uuid);
     }
@@ -33,7 +34,7 @@ public class BookLogic : IBookLogic
         return await _bookDao.GetAllAsync(isbn);
     }
 
-    public async Task<Book> CreateAsync(string isbn)
+    public async Task<BookCreationDto> CreateAsync(string isbn)
     {
         Console.WriteLine("lgoc");
         return await _bookDao.CreateAsync(isbn);

@@ -15,7 +15,8 @@ public class BookRegistryMutation
         _bookRegistryLogic = bookRegistryLogic;
     }
 
-    public async Task<BookRegistry> CreateBookRegistry(string title, string author, string genre, string isbn,
+    public async Task<BookRegistryCreationDto> CreateBookRegistry(string title, string author, string genre,
+        string isbn,
         string description)
     {
         Console.WriteLine("create book mutation");
@@ -27,11 +28,13 @@ public class BookRegistryMutation
             description
         );
         Console.WriteLine("create book mutation 2");
-        return await _bookRegistryLogic.CreateAsync(bookRegistry);
+        BookRegistryCreationDto created = await _bookRegistryLogic.CreateAsync(bookRegistry);
+        Console.WriteLine(created);
+        return created;
     }
 
 
-    public async Task <BookRegistry>DeleteBookRegistry(string isbn)
+    public async Task<BookRegistry> DeleteBookRegistry(string isbn)
     {
         Console.WriteLine("delete book mutation");
         return await _bookRegistryLogic.DeleteAsync(isbn);

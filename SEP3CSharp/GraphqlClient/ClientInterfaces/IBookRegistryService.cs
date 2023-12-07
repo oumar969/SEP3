@@ -5,7 +5,7 @@ namespace HttpClients.ClientInterfaces;
 
 public interface IBookRegistryService
 {
-    Task<string> Create(BookRegistryCreationDto dto);
+    Task<BookRegistryCreationDto> Create(BookRegistryCreationDto dto);
     Task<IEnumerable<BookRegistry>> GetBookRegistries();
 
     class BookRegistryGraphqlDto
