@@ -11,7 +11,7 @@ public interface IGenericDao<TEntity>
     // Read
     Task<TEntity> GetByUuidAsync(string uuid);
     Task<IEnumerable<TEntity>> GetAllAsync();
-    Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters);
+    Task<IEnumerable<TEntity>> GetAsync(ISearchParametersDto searchParameters);
 
     // Update
     Task<TEntity> UpdateAsync(TEntity entity);

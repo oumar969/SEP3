@@ -17,7 +17,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         _userDao = userDao;
     }
 
-    public Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
+    public Task<IEnumerable<BookRegistry>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
     {
         return _bookRegistryDao.GetAsync(searchRegistryParameters);
     }

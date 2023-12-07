@@ -59,7 +59,7 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error getting all book registries. Status code: {response.StatusCode}");
     }
 
-    public Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<IEnumerable<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
     {
         throw new NotImplementedException();
     }
@@ -85,8 +85,8 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine($"Error Response: {errorResponse}");
 
         throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
-        
     }
+
     public async Task<BookRegistry> DeleteAsync(string isbn)
     {
         var url = $"{ServerOptions.serverUrl}/book-registry/delete/{isbn}";
@@ -107,7 +107,6 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
     }
 
-    
 
     public async Task<BookRegistry> GetByBookTitleAsync(string title)
     {

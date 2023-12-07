@@ -71,7 +71,7 @@ public class BookDao : IBookDao
         throw new Exception($"Error getting all book registries. Status code: {response.StatusCode}");
     }
 
-    public Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<IEnumerable<Book>> GetAsync(ISearchParametersDto searchParameters)
     {
         throw new NotImplementedException();
     }
@@ -99,8 +99,7 @@ public class BookDao : IBookDao
 
         throw new Exception($"Error deleting book. Status code: {response.StatusCode}");
     }
-    
-    
+
 
     public async Task<Book?> LoanAsync(string bookId, string userId)
     {
