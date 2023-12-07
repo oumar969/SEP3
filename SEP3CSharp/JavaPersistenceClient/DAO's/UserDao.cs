@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
@@ -77,7 +78,7 @@ public class UserDao : IUserDao
 
     public async Task<User> GetByUuidAsync(string uuid)
     {
-        var url = $"{ServerOptions.serverUrl}/user/getByUuid/{uuid}";
+        var url = $"{ServerOptions.serverUrl}/user/get/{uuid}";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -182,8 +183,11 @@ public class UserDao : IUserDao
 
             return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
-
-        //if (response.StatusCode.ToString().Equals("NotFound")) return null;
+    
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
 
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");

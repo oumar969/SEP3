@@ -25,7 +25,7 @@
             {
                 <div class="user-card card mb-3">
                     <div class="card-header">
-                        <h5 class="card-title">@user.FirstName @user.LastName</h5>
+                        <h5 class="card-title">@user.FirstName @user.LastName <button class="btn btn-danger float-right" @onclick="() => DeleteUser(user.UUID)">Delete</button></h5>
                     </div>
                     <div class="card-body">
                         <div class="row mb-2">
@@ -52,7 +52,7 @@
 }
 else
 {
-    <p>Denne side er kune for bilbiotekets personale.</p>
+    <p>Denne side er kun for bibliotekets personale.</p>
 }
 
 @code {
@@ -75,8 +75,7 @@ else
 
         try
         {
-            users = (ICollection<User>?)await userService.GetUsers();
-            Console.WriteLine("users len : " + users.Count);
+            await LoadUsers();
         }
         catch (Exception e)
         {
@@ -86,8 +85,33 @@ else
 
         if (!isLibrarian) return;
 
-    //userClaims = user.Claims;
         name = user.Identity!.Name!;
     }
-
+    
+    private async Task LoadUsers()
+    {
+        users = (ICollection<User>?)await userService.GetUsers();
+        Console.WriteLine("users len : " + users.Count);
+    }
+    
+    private async Task<bool> DeleteUser(string userUUID)
+    {
+        try
+        {
+            var result = await userService.Delete(userUUID);
+            
+            if (result == "ok")
+            {
+                await LoadUsers();
+            }
+            
+            return result == "ok";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+            return false;
+        }
+    }
 }

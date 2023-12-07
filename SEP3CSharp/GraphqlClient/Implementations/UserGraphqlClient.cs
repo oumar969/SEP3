@@ -52,17 +52,15 @@ public class UserGraphqlClient : IUserService
         var deleteUserMutation = new GraphQLRequest
         {
             Query = @"
-            mutation ($uuid: String!) {
-                deleteUser(uuid: $uuid) {
-                    success
-                    message
+                mutation ($uuid: String!) {
+                    deleteUser(uuid: $uuid)
+                }",
+                Variables = new
+                {
+                    uuid
                 }
-            }",
-            Variables = new
-            {
-                uuid
-            }
         };
+
         var response = await graphqlClient.SendMutationAsync<DeleteUserResponse>(deleteUserMutation);
         var resultMsg = "ok";
 
@@ -160,7 +158,8 @@ public class UserGraphqlClient : IUserService
 
     private class DeleteUserResponse
     {
-        public User DeleteUser { get; set; }
+        public bool Success { get; set; }
+        public string Message { get; set; }
     }
 
     private class GetUserDataResponse
