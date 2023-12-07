@@ -2,62 +2,35 @@
 using Application.DAOInterfaces;
 using Domain.DTOs;
 using Domain.Models;
-using FileData;
 using Newtonsoft.Json;
-using System.Net.Http;
 
 
 namespace JavaPersistenceClient.DAOs;
 
 public class BookDao : IBookDao
 {
-    private HttpClient _httpClient;
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly HttpClient _httpClient;
 
-    public BookDao(IHttpClientFactory httpClientFactory)
+    public BookDao(HttpClient httpClient) //tissemand 
     {
-        _httpClientFactory = httpClientFactory;
-        _httpClient = _httpClientFactory.CreateClient();
+        _httpClient = httpClient;
     }
 
-    public async Task<BookCreationDto> CreateAsync(string isbn)
+    public async Task<Book> CreateAsync(string isbn)
     {
-        try
-        {
-            Console.WriteLine("njdsj");
-            Book book = new Book(isbn, Guid.NewGuid().ToString(), "");
-            var jsonContent = new StringContent(JsonConvert.SerializeObject(book), Encoding.UTF8, "application/json");
-            Console.WriteLine("JSON: " + book.Isbn);
-            Console.WriteLine("JSON: " + book.UUID);
-            Console.WriteLine("jsonContent: " + await jsonContent.ReadAsStringAsync());
-            Console.WriteLine("JSON: " + JsonConvert.SerializeObject(book));
-            var response = await _httpClient.PostAsync("http://localhost:7777/book/create", jsonContent);
-            Console.WriteLine("response: " + response);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(jsonResponse);
-            BookCreationDto bookCreationDto = JsonConvert.DeserializeObject<BookCreationDto>(jsonResponse);
+        Console.WriteLine("njdsj");
+        Book book = new Book(isbn, Guid.NewGuid().ToString(), null);
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(book), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(book));
+        Console.WriteLine("jsonContent11: " + jsonContent);
+        var response = await _httpClient.PostAsync("http://localhost:7777/book/create", jsonContent);
+        Console.WriteLine("response: " + response);
+        if (!response.IsSuccessStatusCode)
+            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
 
-            if (response.IsSuccessStatusCode)
-            {
-                bookCreationDto.IsSuccesful = true;
-                bookCreationDto.Message = "Bog blev oprettet";
-            }
-            else
-            {
-                bookCreationDto.IsSuccesful = false;
-                bookCreationDto.Message = "Bog blev ikke oprettet";
-            }
-
-
-            return JsonConvert.DeserializeObject<BookCreationDto>(jsonResponse);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(jsonResponse);
+        return JsonConvert.DeserializeObject<Book>(jsonResponse);
     }
 
     public Task<Book> CreateAsync(Book entity)
