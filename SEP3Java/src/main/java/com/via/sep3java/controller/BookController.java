@@ -42,8 +42,8 @@ public class BookController {
         return new ResponseEntity<>("Book with uuid " + uuid + " updated successfully.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{uuid}")
-    public ResponseEntity<?> deleteBook(@PathVariable String uuid) {
+    @DeleteMapping("/deleteByUuid/{uuid}")
+    public ResponseEntity<?> deleteByUuid(@PathVariable String uuid) {
         Book book = bookRepository.findByUuid(uuid);
         if (book == null) {
             return new ResponseEntity<>("Book with Uuid " + uuid + " not found.", HttpStatus.NOT_FOUND);
@@ -52,15 +52,15 @@ public class BookController {
         return new ResponseEntity<>("Book with UUID " + uuid + " deleted successfully.", HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{isbn}")
-    public ResponseEntity<?> deleteBookWithIsbn(@PathVariable String isbn) {
-        Book book = bookRepository.findByUuid(isbn);
+    @DeleteMapping("/deleteByIsbn/{isbn}")
+    public ResponseEntity<?> deleteByIsbn(@PathVariable String isbn) {
+        Book book = bookRepository.findByIsbn(isbn);
         if (book == null) {
             return new ResponseEntity<>("Book with isbn " + isbn + " not found.", HttpStatus.NOT_FOUND);
         }
         bookRepository.delete(book);
         return new ResponseEntity<>("Book with isbn " + isbn + " deleted successfully.", HttpStatus.OK);
     }
-    
+
 
 }

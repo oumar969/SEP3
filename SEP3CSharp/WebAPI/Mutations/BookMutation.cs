@@ -2,37 +2,30 @@
 using Application.LogicInterfaces;
 using Domain.Models;
 
-namespace WebAPI.Mutations;
+namespace WebAPI.Schema;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
 public class BookMutation
 {
     private readonly IBookLogic _bookLogic;
 
-    public BookMutation(IBookLogic bookLogic)
+    public BookMutation(BookLogic bookLogic)
     {
         _bookLogic = bookLogic;
     }
-    
-    public async Task<Book> CreateBook(string isbn)
+
+    public async Task<Book> DeliverBookAsync(Book book, User user)
     {
-        Console.WriteLine("hej bak");
-        return await _bookLogic.CreateAsync(isbn);
+        return await _bookLogic.DeliverAsync(book, user);
     }
 
-    public async Task<Book> DeliverBookAsync(string bookId, string userId)
+    public async Task DeleteBook(string isbn)
     {
-        return await _bookLogic.DeliverAsync(bookId, userId);
+        await _bookLogic.DeleteAsync(isbn);
     }
 
-    public async Task<Book?> DeleteBook(string isbn)
+    public async Task<Book?> LoanBook(Book book, User user)
     {
-        Console.WriteLine("delete book mutation");
-      return await _bookLogic.DeleteAsync(isbn);
-    }
-
-    public async Task<Book?> LoanBook(string bookId, string userId)
-    {
-        return await _bookLogic.LoanAsync(bookId, userId);
+        return await _bookLogic.LoanAsync(book, user);
     }
 }

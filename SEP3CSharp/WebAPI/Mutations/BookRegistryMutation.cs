@@ -2,7 +2,7 @@ using Application.LogicInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 
-namespace WebAPI.Mutations;
+namespace WebAPI.Schema;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
 public class BookRegistryMutation
@@ -29,12 +29,16 @@ public class BookRegistryMutation
         Console.WriteLine("create book mutation 2");
         return await _bookRegistryLogic.CreateAsync(bookRegistry);
     }
-
-
-    public async Task <BookRegistry>DeleteBookRegistry(string isbn)
+    
+    public async Task<ICollection<BookRegistry>> getAllBookRegistry()
     {
-        Console.WriteLine("delete book mutation");
-        return await _bookRegistryLogic.DeleteAsync(isbn);
+        Console.WriteLine("get all book mutation");
+        return await _bookRegistryLogic.GetAllBookRegistriesAsync();
+    }
+
+    public async Task DeleteBookRegistry(string isbn)
+    {
+        await _bookRegistryLogic.DeleteAsync(isbn);
     }
 
     public async Task<BookRegistry> EditBookRegistry(string isbn, string title, string author, string genre,
