@@ -1,26 +1,17 @@
 @page "/BookCatalog"
 @using HttpClients.ClientInterfaces
 @using Microsoft.AspNetCore.Components
-@using Domain.Models
-@using BlazorWASM.Services
 @inject IBookService bookService
 @inject NavigationManager navMgr
-@inject IUserService userClient
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject IBookRegistryService bookRegistryService;
-@inject BookStateService bookStateService
 
 
-<div class="row align-items-center justify-content-between mb-4">
+<div class="row align-items-center justify-content-between">
     <div class="col">
-        <h3>Bog Katalog</h3>
+        <h3 class="mb-4">Bog Katalog</h3>
     </div>
-    @if (isLibrarian)
-    {
-        <div class="col-auto">
-            <button type="button" class="btn btn-primary" @onclick="RegisterBook">Registrer Ny Bog</button>
-        </div>
-    }
+    <div class="col-auto">
+        <button type="button" class="btn btn-primary" @onclick="RegisterBook">Registrer Ny Bog</button>
+    </div>
 </div>
 
 @if (books == null)
@@ -49,25 +40,18 @@ else
                         }
                     </select>
                 </div>
-                <AuthorizeView>
-                    <Authorized>
-                        @if (!isLibrarian)
-                        {
-                            <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
-                                <label class="form-check-label" for="myLoansCheck">Mine lån</label>
-                            </div>
-                        }
-                    </Authorized>
-                </AuthorizeView>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
+                    <label class="form-check-label" for="myLoansCheck">Mine lån</label>
+                </div>
             </div>
         </div>
         <div class="row">
             @foreach (var book in filteredBooks)
             {
                 <div class="col-md-3">
-                    <div class="card mb-4 shadow-sm" style="cursor: pointer;" @onclick="_ => OpenBookView(book)">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="300" src="@(true ? "Image/book-placeholder.png" : "Image/book-placeholder.png")" alt="Book image">
+                    <div class="card mb-4 shadow-sm" style="cursor: pointer;" @onclick="OpenBookView">
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="300" src="@(!string.IsNullOrEmpty(book.ImageUrl) ? book.ImageUrl : "Image/book-placeholder.png")" alt="Book image">
                         <div class="card-body">
                             <h5 class="card-title">@book.Title</h5>
                             <p class="card-text">@book.Genre</p>
@@ -81,12 +65,12 @@ else
 }
 
 @code {
-    private IEnumerable<BookRegistry> books;
-    private bool isLibrarian;
+    private List<Book> books;
+    private readonly Random random = new();
 
     private bool myLoans;
 
-    private List<BookRegistry> filteredBooks = new();
+    private List<Book> filteredBooks = new();
     private readonly List<string> genres = new() { "Alle", "Klassisk", "Historie", "Fiktion", "Science Fiction", "Fantasy" };
 
     private string _searchTerm;
@@ -119,18 +103,15 @@ else
         }
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnInitializedAsync()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        isLibrarian = user.IsInRole("Librarian");
-    // var userDetails = await userClient.GetUserByEmailAsync(user.Identity?.Name.ToString());
-
-        books = await bookRegistryService.GetBookRegistries();
-
-        selectedGenre = "Alle";
-        searchTerm = "";
+        LoadSampleBooks();
+    // Assuming that at initialization, we want to filter books with default values.
+    // If the initial values for searchTerm and selectedGenre are not "", "All", you should set them before calling FilterBooks.
+        selectedGenre = "Alle"; // Default value, adjust if needed
+        searchTerm = ""; // Default value, adjust if needed
         FilterBooks();
+        return base.OnInitializedAsync();
     }
 
     // FilterBooks method remains unchanged
@@ -144,18 +125,78 @@ else
             .ToList();
     }
 
-    private void OpenBookView(BookRegistry book)
+    private void OpenBookView()
     {
-        bookStateService.SetCurrentBook(book);
+        Console.WriteLine("OpenBookView1");
         navMgr.NavigateTo("/BookView");
+        Console.WriteLine("OpenBookView2");
     }
 
+    private void LoadSampleBooks()
+    {
+        books = new List<Book>();
+
+    // Predefined arrays of possible book data
+        string[] titles = { "The Great Gatsby", "War and Peace", "To Kill a Mockingbird", "1984", "The Catcher in the Rye", "The Hobbit" };
+        string[] authors = { "F. Scott Fitzgerald", "Leo Tolstoy", "Harper Lee", "George Orwell", "J.D. Salinger", "J.R.R. Tolkien" };
+        string[] genres = { "Classic", "Historical", "Fiction", "Science Fiction", "Fantasy" };
+        string[] descriptions =
+        {
+            "A novel about the Roaring Twenties.",
+            "A tale of war and peace in early 19th-century Russia.",
+            "A story of racial injustice in the Deep South.",
+            "A dystopian future ruled by totalitarianism.",
+            "A coming-of-age story.",
+            "A fantasy adventure in Middle-earth."
+        };
+
+    // Loop to create and add 20 random books
+        for (var i = 0; i < 20; i++)
+        {
+            books.Add(new Book
+            {
+                ISBN = GenerateRandomISBN(),
+                Title = titles[random.Next(titles.Length)],
+                Author = authors[random.Next(authors.Length)],
+                Genre = genres[random.Next(genres.Length)],
+                Description = descriptions[random.Next(descriptions.Length)],
+                ImageUrl = null,
+                Reviews = GenerateRandomReviews()
+            });
+        }
+    }
 
     private void RegisterBook()
     {
         navMgr.NavigateTo("/CreateBook");
     }
 
+    private string GenerateRandomISBN()
+    {
+    // ISBN-10 is usually a 10 digit number, this will create a number between 1000000000 and 2147483647
+        return $"{random.Next(1000000000, int.MaxValue)}";
+    }
 
+    private List<string> GenerateRandomReviews()
+    {
+        var reviewCount = random.Next(1, 6); // Generate between 1 and 5 reviews
+        var reviews = new List<string>();
+        for (var i = 0; i < reviewCount; i++)
+        {
+            reviews.Add($"Review {i + 1}");
+        }
+        return reviews;
+    }
+
+    public class Book
+    {
+        public string ISBN { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Genre { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+        public List<string> Reviews { get; set; }
+    }
 
 }
