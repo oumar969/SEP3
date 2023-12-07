@@ -46,16 +46,16 @@
     </div>
 
     @if (!string.IsNullOrEmpty(msg))
-    {
-        @if (msg.Contains("Error:"))
-        {
-            <div class="book-form-error">@msg</div>
-        }
-        else
-        {
-            <div class="book-form-success">@msg</div>
-        }
-    }
+       {
+           @if (msg.Contains("Error:"))
+           {
+               <div class="book-form-error">@msg</div>
+           }
+           else
+           {
+               <div class="book-form-success">@msg</div>
+           }
+       }
 
     <button @onclick="Create" class="book-form-button">Registrer</button>
 </div>
@@ -83,12 +83,12 @@
     {
         msg = "";
         color = "black";
-
+        
         if (!BookRegistryValidator())
         {
-            return;
+            return; 
         }
-
+        
         try
         {
             var BookRegistryCreatedMsg = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription));
@@ -96,7 +96,6 @@
             {
                 msg = "BookRegistry blev oprettet";
                 color = "green";
-                navMgr.NavigateTo("/BookCatalog");
             }
             else
             {
@@ -112,7 +111,7 @@
         }
     }
 
-
+    
     private bool BookRegistryValidator()
     {
         if (string.IsNullOrEmpty(bookTitle))
@@ -150,13 +149,13 @@
             msg = "Body cannot be more than 100 characters!";
             return false;
         }
-        if (bookIsbn.Length != 13)
+        if(bookIsbn.Length <= 13)
         {
             msg = "ISBN skal være 13 cifre";
             return false;
         }
-
-        return true;
+        
+        return true; 
     }
 
 }

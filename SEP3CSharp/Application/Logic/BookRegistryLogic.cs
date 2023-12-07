@@ -17,7 +17,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         _userDao = userDao;
     }
 
-    public Task<IEnumerable<BookRegistry>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
+    public Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
     {
         return _bookRegistryDao.GetAsync(searchRegistryParameters);
     }
@@ -61,14 +61,14 @@ public class BookRegistryLogic : IBookRegistryLogic
     }
 */
 
-    public async Task<BookRegistry> DeleteAsync(string isbn)
+    public async Task DeleteAsync(string uuid)
     {
-        var book = await _bookRegistryDao.GetByIsbnAsync(isbn);
-        if (book == null) throw new Exception($"Book with UUID {isbn} was not found!");
-        return await _bookRegistryDao.DeleteAsync(isbn);
+        var book = await _bookRegistryDao.GetByUuidAsync(uuid);
+        if (book == null) throw new Exception($"Book with UUID {uuid} was not found!");
+        await _bookRegistryDao.DeleteAsync(uuid);
     }
 
-    public Task<IEnumerable<BookRegistry>> GetAllBookRegistriesAsync()
+    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
     {
         return _bookRegistryDao.GetAllAsync();
     }
@@ -76,11 +76,6 @@ public class BookRegistryLogic : IBookRegistryLogic
     public Task<BookRegistry> EditAsync(int id, BookRegistryUpdateDto dto)
     {
         throw new NotImplementedException();
-    }
-
-    public Task<BookRegistry> GetBookRegistryByIsbnAsync(string isbn)
-    {
-        return _bookRegistryDao.GetByIsbnAsync(isbn);
     }
 
     private void ValidateBookRegistry(BookRegistryUpdateDto bookRegistry)

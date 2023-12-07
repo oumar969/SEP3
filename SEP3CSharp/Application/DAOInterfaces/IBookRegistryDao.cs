@@ -10,7 +10,4 @@ public interface IBookRegistryDao : IGenericDao<BookRegistry>
     Task<BookRegistry?> GetByIsbnAsync(string bookIsbn);
 
     Task<BookRegistry> GetByBookTitleAsync(string dtoTitle);
-
-    Task<BookRegistry> DeleteAsync(string isbn);
-
 }

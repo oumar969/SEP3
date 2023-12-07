@@ -1,25 +1,20 @@
 ﻿using Application.LogicInterfaces;
 using Domain.Models;
 
-namespace WebAPI.Queries;
+namespace WebAPI.Schema;
 
 [ExtendObjectType(OperationTypeNames.Query)]
 public class BookQuery
 {
-    private readonly IBookLogic _bookLogic;
-    
-    public BookQuery(IBookLogic bookLogic)
+    private readonly IBookRegistryLogic _bookRegistryLogic;
+
+    public BookQuery(IBookRegistryLogic bookRegistryLogic)
     {
-        _bookLogic = bookLogic;
+        _bookRegistryLogic = bookRegistryLogic;
     }
     
-    public async Task<IEnumerable<Book>> GetAllBooks(string isbn)
+    public async Task<IEnumerable<BookRegistry>> GetAllBook()
     {
-        return await _bookLogic.GetAllBooksAsync(isbn);
-    }
-    
-    public async Task<IEnumerable<Book>> GetAllBooksByIsbn(string isbn)
-    {
-        return await _bookLogic.GetAllBooksAsync(isbn);
+        return await _bookRegistryLogic.GetAllBookRegistriesAsync();
     }
 }

@@ -1,20 +1,18 @@
 ﻿@page "/Profile"
 @using HttpClients.ClientInterfaces
 @using Microsoft.AspNetCore.Components
-@using Newtonsoft.Json
-@using System.Security.Claims
 
 @inject IUserService userClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h3>Profil</h3>
-<AuthorizeView Roles="User">
+<AuthorizeView Roles="user">
     @* Profile-side skal vises som en del af din MainLayout-side, når brugeren har rollen "user", *@
     <Authorized>
         <div class="card">
             <div class="card-body">
                 <p>
-                    <strong>Email: </strong>@user.Identity.Name
+                    <strong>Email: </strong> @Email
                 </p>
                 <p>
                     <strong>Navn: </strong>@firstName
@@ -22,19 +20,11 @@
                 <p>
                     <strong>Efternavn: </strong>@lastName
                 </p>
-                <p>
-                    <strong>UUID: </strong>@uuid
-                </p>
-                <p>
-                    <strong>bøde: </strong>@fee
-                </p>
-                <p>
-                    <strong>Antal af lånebøger: </strong>@bookCount
-                </p>
             </div>
         </div>
     </Authorized>
     <NotAuthorized>
+        <!-- Optional: Show a message or redirect to another page for non-authorized users -->
         <p>Login for at se denne side.</p>
     </NotAuthorized>
 </AuthorizeView>
@@ -48,46 +38,18 @@
     private string firstName;
     private string lastName;
     private double fee;
-    private string bookCount;
-    private AuthenticationState authState;
-    private ClaimsPrincipal user;
 
     protected override async Task OnInitializedAsync()
     {
-        authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        user = authState.User;
+    // var user = await userClient.GetByIdAsync(Email);
+    // Email = user.Email;
+    // firstName = user.FirstName;
+    // lastName = user.LastName;
+    // uuid = user.Uuid;
+    // fee = user.Fee;
 
-        if (user.Identity.IsAuthenticated)
-        {
-            var userDetails = await userClient.GetUserByEmailAsync(user.Identity.Name);
-    //Console.WriteLine(userDetails.Email);
-
-            if (userDetails != null)
-            {
-                Email = userDetails.Email;
-                firstName = userDetails.FirstName;
-                lastName = userDetails.LastName;
-                uuid = userDetails.UUID;
-            }
-    // Email = userDetails.Email;
-    // firstName = userDetails.FirstName;
-    // lastName = userDetails.LastName;
-    // fee = userDetails.Fee;
-    // bookCount = userDetails.BookCount;
-        }
+    // var ratingDto = await _ratingClient.GetRatingMeanBySubject(Email);
+    // rating = ratingDto.Rating;
     }
-
-    // protected override async Task OnInitializedAsync()
-    // {
-    // // var user = await userClient.GetByIdAsync(Email);
-    // // Email = user.Email;
-    // // firstName = user.FirstName;
-    // // lastName = user.LastName;
-    // // uuid = user.Uuid;
-    // // fee = user.Fee;
-    //
-    // // var ratingDto = await _ratingClient.GetRatingMeanBySubject(Email);
-    // // rating = ratingDto.Rating;
-    // }
 
 }

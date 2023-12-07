@@ -12,7 +12,7 @@ public interface IAuthService
     public Task LogoutAsync();
 
 
-    Task<UserLoginDto> ValidateUser(string username, string password);
+    Task<User> ValidateUser(string username, string password);
     Task<User> RegisterUser(User user);
     public Task<ClaimsPrincipal> GetAuthAsync();
 }
