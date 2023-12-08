@@ -19,23 +19,14 @@ public class UserDao : IUserDao
 
     public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
     {
-        User entity = new User(
-            dto.UUID,
-            dto.FirstName,
-            dto.LastName,
-            dto.Email,
-            dto.Password,
-            dto.IsLibrarian
-        );
-
-        if (entity.UUID == null)
+        if (dto.UUID == null)
         {
-            entity.UUID = Guid.NewGuid().ToString();
+            dto.UUID = Guid.NewGuid().ToString();
         }
 
 
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(dto));
         Console.WriteLine("jsonContent11: " + jsonContent);
         var response = await _httpClient.PostAsync(ServerOptions.serverUrl + "/user/create", jsonContent);
         var responseString = await response.Content.ReadAsStringAsync();
@@ -45,12 +36,12 @@ public class UserDao : IUserDao
         if (!response.IsSuccessStatusCode)
         {
             return new UserCreationDto(
-                entity.UUID,
-                entity.FirstName,
-                entity.LastName,
-                entity.Email,
-                entity.Password,
-                entity.IsLibrarian,
+                dto.UUID,
+                dto.FirstName,
+                dto.LastName,
+                dto.Email,
+                dto.Password,
+                dto.IsLibrarian,
                 false,
                 "Fejl ved oprettelse af bruger: " + responseString
             );
@@ -59,12 +50,12 @@ public class UserDao : IUserDao
         var jsonResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine(jsonResponse);
         UserCreationDto createdUserCreationDto = new UserCreationDto(
-            entity.UUID,
-            entity.FirstName,
-            entity.LastName,
-            entity.Email,
-            entity.Password,
-            entity.IsLibrarian,
+            dto.UUID,
+            dto.FirstName,
+            dto.LastName,
+            dto.Email,
+            dto.Password,
+            dto.IsLibrarian,
             true,
             "Brugeren blev oprettet"
         );
@@ -126,11 +117,11 @@ public class UserDao : IUserDao
         throw new NotImplementedException();
     }
 
-    public async Task<User> UpdateAsync(User entity)
+    public async Task<UserUpdateDto> UpdateAsync(UserUpdateDto dto)
     {
         var url = $"{ServerOptions.serverUrl}/user/update";
 
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
         var response = await _httpClient.PutAsync(url, jsonContent);
 
         Console.WriteLine($"PUT request to {url}");
@@ -142,7 +133,7 @@ public class UserDao : IUserDao
 
             Console.WriteLine($"JSON Response: {jsonResponse}");
 
-            return JsonConvert.DeserializeObject<User>(jsonResponse);
+            return JsonConvert.DeserializeObject<UserUpdateDto>(jsonResponse);
         }
 
         var errorResponse = await response.Content.ReadAsStringAsync();
@@ -183,7 +174,7 @@ public class UserDao : IUserDao
 
             return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
-    
+
         if (response.StatusCode == HttpStatusCode.NotFound)
         {
             return null;

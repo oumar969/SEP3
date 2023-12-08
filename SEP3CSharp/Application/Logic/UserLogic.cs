@@ -49,6 +49,11 @@ public class UserLogic : IUserLogic
         return userDao.GetAsync(searchParameters);
     }
 
+    public Task<UserUpdateDto> UpdateAsync(string uuid, UserUpdateDto dto)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task DeleteAsync(string uuid)
     {
         var user = await userDao.GetByUuidAsync(uuid);
@@ -70,12 +75,9 @@ public class UserLogic : IUserLogic
         // return user;
     }
 
-    public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
+    public Task<UserUpdateDto> UpdateAsync(UserUpdateDto dto)
     {
-        var toUpdate = new User(dto.UUID, dto.FirstName, dto.LastName, dto.Email, dto.Password, dto.IsLibrarian);
-
-
-        return userDao.UpdateAsync(toUpdate);
+        return userDao.UpdateAsync(dto);
     }
 
     public async Task<User?> GetByUuidAsync(string uuid)
