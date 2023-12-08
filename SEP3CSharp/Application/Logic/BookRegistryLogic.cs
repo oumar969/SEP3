@@ -25,11 +25,9 @@ public class BookRegistryLogic : IBookRegistryLogic
         return created;
     }
 
-    public async Task<BookRegistry> DeleteAsync(string isbn)
+    public async Task<BookRegistryDeleteDto> DeleteAsync(BookRegistryDeleteDto dto)
     {
-        var book = await _bookRegistryDao.GetByIsbnAsync(isbn);
-        if (book == null) throw new Exception($"Book with UUID {isbn} was not found!");
-        return await _bookRegistryDao.DeleteAsync(isbn);
+        return await _bookRegistryDao.DeleteAsync(dto);
     }
 
     public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()

@@ -7,9 +7,5 @@ public interface IBookRegistryService
 {
     Task<BookRegistryCreationDto> Create(BookRegistryCreationDto dto);
     Task<ICollection<BookRegistry>> GetBookRegistries();
-
-    class BookRegistryGraphqlDto
-    {
-        public BookRegistry CreateBookBookRegistry { get; set; }
-    }
+    Task<BookRegistryDeleteDto> Delete(BookRegistryDeleteDto dto);
 }

@@ -1,7 +1,9 @@
 package com.via.sep3java.controller;
 
+import com.via.sep3java.entity.Book;
 import com.via.sep3java.entity.BookRegistry;
 import com.via.sep3java.repository.BookRegistryRepository;
+import com.via.sep3java.repository.BookRepository;
 import com.via.sep3java.service.ISBNServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,11 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
+import java.util.List;
 
 @RestController @RequestMapping("/book-registry") public class BookRegistryController
 {
   @Autowired private BookRegistryRepository bookRegistryRepository;
+  @Autowired private BookRepository bookRepository;
 
   @PostMapping("/create") public BookRegistry registerBook(
       @Valid @RequestBody BookRegistry bookRegistry)
@@ -73,22 +76,16 @@ import java.util.Collections;
           HttpStatus.NOT_FOUND);
     }
     bookRegistryRepository.delete(bookRegistry);
+
+    List<Book> books = bookRepository.findAllByIsbn(isbn);
+    for (Book book : books)
+    {
+      if (book.getIsbn().equals(isbn))
+      {
+        bookRepository.delete(book);
+      }
+    }
     return new ResponseEntity<>(
         "Book with ISBN " + isbn + " deleted successfully.", HttpStatus.OK);
-  }
-
-  @DeleteMapping("/delete/{uuid}") public ResponseEntity<?> deleteBookRegistryByUuid(
-      @PathVariable String uuid)
-  {
-    BookRegistry bookRegistry = (BookRegistry) bookRegistryRepository.findAllById(
-        Collections.singleton(uuid));
-    if (bookRegistry == null)
-    {
-      return new ResponseEntity<>("Book with uuid " + uuid + " not found.",
-          HttpStatus.NOT_FOUND);
-    }
-    bookRegistryRepository.delete(bookRegistry);
-    return new ResponseEntity<>(
-        "Book with uuid " + uuid + " deleted successfully.", HttpStatus.OK);
   }
 }

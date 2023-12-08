@@ -5,6 +5,7 @@
 @using Domain.Models
 @using Microsoft.IdentityModel.Tokens
 @inject IBookService bookService
+@inject IBookRegistryService bookRegistryService;
 @inject IUserService userClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager navMgr
@@ -117,9 +118,17 @@ else
     private ICollection<Book> books;
     private User currentUser;
 
-    private void deleteBookRegistry()
+    private async void deleteBookRegistry()
     {
-    // bookService.DeleteBook(book);
+        var response = await bookRegistryService.Delete(new BookRegistryDeleteDto(bookRegistry.Isbn));
+        if (response.IsSuccessful)
+        {
+            navMgr.NavigateTo("/BookCatalog");
+        }
+        else
+        {
+            Console.WriteLine("failed to delete book registry: " + response.Message);
+        }
     }
 
     private int bookCount = 0;
@@ -172,7 +181,10 @@ else
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         isLibrarian = user.IsInRole("Librarian");
-        currentUser = await userClient.GetUserByEmailAsync(user.Identity.Name);
+        if (user.Identity.Name.IsNullOrEmpty())
+        {
+            currentUser = await userClient.GetUserByEmailAsync(user.Identity.Name);
+        }
         books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
         foreach (var book in books)
         {

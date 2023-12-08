@@ -81,6 +81,34 @@ public class BookRegistryGraphClient : IBookRegistryService
         return response.Data?.AllBookRegistries;
     }
 
+    public async Task<BookRegistryDeleteDto> Delete(BookRegistryDeleteDto dto)
+    {
+        var qraphQLRequest = new GraphQLRequest
+        {
+            Query = @"
+            mutation ($isbn: String!) {
+                deleteBookRegistry(isbn: $isbn) {
+                    isbn
+                    isSuccessful
+                    message
+                }
+            }",
+            Variables = new
+            {
+                isbn = dto.Isbn
+            }
+        };
+
+        var response = await graphqlClient.SendMutationAsync<DeleteBookRegistryResponse>(qraphQLRequest);
+        Console.WriteLine("Res delete book reg gg1: " + response.Data?.DeleteBookRegistry);
+        Console.WriteLine("Res delete book reg gg2: " + response.Data?.DeleteBookRegistry.IsSuccessful);
+        Console.WriteLine("Res delete book reg gg3: " + response.Data?.DeleteBookRegistry.Message);
+
+        if (response.Errors != null && response.Errors.Length > 0)
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        return response.Data?.DeleteBookRegistry;
+    }
+
     private class GetBookRegistriesRespnse
     {
         public ICollection<BookRegistry> AllBookRegistries { get; set; }
@@ -89,5 +117,11 @@ public class BookRegistryGraphClient : IBookRegistryService
     private class CreateBookRegistryRespnse
     {
         public BookRegistryCreationDto CreateBookRegistry { get; set; }
+    }
+
+
+    private class DeleteBookRegistryResponse
+    {
+        public BookRegistryDeleteDto DeleteBookRegistry { get; set; }
     }
 }

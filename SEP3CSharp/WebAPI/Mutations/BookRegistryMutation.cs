@@ -34,10 +34,11 @@ public class BookRegistryMutation
     }
 
 
-    public async Task<BookRegistry> DeleteBookRegistry(string isbn)
+    public async Task<BookRegistryDeleteDto> DeleteBookRegistry(string isbn)
     {
         Console.WriteLine("delete book mutation");
-        return await _bookRegistryLogic.DeleteAsync(isbn);
+        BookRegistryDeleteDto dto = new BookRegistryDeleteDto(isbn);
+        return await _bookRegistryLogic.DeleteAsync(dto);
     }
 
     public async Task<BookRegistry> EditBookRegistry(string isbn, string title, string author, string genre,

@@ -1,4 +1,5 @@
 ﻿using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Models;
 
 namespace WebAPI.Queries;

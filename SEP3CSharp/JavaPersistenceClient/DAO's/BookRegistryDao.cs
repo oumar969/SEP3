@@ -88,9 +88,9 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public async Task<BookRegistry> DeleteAsync(string isbn)
+    public async Task<BookRegistryDeleteDto> DeleteAsync(BookRegistryDeleteDto dto)
     {
-        var url = $"{ServerOptions.serverUrl}/book-registry/delete/{isbn}";
+        var url = $"{ServerOptions.serverUrl}/book-registry/delete/{dto.Isbn}";
 
         var response = await _httpClient.DeleteAsync(url);
 
@@ -99,13 +99,16 @@ public class BookRegistryDao : IBookRegistryDao
 
         if (response.IsSuccessStatusCode)
         {
-            return null; // or return any relevant data depending on your requirements
+            dto.IsSuccessful = true;
+            dto.Message = "Bog registreret blev slettet";
+        }
+        else
+        {
+            dto.IsSuccessful = false;
+            dto.Message = "Bog registreret blev ikke slettet";
         }
 
-        var errorResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"Error Response: {errorResponse}");
-
-        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
+        return dto;
     }
 
 
@@ -154,15 +157,5 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine($"Error Response: {errorResponse}");
 
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
-    }
-
-    public Task<Book?> GetByIdAsync(int bookId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
-    {
-        throw new NotImplementedException();
     }
 }
