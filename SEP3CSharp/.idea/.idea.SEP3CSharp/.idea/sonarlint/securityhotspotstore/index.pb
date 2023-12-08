@@ -1511,3 +1511,5 @@ N
 Application/Logic/BookLogic.cs,8\0\808e16f04ff480ca5b3c30fb002a12daf5fca2a5
 Y
 )Application/LogicInterfaces/IBookLogic.cs,7\b\7bbcbf4c821dffd9f66fb37385ce59865aeb33b9
+T
+$BlazorWASM/Pages/Book/BookView.razor,a\f\afab68b1f4015046f4f2ab0c2c9780c93891343a

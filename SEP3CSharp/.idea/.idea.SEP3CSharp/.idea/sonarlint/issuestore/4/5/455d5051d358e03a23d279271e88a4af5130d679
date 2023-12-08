@@ -1,14 +1,12 @@
 
-hcsharpsquid:S927H"ERename parameter 'isbn' to 'uuid' to match the interface declaration.(ßØÖ…8ïáñÿÃ1
-mcsharpsquid:S927p"JRename parameter 'title' to 'dtoTitle' to match the interface declaration.(ûµê8îáñÿÃ1
-rcsharpsquid:S927‡"IRename parameter 'isbn' to 'bookIsbn' to match the interface declaration.(â´æÔüÿÿÿÿ8õÓ¯Ä1
-Xcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8İÑ³´Ã1
-]csharpsquid:S112;"5'System.Exception' should not be thrown by user code.(îë›¦ÿÿÿÿÿ8¾Ê¹ÉÃ1
-Xcsharpsquid:S112W"5'System.Exception' should not be thrown by user code.(ç¹ª8¶Š€Ä1
-Xcsharpsquid:S112k"5'System.Exception' should not be thrown by user code.(ç¹ª8Û³´Ä1
-Ycsharpsquid:S112„"5'System.Exception' should not be thrown by user code.(½ ÿ«8ñáñÿÃ1
-Ycsharpsquid:S112œ"5'System.Exception' should not be thrown by user code.(½ ÿ«8ñáñÿÃ1
-Ycsharpsquid:S112±"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8­¹…Ä1
-Tcsharpsquid:S1144©"/Remove the unused private method 'CreateAsync'.(åãëÂ8òáñÿÃ1
-hcsharpsquid:S1075"?Refactor your code not to use hardcoded absolute paths or URIs.(ìâŠıøÿÿÿÿ8ÅÊ¹ÉÃ1
-dcsharpsquid:S1075®"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8óáñÿÃ1
+Zcsharpsquid:S4136)"6All 'UpdateAsync' method overloads should be adjacent.(”¯öª8íçÙ¥Ä1
+mcsharpsquid:S927i"JRename parameter 'title' to 'dtoTitle' to match the interface declaration.(ûµê8¡À˜£Ä1
+rcsharpsquid:S927€"IRename parameter 'isbn' to 'bookIsbn' to match the interface declaration.(â´æÔüÿÿÿÿ8§˜«£Ä1
+]csharpsquid:S112G"5'System.Exception' should not be thrown by user code.(îë›¦ÿÿÿÿÿ8´òÑ¥Ä1
+Xcsharpsquid:S112e"5'System.Exception' should not be thrown by user code.(ç¹ª8¯˜«£Ä1
+Xcsharpsquid:S112}"5'System.Exception' should not be thrown by user code.(½ ÿ«8ñáñÿÃ1
+Ycsharpsquid:S112•"5'System.Exception' should not be thrown by user code.(½ ÿ«8¦À˜£Ä1
+Ycsharpsquid:S112ª"5'System.Exception' should not be thrown by user code.(ŞÌÖ‡8¶˜«£Ä1
+Tcsharpsquid:S1144¢"/Remove the unused private method 'CreateAsync'.(åãëÂ8òáñÿÃ1
+hcsharpsquid:S1075"?Refactor your code not to use hardcoded absolute paths or URIs.(ìâŠıøÿÿÿÿ8¹òÑ¥Ä1
+dcsharpsquid:S1075§"?Refactor your code not to use hardcoded absolute paths or URIs.(Åˆ”¨8óáñÿÃ1

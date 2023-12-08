@@ -3135,3 +3135,5 @@ U
 %Application/DAOInterfaces/IBookDao.cs,b\4\b4978b4504c8d362715a203e7b1fb906f15305ff
 N
 Application/Logic/BookLogic.cs,8\0\808e16f04ff480ca5b3c30fb002a12daf5fca2a5
+T
+$BlazorWASM/Pages/Book/BookView.razor,a\f\afab68b1f4015046f4f2ab0c2c9780c93891343a
