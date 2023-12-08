@@ -79,7 +79,14 @@ else
                                     }
                                     else
                                     {
-                                        <button class="btn btn-primary" @onclick="LoanBook" disabled="@(bookCount == 0)">Lån Bog</button>
+                                        @if (HasUserLoanedBook())
+                                        {
+                                            <button class="btn btn-primary" @onclick="DeliverBook">Aflever Bog</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary" @onclick="LoanBook" disabled="@(bookCount == 0)">Lån Bog</button>
+                                        }
                                     }
                                 </div>
                             </div>
@@ -174,6 +181,22 @@ else
         }
     }
 
+    private bool HasUserLoanedBook()
+    {
+        if (books.IsNullOrEmpty())
+        {
+            return false;
+        }
+        return books.Any(b =>
+        {
+            if (b.LoanerUuid.IsNullOrEmpty())
+            {
+                return false;
+            }
+            return b.LoanerUuid == currentUser.UUID;
+        });
+    }
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -181,9 +204,13 @@ else
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         isLibrarian = user.IsInRole("Librarian");
-        if (user.Identity.Name.IsNullOrEmpty())
+        Console.WriteLine("user.Identity.Name: " + user.Identity?.Name);
+        Console.WriteLine("here here yeah: " + user.Identity.Name.IsNullOrEmpty());
+        if (!user.Identity.Name.IsNullOrEmpty())
         {
+            Console.WriteLine("user.Identity.Name is null or empty");
             currentUser = await userClient.GetUserByEmailAsync(user.Identity.Name);
+            Console.WriteLine("currentUser: " + currentUser.Email);
         }
         books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
         foreach (var book in books)
@@ -204,7 +231,29 @@ else
                 var response = await bookService.UpdateBook(new BookUpdateDto(book.UUID, book.Isbn, currentUser.UUID));
                 Console.WriteLine("Book wraaa 1: " + response.Message);
                 Console.WriteLine("Book wraaa 2: " + response.IsSuccessful);
+                if (response.IsSuccessful)
+                {
+                    book.LoanerUuid = currentUser.UUID;
+                    --bookCount;
+                    StateHasChanged();
+                }
                 return;
+            }
+        }
+    }
+
+    private async Task DeliverBook()
+    {
+        var loanedBook = books.FirstOrDefault(b => b.LoanerUuid == currentUser.UUID);
+        if (loanedBook != null)
+        {
+            var response = await bookService.UpdateBook(new BookUpdateDto(loanedBook.UUID, loanedBook.Isbn, null));
+            Console.WriteLine("Book returned: " + response.Message);
+            if (response.IsSuccessful)
+            {
+                loanedBook.LoanerUuid = null;
+                --bookCount;
+                StateHasChanged();
             }
         }
     }
