@@ -1,8 +1,15 @@
 
+jcsharpsquid:S927"GRename parameter 'entity' to 'user' to match the interface declaration.(€°åÙ8Ë·—‚Á1
+ocsharpsquid:S927T"GRename parameter 'entity' to 'user' to match the interface declaration.(şéÊıÿÿÿÿ8Æûı´Â1
 csharpsquid:S1939
 "j'IUserDao' implements 'IGenericDao<User>' so 'IGenericDao<User>' can be removed from the inheritance list.(Û¥ºØ8ø¾¯˜½1
-^csharpsquid:S112¿"5'System.Exception' should not be thrown by user code.(˜Ã•‘ıÿÿÿÿ8Ëûı´Â1
-Ycsharpsquid:S112Ö"5'System.Exception' should not be thrown by user code.(ÔÑ¢§8Ëûı´Â1
-Ycsharpsquid:S112ö"5'System.Exception' should not be thrown by user code.( îˆ8Ëûı´Â1
-Ycsharpsquid:S112ˆ"5'System.Exception' should not be thrown by user code.(ç¹ª8Ëûı´Â1
-^csharpsquid:S112"5'System.Exception' should not be thrown by user code.(‡‘¾òûÿÿÿÿ8Ìûı´Â1
+Xcsharpsquid:S112"5'System.Exception' should not be thrown by user code.(Ã³ù²8Ò·—‚Á1
+Xcsharpsquid:S1126"5'System.Exception' should not be thrown by user code.(½ ÿ«8Ó·—‚Á1
+]csharpsquid:S112L"5'System.Exception' should not be thrown by user code.(‡‘¾òûÿÿÿÿ8ŠÍ¬¬Â1
+Wcsharpsquid:S112j"5'System.Exception' should not be thrown by user code.(Ìğ„8‹‚Á¤Ã1
+Xcsharpsquid:S112z"5'System.Exception' should not be thrown by user code.(°Ä†£8Ëûı´Â1
+^csharpsquid:S112“"5'System.Exception' should not be thrown by user code.(˜Ã•‘ıÿÿÿÿ8Ëûı´Â1
+Ycsharpsquid:S112ª"5'System.Exception' should not be thrown by user code.(ÔÑ¢§8Ëûı´Â1
+Ycsharpsquid:S112Ê"5'System.Exception' should not be thrown by user code.( îˆ8Ëûı´Â1
+^csharpsquid:S112Ü"5'System.Exception' should not be thrown by user code.(¸¤¿µøÿÿÿÿ8Ëûı´Â1
+^csharpsquid:S112ğ"5'System.Exception' should not be thrown by user code.(‡‘¾òûÿÿÿÿ8Ìûı´Â1

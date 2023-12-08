@@ -4,10 +4,8 @@ namespace Domain.Models;
 
 public class User
 {
-    [JsonConstructor]
-    public User(string uuid, string firstName, string lastName, string email, string password, bool isLibrarian)
+    public User(string firstName, string lastName, string email, string password, bool isLibrarian)
     {
-        UUID = uuid;
         FirstName = firstName;
         LastName = lastName;
         Email = email;
@@ -15,16 +13,8 @@ public class User
         IsLibrarian = isLibrarian;
     }
 
-    // public User()
-    // {
-    // }
-    
-    public User(string uuid, string firstName, string lastName, string email)
+    public User()
     {
-        UUID = uuid;
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
     }
 
     [JsonProperty("uuid")] public string UUID { get; set; }
