@@ -247,12 +247,12 @@ else
         var loanedBook = books.FirstOrDefault(b => b.LoanerUuid == currentUser.UUID);
         if (loanedBook != null)
         {
-            var response = await bookService.UpdateBook(new BookUpdateDto(loanedBook.UUID, loanedBook.Isbn, null));
+            var response = await bookService.UpdateBook(new BookUpdateDto(loanedBook.UUID, loanedBook.Isbn, "return"));
             Console.WriteLine("Book returned: " + response.Message);
             if (response.IsSuccessful)
             {
                 loanedBook.LoanerUuid = null;
-                --bookCount;
+                ++bookCount;
                 StateHasChanged();
             }
         }
