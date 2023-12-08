@@ -17,9 +17,9 @@ public interface IBookService
         string? descriptionContains
     );
 
-    Task UpdateAsync(BookUpdateDto dto);
 
     Task<BookRegistry> GetByIdAsync(int id);
     Task DeleteAsync(int id);
+    Task<BookUpdateDto> UpdateBook(BookUpdateDto dto);
     Task<IEnumerable<Book>> GetAllBooksAsync(string isbn);
 }

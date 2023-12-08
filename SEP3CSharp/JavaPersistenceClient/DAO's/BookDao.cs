@@ -92,11 +92,6 @@ public class BookDao : IBookDao
         throw new NotImplementedException();
     }
 
-    public Task<Book> UpdateAsync(Book entity)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<Book> DeleteAsync(string isbn)
     {
         Console.WriteLine("delete book dao");
@@ -117,35 +112,25 @@ public class BookDao : IBookDao
     }
 
 
-    public async Task<Book?> LoanAsync(string bookId, string userId)
+    public async Task<BookUpdateDto> UpdateAsync(BookUpdateDto dto)
     {
-        string jsonBody = "{ \"loanerUuid\": \"" + userId + "\"}";
-        var jsonContent = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(bookId));
+        Book book = new Book(dto.Isbn, dto.Uuid, dto.LoanerUuid);
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(book), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(book));
         Console.WriteLine("jsonContent11: " + jsonContent);
-        var response = await _httpClient.PutAsync("http://localhost:7777/book/update/" + bookId, jsonContent);
+        var response = await _httpClient.PutAsync("http://localhost:7777/book/update/" + dto.Uuid, jsonContent);
         Console.WriteLine("response: " + response);
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
+        if (response.IsSuccessStatusCode)
+        {
+            dto.IsSuccessful = true;
+            dto.Message = "Bog blev lånt";
+        }
+        else
+        {
+            dto.IsSuccessful = false;
+            dto.Message = "Bog blev ikke lånt";
+        }
 
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<Book>(jsonResponse);
-    }
-
-    public async Task<Book?> DeliverAsync(string bookId, string userId)
-    {
-        string jsonBody = "{ \"loanerUuid\": \"" + null + "\"}";
-        var jsonContent = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(bookId));
-        Console.WriteLine("jsonContent11: " + jsonContent);
-        var response = await _httpClient.PutAsync("http://localhost:7777/book/update/" + bookId, jsonContent);
-        Console.WriteLine("response: " + response);
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
-
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<Book>(jsonResponse);
+        return dto;
     }
 }

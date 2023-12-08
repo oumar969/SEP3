@@ -1,25 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Domain.Models;
-
-namespace Domain.DTOs;
+﻿namespace Domain.DTOs;
 
 public class BookUpdateDto
 {
-    public BookUpdateDto(string uuid)
+    public BookUpdateDto()
     {
-        UUID = uuid;
     }
 
-    public string UUID { get; set; }
-    public string Title { get; set; }
-    public string Author { get; set; }
-    public string Genre { get; set; }
-    public string Location { get; set; }
+    public BookUpdateDto(string uuid, string isbn, string loanerUuid, bool isSuccessful = false, string message = "")
+    {
+        Uuid = uuid;
+        Isbn = isbn;
+        LoanerUuid = loanerUuid;
+        IsSuccessful = isSuccessful;
+        Message = message;
+    }
+
+
+    public string Uuid { get; set; }
     public string Isbn { get; set; }
-    public string Description { get; set; }
-    public string Review { get; set; }
-    public int? BorrowerId { get; set; }
-
-
-    public User? Borrower { get; set; } // Brugeren, der har lånt bogen    
+    public string LoanerUuid { get; set; }
+    public bool IsSuccessful { get; set; }
+    public string Message { get; set; }
 }

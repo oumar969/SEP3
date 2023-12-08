@@ -6,8 +6,7 @@ namespace Application.DAOInterfaces;
 
 public interface IBookDao
 {
-    Task<Book> LoanAsync(string bookId, string userId);
-    Task<Book> DeliverAsync(string bookId, string userId);
+    Task<BookUpdateDto> UpdateAsync(BookUpdateDto dto);
     Task<BookCreationDto> CreateAsync(BookCreationDto dto);
     Task<IEnumerable<Book>> GetAllAsync(string isbn);
     Task<Book> DeleteAsync(string id);

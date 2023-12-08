@@ -14,14 +14,9 @@ public class BookLogic : IBookLogic
         _bookDao = bookDao;
     }
 
-    public async Task<Book?> LoanAsync(string bookId, string userId)
+    public async Task<BookUpdateDto> UpdateAsync(BookUpdateDto dto)
     {
-        return await _bookDao.LoanAsync(bookId, userId);
-    }
-
-    public async Task<Book?> DeliverAsync(string bookId, string userId)
-    {
-        return await _bookDao.DeliverAsync(bookId, userId);
+        return await _bookDao.UpdateAsync(dto);
     }
 
     public Task<Book> GetByUuidAsync(string uuid)

@@ -78,11 +78,6 @@ public class BookGraphqlClient : IBookService
         throw new NotImplementedException();
     }
 
-    Task IBookService.UpdateAsync(BookUpdateDto dto)
-    {
-        return UpdateAsync(dto);
-    }
-
     Task<BookRegistry> IBookService.GetByIdAsync(int id)
     {
         throw new NotImplementedException();
@@ -100,11 +95,6 @@ public class BookGraphqlClient : IBookService
         throw new NotImplementedException();
     }
 
-    public Task<string> UpdateAsync(BookUpdateDto dto)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<Book> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
@@ -115,43 +105,40 @@ public class BookGraphqlClient : IBookService
         throw new NotImplementedException();
     }
 
-    public async Task<string> LoanBook(Book book, User user)
+    public async Task<BookUpdateDto> UpdateBook(BookUpdateDto dto)
     {
         var loanBookMutation = new GraphQLRequest
         {
             Query = @"
-                mutation ($bookId: Int!, $userId: Int!) {
-                    loanBook(bookId: $bookId, userId: $userId) {
-                        title
-                        author
+                mutation ($uuid: String!, $isbn: String!, $loanerUuid: String!) {
+                    updateBook(uuid: $uuid, isbn: $isbn, loanerUuid: $loanerUuid) {
+                        uuid
                         isbn
-                        genre
-                        description
-                        loanedTo {
-                            firstName
-                            lastName
-                            email
-                        }
+                        loanerUuid
+                        isSuccessful
+                        message
                     }
                 }",
             Variables = new
             {
-                bookId = book.UUID,
-                userId = user.UUID
+                uuid = dto.Uuid,
+                isbn = dto.LoanerUuid,
+                loanerUuid = dto.LoanerUuid
             }
         };
-        var response = await graphqlClient.SendMutationAsync<LoanBookResponse>(loanBookMutation);
-        var resultMsg = "ok";
+        var response = await graphqlClient.SendMutationAsync<UpdateBookResponse>(loanBookMutation);
+        Console.WriteLine("book loaned: " + response.Data?.UpdateBook.IsSuccessful);
+        Console.WriteLine("book loaned: " + response.Data?.UpdateBook.Message);
 
         if (response.Errors != null && response.Errors.Length > 0)
-            resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
 
-        return resultMsg;
+        return response.Data?.UpdateBook;
     }
 
-    private class LoanBookResponse
+    private class UpdateBookResponse
     {
-        public Book LoanBook { get; set; }
+        public BookUpdateDto UpdateBook { get; set; }
     }
 
     private class CreateBookResponse

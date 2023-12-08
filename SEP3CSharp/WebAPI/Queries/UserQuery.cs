@@ -29,5 +29,11 @@ public class UserQuery
         await _userLogic.DeleteAsync(uuid);
     }
 
-
+    public async Task<User> userByEmail(string email)
+    {
+        Console.WriteLine("here1");
+        User user = await _userLogic.GetByEmailAsync(email);
+        Console.WriteLine("userQuery" + user);
+        return user;
+    }
 }

@@ -115,6 +115,7 @@ else
 
     private BookRegistry bookRegistry;
     private IEnumerable<Book> books;
+    private User currentUser;
 
     private void deleteBookRegistry()
     {
@@ -151,6 +152,7 @@ else
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         isLibrarian = user.IsInRole("Librarian");
+        currentUser = await userClient.GetUserByEmailAsync(user.Identity.Name);
         books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
         foreach (var book in books)
         {
@@ -161,9 +163,18 @@ else
         }
     }
 
-    private void LoanBook()
+    private async Task LoanBook()
     {
-    // Log
+        foreach (var book in books)
+        {
+            if (book.LoanerUuid.IsNullOrEmpty())
+            {
+                var response = await bookService.UpdateBook(new BookUpdateDto(book.UUID, book.Isbn, currentUser.UUID));
+                Console.WriteLine("Book wraaa 1: " + response.Message);
+                Console.WriteLine("Book wraaa 2: " + response.IsSuccessful);
+                return;
+            }
+        }
     }
 
 

@@ -153,7 +153,7 @@ public class UserDao : IUserDao
         throw new Exception($"Error deleting user. Status code: {response.StatusCode}");
     }
 
-    public async Task<User?> GetByEmailAsync(string email)
+    public async Task<User> GetByEmailAsync(string email)
     {
         var url = $"{ServerOptions.serverUrl}/user/get/by-email/{email}";
         Console.WriteLine("url: watin");

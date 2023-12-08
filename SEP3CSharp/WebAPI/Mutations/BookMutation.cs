@@ -25,19 +25,15 @@ public class BookMutation
         return bookCreationDto;
     }
 
-    public async Task<Book> DeliverBookAsync(string bookId, string userId)
-    {
-        return await _bookLogic.DeliverAsync(bookId, userId);
-    }
-
     public async Task<Book?> DeleteBook(string isbn)
     {
         Console.WriteLine("delete book mutation");
         return await _bookLogic.DeleteAsync(isbn);
     }
 
-    public async Task<Book?> LoanBook(string bookId, string userId)
+    public async Task<BookUpdateDto> UpdateBook(string uuid, string isbn, string loanerUuid)
     {
-        return await _bookLogic.LoanAsync(bookId, userId);
+        BookUpdateDto dto = new BookUpdateDto(uuid, isbn, loanerUuid);
+        return await _bookLogic.UpdateAsync(dto);
     }
 }
