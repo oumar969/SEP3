@@ -9,6 +9,7 @@ public interface IUserService
     Task<IEnumerable<User>> GetUsers(string? usernameContains = null);
 
     Task<string> Delete(string uuid);
+    Task<User> GetUserByEmailAsync(string email);
 
     class UserGraphqlDto
     {
