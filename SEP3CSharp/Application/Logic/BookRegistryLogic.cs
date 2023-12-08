@@ -32,7 +32,7 @@ public class BookRegistryLogic : IBookRegistryLogic
         return await _bookRegistryDao.DeleteAsync(isbn);
     }
 
-    public Task<IEnumerable<BookRegistry>> GetAllBookRegistriesAsync()
+    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
     {
         return _bookRegistryDao.GetAllAsync();
     }

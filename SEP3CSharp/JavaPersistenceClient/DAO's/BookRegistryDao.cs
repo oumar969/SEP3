@@ -55,7 +55,7 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<BookRegistry>> GetAllAsync()
+    public async Task<ICollection<BookRegistry>> GetAllAsync()
     {
         var url = $"{ServerOptions.serverUrl}/book-registry/get/all";
 
@@ -78,7 +78,7 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error getting all book registries. Status code: {response.StatusCode}");
     }
 
-    public Task<IEnumerable<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
     {
         throw new NotImplementedException();
     }

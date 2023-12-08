@@ -64,7 +64,7 @@ public class BookDao : IBookDao
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Book>> GetAllAsync(string isbn)
+    public async Task<ICollection<Book>> GetAllAsync(string isbn)
     {
         var url = $"{ServerOptions.serverUrl}/book/get/all/{isbn}";
 
@@ -78,7 +78,7 @@ public class BookDao : IBookDao
 
             Console.WriteLine($"JSON Response: {jsonResponse}");
 
-            return JsonConvert.DeserializeObject<IEnumerable<Book>>(jsonResponse);
+            return JsonConvert.DeserializeObject<ICollection<Book>>(jsonResponse);
         }
 
         var errorResponse = await response.Content.ReadAsStringAsync();
@@ -87,15 +87,15 @@ public class BookDao : IBookDao
         throw new Exception($"Error getting all book registries. Status code: {response.StatusCode}");
     }
 
-    public Task<IEnumerable<Book>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Book> DeleteAsync(string isbn)
+    public async Task<BookDeleteDto> DeleteAsync(BookDeleteDto dto)
     {
         Console.WriteLine("delete book dao");
-        var url = $"{ServerOptions.serverUrl}/book/deleteByIsbn/{isbn}";
+        var url = $"{ServerOptions.serverUrl}/book/delete/by-uuid/{dto.Uuid}";
 
         var response = await _httpClient.DeleteAsync(url);
 
@@ -103,12 +103,17 @@ public class BookDao : IBookDao
         Console.WriteLine($"Response status code: {response.StatusCode}");
 
         if (response.IsSuccessStatusCode)
-            return JsonConvert.DeserializeObject<Book>(await response.Content.ReadAsStringAsync());
-
-        var errorResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"Error Response: {errorResponse}");
-
-        throw new Exception($"Error deleting book. Status code: {response.StatusCode}");
+        {
+            dto.IsSuccessful = true;
+            dto.Message = "Bog blev slettet";
+            return dto;
+        }
+        else
+        {
+            dto.IsSuccessful = false;
+            dto.Message = "Bog blev ikke slettet";
+            return dto;
+        }
     }
 
 

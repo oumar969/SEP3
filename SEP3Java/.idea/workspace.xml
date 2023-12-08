@@ -5,16 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/BookDeleteDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IBookDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IBookDao.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/BookLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/BookLogic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IBookLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IBookLogic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookView.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookView.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/BookUpdateDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/BookUpdateDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/MyBooks.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/MyBooks.razor.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/SuccessPage.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Shared/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Shared/NavMenu.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IBookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IBookService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/BookGraphqlClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/BookGraphqlClient.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookDao.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/BookMutation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/BookMutation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/BookRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +130,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.via.sep3java.repository" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.via.sep3java.controller" />
       <recent name="com.via.sep3java.repository" />
@@ -318,22 +329,6 @@
     <MESSAGE value="Add some controllers" />
     <MESSAGE value="getAll fixed" />
     <option name="LAST_COMMIT_MESSAGE" value="getAll fixed" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

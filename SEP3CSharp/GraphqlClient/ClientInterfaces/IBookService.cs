@@ -6,20 +6,7 @@ namespace HttpClients.ClientInterfaces;
 public interface IBookService
 {
     Task<BookCreationDto> CreateAsync(BookCreationDto dto);
-
-    Task<ICollection<Book>> GetAsync(
-        string? userName,
-        int? userId,
-        string? titleContains,
-        string? authorContains,
-        string? isbnContains,
-        string? genreContains,
-        string? descriptionContains
-    );
-
-
-    Task<BookRegistry> GetByIdAsync(int id);
-    Task DeleteAsync(int id);
+    Task<BookDeleteDto> DeleteAsync(BookDeleteDto dtp);
     Task<BookUpdateDto> UpdateBook(BookUpdateDto dto);
-    Task<IEnumerable<Book>> GetAllBooksAsync(string isbn);
+    Task<ICollection<Book>> GetAllBooksAsync(string isbn);
 }

@@ -14,5 +14,5 @@ public interface IBookRegistryDao
     Task<BookRegistry> DeleteAsync(string isbn);
     Task<BookRegistryCreationDto> CreateAsync(BookRegistryCreationDto dto);
     Task<BookRegistry> GetByUuidAsync(string uuid);
-    Task<IEnumerable<BookRegistry>> GetAllAsync();
+    Task<ICollection<BookRegistry>> GetAllAsync();
 }

@@ -24,7 +24,7 @@ public class BookLogic : IBookLogic
         return _bookDao.GetByUuidAsync(uuid);
     }
 
-    public async Task<IEnumerable<Book>> GetAllBooksAsync(string isbn)
+    public async Task<ICollection<Book>> GetAllBooksAsync(string isbn)
     {
         return await _bookDao.GetAllAsync(isbn);
     }
@@ -35,8 +35,8 @@ public class BookLogic : IBookLogic
         return await _bookDao.CreateAsync(dto);
     }
 
-    public async Task<Book> DeleteAsync(string isbn)
+    public async Task<BookDeleteDto> DeleteAsync(BookDeleteDto dto)
     {
-        return await _bookDao.DeleteAsync(isbn);
+        return await _bookDao.DeleteAsync(dto);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController @RequestMapping("/book") public class BookController
@@ -55,13 +56,13 @@ import java.util.Map;
         "Book with uuid " + uuid + " updated successfully.", HttpStatus.OK);
   }
 
-  @DeleteMapping("/deleteByUuid/{uuid}") public ResponseEntity<?> deleteByUuid(
+  @DeleteMapping("/delete/by-uuid/{uuid}") public ResponseEntity<?> deleteByUuid(
       @PathVariable String uuid)
   {
     Book book = bookRepository.findByUuid(uuid);
     if (book == null)
     {
-      return new ResponseEntity<>("Book with Uuid " + uuid + " not found.",
+      return new ResponseEntity<>("Book with UUID " + uuid + " not found.",
           HttpStatus.NOT_FOUND);
     }
     bookRepository.delete(book);
@@ -69,18 +70,21 @@ import java.util.Map;
         "Book with UUID " + uuid + " deleted successfully.", HttpStatus.OK);
   }
 
-  @DeleteMapping("/deleteByIsbn/{isbn}") public ResponseEntity<?> deleteByIsbn(
+  @DeleteMapping("/delete/by-isbn/{isbn}") public ResponseEntity<?> deleteByIsbn(
       @PathVariable String isbn)
   {
-    Book book = bookRepository.findByIsbn(isbn);
-    if (book == null)
+    List<Book> books = bookRepository.findAllByIsbn(isbn);
+    if (books.isEmpty())
     {
-      return new ResponseEntity<>("Book with isbn " + isbn + " not found.",
+      return new ResponseEntity<>("No books with ISBN " + isbn + " not found.",
           HttpStatus.NOT_FOUND);
     }
-    bookRepository.delete(book);
+    for (Book book : books)
+    {
+      bookRepository.delete(book);
+    }
     return new ResponseEntity<>(
-        "Book with isbn " + isbn + " deleted successfully.", HttpStatus.OK);
+        "Books with ISBN " + isbn + " deleted successfully.", HttpStatus.OK);
   }
 
 }

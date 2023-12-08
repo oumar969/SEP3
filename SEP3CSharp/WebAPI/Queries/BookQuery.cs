@@ -13,7 +13,7 @@ public class BookQuery
         _bookLogic = bookLogic;
     }
 
-    public async Task<IEnumerable<Book>> AllBooks(string isbn)
+    public async Task<ICollection<Book>> AllBooks(string isbn)
     {
         return await _bookLogic.GetAllBooksAsync(isbn);
     }

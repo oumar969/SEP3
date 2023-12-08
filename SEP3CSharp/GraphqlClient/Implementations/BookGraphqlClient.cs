@@ -44,7 +44,7 @@ public class BookGraphqlClient : IBookService
         return response.Data?.CreateBook;
     }
 
-    public async Task<IEnumerable<Book>> GetAllBooksAsync(string isbn)
+    public async Task<ICollection<Book>> GetAllBooksAsync(string isbn)
     {
         var graphQlRequest = new GraphQLRequest
         {
@@ -78,31 +78,35 @@ public class BookGraphqlClient : IBookService
         throw new NotImplementedException();
     }
 
-    Task<BookRegistry> IBookService.GetByIdAsync(int id)
+    public async Task<BookDeleteDto> DeleteAsync(BookDeleteDto dto)
     {
-        throw new NotImplementedException();
-    }
+        var loanBookMutation = new GraphQLRequest
+        {
+            Query = @"
+                mutation ($uuid: String!, $isbn: String!, $loanerUuid: String!) {
+                    deleteBook(uuid: $uuid, isbn: $isbn, loanerUuid: $loanerUuid) {
+                        uuid
+                        isbn
+                        loanerUuid
+                        isSuccessful
+                        message
+                    }
+                }",
+            Variables = new
+            {
+                uuid = dto.Uuid,
+                isbn = dto.LoanerUuid,
+                loanerUuid = dto.LoanerUuid
+            }
+        };
+        var response = await graphqlClient.SendMutationAsync<DeleteBookResponse>(loanBookMutation);
+        Console.WriteLine("book deleted: " + response.Data?.DeleteBook.IsSuccessful);
+        Console.WriteLine("book deleted: " + response.Data?.DeleteBook.Message);
 
-    Task IBookService.DeleteAsync(int id)
-    {
-        return DeleteAsync(id);
-    }
+        if (response.Errors != null && response.Errors.Length > 0)
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
 
-    public Task<IEnumerable<Book>> GetAsync(string? titleContains = null, string? authorContains = null,
-        string? isbnContains = null,
-        string? genreContains = null)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Book> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<string> DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
+        return response.Data?.DeleteBook;
     }
 
     public async Task<BookUpdateDto> UpdateBook(BookUpdateDto dto)
@@ -148,6 +152,11 @@ public class BookGraphqlClient : IBookService
 
     private class GetAllBooksResponse
     {
-        public IEnumerable<Book> AllBooks { get; set; }
+        public ICollection<Book> AllBooks { get; set; }
+    }
+
+    private class DeleteBookResponse
+    {
+        public BookDeleteDto DeleteBook { get; set; }
     }
 }

@@ -20,7 +20,7 @@ public class UserGraphqlClient : IUserService
         graphqlClient = new GraphQLHttpClient(ClientOptions.serverUrl, new NewtonsoftJsonSerializer());
     }
 
-    public async Task<IEnumerable<User>> GetUsers(string? usernameContains = null)
+    public async Task<ICollection<User>> GetUsers(string? usernameContains = null)
     {
         var graphQlRequest = new GraphQLRequest
         {
@@ -169,6 +169,6 @@ public class UserGraphqlClient : IUserService
 
     private class GetUsersDataRespnse
     {
-        public IEnumerable<User> AllUsers { get; set; }
+        public ICollection<User> AllUsers { get; set; }
     }
 }

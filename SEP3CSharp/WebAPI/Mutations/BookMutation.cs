@@ -25,10 +25,10 @@ public class BookMutation
         return bookCreationDto;
     }
 
-    public async Task<Book?> DeleteBook(string isbn)
+    public async Task<BookDeleteDto> DeleteBook(string uuid, string isbn, string loanerUuid)
     {
-        Console.WriteLine("delete book mutation");
-        return await _bookLogic.DeleteAsync(isbn);
+        BookDeleteDto dto = new BookDeleteDto(uuid, isbn, loanerUuid);
+        return await _bookLogic.DeleteAsync(dto);
     }
 
     public async Task<BookUpdateDto> UpdateBook(string uuid, string isbn, string loanerUuid)

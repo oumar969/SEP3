@@ -67,7 +67,7 @@ else
                                 @if (isLibrarian)
                                 {
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-outline-danger shadow-none" @onclick="RemoveBook">-</button>
+                                        <button type="button" class="btn btn-outline-danger shadow-none" disabled="@(bookCount == 0)" @onclick="RemoveBook">-</button>
                                         <button type="button" class="btn btn-outline-success shadow-none" @onclick="AddBook">+</button>
                                     </div>
                                 }
@@ -114,7 +114,7 @@ else
     private bool isLibrarian;
 
     private BookRegistry bookRegistry;
-    private IEnumerable<Book> books;
+    private ICollection<Book> books;
     private User currentUser;
 
     private void deleteBookRegistry()
@@ -132,16 +132,36 @@ else
         if (bookCreated.IsSuccessful)
         {
             Console.WriteLine("here book count up");
-            bookCount++;
+            books.Append(new Book(bookCreated.Uuid, bookCreated.Isbn, bookCreated.LoanerUuid));
+            ++bookCount;
             StateHasChanged();
         }
     }
 
-    private void RemoveBook()
+    private async void RemoveBook()
     {
-        if (bookCount > 0)
+        Book bookToDelete = null;
+        foreach (var book in books)
         {
-            bookCount--;
+            if (book.LoanerUuid.IsNullOrEmpty())
+            {
+                bookToDelete = book;
+                break;
+            }
+        }
+        if (bookToDelete == null)
+        {
+            return;
+        }
+        var bookCreated = await bookService.DeleteAsync(new BookDeleteDto(bookToDelete.UUID, bookToDelete.Isbn, ""));
+        Console.WriteLine("Book deleted book view 1: " + bookCreated.Message);
+        Console.WriteLine("Book deleted book view 2: " + bookCreated.IsSuccessful);
+        if (bookCreated.IsSuccessful)
+        {
+            Console.WriteLine("here book count up");
+            books.Remove(bookToDelete);
+            --bookCount;
+            StateHasChanged();
         }
     }
 

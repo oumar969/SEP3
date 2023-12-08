@@ -8,7 +8,7 @@ public interface IBookDao
 {
     Task<BookUpdateDto> UpdateAsync(BookUpdateDto dto);
     Task<BookCreationDto> CreateAsync(BookCreationDto dto);
-    Task<IEnumerable<Book>> GetAllAsync(string isbn);
-    Task<Book> DeleteAsync(string id);
+    Task<ICollection<Book>> GetAllAsync(string isbn);
+    Task<BookDeleteDto> DeleteAsync(BookDeleteDto dto);
     Task<Book> GetByUuidAsync(string uuid);
 }

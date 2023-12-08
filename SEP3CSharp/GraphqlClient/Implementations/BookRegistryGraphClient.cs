@@ -56,7 +56,7 @@ public class BookRegistryGraphClient : IBookRegistryService
         return response.Data?.CreateBookRegistry;
     }
 
-    public async Task<IEnumerable<BookRegistry>> GetBookRegistries()
+    public async Task<ICollection<BookRegistry>> GetBookRegistries()
     {
         var graphQlRequest = new GraphQLRequest
         {
@@ -83,7 +83,7 @@ public class BookRegistryGraphClient : IBookRegistryService
 
     private class GetBookRegistriesRespnse
     {
-        public IEnumerable<BookRegistry> AllBookRegistries { get; set; }
+        public ICollection<BookRegistry> AllBookRegistries { get; set; }
     }
 
     private class CreateBookRegistryRespnse
