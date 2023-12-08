@@ -17,8 +17,12 @@ public class BookMutation
 
     public async Task<BookCreationDto> CreateBook(string isbn)
     {
+        BookCreationDto dto = new BookCreationDto(Guid.NewGuid().ToString(), isbn, "");
         Console.WriteLine("hej bak2");
-        return await _bookLogic.CreateAsync(isbn);
+        BookCreationDto bookCreationDto = await _bookLogic.CreateAsync(dto);
+        Console.WriteLine("bookCreationDto1: " + bookCreationDto.IsSuccessful);
+        Console.WriteLine("bookCreationDto2: " + bookCreationDto.Message);
+        return bookCreationDto;
     }
 
     public async Task<Book> DeliverBookAsync(string bookId, string userId)

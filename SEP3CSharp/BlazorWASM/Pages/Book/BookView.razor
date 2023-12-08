@@ -1,6 +1,7 @@
 @page "/BookView"
 @using HttpClients.ClientInterfaces
 @using BlazorWASM.Services
+@using Domain.DTOs
 @using Domain.Models
 @inject IBookService bookService
 @inject IUserService userClient
@@ -120,9 +121,16 @@ else
 
     private int bookCount = 0;
 
-    private void AddBook()
+    private async void AddBook()
     {
-        bookCount++;
+        var bookCreated = await bookService.CreateAsync(new BookCreationDto(null, book.Isbn, null));
+        Console.WriteLine("Book created book view 1: " + bookCreated.Message);
+        Console.WriteLine("Book created book view 2: " + bookCreated.IsSuccessful);
+        if (bookCreated.IsSuccessful)
+        {
+            Console.WriteLine("here book count up");
+            bookCount++;
+        }
     }
 
     private void RemoveBook()

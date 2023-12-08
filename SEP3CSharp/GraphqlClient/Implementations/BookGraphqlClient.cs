@@ -27,6 +27,8 @@ public class BookGraphqlClient : IBookService
                         uuid
                         isbn
                         loanerUuid
+                        isSuccessful
+                        message
                     }
                 }",
             Variables = new
@@ -35,7 +37,8 @@ public class BookGraphqlClient : IBookService
             }
         };
         var response = await graphqlClient.SendMutationAsync<CreateBookResponse>(createBookMutation);
-        Console.WriteLine(response.Data?.CreateBook);
+        Console.WriteLine("book created: " + response.Data?.CreateBook);
+        Console.WriteLine("book created is suc: " + response.Data?.CreateBook.IsSuccessful);
         if (response.Errors != null && response.Errors.Length > 0)
             throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
         return response.Data?.CreateBook;

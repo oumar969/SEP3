@@ -34,10 +34,10 @@ public class BookLogic : IBookLogic
         return await _bookDao.GetAllAsync(isbn);
     }
 
-    public async Task<BookCreationDto> CreateAsync(string isbn)
+    public async Task<BookCreationDto> CreateAsync(BookCreationDto dto)
     {
         Console.WriteLine("lgoc");
-        return await _bookDao.CreateAsync(isbn);
+        return await _bookDao.CreateAsync(dto);
     }
 
     public async Task<Book> DeleteAsync(string isbn)

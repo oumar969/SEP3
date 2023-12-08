@@ -20,12 +20,12 @@ public class BookDao : IBookDao
         _httpClient = _httpClientFactory.CreateClient();
     }
 
-    public async Task<BookCreationDto> CreateAsync(string isbn)
+    public async Task<BookCreationDto> CreateAsync(BookCreationDto dto)
     {
         try
         {
             Console.WriteLine("njdsj");
-            Book book = new Book(isbn, Guid.NewGuid().ToString(), "");
+            Book book = new Book(dto.Isbn, dto.Uuid, dto.LoanerUuid);
             var jsonContent = new StringContent(JsonConvert.SerializeObject(book), Encoding.UTF8, "application/json");
             Console.WriteLine("JSON: " + book.Isbn);
             Console.WriteLine("JSON: " + book.UUID);
@@ -33,25 +33,19 @@ public class BookDao : IBookDao
             Console.WriteLine("JSON: " + JsonConvert.SerializeObject(book));
             var response = await _httpClient.PostAsync("http://localhost:7777/book/create", jsonContent);
             Console.WriteLine("response: " + response);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(jsonResponse);
-            BookCreationDto bookCreationDto = JsonConvert.DeserializeObject<BookCreationDto>(jsonResponse);
-
             if (response.IsSuccessStatusCode)
             {
-                bookCreationDto.IsSuccessful = true;
-                bookCreationDto.Message = "Bog blev oprettet";
+                dto.IsSuccessful = true;
+                dto.Message = "Bog blev oprettet";
             }
             else
             {
-                bookCreationDto.IsSuccessful = false;
-                bookCreationDto.Message = "Bog blev ikke oprettet";
+                dto.IsSuccessful = false;
+                dto.Message = "Bog blev ikke oprettet";
             }
 
 
-            return JsonConvert.DeserializeObject<BookCreationDto>(jsonResponse);
+            return dto;
         }
         catch (Exception e)
         {
