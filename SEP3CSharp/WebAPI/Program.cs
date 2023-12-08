@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using WebAPI.Queries;
 using WebApi.Services;
 using WebAPI.Mutations;
+using WebAPI.Schema;
 
 var builder = WebApplication.CreateBuilder(args);
 

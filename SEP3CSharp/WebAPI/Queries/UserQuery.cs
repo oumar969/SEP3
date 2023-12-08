@@ -30,11 +30,4 @@ public class UserQuery
     }
 
 
-    public async Task<User> EditUser(string uuid, string firstName, string lastName, string email, string password,
-        bool isLibrarian)
-    {
-        var userUpdateDto = new UserUpdateDto(firstName, lastName, email, password, isLibrarian);
-
-        return await _userLogic.UpdateAsync(uuid, userUpdateDto);
-    }
 }

@@ -16,7 +16,7 @@ public class UserUpdateDto
     }
 
     public UserUpdateDto(string firstName, string lastName, string email, string password, bool isLibrarian,
-        bool isSuccessful, string errMsg)
+        bool isSuccessful = false, string errMsg = "")
     {
         FirstName = firstName;
         LastName = lastName;

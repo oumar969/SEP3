@@ -35,31 +35,16 @@ public class UserDao : IUserDao
         Console.WriteLine("response suc?: " + response.IsSuccessStatusCode);
         if (!response.IsSuccessStatusCode)
         {
-            return new UserCreationDto(
-                dto.UUID,
-                dto.FirstName,
-                dto.LastName,
-                dto.Email,
-                dto.Password,
-                dto.IsLibrarian,
-                false,
-                "Fejl ved oprettelse af bruger: " + responseString
-            );
+            dto.IsSuccessful = false;
+            dto.ErrMsg = "Fejl ved oprettelse af bruger: " + responseString;
+            return dto;
         }
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine(jsonResponse);
-        UserCreationDto createdUserCreationDto = new UserCreationDto(
-            dto.UUID,
-            dto.FirstName,
-            dto.LastName,
-            dto.Email,
-            dto.Password,
-            dto.IsLibrarian,
-            true,
-            "Brugeren blev oprettet"
-        );
-        return createdUserCreationDto;
+        dto.IsSuccessful = true;
+        dto.ErrMsg = "Brugeren blev oprettet";
+        return dto;
     }
 
     public Task<User> CreateAsync(User entity)

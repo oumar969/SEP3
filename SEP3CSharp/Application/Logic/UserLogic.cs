@@ -24,23 +24,10 @@ public class UserLogic : IUserLogic
         {
             dto.ErrMsg = "Email already exists";
             dto.IsSuccessful = false;
+            return dto;
         }
 
-        ValidateData(dto);
-        Console.WriteLine("dto1: " + dto);
-        var created = await userDao.CreateAsync(dto);
-
-        UserCreationDto userCreationDto = new UserCreationDto(
-            created.UUID,
-            created.FirstName,
-            created.LastName,
-            created.Email,
-            created.Password,
-            created.IsLibrarian,
-            created.IsSuccessful,
-            created.ErrMsg
-        );
-        return userCreationDto;
+        return await userDao.CreateAsync(dto);
     }
 
 

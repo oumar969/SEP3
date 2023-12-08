@@ -26,7 +26,7 @@ public class UserMutation
         return userLoginDto;
     }
 
-    public async Task<User> CreateUser(string firstName, string lastName, string email, string password,
+    public async Task<UserCreationDto> CreateUser(string firstName, string lastName, string email, string password,
         bool isLibrarian)
     {
         var userCreationDto = new UserCreationDto(
@@ -44,5 +44,15 @@ public class UserMutation
     public async Task DeleteUser(string uuid)
     {
         await _userLogic.DeleteAsync(uuid);
+    }
+
+
+    public async Task<UserUpdateDto> EditUser(string uuid, string firstName, string lastName, string email,
+        string password,
+        bool isLibrarian)
+    {
+        var userUpdateDto = new UserUpdateDto(firstName, lastName, email, password, isLibrarian);
+
+        return await _userLogic.UpdateAsync(userUpdateDto);
     }
 }
