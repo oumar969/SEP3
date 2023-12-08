@@ -3,6 +3,7 @@
 @using BlazorWASM.Services
 @using Domain.DTOs
 @using Domain.Models
+@using Microsoft.IdentityModel.Tokens
 @inject IBookService bookService
 @inject IUserService userClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -19,7 +20,7 @@
     </div>
 </div>
 
-@if (book == null)
+@if (bookRegistry == null)
 {
     <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">Bog ikke fundet</h4>
@@ -40,17 +41,17 @@ else
                 <div class="vr"/>
                 <div class="col-md-10">
                     <div class="card-body">
-                        <h5 class="card-title">@book.Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
-                        <p class="card-text">@book.Description</p>
+                        <h5 class="card-title">@bookRegistry.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@bookRegistry.Author</h6>
+                        <p class="card-text">@bookRegistry.Description</p>
                         <p class="card-text">
                             <small class="text-muted">
-                                <strong>Genre:</strong> @book.Genre
+                                <strong>Genre:</strong> @bookRegistry.Genre
                             </small>
                         </p>
                         <p class="card-text">
                             <small class="text-muted">
-                                <strong>ISBN:</strong> @book.Isbn
+                                <strong>ISBN:</strong> @bookRegistry.Isbn
                             </small>
                         </p>
                         <p class="card-text">
@@ -112,7 +113,8 @@ else
 @code {
     private bool isLibrarian;
 
-    private BookRegistry book;
+    private BookRegistry bookRegistry;
+    private IEnumerable<Book> books;
 
     private void deleteBookRegistry()
     {
@@ -123,13 +125,14 @@ else
 
     private async void AddBook()
     {
-        var bookCreated = await bookService.CreateAsync(new BookCreationDto(null, book.Isbn, null));
+        var bookCreated = await bookService.CreateAsync(new BookCreationDto(null, bookRegistry.Isbn, null));
         Console.WriteLine("Book created book view 1: " + bookCreated.Message);
         Console.WriteLine("Book created book view 2: " + bookCreated.IsSuccessful);
         if (bookCreated.IsSuccessful)
         {
             Console.WriteLine("here book count up");
             bookCount++;
+            StateHasChanged();
         }
     }
 
@@ -144,10 +147,18 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        book = bookStateService.CurrentBook;
+        bookRegistry = bookStateService.CurrentBook;
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         isLibrarian = user.IsInRole("Librarian");
+        books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
+        foreach (var book in books)
+        {
+            if (book.LoanerUuid.IsNullOrEmpty())
+            {
+                ++bookCount;
+            }
+        }
     }
 
     private void LoanBook()

@@ -21,4 +21,5 @@ public interface IBookService
 
     Task<BookRegistry> GetByIdAsync(int id);
     Task DeleteAsync(int id);
+    Task<IEnumerable<Book>> GetAllBooksAsync(string isbn);
 }

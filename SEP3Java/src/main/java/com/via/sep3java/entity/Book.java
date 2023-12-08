@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 
   @Column(nullable = false) private String isbn;
 
-  @Column private String loanerUuid;
+  @Column(nullable = false) private String loanerUuid;
 
   // Default constructor is required by JPA specifications
   public Book()

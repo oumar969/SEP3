@@ -64,11 +64,6 @@ public class BookDao : IBookDao
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<Book>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<Book>> GetAllAsync(string isbn)
     {
         var url = $"{ServerOptions.serverUrl}/book/get/all/{isbn}";
@@ -83,7 +78,7 @@ public class BookDao : IBookDao
 
             Console.WriteLine($"JSON Response: {jsonResponse}");
 
-            return JsonConvert.DeserializeObject<List<Book>>(jsonResponse);
+            return JsonConvert.DeserializeObject<IEnumerable<Book>>(jsonResponse);
         }
 
         var errorResponse = await response.Content.ReadAsStringAsync();

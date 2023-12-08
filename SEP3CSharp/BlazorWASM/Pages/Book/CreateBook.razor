@@ -77,8 +77,7 @@
 
     AuthenticationState authState;
     ClaimsPrincipal user;
-    BookRegistryCreationDto dto;
-    BookRegistryCreationDto bookRegistryCreated;
+    BookRegistryCreationDto bookRegistryCreated = new BookRegistryCreationDto();
 
 
     private async Task Create()
@@ -102,7 +101,7 @@
 
                 for (int i = 0; i < stockNumber; i++)
                 {
-                    var bookCreated = await bookService.CreateAsync(new BookCreationDto(null, bookIsbn, null));
+                    var bookCreated = await bookService.CreateAsync(new BookCreationDto("", bookIsbn, ""));
                     Console.WriteLine("bookCreated:");
                     Console.WriteLine(bookCreated.IsSuccessful);
                     Console.WriteLine(bookCreated.Message);

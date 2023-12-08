@@ -5,25 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment=".">
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/BookRegistryLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/BookRegistryLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IBookRegistryLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IBookRegistryLogic.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookView.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookView.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/CreateBook.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/CreateBook.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Login.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Login.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/BookCreationDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/BookCreationDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/BookRegistryCreationDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/BookRegistryCreationDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/UserLoginDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/UserLoginDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IBookService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IBookService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/BookGraphqlClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/BookGraphqlClient.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/BookRegistryGraphClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/BookRegistryGraphClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/JwtAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/JwtAuthService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookRegistryDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/BookRegistryDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/UserDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/UserDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/UserMutation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/UserMutation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Services/AuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Services/AuthService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Services/IAuthService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Services/IAuthService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Queries/BookQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Queries/BookQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Queries/BookRegistryQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Queries/BookRegistryQuery.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookRegistryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/BookRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/BookRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -333,12 +330,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java</url>
-          <line>44</line>
+          <line>57</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/BookController.java</url>
-          <line>46</line>
+          <line>60</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

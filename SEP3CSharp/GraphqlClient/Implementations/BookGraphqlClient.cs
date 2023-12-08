@@ -44,6 +44,33 @@ public class BookGraphqlClient : IBookService
         return response.Data?.CreateBook;
     }
 
+    public async Task<IEnumerable<Book>> GetAllBooksAsync(string isbn)
+    {
+        var graphQlRequest = new GraphQLRequest
+        {
+            Query = @"
+            query ($isbn: String!) {
+                allBooks (isbn: $isbn) {
+                    uuid
+                    isbn
+                    loanerUuid
+                }
+            }",
+            Variables = new
+            {
+                isbn = isbn
+            }
+        };
+
+        var response = await graphqlClient.SendMutationAsync<GetAllBooksResponse>(graphQlRequest);
+        Console.WriteLine("Res all books: " + response.Data?.AllBooks);
+        Console.WriteLine("Res all books count: " + response.Data?.AllBooks.Count());
+
+        if (response.Errors != null && response.Errors.Length > 0)
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        return response.Data?.AllBooks;
+    }
+
     public Task<ICollection<Book>> GetAsync(string? userName, int? userId, string? titleContains,
         string? authorContains, string? isbnContains,
         string? genreContains, string? descriptionContains)
@@ -130,5 +157,10 @@ public class BookGraphqlClient : IBookService
     private class CreateBookResponse
     {
         public BookCreationDto CreateBook { get; set; }
+    }
+
+    private class GetAllBooksResponse
+    {
+        public IEnumerable<Book> AllBooks { get; set; }
     }
 }

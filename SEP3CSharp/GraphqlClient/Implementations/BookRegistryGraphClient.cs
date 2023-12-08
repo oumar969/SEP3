@@ -63,16 +63,17 @@ public class BookRegistryGraphClient : IBookRegistryService
             Query = @"
             query {
                 allBookRegistries {
+                    isbn
                     title
                     author
                     genre
-                    isbn
                     description
-                },
+                    reviews
+                }
             }"
         };
-
-        var response = await graphqlClient.SendMutationAsync<GetUsersDataRespnse>(graphQlRequest);
+        Console.WriteLine("here res 11");
+        var response = await graphqlClient.SendMutationAsync<GetBookRegistriesRespnse>(graphQlRequest);
         Console.WriteLine("Res: " + response.Data?.AllBookRegistries);
 
         if (response.Errors != null && response.Errors.Length > 0)
@@ -80,7 +81,7 @@ public class BookRegistryGraphClient : IBookRegistryService
         return response.Data?.AllBookRegistries;
     }
 
-    private class GetUsersDataRespnse
+    private class GetBookRegistriesRespnse
     {
         public IEnumerable<BookRegistry> AllBookRegistries { get; set; }
     }

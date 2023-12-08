@@ -13,12 +13,14 @@ public class BookRegistryQuery
         _bookRegistryLogic = bookRegistryLogic;
     }
 
-    public async Task<IEnumerable<BookRegistry>> allBookRegistries()
+    public async Task<IEnumerable<BookRegistry>> AllBookRegistries()
     {
         Console.WriteLine("allBookRegistries 1");
-        return await _bookRegistryLogic.GetAllBookRegistriesAsync();
+        IEnumerable<BookRegistry> bookRegistries = await _bookRegistryLogic.GetAllBookRegistriesAsync();
+        Console.WriteLine("allBookRegistries 2: " + bookRegistries.Count());
+        return bookRegistries;
     }
-    
+
     public async Task<BookRegistry> GetBookByIsbn(string isbn)
     {
         return await _bookRegistryLogic.GetBookRegistryByIsbnAsync(isbn);
