@@ -126,10 +126,11 @@ public class BookGraphqlClient : IBookService
             Variables = new
             {
                 uuid = dto.Uuid,
-                isbn = dto.LoanerUuid,
+                isbn = dto.Isbn,
                 loanerUuid = dto.LoanerUuid
             }
         };
+        
         var response = await graphqlClient.SendMutationAsync<UpdateBookResponse>(loanBookMutation);
         Console.WriteLine("book loaned: " + response.Data?.UpdateBook.IsSuccessful);
         Console.WriteLine("book loaned: " + response.Data?.UpdateBook.Message);
