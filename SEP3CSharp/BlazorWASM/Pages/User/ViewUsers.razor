@@ -10,14 +10,6 @@
 
 @if (isLibrarian)
 {
-    <h3>Hello @name</h3>
-    @if (!string.IsNullOrEmpty(msg))
-    {
-        <div>
-            <span>@msg</span>
-        </div>
-    }
-
     @if (users == null)
     {
         <span>Loading..</span>
@@ -28,34 +20,39 @@
     }
     else
     {
-        <div class="users-container">
+        <div class="users-container mt-3">
             @foreach (var user in users)
             {
-                <div class="user-card">
-                    <div>
-                        <label>@user.FirstName</label>
+                <div class="user-card card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">@user.FirstName @user.LastName <button class="btn btn-danger float-right" @onclick="() => DeleteUser(user.UUID)">Delete</button></h5>
                     </div>
-                    <div>
-                        <label>@user.LastName</label>
-                    </div>
-                    <div>
-                        <label>@user.Email</label>
-                    </div>
-                    <div>
-                        <label>@user.Password</label>
-                    </div>
-                    <div>
-                        <label>@user.IsLibrarian</label>
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-sm-3">
+                                <strong>Email:</strong>
+                            </div>
+                            <div class="col-sm-2">
+                                @user.Email
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-3">
+                                <strong>Librarian:</strong>
+                            </div>
+                            <div class="col-sm-2">
+                                @(user.IsLibrarian ? "Yes" : "No")
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
-
         </div>
     }
 }
 else
 {
-    <p>Denne side er kune for bilbiotekets personale.</p>
+    <p>Denne side er kun for bibliotekets personale.</p>
 }
 
 @code {
@@ -78,7 +75,7 @@ else
 
         try
         {
-            users = (ICollection<User>?)await userService.GetUsers();
+            await LoadUsers();
         }
         catch (Exception e)
         {
@@ -88,8 +85,34 @@ else
 
         if (!isLibrarian) return;
 
-    //userClaims = user.Claims;
         name = user.Identity!.Name!;
     }
-
+    
+    private async Task LoadUsers()
+    {
+        users = (ICollection<User>?)await userService.GetUsers();
+        Console.WriteLine("users len : " + users.Count);
+    }
+    
+    private async Task<bool> DeleteUser(string userUUID)
+    {
+        try
+        {
+            var result = await userService.Delete(userUUID);
+            
+            if (result == "ok")
+            {
+                await LoadUsers();
+            }
+            
+            return result == "ok";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            msg = e.Message;
+            return false;
+        }
+    }
 }
+
