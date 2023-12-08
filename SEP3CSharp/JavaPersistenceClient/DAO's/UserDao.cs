@@ -19,14 +19,24 @@ public class UserDao : IUserDao
 
     public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
     {
-        if (dto.UUID == null)
+        User user = new()
         {
-            dto.UUID = Guid.NewGuid().ToString();
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            Password = dto.Password,
+            UUID = dto.UUID,
+            IsLibrarian = dto.IsLibrarian
+        };
+
+        if (user.UUID == null || user.UUID.Equals(""))
+        {
+            user.UUID = Guid.NewGuid().ToString();
         }
 
 
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(dto));
+        var jsonContent = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(user));
         Console.WriteLine("jsonContent11: " + jsonContent);
         var response = await _httpClient.PostAsync(ServerOptions.serverUrl + "/user/create", jsonContent);
         var responseString = await response.Content.ReadAsStringAsync();
@@ -145,7 +155,7 @@ public class UserDao : IUserDao
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        var url = $"{ServerOptions.serverUrl}/user/get/by/email/{email}";
+        var url = $"{ServerOptions.serverUrl}/user/get/by-email/{email}";
         Console.WriteLine("url: watin");
         var response = await _httpClient.GetAsync(url);
 

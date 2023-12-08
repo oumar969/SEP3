@@ -47,7 +47,9 @@ public class BookRegistryGraphClient : IBookRegistryService
         };
 
         var response = await graphqlClient.SendMutationAsync<CreateBookRegistryRespnse>(createBookRegistryMutation);
-        Console.WriteLine("Res gg2: " + response.Data?.CreateBookRegistry);
+        Console.WriteLine("Res gg1: " + response.Data?.CreateBookRegistry);
+        Console.WriteLine("Res gg2: " + response.Data?.CreateBookRegistry.IsSuccessful);
+        Console.WriteLine("Res gg3: " + response.Data?.CreateBookRegistry.Message);
 
         if (response.Errors != null && response.Errors.Length > 0)
             throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));

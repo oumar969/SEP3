@@ -7,12 +7,12 @@ namespace WebApi.Services;
 public interface IAuthService
 {
     public Action<ClaimsPrincipal> OnAuthStateChanged { get; set; }
-    public Task<UserLoginDto> LoginAsync(string username, string password);
+    public Task<UserLoginDto> LoginAsync(UserLoginDto dto);
 
     public Task LogoutAsync();
 
 
-    Task<User> ValidateUser(string username, string password);
+    Task<UserLoginDto> ValidateUser(UserLoginDto dto);
     Task<User> RegisterUser(User user);
     public Task<ClaimsPrincipal> GetAuthAsync();
 }

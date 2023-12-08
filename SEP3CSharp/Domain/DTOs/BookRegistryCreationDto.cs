@@ -8,7 +8,7 @@ public class BookRegistryCreationDto
 
     public BookRegistryCreationDto(string title, string author, string genre, string isbn, string description,
         string reviews = "",
-        bool isSuccesful = false, string message = "")
+        bool isSuccessful = false, string message = "")
     {
         Title = title;
         Author = author;
@@ -16,7 +16,7 @@ public class BookRegistryCreationDto
         Isbn = isbn;
         Description = description;
         Reviews = reviews;
-        IsSuccesful = isSuccesful;
+        IsSuccessful = isSuccessful;
         Message = message;
     }
 
@@ -27,6 +27,6 @@ public class BookRegistryCreationDto
     public string Isbn { get; init; }
     public string Description { get; init; }
     public string Reviews { get; set; }
-    public bool IsSuccesful { get; set; }
+    public bool IsSuccessful { get; set; }
     public string Message { get; set; }
 }

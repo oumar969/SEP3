@@ -41,12 +41,12 @@ public class BookDao : IBookDao
 
             if (response.IsSuccessStatusCode)
             {
-                bookCreationDto.IsSuccesful = true;
+                bookCreationDto.IsSuccessful = true;
                 bookCreationDto.Message = "Bog blev oprettet";
             }
             else
             {
-                bookCreationDto.IsSuccesful = false;
+                bookCreationDto.IsSuccessful = false;
                 bookCreationDto.Message = "Bog blev ikke oprettet";
             }
 

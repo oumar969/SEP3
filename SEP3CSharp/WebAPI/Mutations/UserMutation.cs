@@ -20,10 +20,9 @@ public class UserMutation
 
     public async Task<UserLoginDto> Login(string email, string password)
     {
+        UserLoginDto userLoginDto = new UserLoginDto(email, password, "");
         Console.WriteLine("login mutation");
-        var userLoginDto = await _authService.LoginAsync(email, password);
-        Console.WriteLine("userLoginDto: " + userLoginDto);
-        return userLoginDto;
+        return await _authService.LoginAsync(userLoginDto);
     }
 
     public async Task<UserCreationDto> CreateUser(string firstName, string lastName, string email, string password,

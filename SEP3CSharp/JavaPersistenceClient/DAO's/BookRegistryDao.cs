@@ -18,24 +18,31 @@ public class BookRegistryDao : IBookRegistryDao
 
     public async Task<BookRegistryCreationDto> CreateAsync(BookRegistryCreationDto dto)
     {
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(dto));
+        BookRegistry bookRegistry = new BookRegistry(
+            dto.Title,
+            dto.Author,
+            dto.Genre,
+            dto.Isbn,
+            dto.Description,
+            ""
+        );
+
+        var jsonContent =
+            new StringContent(JsonConvert.SerializeObject(bookRegistry), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(bookRegistry));
         Console.WriteLine("jsonContent11: " + jsonContent);
         var response = await _httpClient.PostAsync("http://localhost:7777/book-registry/create", jsonContent);
         Console.WriteLine("response: " + response);
         if (response.IsSuccessStatusCode)
         {
-            BookRegistry bookRegistry =
-                JsonConvert.DeserializeObject<BookRegistry>(await response.Content.ReadAsStringAsync());
-            return new BookRegistryCreationDto(bookRegistry.Title, bookRegistry.Author, bookRegistry.Genre,
-                bookRegistry.Isbn, bookRegistry.Description, bookRegistry.Reviews, true,
-                "Bog registreret blev oprettet");
+            dto.IsSuccessful = true;
+            dto.Message = "Bog registreret blev oprettet";
+            return dto;
         }
-        else
-        {
-            return new BookRegistryCreationDto(dto.Title, dto.Author, dto.Genre,
-                dto.Isbn, dto.Description, dto.Reviews, false, "Bog registreret blev ikke oprettet");
-        }
+
+        dto.IsSuccessful = false;
+        dto.Message = "Bog registreret blev ikke oprettet";
+        return dto;
     }
 
     public Task<BookRegistry> UpdateAsync(BookRegistryUpdateDto dto)
@@ -157,20 +164,5 @@ public class BookRegistryDao : IBookRegistryDao
     public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
     {
         throw new NotImplementedException();
-    }
-
-    private async Task<BookRegistry> CreateAsync(BookRegistry entity)
-    {
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
-        Console.WriteLine("jsonContent11: " + jsonContent);
-        var response = await _httpClient.PostAsync("http://localhost:7777/book_registry/register", jsonContent);
-        Console.WriteLine("response: " + response);
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
-
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
     }
 }

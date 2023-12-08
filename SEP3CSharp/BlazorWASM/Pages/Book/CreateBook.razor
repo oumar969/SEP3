@@ -48,7 +48,7 @@
 
     @if (!string.IsNullOrEmpty(msg))
     {
-        @if (msg.Contains("Error:"))
+        @if (!bookRegistryCreated.IsSuccessful)
         {
             <div class="book-form-error">@msg</div>
         }
@@ -78,6 +78,7 @@
     AuthenticationState authState;
     ClaimsPrincipal user;
     BookRegistryCreationDto dto;
+    BookRegistryCreationDto bookRegistryCreated;
 
 
     private async Task Create()
@@ -92,9 +93,9 @@
 
         try
         {
-            BookRegistryCreationDto bookRegistryCreated = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription, "", false, ""));
+            bookRegistryCreated = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription, "", false, ""));
             Console.WriteLine(bookRegistryCreated.Title);
-            if (false)
+            if (bookRegistryCreated.IsSuccessful)
             {
                 msg = "BookRegistry blev oprettet";
                 color = "green";
@@ -103,7 +104,7 @@
                 {
                     var bookCreated = await bookService.CreateAsync(new BookCreationDto(null, bookIsbn, null));
                     Console.WriteLine("bookCreated:");
-                    Console.WriteLine(bookCreated.IsSuccesful);
+                    Console.WriteLine(bookCreated.IsSuccessful);
                     Console.WriteLine(bookCreated.Message);
                 }
 
@@ -111,8 +112,8 @@
             }
             else
             {
-                msg = "BookRegistry blev ikke oprettet, " + bookRegistryCreated;
                 color = "red";
+                msg = bookRegistryCreated.Message;
             }
         }
         catch (Exception e)

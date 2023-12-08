@@ -6,12 +6,12 @@ public class BookCreationDto
     {
     }
 
-    public BookCreationDto(string uuid, string isbn, string loanerUuid, bool isSuccesful = false, string message = "")
+    public BookCreationDto(string uuid, string isbn, string loanerUuid, bool isSuccessful = false, string message = "")
     {
         Uuid = uuid;
         Isbn = isbn;
         LoanerUuid = loanerUuid;
-        IsSuccesful = isSuccesful;
+        IsSuccessful = isSuccessful;
         Message = message;
     }
 
@@ -19,6 +19,6 @@ public class BookCreationDto
     public string Uuid { get; set; }
     public string Isbn { get; set; }
     public string LoanerUuid { get; set; }
-    public bool IsSuccesful { get; set; }
+    public bool IsSuccessful { get; set; }
     public string Message { get; set; }
 }

@@ -24,12 +24,6 @@ public class BookRegistryLogic : IBookRegistryLogic
         var created = await _bookRegistryDao.CreateAsync(dto);
         return created;
     }
-    /*
-    public async Task<BookRegistry> GetByIsbnAsync(string id)
-    {
-        return await _bookRegistryDao.GetByIsbnAsync(id);
-    }
-*/
 
     public async Task<BookRegistry> DeleteAsync(string isbn)
     {
