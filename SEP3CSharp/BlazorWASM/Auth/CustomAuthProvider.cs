@@ -5,7 +5,8 @@ namespace BlazorWasm.Auth;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Authorization;
 
-public class CustomAuthProvider : AuthenticationStateProvider
+
+public class CustomAuthProvider: AuthenticationStateProvider
 {
     private readonly IAuthService authService;
     private readonly ILogger<CustomAuthProvider> logger;

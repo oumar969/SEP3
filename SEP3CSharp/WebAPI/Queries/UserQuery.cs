@@ -2,7 +2,7 @@
 using Domain.DTOs;
 using Domain.Models;
 
-namespace WebAPI.Queries;
+namespace WebAPI.Schema;
 
 [ExtendObjectType(OperationTypeNames.Query)]
 public class UserQuery
@@ -14,23 +14,27 @@ public class UserQuery
         _userLogic = userLogic;
     }
 
-    public async Task<User> GetUserByUuid(string uuid)
+    public async Task<User?> GetUserByUuid(string uuid)
     {
         return await _userLogic.GetByUuidAsync(uuid);
     }
 
-    public async Task<IEnumerable<User>> allUsers()
+    public async Task<IEnumerable<User>> GetAllUsers()
     {
-        Console.WriteLine("here xD1");
         return await _userLogic.GetAllUsersAsync();
     }
 
-
-    public async Task<User> userByEmail(string email)
+    public async Task DeleteUser(string uuid)
     {
-        Console.WriteLine("here1");
-        User? user = await _userLogic.GetByEmailAsync(email);
-        Console.WriteLine("userQuery" + user);
-        return user;
+        await _userLogic.DeleteAsync(uuid);
+    }
+
+
+    public async Task<User> EditUser(string uuid, string firstName, string lastName, string email, string password,
+        bool isLibrarian)
+    {
+        var userUpdateDto = new UserUpdateDto(firstName, lastName, email, password, isLibrarian);
+
+        return await _userLogic.UpdateAsync(uuid, userUpdateDto);
     }
 }

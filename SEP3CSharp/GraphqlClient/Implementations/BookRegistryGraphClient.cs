@@ -43,7 +43,7 @@ public class BookRegistryGraphClient : IBookRegistryService
                 genre = dto.Genre,
                 isbn = dto.Isbn,
                 description = dto.Description
-            }
+            } //test
         };
 
         var response = await graphqlClient.SendMutationAsync<CreateBookRegistryRespnse>(createBookRegistryMutation);

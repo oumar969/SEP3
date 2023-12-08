@@ -1,5 +1,4 @@
 using BlazorWasm.Auth;
-using BlazorWASM.Services;
 using Domain.Auth;
 using GraphQL.Client.Abstractions;
 using GraphQL.Client.Http;
@@ -27,8 +26,6 @@ builder.Services.AddScoped<IAuthService, JwtAuthService>();
 builder.Services.AddScoped<IBookService, BookGraphqlClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<CascadingAuthenticationState>();
-builder.Services.AddScoped<BookStateService>();
-
 AuthorizationPolicies.AddPolicies(builder.Services);
 
 builder.Services.AddScoped<IGraphQLClient>(s =>

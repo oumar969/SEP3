@@ -16,31 +16,25 @@ public class UserLogic : IUserLogic
     }
 
 
-    public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
+    public async Task<User> CreateAsync(UserCreationDto dto)
     {
-        Console.WriteLine("dto0: " + dto);
         var existing = await userDao.GetByEmailAsync(dto.Email);
-        if (existing != null)
-        {
-            dto.ErrMsg = "Email already exists";
-            dto.IsSuccessful = false;
-        }
+        if (existing != null) throw new Exception("User already exists");
 
         ValidateData(dto);
-        Console.WriteLine("dto1: " + dto);
-        var created = await userDao.CreateAsync(dto);
 
-        UserCreationDto userCreationDto = new UserCreationDto(
-            created.UUID,
-            created.FirstName,
-            created.LastName,
-            created.Email,
-            created.Password,
-            created.IsLibrarian,
-            created.IsSuccessful,
-            created.ErrMsg
-        );
-        return userCreationDto;
+        var toCreate = new User
+        {
+            UUID = dto.UUID,
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            Password = dto.Password,
+            IsLibrarian = dto.IsLibrarian
+        };
+
+        var created = await userDao.CreateAsync(toCreate);
+        return created;
     }
 
 
@@ -59,21 +53,16 @@ public class UserLogic : IUserLogic
 
     public Task<ICollection<User>> GetAllUsersAsync()
     {
-        return userDao.GetAllUsersAsync();
-    }
-
-    public async Task<User?> GetByEmailAsync(string email)
-    {
-        return await userDao.GetByEmailAsync(email);
-        // User? user = await userDao.GetByEmailAsync(email);
-        // Console.WriteLine(user + "UserLogic");
-        // return user;
+        throw new NotImplementedException();
     }
 
     public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
     {
-        var toUpdate = new User(dto.UUID, dto.FirstName, dto.LastName, dto.Email, dto.Password, dto.IsLibrarian);
-
+        var toUpdate = new User
+        {
+            UUID = uuid, FirstName = dto.FirstName, LastName = dto.LastName, Password = dto.Password, Email = dto.Email,
+            IsLibrarian = dto.IsLibrarian
+        };
 
         return userDao.UpdateAsync(toUpdate);
     }
@@ -85,28 +74,31 @@ public class UserLogic : IUserLogic
 
     public static void ValidateData(UserCreationDto userCreationDto)
     {
-        if (string.IsNullOrWhiteSpace(userCreationDto.FirstName))
+        var firstName = userCreationDto.FirstName;
+        var lastName = userCreationDto.LastName;
+        var email = userCreationDto.Email;
+        var password = userCreationDto.Password;
+
+        if (string.IsNullOrWhiteSpace(firstName))
             throw new Exception("First Name is required");
 
-        if (string.IsNullOrWhiteSpace(userCreationDto.LastName))
+        if (string.IsNullOrWhiteSpace(lastName))
             throw new Exception("Last Name is required");
 
-        if (string.IsNullOrWhiteSpace(userCreationDto.Email))
+        if (string.IsNullOrWhiteSpace(email))
             throw new Exception("Email is required");
 
-        if (string.IsNullOrWhiteSpace(userCreationDto.Password))
+        if (string.IsNullOrWhiteSpace(password))
             throw new Exception("Password is required");
 
-        if (userCreationDto.FirstName.Length < 3 || userCreationDto.LastName.Length < 3)
+        if (firstName.Length < 3 || lastName.Length < 3)
             throw new Exception("Both First Name and Last Name must be at least 3 characters long");
 
-        if (userCreationDto.Email.Length < 5 || !IsValidEmail(userCreationDto.Email))
+        if (email.Length < 5 || !IsValidEmail(email))
             throw new Exception("Email is not valid");
 
-        if (userCreationDto.Password.Length < 8)
-        {
+        if (password.Length < 8)
             throw new Exception("Password must be at least 8 characters long");
-        }
     }
 
     public static bool IsValidEmail(string email)
