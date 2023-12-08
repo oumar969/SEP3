@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
@@ -7,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace JavaPersistenceClient.DAOs;
 
-public class UserDao : IGenericDao<User>, IUserDao
+public class UserDao : IUserDao
 {
     private readonly HttpClient _httpClient;
 
@@ -16,24 +17,68 @@ public class UserDao : IGenericDao<User>, IUserDao
         _httpClient = new HttpClient();
     }
 
-    public async Task<User> CreateAsync(User entity)
+    public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
     {
+        User entity = new User(
+            dto.UUID,
+            dto.FirstName,
+            dto.LastName,
+            dto.Email,
+            dto.Password,
+            dto.IsLibrarian
+        );
+
+        if (entity.UUID == null)
+        {
+            entity.UUID = Guid.NewGuid().ToString();
+        }
+
+
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
         Console.WriteLine("jsonContent11: " + jsonContent);
         var response = await _httpClient.PostAsync(ServerOptions.serverUrl + "/user/create", jsonContent);
+        var responseString = await response.Content.ReadAsStringAsync();
+        Console.WriteLine("responseString: " + responseString);
         Console.WriteLine("response: " + response);
+        Console.WriteLine("response suc?: " + response.IsSuccessStatusCode);
         if (!response.IsSuccessStatusCode)
-            throw new Exception($"Error creating user: {JsonConvert.SerializeObject(response)}");
+        {
+            return new UserCreationDto(
+                entity.UUID,
+                entity.FirstName,
+                entity.LastName,
+                entity.Email,
+                entity.Password,
+                entity.IsLibrarian,
+                false,
+                "Fejl ved oprettelse af bruger: " + responseString
+            );
+        }
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<User>(jsonResponse);
+        UserCreationDto createdUserCreationDto = new UserCreationDto(
+            entity.UUID,
+            entity.FirstName,
+            entity.LastName,
+            entity.Email,
+            entity.Password,
+            entity.IsLibrarian,
+            true,
+            "Brugeren blev oprettet"
+        );
+        return createdUserCreationDto;
+    }
+
+    public Task<User> CreateAsync(User entity)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<User> GetByUuidAsync(string uuid)
     {
-        var url = $"{ServerOptions.serverUrl}/user/getByUuid/{uuid}";
+        var url = $"{ServerOptions.serverUrl}/user/get/{uuid}";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -84,7 +129,7 @@ public class UserDao : IGenericDao<User>, IUserDao
     public async Task<User> UpdateAsync(User entity)
     {
         var url = $"{ServerOptions.serverUrl}/user/update";
-            
+
         var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
         var response = await _httpClient.PutAsync(url, jsonContent);
 
@@ -104,7 +149,7 @@ public class UserDao : IGenericDao<User>, IUserDao
         Console.WriteLine($"Error Response: {errorResponse}");
 
         throw new Exception($"Error updating user. Status code: {response.StatusCode}");
-    }   
+    }
 
     public async Task DeleteAsync(string uuid)
     {
@@ -124,8 +169,8 @@ public class UserDao : IGenericDao<User>, IUserDao
 
     public async Task<User?> GetByEmailAsync(string email)
     {
-        var url = $"{ServerOptions.serverUrl}/user/getByEmail/{email}";
-
+        var url = $"{ServerOptions.serverUrl}/user/get/by/email/{email}";
+        Console.WriteLine("url: watin");
         var response = await _httpClient.GetAsync(url);
 
         Console.WriteLine($"GET request to {url}");
@@ -138,8 +183,11 @@ public class UserDao : IGenericDao<User>, IUserDao
 
             return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
-
-        if (response.StatusCode.ToString().Equals("NotFound")) return null;
+    
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
 
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");
@@ -222,7 +270,7 @@ public class UserDao : IGenericDao<User>, IUserDao
 
     public Task<ICollection<User>> GetAllUsersAsync()
     {
-        var url = $"{ServerOptions.serverUrl}/user/getAllUsers";
+        var url = $"{ServerOptions.serverUrl}/user/get/all";
 
         var response = _httpClient.GetAsync(url).Result;
 

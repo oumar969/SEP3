@@ -68,7 +68,7 @@ public class BookDao : IBookDao
         var errorResponse = await response.Content.ReadAsStringAsync();
         Console.WriteLine($"Error Response: {errorResponse}");
 
-        throw new Exception($"Error getting all book registries. Status code: {response.StatusCode}");
+        throw new Exception($"Error getting all books. Status code: {response.StatusCode}");
     }
 
     public Task<IEnumerable<Book>> GetAsync(ISearchParametersDto searchParameters)
