@@ -3,7 +3,7 @@ using Domain.DTOs;
 using Domain.Models;
 using WebApi.Services;
 
-namespace WebAPI.Mutations;
+namespace WebAPI.Schema;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
 public class UserMutation
@@ -23,14 +23,12 @@ public class UserMutation
         Console.WriteLine("login mutation");
         var userLoginDto = await _authService.LoginAsync(email, password);
         Console.WriteLine("userLoginDto: " + userLoginDto);
-        Console.WriteLine("errMsg: " + userLoginDto.ErrMsg);
         return userLoginDto;
     }
 
-    public async Task<UserCreationDto> CreateUser(string firstName, string lastName, string email, string password,
+    public async Task<User> CreateUser(string firstName, string lastName, string email, string password,
         bool isLibrarian)
     {
-        Console.WriteLine("creater user mut");
         var userCreationDto = new UserCreationDto(
             null,
             firstName,
@@ -43,16 +41,8 @@ public class UserMutation
         return await _userLogic.CreateAsync(userCreationDto);
     }
 
-    public async Task<bool> DeleteUser(string uuid)
+    public async Task DeleteUser(string uuid)
     {
-        try
-        {
-            await _userLogic.DeleteAsync(uuid);
-            return true;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        await _userLogic.DeleteAsync(uuid);
     }
 }

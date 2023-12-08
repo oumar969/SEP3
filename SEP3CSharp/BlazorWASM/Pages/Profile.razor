@@ -8,7 +8,7 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h3>Profil</h3>
-<AuthorizeView Roles="User">
+<AuthorizeView>
     @* Profile-side skal vises som en del af din MainLayout-side, når brugeren har rollen "user", *@
     <Authorized>
         <div class="card">
@@ -60,7 +60,7 @@
         if (user.Identity.IsAuthenticated)
         {
             var userDetails = await userClient.GetUserByEmailAsync(user.Identity.Name);
-    //Console.WriteLine(userDetails.Email);
+    //Console.WriteLine(userDetails.Email); G
 
             if (userDetails != null)
             {

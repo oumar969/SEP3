@@ -17,37 +17,32 @@ public class BookGraphqlClient : IBookService
         this.graphqlClient = graphqlClient;
     }
 
-    public async Task<string> CreateAsync(BookRegistryCreationDto dto)
+    public async Task<BookCreationDto> CreateAsync(BookCreationDto dto)
     {
         var createBookMutation = new GraphQLRequest
         {
             Query = @"
-                mutation ($title: String!, $author: String!, $isbn: String!, $genre: String!, $description: String!) {
-                    createBook(title: $title, author: $author, isbn: $isbn, genre: $genre, description: $description) {
-                        title
-                        author
+                mutation ($isbn: String!) {
+                    createBook(isbn: $isbn) {
+                        uuid
                         isbn
-                        genre
-                        description
+                        loanerUuid
                     }
                 }",
             Variables = new
             {
-                title = dto.Title,
-                author = dto.Author,
                 isbn = dto.Isbn,
-                genre = dto.Genre,
-                description = dto.Description
             }
         };
-        var response = await graphqlClient.SendMutationAsync<BookGraphqlDto>(createBookMutation);
-        
+        var response = await graphqlClient.SendMutationAsync<CreateBookResponse>(createBookMutation);
+        Console.WriteLine(response.Data?.CreateBook);
         if (response.Errors != null && response.Errors.Length > 0)
-            return "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
-        return "ok";
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        return response.Data?.CreateBook;
     }
 
-    public Task<ICollection<Book>> GetAsync(string? userName, int? userId, string? titleContains, string? authorContains, string? isbnContains,
+    public Task<ICollection<Book>> GetAsync(string? userName, int? userId, string? titleContains,
+        string? authorContains, string? isbnContains,
         string? genreContains, string? descriptionContains)
     {
         throw new NotImplementedException();
@@ -68,15 +63,11 @@ public class BookGraphqlClient : IBookService
         return DeleteAsync(id);
     }
 
-    public Task<IEnumerable<Book>> GetAsync(string? titleContains = null, string? authorContains = null, string? isbnContains = null,
+    public Task<IEnumerable<Book>> GetAsync(string? titleContains = null, string? authorContains = null,
+        string? isbnContains = null,
         string? genreContains = null)
     {
         throw new NotImplementedException();
-    }
-
-    Task IBookService.CreateAsync(BookRegistryCreationDto dto)
-    {
-        return CreateAsync(dto);
     }
 
     public Task<string> UpdateAsync(BookUpdateDto dto)
@@ -119,18 +110,22 @@ public class BookGraphqlClient : IBookService
                 userId = user.UUID
             }
         };
-        var response = await graphqlClient.SendMutationAsync<BookGraphqlDto>(loanBookMutation);
+        var response = await graphqlClient.SendMutationAsync<LoanBookResponse>(loanBookMutation);
         var resultMsg = "ok";
-        
+
         if (response.Errors != null && response.Errors.Length > 0)
             resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
-        
+
         return resultMsg;
     }
 
-    private class BookGraphqlDto
+    private class LoanBookResponse
     {
-        public Book CreateBook { get; set; }
-        public Book UpdateBook { get; set; }
+        public Book LoanBook { get; set; }
+    }
+
+    private class CreateBookResponse
+    {
+        public BookCreationDto CreateBook { get; set; }
     }
 }

@@ -20,8 +20,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddHttpClient();
-
 builder.Services.AddScoped<IUserDao, UserDao>();
+
 builder.Services.AddScoped<IBookRegistryDao, BookRegistryDao>();
 builder.Services.AddScoped<IBookDao, BookDao>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
@@ -30,7 +30,8 @@ builder.Services.AddScoped<IBookRegistryLogic, BookRegistryLogic>();
 builder.Services.AddScoped<IBookLogic, BookLogic>();
 
 builder.Services
-    .AddGraphQLServer().AddQueryType<Query>().AddType<UserQuery>().AddType<BookQuery>().AddType<BookRegistryQuery>().AddMutationType<Mutation>()
+    .AddGraphQLServer().AddQueryType<Query>().AddType<UserQuery>().AddType<BookQuery>().AddType<BookRegistryQuery>()
+    .AddMutationType<Mutation>()
     .AddType<BookMutation>().AddType<BookRegistryMutation>().AddType<UserMutation>();
 
 

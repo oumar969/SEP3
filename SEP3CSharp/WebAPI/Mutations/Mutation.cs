@@ -1,4 +1,4 @@
-﻿namespace WebAPI.Mutations;
+﻿namespace WebAPI.Schema;
 
 [ObjectType(OperationTypeNames.Mutation)]
 public class Mutation

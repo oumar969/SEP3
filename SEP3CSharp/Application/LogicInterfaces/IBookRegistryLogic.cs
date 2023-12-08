@@ -5,9 +5,7 @@ namespace Application.LogicInterfaces;
 
 public interface IBookRegistryLogic
 {
-    Task<BookRegistry> CreateAsync(BookRegistryCreationDto dto);
-    Task<IEnumerable<BookRegistry>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters);
-    Task UpdateAsync(BookRegistryUpdateDto dto);
+    Task<BookRegistryCreationDto> CreateAsync(BookRegistryCreationDto dto);
     Task<BookRegistry> DeleteAsync(string uuid);
     Task<IEnumerable<BookRegistry>> GetAllBookRegistriesAsync();
 

@@ -9,8 +9,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-  @ExceptionHandler(PropertyValueException.class)
-  public ResponseEntity<String> handlePropertyValueException(PropertyValueException ex) {
-    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request data: " + ex.getMessage());
-  }
+    private static final GlobalExceptionHandler instance = new GlobalExceptionHandler();
+
+    private GlobalExceptionHandler() {
+        // Privat konstruktør for at forhindre instantiering udenfor klassen
+    }
+
+    public static GlobalExceptionHandler getInstance() {
+        return instance;
+    }
+
+    @ExceptionHandler(PropertyValueException.class)
+    public ResponseEntity<String> handlePropertyValueException(PropertyValueException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request data: " + ex.getMessage());
+    }
 }
