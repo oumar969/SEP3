@@ -60,7 +60,7 @@
         if (user.Identity.IsAuthenticated)
         {
             var userDetails = await userClient.GetUserByEmailAsync(user.Identity.Name);
-    //Console.WriteLine(userDetails.Email);
+    //Console.WriteLine(userDetails.Email); THHIS WORKS
 
             if (userDetails != null)
             {
