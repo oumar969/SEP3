@@ -39,6 +39,13 @@ public class BookController {
         return bookRepository.findAllByIsbn(isbn);
     }
 
+    @GetMapping("/get/loaner/{loanerUuid}")
+    public Iterable<Book> getLoanerBooks(
+            @PathVariable String loanerUuid) {
+        return bookRepository.findAllByLoanerUuid(loanerUuid);
+    }
+
+
     @PutMapping("/update/{uuid}")
     public ResponseEntity<?> updateBook(
             @PathVariable String uuid, @RequestBody Map<String, String> body) {
