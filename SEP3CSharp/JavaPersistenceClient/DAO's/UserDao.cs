@@ -275,4 +275,25 @@ public class UserDao : IUserDao
         Console.WriteLine($"Error Response: {errorResponse}");
         throw new Exception("Error getting all users");
     }
+
+    public Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
+    {
+        var url = $"{ServerOptions.serverUrl}/book/get/loaner/{loanerUuid}";
+
+        var response = _httpClient.GetAsync(url).Result;
+
+        Console.WriteLine($"GET request to {url}");
+        Console.WriteLine($"Response status code: {response.StatusCode}");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = response.Content.ReadAsStringAsync().Result;
+
+            Console.WriteLine($"JSON Response: {jsonResponse}");
+
+            return Task.FromResult(JsonConvert.DeserializeObject<ICollection<Book>>(jsonResponse));
+        }
+
+        var errorResponse = response.Content.ReadAsStringAsync().Result;
+        Console.WriteLine($"Error Response: {errorResponse}");
+        throw new Exception("Error getting loaners books");    }
 }

@@ -171,4 +171,36 @@ public class UserGraphqlClient : IUserService
     {
         public ICollection<User> AllUsers { get; set; }
     }
+    
+    public async Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
+    {
+        var getLoanerBooksQuery = new GraphQLRequest
+        {
+            Query = @"
+            query ($loanerUuid: String!) {
+                allLoanerBooks(loanerUuid: $loanerUuid) {
+                    uuid
+                }
+            }",
+            Variables = new
+            {
+                loanerUuid
+            }
+        };
+
+        var response = await graphqlClient.SendQueryAsync<GetLoanerBooksDataResponse>(getLoanerBooksQuery);
+
+        if (response.Errors != null && response.Errors.Length > 0)
+        {
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        }
+
+        return response.Data?.allLoanerBooks;
+    }
+
+    private class GetLoanerBooksDataResponse
+    {
+        public ICollection<Book> allLoanerBooks { get; set; }
+    }
+
 }

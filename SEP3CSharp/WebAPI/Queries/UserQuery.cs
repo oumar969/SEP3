@@ -36,4 +36,9 @@ public class UserQuery
         Console.WriteLine("userQuery" + user);
         return user;
     }
+    
+    public async Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
+    {
+        return await _userLogic.GetAllLoanerBooks(loanerUuid);
+    }
 }
