@@ -3137,3 +3137,9 @@ N
 Application/Logic/BookLogic.cs,8\0\808e16f04ff480ca5b3c30fb002a12daf5fca2a5
 T
 $BlazorWASM/Pages/Book/BookView.razor,a\f\afab68b1f4015046f4f2ab0c2c9780c93891343a
+W
+'BlazorWASM/Services/BookStateService.cs,3\e\3e315c3d5a76eda2a0e1b76afba90f28678ca34d
+f
+6GraphqlClient/ClientInterfaces/IBookRegistryService.cs,1\c\1cfc80ea5328991252f2f03e2ab109e6a2a671fb
+J
+UnitTest/BookLogicTests.cs,d\1\d1fa4def46f4e4bb7bc1efa45baf7d2e2ed7dfe8

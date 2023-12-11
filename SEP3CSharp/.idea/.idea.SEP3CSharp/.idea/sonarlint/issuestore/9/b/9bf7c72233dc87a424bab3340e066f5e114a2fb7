@@ -1,24 +1,21 @@
 
-mcsharpsquid:S927""ERename parameter 'isbn' to 'uuid' to match the interface declaration.(ãúÆÁúÿÿÿÿ8ÎœÄÄ1
-kcsharpsquid:S927."CRename parameter 'id' to 'isbn' to match the interface declaration.(ğÖ¡şÿÿÿÿ8ÊŠÆµÂ1
-Xcsharpsquid:S112%"5'System.Exception' should not be thrown by user code.(ß±ûÈ8ê”¥Ä1
-Xcsharpsquid:S112:"5'System.Exception' should not be thrown by user code.(¤‘¹8ÌŠÆµÂ1
-Xcsharpsquid:S112<"5'System.Exception' should not be thrown by user code.(€îÙà8ÍŠÆµÂ1
-Xcsharpsquid:S112>"5'System.Exception' should not be thrown by user code.(º«ì“8ÍŠÆµÂ1
-]csharpsquid:S112@"5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8ÎŠÆµÂ1
-]csharpsquid:S112B"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8ÏŠÆµÂ1
-Xcsharpsquid:S112U"5'System.Exception' should not be thrown by user code.(¤‘¹8ÓŠÆµÂ1
-Xcsharpsquid:S112W"5'System.Exception' should not be thrown by user code.(€îÙà8ÓŠÆµÂ1
-Xcsharpsquid:S112Y"5'System.Exception' should not be thrown by user code.(º«ì“8ÔŠÆµÂ1
-]csharpsquid:S112["5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8ÔŠÆµÂ1
-]csharpsquid:S112]"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8ÕŠÆµÂ1
-Wcsharpsquid:S112b"5'System.Exception' should not be thrown by user code.(ßñ8ÕŠÆµÂ1
-Xcsharpsquid:S112c"5'System.Exception' should not be thrown by user code.(·Ï¼ù8ÖŠÆµÂ1
-]csharpsquid:S112d"5'System.Exception' should not be thrown by user code.(™ÑïÊüÿÿÿÿ8×ŠÆµÂ1
-]csharpsquid:S112e"5'System.Exception' should not be thrown by user code.(İá÷øÿÿÿÿ8çŠÆµÂ1
-Xcsharpsquid:S112f"5'System.Exception' should not be thrown by user code.(Ì©8÷ŠÆµÂ1
-\csharpsquid:S11448"8Remove the unused private method 'ValidateBookRegistry'.(ÎÕÖ½8ˆŸœÄÄ1
-acsharpsquid:S1144S"8Remove the unused private method 'ValidateBookRegistry'.(ƒ¡¦×üÿÿÿÿ8ŠŸœÄÄ1
+kcsharpsquid:S927&"CRename parameter 'id' to 'isbn' to match the interface declaration.(ğÖ¡şÿÿÿÿ8ÊŠÆµÂ1
+Xcsharpsquid:S1122"5'System.Exception' should not be thrown by user code.(¤‘¹8ÌŠÆµÂ1
+Xcsharpsquid:S1124"5'System.Exception' should not be thrown by user code.(€îÙà8ÍŠÆµÂ1
+Xcsharpsquid:S1126"5'System.Exception' should not be thrown by user code.(º«ì“8ÍŠÆµÂ1
+]csharpsquid:S1128"5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8ÎŠÆµÂ1
+]csharpsquid:S112:"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8ÏŠÆµÂ1
+Xcsharpsquid:S112M"5'System.Exception' should not be thrown by user code.(¤‘¹8ÓŠÆµÂ1
+Xcsharpsquid:S112O"5'System.Exception' should not be thrown by user code.(€îÙà8ÓŠÆµÂ1
+Xcsharpsquid:S112Q"5'System.Exception' should not be thrown by user code.(º«ì“8ÔŠÆµÂ1
+]csharpsquid:S112S"5'System.Exception' should not be thrown by user code.(´Ëó˜ÿÿÿÿÿ8ÔŠÆµÂ1
+]csharpsquid:S112U"5'System.Exception' should not be thrown by user code.(é´Ñ¸ÿÿÿÿÿ8ÕŠÆµÂ1
+Wcsharpsquid:S112Z"5'System.Exception' should not be thrown by user code.(ßñ8ÕŠÆµÂ1
+Xcsharpsquid:S112["5'System.Exception' should not be thrown by user code.(·Ï¼ù8ÖŠÆµÂ1
+]csharpsquid:S112\"5'System.Exception' should not be thrown by user code.(™ÑïÊüÿÿÿÿ8×ŠÆµÂ1
+]csharpsquid:S112]"5'System.Exception' should not be thrown by user code.(İá÷øÿÿÿÿ8çŠÆµÂ1
+Xcsharpsquid:S112^"5'System.Exception' should not be thrown by user code.(Ì©8÷ŠÆµÂ1
+\csharpsquid:S11440"8Remove the unused private method 'ValidateBookRegistry'.(ÎÕÖ½8ˆŸœÄÄ1
+acsharpsquid:S1144K"8Remove the unused private method 'ValidateBookRegistry'.(ƒ¡¦×üÿÿÿÿ8ŠŸœÄÄ1
 {csharpsquid:S4487"RRemove this unread private field '_userDao' or refactor the code to use its value.(û‚‹Óüÿÿÿÿ8”ÇäşÁ1
-Gcsharpsquid:S125"Remove this commented out code.(ÒÌâ–øÿÿÿÿ8‹‹ÆµÂ1
-Gcsharpsquid:S125G"Remove this commented out code.(ÒÌâ–øÿÿÿÿ8Œ‹ÆµÂ1
+Gcsharpsquid:S125?"Remove this commented out code.(ÒÌâ–øÿÿÿÿ8Œ‹ÆµÂ1

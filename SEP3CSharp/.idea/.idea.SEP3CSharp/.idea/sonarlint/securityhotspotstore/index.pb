@@ -1513,3 +1513,13 @@ Y
 )Application/LogicInterfaces/IBookLogic.cs,7\b\7bbcbf4c821dffd9f66fb37385ce59865aeb33b9
 T
 $BlazorWASM/Pages/Book/BookView.razor,a\f\afab68b1f4015046f4f2ab0c2c9780c93891343a
+^
+.GraphqlClient/ClientInterfaces/IBookService.cs,a\3\a32ff1b778132e50cbd7a1da2caafda978a8418f
+W
+'BlazorWASM/Services/BookStateService.cs,3\e\3e315c3d5a76eda2a0e1b76afba90f28678ca34d
+f
+6GraphqlClient/ClientInterfaces/IBookRegistryService.cs,1\c\1cfc80ea5328991252f2f03e2ab109e6a2a671fb
+N
+GraphqlClient/ClientOptions.cs,5\e\5e596cbd6131de699da72f8010688b364b91f3ac
+J
+UnitTest/BookLogicTests.cs,d\1\d1fa4def46f4e4bb7bc1efa45baf7d2e2ed7dfe8
