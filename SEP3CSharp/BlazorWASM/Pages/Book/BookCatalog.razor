@@ -122,7 +122,7 @@ else
         if (books.Count() > 0)
         {
             loanedBooks = books
-                .Where(b => b.LoanerUuid == userDetails?.UUID)
+                .Where(b => b.LoanerUuid == userClaims.FindFirst("UUID")?.Value)
                 .Select(b => b.Isbn)
                 .ToList();
         }

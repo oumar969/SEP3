@@ -1,9 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Components
 @using BlazorWASM.Services
 @using System.Security.Claims
+@using HttpClients.ClientInterfaces
 @namespace Login
 @inject NavigationManager navMgr
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IAuthService authService
 
 <AuthorizeView>
     <Authorized>
@@ -40,8 +42,7 @@
 
     private async Task Logout()
     {
-    // await authService.LogoutAsync();
-
+        await authService.LogoutAsync();
         navMgr.NavigateTo("/");
     }
 

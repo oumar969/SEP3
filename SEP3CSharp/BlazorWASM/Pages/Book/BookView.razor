@@ -147,9 +147,14 @@ else
         if (bookCreated.IsSuccessful)
         {
             Console.WriteLine("here book count up");
-            books.Append(new Book(bookCreated.Uuid, bookCreated.Isbn, bookCreated.LoanerUuid));
+            books.Add(new Book(bookCreated.Isbn, bookCreated.Uuid, bookCreated.LoanerUuid));
+            Console.WriteLine("book create id: " + bookCreated.Uuid);
             ++bookCount;
             StateHasChanged();
+            foreach (var book in books)
+            {
+                Console.WriteLine("Book after A: " + book.UUID);
+            }
         }
     }
 
@@ -166,6 +171,7 @@ else
         }
         if (bookToDelete == null)
         {
+            Console.WriteLine("No book to delete");
             return;
         }
         var bookCreated = await bookService.DeleteAsync(new BookDeleteDto(bookToDelete.UUID, bookToDelete.Isbn, ""));
@@ -173,10 +179,15 @@ else
         Console.WriteLine("Book deleted book view 2: " + bookCreated.IsSuccessful);
         if (bookCreated.IsSuccessful)
         {
-            Console.WriteLine("here book count up");
+            Console.WriteLine("here book count down");
             books.Remove(bookToDelete);
+            Console.WriteLine("book delete id: " + bookToDelete.UUID);
             --bookCount;
             StateHasChanged();
+            foreach (var book in books)
+            {
+                Console.WriteLine("Book after D: " + book.UUID);
+            }
         }
     }
 

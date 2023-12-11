@@ -36,21 +36,24 @@
         </div>
         <AuthorizeView>
             <Authorized>
-                @if (userClaims.IsInRole("Librarian"))
+                @if (userClaims.Identity != null)
                 {
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="ViewUsers">
-                            <span class="oi oi-list-rich" aria-hidden="true"></span> Brugere
-                        </NavLink>
-                    </div>
-                }
-                else
-                {
-                    <div class="nav-item px-3">
-                        <NavLink class="nav-link" href="Profile">
-                            <span class="oi oi-list-rich" aria-hidden="true"></span> Profil
-                        </NavLink>
-                    </div>
+                    @if (userClaims.IsInRole("Librarian"))
+                    {
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="ViewUsers">
+                                <span class="oi oi-list-rich" aria-hidden="true"></span> Brugere
+                            </NavLink>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="Profile">
+                                <span class="oi oi-list-rich" aria-hidden="true"></span> Profil
+                            </NavLink>
+                        </div>
+                    }
                 }
             </Authorized>
         </AuthorizeView>
