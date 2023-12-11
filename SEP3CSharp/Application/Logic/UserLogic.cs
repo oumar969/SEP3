@@ -62,6 +62,11 @@ public class UserLogic : IUserLogic
         // return user;
     }
 
+    public Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
+    {
+        return userDao.GetAllLoanerBooks(loanerUuid);
+    }
+
     public Task<UserUpdateDto> UpdateAsync(UserUpdateDto dto)
     {
         return userDao.UpdateAsync(dto);

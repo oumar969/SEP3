@@ -15,4 +15,5 @@ public interface IUserDao
     Task<UserUpdateDto> UpdateAsync(UserUpdateDto user);
     Task DeleteAsync(string uuid);
     Task<ICollection<User>> GetAllUsersAsync();
+    Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid);
 }

@@ -206,6 +206,7 @@ else
         isLibrarian = user.IsInRole("Librarian");
         Console.WriteLine("user.Identity.Name: " + user.Identity?.Name);
         Console.WriteLine("here here yeah: " + user.Identity.Name.IsNullOrEmpty());
+        // ???
         if (!user.Identity.Name.IsNullOrEmpty())
         {
             Console.WriteLine("user.Identity.Name is null or empty");

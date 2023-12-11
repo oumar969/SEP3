@@ -10,6 +10,7 @@ public interface IUserService
 
     Task<string> Delete(string uuid);
     Task<User> GetUserByEmailAsync(string email);
+    Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid);
 
     class UserGraphqlDto
     {

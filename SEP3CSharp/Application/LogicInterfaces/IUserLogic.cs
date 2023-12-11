@@ -12,4 +12,5 @@ public interface IUserLogic
     public Task DeleteAsync(string id);
     public Task<ICollection<User>> GetAllUsersAsync();
     public Task<User> GetByEmailAsync(string email);
+    public Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid);
 }
