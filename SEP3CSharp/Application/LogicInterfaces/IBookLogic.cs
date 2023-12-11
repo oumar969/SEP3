@@ -1,13 +1,12 @@
-﻿using Domain.Models;
+﻿using Domain.DTOs;
+using Domain.Models;
 
 namespace Application.LogicInterfaces;
 
 public interface IBookLogic
 {
-    Task<Book?> LoanAsync(Book book, User user);
-    Task<Book?> DeliverAsync(Book book, User user);
-    Task<Book?> GetByUuidAsync(string uuid);
-    Task<IEnumerable<Book>> GetAllBooksAsync();
-    Task<Book> CreateAsync(Book book);
-    Task<Book> DeleteAsync(string uuid);
+    Task<BookUpdateDto> UpdateAsync(BookUpdateDto dto);
+    Task<ICollection<Book>> GetAllBooksAsync(string isbn);
+    Task<BookCreationDto> CreateAsync(BookCreationDto dto);
+    Task<BookDeleteDto> DeleteAsync(BookDeleteDto dto);
 }

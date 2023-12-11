@@ -1,113 +1,268 @@
 @page "/BookView"
 @using HttpClients.ClientInterfaces
+@using BlazorWASM.Services
+@using Domain.DTOs
+@using Domain.Models
+@using Microsoft.IdentityModel.Tokens
 @inject IBookService bookService
+@inject IBookRegistryService bookRegistryService;
+@inject IUserService userClient
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager navMgr
+@inject BookStateService bookStateService
 
-<h3 class="mb-4">Book</h3>
 
-
-<div class="container my-4">
-    <div class="card mb-3 rounded">
-        <!-- Added rounded class here -->
-        <div class="row g-0">
-            <div class="col-md">
-                <img src="@book.ImageUrl" class="img-fluid h-100" alt="Book Image"/> <!-- Removed rounded-start class -->
-            </div>
-            <div class="vr"/>
-            <div class="col-md-10">
-                <div class="card-body">
-                    <h5 class="card-title">@book.Title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@book.Author</h6>
-                    <p class="card-text">@book.Description</p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            <strong>Genre:</strong> @book.Genre
-                        </small>
-                    </p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            <strong>ISBN:</strong> @book.ISBN
-                        </small>
-                    </p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            <strong>In Stock:</strong>
-                            <span class="@(book.StockCount == 0 ? "text-danger" : "")">@book.StockCount</span>
-                        </small>
-                    </p>
-                </div>
-                <div class="card-footer d-flex justify-content-end" style="gap: 14px;">
-                    <button class="btn btn-primary bg-danger border-danger" @onclick="() => LoanBook(book)">Slet Bog</button>
-                    <button class="btn btn-primary" @onclick="() => LoanBook(book)" disabled="@book.StockCount == 0">Lån Bog</button>
-                </div>
-            </div>
-        </div>
+<div class="row align-items-center justify-content-between mb-4">
+    <div class="col">
+        <h3>Bog</h3>
     </div>
-    @if (book.Reviews.Any())
-    {
-        <div class="card rounded mt-4">
-            <!-- Add margin-top for spacing from the above content -->
-            <div class="card-body">
-                <h5 class="mb-3">Reviews</h5> <!-- Add margin-bottom to space out the title from the list -->
-                <ul class="list-group list-group-flush">
-                    <!-- Use list-group for styling individual items -->
-                    @foreach (var review in book.Reviews)
-                    {
-                        <li class="list-group-item">
-                            <!-- list-group-item gives padding and proper styling -->
-                            <!-- You can add more styling here if you want to customize further -->
-                            @review
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    }
+    <div class="col-auto">
+        <button class="btn btn-primary" @onclick="GoToBookCatalog">Tilbage</button>
+    </div>
 </div>
 
+@if (bookRegistry == null)
+{
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Bog ikke fundet</h4>
+        <p>Den bog du prøver at finde findes ikke.</p>
+        <hr>
+        <p class="mb-0">Prøv igen.</p>
+    </div>
+}
+else
+{
+    <div class="container my-4">
+        <div class="card mb-3 rounded">
+            <!-- Added rounded class here -->
+            <div class="row g-0">
+                <div class="col-md">
+                    <img src="Image/book-placeholder.png" class="img-fluid h-100" alt="Book Image"/> <!-- Removed rounded-start class -->
+                </div>
+                <div class="vr"/>
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title">@bookRegistry.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@bookRegistry.Author</h6>
+                        <p class="card-text">@bookRegistry.Description</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <strong>Genre:</strong> @bookRegistry.Genre
+                            </small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <strong>ISBN:</strong> @bookRegistry.Isbn
+                            </small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <strong>På lager:</strong>
+                                <span class="@(bookCount == 0 ? "text-danger" : "")">@bookCount</span>
+                            </small>
+                        </p>
+                    </div>
+                    <AuthorizeView>
+                        <Authorized>
+                            <div class="card-footer d-flex justify-content-end justify-content-between" style="gap: 14px;">
+                                @if (isLibrarian)
+                                {
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-danger shadow-none" disabled="@(bookCount == 0)" @onclick="RemoveBook">-</button>
+                                        <button type="button" class="btn btn-outline-success shadow-none" @onclick="AddBook">+</button>
+                                    </div>
+                                }
+                                <div>
+                                    @if (isLibrarian)
+                                    {
+                                        <button class="btn btn-danger" @onclick="deleteBookRegistry">Slet Bog</button>
+                                    }
+                                    else
+                                    {
+                                        @if (HasUserLoanedBook())
+                                        {
+                                            <button class="btn btn-primary" @onclick="DeliverBook">Aflever Bog</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary" @onclick="LoanBook" disabled="@(bookCount == 0)">Lån Bog</button>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </Authorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+        @* @if (book.Reviews.Any()) *@
+        @* { *@
+        @*     <div class="card rounded mt-4"> *@
+        @*         <!-- Add margin-top for spacing from the above content --> *@
+        @*         <div class="card-body"> *@
+        @*             <h5 class="mb-3">Reviews</h5> <!-- Add margin-bottom to space out the title from the list --> *@
+        @*             <ul class="list-group list-group-flush"> *@
+        @*                 <!-- Use list-group for styling individual items --> *@
+        @*                 @foreach (var review in book.Reviews) *@
+        @*                 { *@
+        @*                     <li class="list-group-item"> *@
+        @*                         <!-- list-group-item gives padding and proper styling --> *@
+        @*                         <!-- You can add more styling here if you want to customize further --> *@
+        @*                         @review *@
+        @*                     </li> *@
+        @*                 } *@
+        @*             </ul> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* } *@
+    </div>
+}
 
 @code {
+    private bool isLibrarian;
 
-    private readonly Book book = new()
+    private BookRegistry bookRegistry;
+    private ICollection<Book> books;
+    private User currentUser;
+
+    private async void deleteBookRegistry()
     {
-        ISBN = "1234567890",
-        Title = "Example Book Title",
-        Author = "Author Name",
-        Genre = "Fiction",
-        Description = "This is an example book description.",
-        ImageUrl = "Image/book-placeholder.png",
-        Reviews = new List<string>
+        var response = await bookRegistryService.Delete(new BookRegistryDeleteDto(bookRegistry.Isbn));
+        if (response.IsSuccessful)
         {
-            "Review 1",
-            "Review 2"
+            navMgr.NavigateTo("/BookCatalog");
         }
-    };
+        else
+        {
+            Console.WriteLine("failed to delete book registry: " + response.Message);
+        }
+    }
 
-    private void deleteBook(Book book)
+    private int bookCount = 0;
+
+    private async void AddBook()
     {
-    // bookService.DeleteBook(book);
+        var bookCreated = await bookService.CreateAsync(new BookCreationDto(null, bookRegistry.Isbn, null));
+        Console.WriteLine("Book created book view 1: " + bookCreated.Message);
+        Console.WriteLine("Book created book view 2: " + bookCreated.IsSuccessful);
+        if (bookCreated.IsSuccessful)
+        {
+            Console.WriteLine("here book count up");
+            books.Append(new Book(bookCreated.Uuid, bookCreated.Isbn, bookCreated.LoanerUuid));
+            ++bookCount;
+            StateHasChanged();
+        }
+    }
+
+    private async void RemoveBook()
+    {
+        Book bookToDelete = null;
+        foreach (var book in books)
+        {
+            if (book.LoanerUuid.IsNullOrEmpty())
+            {
+                bookToDelete = book;
+                break;
+            }
+        }
+        if (bookToDelete == null)
+        {
+            return;
+        }
+        var bookCreated = await bookService.DeleteAsync(new BookDeleteDto(bookToDelete.UUID, bookToDelete.Isbn, ""));
+        Console.WriteLine("Book deleted book view 1: " + bookCreated.Message);
+        Console.WriteLine("Book deleted book view 2: " + bookCreated.IsSuccessful);
+        if (bookCreated.IsSuccessful)
+        {
+            Console.WriteLine("here book count up");
+            books.Remove(bookToDelete);
+            --bookCount;
+            StateHasChanged();
+        }
+    }
+
+    private bool HasUserLoanedBook()
+    {
+        if (books.IsNullOrEmpty())
+        {
+            return false;
+        }
+        return books.Any(b =>
+        {
+            if (b.LoanerUuid.IsNullOrEmpty())
+            {
+                return false;
+            }
+            return b.LoanerUuid == currentUser.UUID;
+        });
     }
 
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        return base.OnInitializedAsync();
+        bookRegistry = bookStateService.CurrentBook;
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        isLibrarian = user.IsInRole("Librarian");
+        Console.WriteLine("user.Identity.Name: " + user.Identity?.Name);
+        Console.WriteLine("here here yeah: " + user.Identity.Name.IsNullOrEmpty());
+        // ???
+        if (!user.Identity.Name.IsNullOrEmpty())
+        {
+            Console.WriteLine("user.Identity.Name is null or empty");
+            currentUser = await userClient.GetUserByEmailAsync(user.Identity.Name);
+            Console.WriteLine("currentUser: " + currentUser.Email);
+        }
+        books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
+        foreach (var book in books)
+        {
+            if (book.LoanerUuid.IsNullOrEmpty())
+            {
+                ++bookCount;
+            }
+        }
     }
 
-    private void LoanBook(Book book)
+    private async Task LoanBook()
     {
-    // Logic to loan the book
+        foreach (var book in books)
+        {
+            if (book.LoanerUuid.IsNullOrEmpty())
+            {
+                var response = await bookService.UpdateBook(new BookUpdateDto(book.UUID, book.Isbn, currentUser.UUID));
+                Console.WriteLine("Book wraaa 1: " + response.Message);
+                Console.WriteLine("Book wraaa 2: " + response.IsSuccessful);
+                if (response.IsSuccessful)
+                {
+                    book.LoanerUuid = currentUser.UUID;
+                    --bookCount;
+                    StateHasChanged();
+                }
+                return;
+            }
+        }
     }
 
-    public class Book
+    private async Task DeliverBook()
     {
-        public string ISBN { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public string Genre { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
-        public int StockCount { get; set; }
-        public List<string> Reviews { get; set; }
+        var loanedBook = books.FirstOrDefault(b => b.LoanerUuid == currentUser.UUID);
+        if (loanedBook != null)
+        {
+            var response = await bookService.UpdateBook(new BookUpdateDto(loanedBook.UUID, loanedBook.Isbn, "return"));
+            Console.WriteLine("Book returned: " + response.Message);
+            if (response.IsSuccessful)
+            {
+                loanedBook.LoanerUuid = null;
+                ++bookCount;
+                StateHasChanged();
+            }
+        }
+    }
+
+
+    private void GoToBookCatalog()
+    {
+        navMgr.NavigateTo("/BookCatalog");
     }
 
 }

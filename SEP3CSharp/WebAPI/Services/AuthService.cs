@@ -20,21 +20,26 @@ public class AuthService : IAuthService
         this.config = config;
     }
 
-    public async Task<UserLoginDto> LoginAsync(string email, string password)
+    public async Task<UserLoginDto> LoginAsync(UserLoginDto dto)
     {
         try
         {
             Console.WriteLine("login auth service 1");
-            var user = await ValidateUser(email, password);
+            var user = await ValidateUser(dto);
             Console.WriteLine("login auth service 2");
-            var token = GenerateJwt(user);
+            var token = GenerateJwt(dto);
             Console.WriteLine("token: " + token);
-            return new UserLoginDto(email, password, token);
+            dto.IsSuccess = true;
+            dto.Token = token;
+            dto.Message = "Login successfuldt";
+            return dto;
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return new UserLoginDto(email, password, null, false);
+            dto.IsSuccess = false;
+            dto.Message = e.Message;
+            return dto;
         }
     }
 
@@ -43,20 +48,21 @@ public class AuthService : IAuthService
         throw new NotImplementedException();
     }
 
-    public Task<User> ValidateUser(string email, string password)
+    public async Task<UserLoginDto> ValidateUser(UserLoginDto dto)
     {
         try
         {
             users = userDao.GetAllAsync().Result;
             Console.WriteLine("users: " + users);
             var existingUser = users.FirstOrDefault(u =>
-                u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+                u.Email.Equals(dto.Email, StringComparison.OrdinalIgnoreCase));
 
             if (existingUser == null) throw new Exception("Bruger ikke fundet");
 
-            if (!existingUser.Password.Equals(password)) throw new Exception("Forkert kodeord");
+            if (!existingUser.Password.Equals(dto.Password)) throw new Exception("Forkert kodeord");
             Console.WriteLine("existingUser: " + existingUser);
-            return Task.FromResult(existingUser);
+            dto.IsSuccess = true;
+            return dto;
         }
         catch (Exception e)
         {
@@ -82,13 +88,10 @@ public class AuthService : IAuthService
 
     public Action<ClaimsPrincipal> OnAuthStateChanged { get; set; }
 
-    private List<Claim> GenerateClaims(User user)
+    private List<Claim> GenerateClaims(UserLoginDto dto)
     {
-        Console.WriteLine("generate claims 0");
-        Console.WriteLine("user : " + user);
-        Console.WriteLine("Subject: " + config["Jwt:Subject"]);
-        Console.WriteLine("Issuer: " + config["Jwt:Issuer"]);
-        Console.WriteLine("Audience: " + config["Jwt:Audience"]);
+        User user = userDao.GetByEmailAsync(dto.Email).Result;
+        Console.WriteLine("user in claims: " + user.ToString());
 
         var claims = new[]
         {
@@ -106,10 +109,10 @@ public class AuthService : IAuthService
         return claims.ToList();
     }
 
-    private string GenerateJwt(User user)
+    private string GenerateJwt(UserLoginDto dto)
     {
         Console.WriteLine("generate jwt 0");
-        var claims = GenerateClaims(user);
+        var claims = GenerateClaims(dto);
         Console.WriteLine("generate jwt 1.5");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
         var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);

@@ -6,15 +6,15 @@ namespace WebAPI.Schema;
 [ExtendObjectType(OperationTypeNames.Query)]
 public class BookQuery
 {
-    private readonly IBookRegistryLogic _bookRegistryLogic;
+    private readonly IBookLogic _bookLogic;
 
-    public BookQuery(IBookRegistryLogic bookRegistryLogic)
+    public BookQuery(IBookLogic bookLogic)
     {
-        _bookRegistryLogic = bookRegistryLogic;
+        _bookLogic = bookLogic;
     }
-    
-    public async Task<IEnumerable<BookRegistry>> GetAllBook()
+
+    public async Task<ICollection<Book>> AllBooks(string isbn)
     {
-        return await _bookRegistryLogic.GetAllBookRegistriesAsync();
+        return await _bookLogic.GetAllBooksAsync(isbn);
     }
 }

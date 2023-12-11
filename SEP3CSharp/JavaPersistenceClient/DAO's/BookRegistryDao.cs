@@ -16,19 +16,38 @@ public class BookRegistryDao : IBookRegistryDao
         _httpClient = new HttpClient();
     }
 
-    async Task<BookRegistry> IGenericDao<BookRegistry>.CreateAsync(BookRegistry entity)
+    public async Task<BookRegistryCreationDto> CreateAsync(BookRegistryCreationDto dto)
     {
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
+        BookRegistry bookRegistry = new BookRegistry(
+            dto.Title,
+            dto.Author,
+            dto.Genre,
+            dto.Isbn,
+            dto.Description,
+            ""
+        );
+
+        var jsonContent =
+            new StringContent(JsonConvert.SerializeObject(bookRegistry), Encoding.UTF8, "application/json");
+        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(bookRegistry));
         Console.WriteLine("jsonContent11: " + jsonContent);
         var response = await _httpClient.PostAsync("http://localhost:7777/book-registry/create", jsonContent);
         Console.WriteLine("response: " + response);
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
+        if (response.IsSuccessStatusCode)
+        {
+            dto.IsSuccessful = true;
+            dto.Message = "Bog registreret blev oprettet";
+            return dto;
+        }
 
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
+        dto.IsSuccessful = false;
+        dto.Message = "Bog registreret blev ikke oprettet";
+        return dto;
+    }
+
+    public Task<BookRegistry> UpdateAsync(BookRegistryUpdateDto dto)
+    {
+        throw new NotImplementedException();
     }
 
     public Task<BookRegistry> GetByUuidAsync(string uuid)
@@ -38,7 +57,7 @@ public class BookRegistryDao : IBookRegistryDao
 
     public async Task<ICollection<BookRegistry>> GetAllAsync()
     {
-        var url = $"{ServerOptions.serverUrl}/book/getAll";
+        var url = $"{ServerOptions.serverUrl}/book-registry/get/all";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -59,7 +78,7 @@ public class BookRegistryDao : IBookRegistryDao
         throw new Exception($"Error getting all book registries. Status code: {response.StatusCode}");
     }
 
-    public Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters)
+    public Task<ICollection<BookRegistry>> GetAsync(ISearchParametersDto searchParameters)
     {
         throw new NotImplementedException();
     }
@@ -69,9 +88,9 @@ public class BookRegistryDao : IBookRegistryDao
         throw new NotImplementedException();
     }
 
-    public async Task DeleteAsync(string uuid)
+    public async Task<BookRegistryDeleteDto> DeleteAsync(BookRegistryDeleteDto dto)
     {
-        var url = $"{ServerOptions.serverUrl}/books/delete/{uuid}";
+        var url = $"{ServerOptions.serverUrl}/book-registry/delete/{dto.Isbn}";
 
         var response = await _httpClient.DeleteAsync(url);
 
@@ -79,17 +98,23 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine($"Response status code: {response.StatusCode}");
 
         if (response.IsSuccessStatusCode)
-            return;
+        {
+            dto.IsSuccessful = true;
+            dto.Message = "Bog registreret blev slettet";
+        }
+        else
+        {
+            dto.IsSuccessful = false;
+            dto.Message = "Bog registreret blev ikke slettet";
+        }
 
-        var errorResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"Error Response: {errorResponse}");
-
-        throw new Exception($"Error deleting book registry. Status code: {response.StatusCode}");
+        return dto;
     }
+
 
     public async Task<BookRegistry> GetByBookTitleAsync(string title)
     {
-        var url = $"{ServerOptions.serverUrl}/book/getByTitle/{title}";
+        var url = $"{ServerOptions.serverUrl}/book-registry/getByTitle/{title}";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -112,7 +137,8 @@ public class BookRegistryDao : IBookRegistryDao
 
     public async Task<BookRegistry> GetByIsbnAsync(string isbn)
     {
-        var url = $"{ServerOptions.serverUrl}/book/getByIsbn/{isbn}";
+        Console.WriteLine("get by isbn");
+        var url = $"{ServerOptions.serverUrl}/book-registry/getByIsbn/{isbn}";
 
         var response = await _httpClient.GetAsync(url);
 
@@ -131,30 +157,5 @@ public class BookRegistryDao : IBookRegistryDao
         Console.WriteLine($"Error Response: {errorResponse}");
 
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
-    }
-
-    public Task<Book?> GetByIdAsync(int bookId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    private async Task<BookRegistry> CreateAsync(BookRegistry entity)
-    {
-        var jsonContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-        Console.WriteLine("JSON: " + JsonConvert.SerializeObject(entity));
-        Console.WriteLine("jsonContent11: " + jsonContent);
-        var response = await _httpClient.PostAsync("http://localhost:7777/book_registry/register", jsonContent);
-        Console.WriteLine("response: " + response);
-        if (!response.IsSuccessStatusCode)
-            throw new Exception($"Error creating bookRegistry: {JsonConvert.SerializeObject(response)}");
-
-        var jsonResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(jsonResponse);
-        return JsonConvert.DeserializeObject<BookRegistry>(jsonResponse);
     }
 }

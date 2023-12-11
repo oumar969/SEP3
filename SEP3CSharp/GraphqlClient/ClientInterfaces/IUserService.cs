@@ -5,10 +5,12 @@ namespace HttpClients.ClientInterfaces;
 
 public interface IUserService
 {
-    Task<User> Create(UserCreationDto dto);
-    Task<IEnumerable<User>> GetUsers(string? usernameContains = null);
+    Task<UserCreationDto> Create(UserCreationDto dto);
+    Task<ICollection<User>> GetUsers(string? usernameContains = null);
 
     Task<string> Delete(string uuid);
+    Task<User> GetUserByEmailAsync(string email);
+    Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid);
 
     class UserGraphqlDto
     {

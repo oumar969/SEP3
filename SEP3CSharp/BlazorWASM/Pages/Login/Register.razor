@@ -10,17 +10,17 @@
     <h3 class="login-title">Registrer</h3>
 
     @if (ShowErrors)
-       {
-           <div class="login-error">
-               <span>@Message</span>
-           </div>
-       }
-       else if (ShowSuccess)
-       {
-           <div class="login-success">
-               <span>Brugeren blev oprettet</span>
-           </div>
-       }
+    {
+        <div class="login-error">
+            <span>@Message</span>
+        </div>
+    }
+    else if (ShowSuccess)
+    {
+        <div class="login-success">
+            <span>Brugeren blev oprettet</span>
+        </div>
+    }
 
     <EditForm Model="registerModel" OnValidSubmit="HandleRegistration" class="login-form">
         <DataAnnotationsValidator/>
@@ -74,22 +74,26 @@
         Console.WriteLine("handling registration");
         try
         {
-            var userCreatedMsg = await userService.Create(new UserCreationDto(
+            if (!IsValidtInput())
+            {
+                return;
+            }
+            UserCreationDto userCreatedDto = await userService.Create(new UserCreationDto(
                 registerModel.FirstName, registerModel.LastName, registerModel.Email, registerModel.Password, registerModel.IsLibrarian));
 
-            if (userCreatedMsg.Equals("ok"))
+            if (userCreatedDto.IsSuccessful)
             {
                 Console.WriteLine("created user");
                 ShowSuccess = true;
                 ShowErrors = false;
-    // fix
+                navMgr.NavigateTo("/Login");
             }
             else
             {
                 Console.WriteLine("did not create user");
                 ShowSuccess = false;
                 ShowErrors = true;
-                Message = "Brugeren blev ikke oprettet: " + userCreatedMsg;    // fix
+                Message = userCreatedDto.ErrMsg;
             }
         }
         catch
@@ -98,7 +102,55 @@
             Console.WriteLine(e);
             ShowSuccess = false;
             ShowErrors = true;
-            Message = "Fejl under oprettelse af bruger: " + e.Message;        }
+            Message = "Fejl under oprettelse af bruger: " + e.Message;
+        }
     }
+
+    private bool IsValidtInput()
+    {
+        if (string.IsNullOrWhiteSpace(registerModel.FirstName))
+        {
+            Message = "Fornavn skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.LastName))
+        {
+            Message = "Efternavn skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.Email))
+        {
+            Message = "Email skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.Password))
+        {
+            Message = "Kodeord skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (string.IsNullOrWhiteSpace(registerModel.ConfirmPassword))
+        {
+            Message = "Bekræft kodeord skal udfyldes";
+            ShowErrors = true;
+        }
+        else if (registerModel.Password.Length < 8)
+        {
+            Message = "Kodeord skal være mindst 8 karakterer langt";
+            ShowErrors = true;
+        }
+        else if (registerModel.Password != registerModel.ConfirmPassword)
+        {
+            Message = "Kodeord og bekræft kodeord skal være ens";
+            ShowErrors = true;
+        }
+        else
+        {
+            ShowErrors = false;
+            return true;
+        }
+        return false;
+    }
+
+}
 
 }

@@ -2,7 +2,7 @@ using Application.LogicInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 
-namespace WebAPI.Schema;
+namespace WebAPI.Mutations;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
 public class BookRegistryMutation
@@ -15,7 +15,8 @@ public class BookRegistryMutation
         _bookRegistryLogic = bookRegistryLogic;
     }
 
-    public async Task<BookRegistry> CreateBookRegistry(string title, string author, string genre, string isbn,
+    public async Task<BookRegistryCreationDto> CreateBookRegistry(string title, string author, string genre,
+        string isbn,
         string description)
     {
         Console.WriteLine("create book mutation");
@@ -27,18 +28,17 @@ public class BookRegistryMutation
             description
         );
         Console.WriteLine("create book mutation 2");
-        return await _bookRegistryLogic.CreateAsync(bookRegistry);
-    }
-    
-    public async Task<ICollection<BookRegistry>> getAllBookRegistry()
-    {
-        Console.WriteLine("get all book mutation");
-        return await _bookRegistryLogic.GetAllBookRegistriesAsync();
+        BookRegistryCreationDto created = await _bookRegistryLogic.CreateAsync(bookRegistry);
+        Console.WriteLine(created);
+        return created;
     }
 
-    public async Task DeleteBookRegistry(string isbn)
+
+    public async Task<BookRegistryDeleteDto> DeleteBookRegistry(string isbn)
     {
-        await _bookRegistryLogic.DeleteAsync(isbn);
+        Console.WriteLine("delete book mutation");
+        BookRegistryDeleteDto dto = new BookRegistryDeleteDto(isbn);
+        return await _bookRegistryLogic.DeleteAsync(dto);
     }
 
     public async Task<BookRegistry> EditBookRegistry(string isbn, string title, string author, string genre,

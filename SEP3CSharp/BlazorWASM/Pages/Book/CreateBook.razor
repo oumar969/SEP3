@@ -10,6 +10,7 @@
 @inject NavigationManager navMgr
 @inject IGraphQLClient graphqlClient;
 @inject IBookRegistryService bookRegistryService;
+@inject IBookService bookService;
 
 
 <div class="book-form-card">
@@ -46,16 +47,16 @@
     </div>
 
     @if (!string.IsNullOrEmpty(msg))
-       {
-           @if (msg.Contains("Error:"))
-           {
-               <div class="book-form-error">@msg</div>
-           }
-           else
-           {
-               <div class="book-form-success">@msg</div>
-           }
-       }
+    {
+        @if (!bookRegistryCreated.IsSuccessful)
+        {
+            <div class="book-form-error">@msg</div>
+        }
+        else
+        {
+            <div class="book-form-success">@msg</div>
+        }
+    }
 
     <button @onclick="Create" class="book-form-button">Registrer</button>
 </div>
@@ -76,31 +77,42 @@
 
     AuthenticationState authState;
     ClaimsPrincipal user;
-    BookRegistryCreationDto dto;
+    BookRegistryCreationDto bookRegistryCreated = new BookRegistryCreationDto();
 
 
     private async Task Create()
     {
         msg = "";
         color = "black";
-        
+
         if (!BookRegistryValidator())
         {
-            return; 
+            return;
         }
-        
+
         try
         {
-            var BookRegistryCreatedMsg = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription));
-            if (BookRegistryCreatedMsg.Equals("ok"))
+            bookRegistryCreated = await bookRegistryService.Create(new BookRegistryCreationDto(bookTitle, bookAuthor, bookGenre, bookIsbn, bookDescription, "", false, ""));
+            Console.WriteLine(bookRegistryCreated.Title);
+            if (bookRegistryCreated.IsSuccessful)
             {
                 msg = "BookRegistry blev oprettet";
                 color = "green";
+
+                for (int i = 0; i < stockNumber; i++)
+                {
+                    var bookCreated = await bookService.CreateAsync(new BookCreationDto("", bookIsbn, ""));
+                    Console.WriteLine("bookCreated:");
+                    Console.WriteLine(bookCreated.IsSuccessful);
+                    Console.WriteLine(bookCreated.Message);
+                }
+
+                navMgr.NavigateTo("/BookCatalog");
             }
             else
             {
-                msg = "BookRegistry blev ikke oprettet, " + BookRegistryCreatedMsg;
                 color = "red";
+                msg = bookRegistryCreated.Message;
             }
         }
         catch (Exception e)
@@ -111,7 +123,7 @@
         }
     }
 
-    
+
     private bool BookRegistryValidator()
     {
         if (string.IsNullOrEmpty(bookTitle))
@@ -149,13 +161,13 @@
             msg = "Body cannot be more than 100 characters!";
             return false;
         }
-        if(bookIsbn.Length <= 13)
+        if (bookIsbn.Length != 13)
         {
             msg = "ISBN skal være 13 cifre";
             return false;
         }
-        
-        return true; 
+
+        return true;
     }
 
 }

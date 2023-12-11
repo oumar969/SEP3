@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">VIA Bibliotek</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -32,16 +34,22 @@
         </div>
         <AuthorizeView>
             <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Profile">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Profil
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="ViewUsers">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Brugere
-                    </NavLink>
-                </div>
+                @if (isLibrarian)
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="ViewUsers">
+                            <span class="oi oi-list-rich" aria-hidden="true"></span> Brugere
+                        </NavLink>
+                    </div>
+                }
+                else
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Profile">
+                            <span class="oi oi-list-rich" aria-hidden="true"></span> Profil
+                        </NavLink>
+                    </div>
+                }
             </Authorized>
         </AuthorizeView>
     </nav>
@@ -49,12 +57,20 @@
 
 @code {
     private bool collapseNavMenu = true;
+    private bool isLibrarian = false;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        isLibrarian = user.IsInRole("Librarian");
     }
 
 }

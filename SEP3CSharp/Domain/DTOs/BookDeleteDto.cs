@@ -1,12 +1,12 @@
-﻿namespace Domain.DTOs;
+namespace Domain.DTOs;
 
-public class BookUpdateDto
+public class BookDeleteDto
 {
-    public BookUpdateDto()
+    public BookDeleteDto()
     {
     }
 
-    public BookUpdateDto(string uuid, string isbn, string loanerUuid, bool isSuccessful = false, string message = "")
+    public BookDeleteDto(string uuid, string isbn, string loanerUuid, bool isSuccessful = false, string message = "")
     {
         Uuid = uuid;
         Isbn = isbn;

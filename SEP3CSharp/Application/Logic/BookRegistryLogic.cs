@@ -17,55 +17,17 @@ public class BookRegistryLogic : IBookRegistryLogic
         _userDao = userDao;
     }
 
-    public Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters)
+
+    public async Task<BookRegistryCreationDto> CreateAsync(BookRegistryCreationDto dto)
     {
-        return _bookRegistryDao.GetAsync(searchRegistryParameters);
-    }
-
-    public async Task UpdateAsync(BookRegistryUpdateDto dto)
-    {
-        var existing = await _bookRegistryDao.GetByUuidAsync(dto.Isbn);
-
-        if (existing == null) throw new Exception($"Book with ISBN {dto.Isbn} not found!");
-
         ValidateBookRegistry(dto);
-
-        existing.Title = dto.Title ?? existing.Title;
-        existing.Author = dto.Author ?? existing.Author;
-        existing.Genre = dto.Genre ?? existing.Genre;
-        existing.Isbn = dto.Isbn ?? existing.Isbn;
-        existing.Description = dto.Description ?? existing.Description;
-        existing.Reviews = dto.Review ?? existing.Reviews;
-
-        if (existing.Title.Length > 10) throw new Exception($"{existing.Title} cannot be longer than 10 characters.");
-
-        ValidateBookRegistry(existing);
-
-        await _bookRegistryDao.UpdateAsync(existing);
-    }
-
-
-    async Task<BookRegistry> IBookRegistryLogic.CreateAsync(BookRegistryCreationDto dto)
-    {
-        Console.WriteLine("create book mutation 3");
-        ValidateBookRegistry(dto);
-        Console.WriteLine("create book mutation 4");
-        var newBookRegistry = new BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
-        var created = await _bookRegistryDao.CreateAsync(newBookRegistry);
+        var created = await _bookRegistryDao.CreateAsync(dto);
         return created;
     }
-    /*
-    public async Task<BookRegistry> GetByIsbnAsync(string id)
-    {
-        return await _bookRegistryDao.GetByIsbnAsync(id);
-    }
-*/
 
-    public async Task DeleteAsync(string uuid)
+    public async Task<BookRegistryDeleteDto> DeleteAsync(BookRegistryDeleteDto dto)
     {
-        var book = await _bookRegistryDao.GetByUuidAsync(uuid);
-        if (book == null) throw new Exception($"Book with UUID {uuid} was not found!");
-        await _bookRegistryDao.DeleteAsync(uuid);
+        return await _bookRegistryDao.DeleteAsync(dto);
     }
 
     public Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync()
@@ -76,6 +38,11 @@ public class BookRegistryLogic : IBookRegistryLogic
     public Task<BookRegistry> EditAsync(int id, BookRegistryUpdateDto dto)
     {
         throw new NotImplementedException();
+    }
+
+    public Task<BookRegistry> GetBookRegistryByIsbnAsync(string isbn)
+    {
+        return _bookRegistryDao.GetByIsbnAsync(isbn);
     }
 
     private void ValidateBookRegistry(BookRegistryUpdateDto bookRegistry)
@@ -89,58 +56,6 @@ public class BookRegistryLogic : IBookRegistryLogic
         if (string.IsNullOrWhiteSpace(bookRegistry.Isbn)) throw new Exception("Book ISBN is required.");
 
         if (string.IsNullOrWhiteSpace(bookRegistry.Description)) throw new Exception("Book description is required.");
-    }
-
-
-    public async Task UpdateAsync(BookUpdateDto dto)
-    {
-        var existing = await _bookRegistryDao.GetByUuidAsync(dto.UUID);
-
-        if (existing == null) throw new Exception($"Book with ID {dto.UUID} not found!");
-
-        User? user = null;
-        if (dto.BorrowerId != null)
-        {
-            // user = await _userDao.GetByUuidAsync((int)dto.BorrowerId);
-            // if (user == null) throw new Exception($"User with id {dto.BorrowerId} was not found.");
-        }
-
-        var titleToUse = dto.Title ?? existing.Title;
-        var authorToUse = dto.Author ?? existing.Author;
-        var genreToUse = dto.Genre ?? existing.Genre;
-        var isbnToUse = dto.Isbn ?? existing.Isbn;
-        var descriptionToUse = dto.Description ?? existing.Description;
-        var reviewToUse = dto.Review ?? existing.Reviews;
-
-        if (titleToUse.Length > 10) throw new Exception($"{dto.Title} cannot be longer than 10 characters.");
-
-        BookRegistry updated = new(titleToUse, authorToUse, genreToUse, isbnToUse, descriptionToUse, reviewToUse);
-
-        ValidateBookRegistry(updated);
-
-        await _bookRegistryDao.UpdateAsync(updated);
-    }
-
-    public async Task<BookRegistry> EditAsync(string id, BookRegistryCreationDto dto)
-    {
-        var existing = await _bookRegistryDao.GetByIsbnAsync(id);
-
-        if (existing == null) throw new Exception($"Book with ID {id} not found!");
-
-        ValidateBookRegistry(dto);
-
-        existing.Title = dto.Title ?? existing.Title;
-        existing.Author = dto.Author ?? existing.Author;
-        existing.Genre = dto.Genre ?? existing.Genre;
-        existing.Isbn = dto.Isbn ?? existing.Isbn;
-        existing.Description = dto.Description ?? existing.Description;
-        existing.Reviews = dto.Review ?? existing.Reviews;
-
-        ValidateBookRegistry(existing);
-
-        await _bookRegistryDao.UpdateAsync(existing);
-
-        return existing;
     }
 
     /*

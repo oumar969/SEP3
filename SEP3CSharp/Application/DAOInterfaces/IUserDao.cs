@@ -4,15 +4,16 @@ using FileData;
 
 namespace Application.DaoInterfaces;
 
-public interface IUserDao : IGenericDao<User>
+public interface IUserDao
 {
     Task<User> GetByEmailAsync(string email);
-    Task<User> CreateAsync(User user);
-    Task<User?> GetByUuidAsync(string uuid); 
+    Task<UserCreationDto> CreateAsync(UserCreationDto user);
+    Task<User?> GetByUuidAsync(string uuid);
     Task<User?> GetByUsernameAsync(string userName);
     Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters);
     Task<User?> GetByIdAsync(int id);
-    Task<User> UpdateAsync(User user);
-    Task DeleteAsync(int id);
+    Task<UserUpdateDto> UpdateAsync(UserUpdateDto user);
+    Task DeleteAsync(string uuid);
     Task<ICollection<User>> GetAllUsersAsync();
+    Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid);
 }

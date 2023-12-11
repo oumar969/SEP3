@@ -2,6 +2,7 @@
 @using HttpClients.ClientInterfaces
 @using Microsoft.AspNetCore.Components
 @using Domain.DTOs
+@using Microsoft.IdentityModel.Tokens
 @inject IAuthService authService
 @inject NavigationManager navMgr
 
@@ -49,17 +50,24 @@
         errorLabel = "";
         try
         {
+            if (email.IsNullOrEmpty() || password.IsNullOrEmpty())
+            {
+                errorLabel = "Indtast både email og password.";
+                return;
+            }
+
+
             Console.WriteLine("here0");
             var response = await authService.LoginAsync(new UserLoginDto(email, password));
-
-            if (response.Success)
+            Console.WriteLine("here " + response.IsSuccess);
+            if (response.IsSuccess)
             {
                 Console.WriteLine("here1");
                 navMgr.NavigateTo("/");
             }
             else
             {
-                errorLabel = "Invalid login credentials. Please try again.";
+                errorLabel = response.Message;
             }
         }
         catch (Exception e)

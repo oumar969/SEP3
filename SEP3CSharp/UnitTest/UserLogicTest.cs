@@ -16,7 +16,7 @@ namespace UnitTest
         public void Setup()
         {
             // Mock IUserDao
-            userDaoMock = new Mock<IUserDao>();//Mock er en klasse som lad os lave en fake version af en klasse
+            userDaoMock = new Mock<IUserDao>(); //Mock er en klasse som lad os lave en fake version af en klasse
             userLogic = new UserLogic(userDaoMock.Object);
         }
 
@@ -33,8 +33,8 @@ namespace UnitTest
                 IsLibrarian = false
             };
 
-            userDaoMock.Setup(u => u.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync((User)null);
-            userDaoMock.Setup(u => u.CreateAsync(It.IsAny<User>())).ReturnsAsync(new User());
+            // userDaoMock.Setup(u => u.GetByEmailAsync(It.IsAny<string>())).ReturnsAsync((User)null);
+            // userDaoMock.Setup(u => u.CreateAsync(It.IsAny<User>())).ReturnsAsync(new User());
 
             // Act
             var result = await userLogic.CreateAsync(userCreationDto);

@@ -1491,3 +1491,25 @@ K
 Domain/DTOs/UserLoginDto.cs,8\0\80201652356bf26acc9e9d3cc24caff9d699cc18
 X
 (WebAPI/Mutations/BookRegistryMutation.cs,b\9\b94a2204dae40b6397e0bb5527323c09259e0284
+^
+.GraphqlClient/ClientInterfaces/IUserService.cs,4\5\45376f662447e0ef7bfb966aab429d9c3e17b419
+b
+2GraphqlClient/Implementations/UserGraphqlClient.cs,3\b\3bbee35d436e7e35064fa0996217a8e87c13da34
+P
+ WebAPI/Mutations/UserMutation.cs,f\0\f013f36557405e35184d502bfa0fbc45c13fd8c3
+_
+/GraphqlClient/Implementations/JwtAuthService.cs,3\9\39b8aa6e51b3d425d6b73c6d44039aa9559de10e
+S
+#WebAPI/Queries/BookRegistryQuery.cs,7\c\7cab8d538e6c47cb8c747b98b47732aaef152e65
+V
+&JavaPersistenceClient/DAO's/BookDao.cs,f\2\f2290114852a8cfd2256a0838b637a6ed6d3d265
+P
+ WebAPI/Mutations/BookMutation.cs,2\2\22b8477e4d36ae475cfc474e0deecbaff9056a39
+U
+%Application/DAOInterfaces/IBookDao.cs,b\4\b4978b4504c8d362715a203e7b1fb906f15305ff
+N
+Application/Logic/BookLogic.cs,8\0\808e16f04ff480ca5b3c30fb002a12daf5fca2a5
+Y
+)Application/LogicInterfaces/IBookLogic.cs,7\b\7bbcbf4c821dffd9f66fb37385ce59865aeb33b9
+T
+$BlazorWASM/Pages/Book/BookView.razor,a\f\afab68b1f4015046f4f2ab0c2c9780c93891343a

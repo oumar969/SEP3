@@ -20,13 +20,12 @@ public class UserMutation
 
     public async Task<UserLoginDto> Login(string email, string password)
     {
+        UserLoginDto userLoginDto = new UserLoginDto(email, password, "");
         Console.WriteLine("login mutation");
-        var userLoginDto = await _authService.LoginAsync(email, password);
-        Console.WriteLine("userLoginDto: " + userLoginDto);
-        return userLoginDto;
+        return await _authService.LoginAsync(userLoginDto);
     }
 
-    public async Task<User> CreateUser(string firstName, string lastName, string email, string password,
+    public async Task<UserCreationDto> CreateUser(string firstName, string lastName, string email, string password,
         bool isLibrarian)
     {
         var userCreationDto = new UserCreationDto(
@@ -44,5 +43,15 @@ public class UserMutation
     public async Task DeleteUser(string uuid)
     {
         await _userLogic.DeleteAsync(uuid);
+    }
+
+
+    public async Task<UserUpdateDto> EditUser(string uuid, string firstName, string lastName, string email,
+        string password,
+        bool isLibrarian)
+    {
+        var userUpdateDto = new UserUpdateDto(firstName, lastName, email, password, isLibrarian);
+
+        return await _userLogic.UpdateAsync(userUpdateDto);
     }
 }

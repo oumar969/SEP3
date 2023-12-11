@@ -1,31 +1,39 @@
 ﻿using Application.Logic;
 using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Models;
 
-namespace WebAPI.Schema;
+namespace WebAPI.Mutations;
 
 [ExtendObjectType(OperationTypeNames.Mutation)]
 public class BookMutation
 {
     private readonly IBookLogic _bookLogic;
 
-    public BookMutation(BookLogic bookLogic)
+    public BookMutation(IBookLogic bookLogic)
     {
         _bookLogic = bookLogic;
     }
 
-    public async Task<Book> DeliverBookAsync(Book book, User user)
+    public async Task<BookCreationDto> CreateBook(string isbn)
     {
-        return await _bookLogic.DeliverAsync(book, user);
+        BookCreationDto dto = new BookCreationDto(Guid.NewGuid().ToString(), isbn, "");
+        Console.WriteLine("hej bak2");
+        BookCreationDto bookCreationDto = await _bookLogic.CreateAsync(dto);
+        Console.WriteLine("bookCreationDto1: " + bookCreationDto.IsSuccessful);
+        Console.WriteLine("bookCreationDto2: " + bookCreationDto.Message);
+        return bookCreationDto;
     }
 
-    public async Task DeleteBook(string isbn)
+    public async Task<BookDeleteDto> DeleteBook(string uuid, string isbn, string loanerUuid)
     {
-        await _bookLogic.DeleteAsync(isbn);
+        BookDeleteDto dto = new BookDeleteDto(uuid, isbn, loanerUuid);
+        return await _bookLogic.DeleteAsync(dto);
     }
 
-    public async Task<Book?> LoanBook(Book book, User user)
+    public async Task<BookUpdateDto> UpdateBook(string uuid, string isbn, string loanerUuid)
     {
-        return await _bookLogic.LoanAsync(book, user);
+        BookUpdateDto dto = new BookUpdateDto(uuid, isbn, loanerUuid);
+        return await _bookLogic.UpdateAsync(dto);
     }
 }

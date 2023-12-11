@@ -11,11 +11,11 @@ public interface IGenericDao<TEntity>
     // Read
     Task<TEntity> GetByUuidAsync(string uuid);
     Task<ICollection<TEntity>> GetAllAsync();
-    Task<ICollection<Book>> GetAsync(ISearchParametersDto searchParameters);
+    Task<ICollection<TEntity>> GetAsync(ISearchParametersDto searchParameters);
 
     // Update
     Task<TEntity> UpdateAsync(TEntity entity);
 
     // Delete
-    Task DeleteAsync(string uuid);
+    Task<Book> DeleteAsync(string uuid);
 }

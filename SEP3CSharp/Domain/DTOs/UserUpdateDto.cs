@@ -8,19 +8,22 @@ public class UserUpdateDto
     public string Email { get; set; }
     public string Password { get; set; }
     public bool IsLibrarian { get; set; }
-    
-    public UserUpdateDto(string uUID)
+    public bool IsSuccessful { get; set; }
+    public string ErrMsg { get; set; }
+
+    public UserUpdateDto()
     {
-        UUID = uUID;
     }
 
-    public UserUpdateDto(string firstName, string lastName, string email, string password, bool isLibrarian)
+    public UserUpdateDto(string firstName, string lastName, string email, string password, bool isLibrarian,
+        bool isSuccessful = false, string errMsg = "")
     {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Password = password;
         IsLibrarian = isLibrarian;
+        IsSuccessful = isSuccessful;
+        ErrMsg = errMsg;
     }
-    
 }

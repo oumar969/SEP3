@@ -1,35 +1,30 @@
 package com.via.sep3java.entity;
 
-import java.util.UUID;
-
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
 
-@Entity
-public class Book {
-  @Id
-  @Column(nullable = false)
-  private String uuid;
+@Entity public class Book
+{
+  @Id @Column(nullable = false) private String uuid;
 
-  @Column(nullable = false)
-  private String isbn;
+  @Column(nullable = false) private String isbn;
 
-  @Column(nullable = true)
-  private String loanerUuid;
+  @Column(nullable = false) private String loanerUuid;
 
   // Default constructor is required by JPA specifications
-  public Book() {
-    this.uuid = UUID.randomUUID().toString();
+  public Book()
+  {
   }
 
   // For the id field
-  public String getUuid() {
+  public String getUuid()
+  {
     return uuid;
   }
 
-  public void setUuid(String uuid) {
+  public void setUuid(String uuid)
+  {
     this.uuid = uuid;
   }
 

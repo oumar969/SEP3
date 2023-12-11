@@ -1,5 +1,6 @@
 ﻿using Application.DAOInterfaces;
 using Application.LogicInterfaces;
+using Domain.DTOs;
 using Domain.Models;
 
 namespace Application.Logic;
@@ -13,33 +14,29 @@ public class BookLogic : IBookLogic
         _bookDao = bookDao;
     }
 
-    public async Task<Book?> LoanAsync(Book book, User user)
+    public async Task<BookUpdateDto> UpdateAsync(BookUpdateDto dto)
     {
-        return await _bookDao.LoanAsync(book, user);
+        return await _bookDao.UpdateAsync(dto);
     }
 
-    public async Task<Book?> DeliverAsync(Book book, User user)
+    public Task<Book> GetByUuidAsync(string uuid)
     {
-        return await _bookDao.DeliverAsync(book, user);
+        return _bookDao.GetByUuidAsync(uuid);
     }
 
-    public Task<Book?> GetByUuidAsync(string uuid)
+    public async Task<ICollection<Book>> GetAllBooksAsync(string isbn)
     {
-        throw new NotImplementedException();
+        return await _bookDao.GetAllAsync(isbn);
     }
 
-    public Task<IEnumerable<Book>> GetAllBooksAsync()
+    public async Task<BookCreationDto> CreateAsync(BookCreationDto dto)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("lgoc");
+        return await _bookDao.CreateAsync(dto);
     }
 
-    public Task<Book> CreateAsync(Book book)
+    public async Task<BookDeleteDto> DeleteAsync(BookDeleteDto dto)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<Book> DeleteAsync(string uuid)
-    {
-        throw new NotImplementedException();
+        return await _bookDao.DeleteAsync(dto);
     }
 }

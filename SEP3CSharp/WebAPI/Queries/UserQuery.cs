@@ -19,7 +19,7 @@ public class UserQuery
         return await _userLogic.GetByUuidAsync(uuid);
     }
 
-    public async Task<IEnumerable<User>> GetAllUsers()
+    public async Task<ICollection<User>> GetAllUsers()
     {
         return await _userLogic.GetAllUsersAsync();
     }
@@ -29,12 +29,16 @@ public class UserQuery
         await _userLogic.DeleteAsync(uuid);
     }
 
-
-    public async Task<User> EditUser(string uuid, string firstName, string lastName, string email, string password,
-        bool isLibrarian)
+    public async Task<User> userByEmail(string email)
     {
-        var userUpdateDto = new UserUpdateDto(firstName, lastName, email, password, isLibrarian);
-
-        return await _userLogic.UpdateAsync(uuid, userUpdateDto);
+        Console.WriteLine("here1");
+        User user = await _userLogic.GetByEmailAsync(email);
+        Console.WriteLine("userQuery" + user);
+        return user;
+    }
+    
+    public async Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
+    {
+        return await _userLogic.GetAllLoanerBooks(loanerUuid);
     }
 }

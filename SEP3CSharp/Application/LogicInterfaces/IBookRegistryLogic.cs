@@ -5,11 +5,10 @@ namespace Application.LogicInterfaces;
 
 public interface IBookRegistryLogic
 {
-    Task<BookRegistry> CreateAsync(BookRegistryCreationDto dto);
-    Task<ICollection<Book>> GetAsync(SearchBookRegistryParametersDto searchRegistryParameters);
-    Task UpdateAsync(BookRegistryUpdateDto dto);
-    Task DeleteAsync(string uuid);
+    Task<BookRegistryCreationDto> CreateAsync(BookRegistryCreationDto dto);
+    Task<BookRegistryDeleteDto> DeleteAsync(BookRegistryDeleteDto dto);
     Task<ICollection<BookRegistry>> GetAllBookRegistriesAsync();
 
     Task<BookRegistry> EditAsync(int isbn, BookRegistryUpdateDto dto);
+    Task<BookRegistry> GetBookRegistryByIsbnAsync(string isbn);
 }

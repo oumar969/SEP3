@@ -16,31 +16,29 @@ public class UserLogic : IUserLogic
     }
 
 
-    public async Task<User> CreateAsync(UserCreationDto dto)
+    public async Task<UserCreationDto> CreateAsync(UserCreationDto dto)
     {
+        Console.WriteLine("dto0: " + dto);
         var existing = await userDao.GetByEmailAsync(dto.Email);
-        if (existing != null) throw new Exception("User already exists");
-
-        ValidateData(dto);
-
-        var toCreate = new User
+        if (existing != null)
         {
-            UUID = dto.UUID,
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Email = dto.Email,
-            Password = dto.Password,
-            IsLibrarian = dto.IsLibrarian
-        };
+            dto.ErrMsg = "Email already exists";
+            dto.IsSuccessful = false;
+            return dto;
+        }
 
-        var created = await userDao.CreateAsync(toCreate);
-        return created;
+        return await userDao.CreateAsync(dto);
     }
 
 
     public Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters)
     {
         return userDao.GetAsync(searchParameters);
+    }
+
+    public Task<UserUpdateDto> UpdateAsync(string uuid, UserUpdateDto dto)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task DeleteAsync(string uuid)
@@ -53,18 +51,25 @@ public class UserLogic : IUserLogic
 
     public Task<ICollection<User>> GetAllUsersAsync()
     {
-        throw new NotImplementedException();
+        return userDao.GetAllUsersAsync();
     }
 
-    public Task<User> UpdateAsync(string uuid, UserUpdateDto dto)
+    public async Task<User> GetByEmailAsync(string email)
     {
-        var toUpdate = new User
-        {
-            UUID = uuid, FirstName = dto.FirstName, LastName = dto.LastName, Password = dto.Password, Email = dto.Email,
-            IsLibrarian = dto.IsLibrarian
-        };
+        return await userDao.GetByEmailAsync(email);
+        // User? user = await userDao.GetByEmailAsync(email);
+        // Console.WriteLine(user + "UserLogic");
+        // return user;
+    }
 
-        return userDao.UpdateAsync(toUpdate);
+    public Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
+    {
+        return userDao.GetAllLoanerBooks(loanerUuid);
+    }
+
+    public Task<UserUpdateDto> UpdateAsync(UserUpdateDto dto)
+    {
+        return userDao.UpdateAsync(dto);
     }
 
     public async Task<User?> GetByUuidAsync(string uuid)
@@ -74,31 +79,28 @@ public class UserLogic : IUserLogic
 
     public static void ValidateData(UserCreationDto userCreationDto)
     {
-        var firstName = userCreationDto.FirstName;
-        var lastName = userCreationDto.LastName;
-        var email = userCreationDto.Email;
-        var password = userCreationDto.Password;
-
-        if (string.IsNullOrWhiteSpace(firstName))
+        if (string.IsNullOrWhiteSpace(userCreationDto.FirstName))
             throw new Exception("First Name is required");
 
-        if (string.IsNullOrWhiteSpace(lastName))
+        if (string.IsNullOrWhiteSpace(userCreationDto.LastName))
             throw new Exception("Last Name is required");
 
-        if (string.IsNullOrWhiteSpace(email))
+        if (string.IsNullOrWhiteSpace(userCreationDto.Email))
             throw new Exception("Email is required");
 
-        if (string.IsNullOrWhiteSpace(password))
+        if (string.IsNullOrWhiteSpace(userCreationDto.Password))
             throw new Exception("Password is required");
 
-        if (firstName.Length < 3 || lastName.Length < 3)
+        if (userCreationDto.FirstName.Length < 3 || userCreationDto.LastName.Length < 3)
             throw new Exception("Both First Name and Last Name must be at least 3 characters long");
 
-        if (email.Length < 5 || !IsValidEmail(email))
+        if (userCreationDto.Email.Length < 5 || !IsValidEmail(userCreationDto.Email))
             throw new Exception("Email is not valid");
 
-        if (password.Length < 8)
+        if (userCreationDto.Password.Length < 8)
+        {
             throw new Exception("Password must be at least 8 characters long");
+        }
     }
 
     public static bool IsValidEmail(string email)
