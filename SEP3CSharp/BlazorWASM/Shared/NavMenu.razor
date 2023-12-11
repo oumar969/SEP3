@@ -1,4 +1,6 @@
-﻿@inject AuthenticationStateProvider AuthenticationStateProvider
+﻿@using BlazorWASM.Services
+@using System.Security.Claims
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -34,7 +36,7 @@
         </div>
         <AuthorizeView>
             <Authorized>
-                @if (isLibrarian)
+                @if (userClaims.IsInRole("Librarian"))
                 {
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="ViewUsers">
@@ -57,20 +59,20 @@
 
 @code {
     private bool collapseNavMenu = true;
-    private bool isLibrarian = false;
+    ClaimsPrincipal? userClaims;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        userClaims = authState.User;
+    }
+
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
-    }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        isLibrarian = user.IsInRole("Librarian");
     }
 
 }

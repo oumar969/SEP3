@@ -4,6 +4,7 @@
 @using Domain.DTOs
 @using Domain.Models
 @using Microsoft.IdentityModel.Tokens
+@using System.Security.Claims
 @inject IBookService bookService
 @inject IBookRegistryService bookRegistryService;
 @inject IUserService userClient
@@ -65,7 +66,7 @@ else
                     <AuthorizeView>
                         <Authorized>
                             <div class="card-footer d-flex justify-content-end justify-content-between" style="gap: 14px;">
-                                @if (isLibrarian)
+                                @if (userClaims.IsInRole("Librarian"))
                                 {
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-outline-danger shadow-none" disabled="@(bookCount == 0)" @onclick="RemoveBook">-</button>
@@ -73,7 +74,7 @@ else
                                     </div>
                                 }
                                 <div>
-                                    @if (isLibrarian)
+                                    @if (userClaims.IsInRole("Librarian"))
                                     {
                                         <button class="btn btn-danger" @onclick="deleteBookRegistry">Slet Bog</button>
                                     }
@@ -119,11 +120,9 @@ else
 }
 
 @code {
-    private bool isLibrarian;
-
     private BookRegistry bookRegistry;
     private ICollection<Book> books;
-    private User currentUser;
+    ClaimsPrincipal? userClaims;
 
     private async void deleteBookRegistry()
     {
@@ -193,26 +192,16 @@ else
             {
                 return false;
             }
-            return b.LoanerUuid == currentUser.UUID;
+            return b.LoanerUuid == userClaims.FindFirst("UUID")?.Value;
         });
     }
 
 
     protected override async Task OnInitializedAsync()
     {
-        bookRegistry = bookStateService.CurrentBook;
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        isLibrarian = user.IsInRole("Librarian");
-        Console.WriteLine("user.Identity.Name: " + user.Identity?.Name);
-        Console.WriteLine("here here yeah: " + user.Identity.Name.IsNullOrEmpty());
-        // ???
-        if (!user.Identity.Name.IsNullOrEmpty())
-        {
-            Console.WriteLine("user.Identity.Name is null or empty");
-            currentUser = await userClient.GetUserByEmailAsync(user.Identity.Name);
-            Console.WriteLine("currentUser: " + currentUser.Email);
-        }
+        userClaims = authState.User;
+        bookRegistry = bookStateService.CurrentBook;
         books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
         foreach (var book in books)
         {
@@ -229,12 +218,12 @@ else
         {
             if (book.LoanerUuid.IsNullOrEmpty())
             {
-                var response = await bookService.UpdateBook(new BookUpdateDto(book.UUID, book.Isbn, currentUser.UUID));
+                var response = await bookService.UpdateBook(new BookUpdateDto(book.UUID, book.Isbn, userClaims.FindFirst("UUID")?.Value));
                 Console.WriteLine("Book wraaa 1: " + response.Message);
                 Console.WriteLine("Book wraaa 2: " + response.IsSuccessful);
                 if (response.IsSuccessful)
                 {
-                    book.LoanerUuid = currentUser.UUID;
+                    book.LoanerUuid = userClaims.FindFirst("UUID")?.Value;
                     --bookCount;
                     StateHasChanged();
                 }
@@ -245,7 +234,7 @@ else
 
     private async Task DeliverBook()
     {
-        var loanedBook = books.FirstOrDefault(b => b.LoanerUuid == currentUser.UUID);
+        var loanedBook = books.FirstOrDefault(b => b.LoanerUuid == userClaims.FindFirst("UUID")?.Value);
         if (loanedBook != null)
         {
             var response = await bookService.UpdateBook(new BookUpdateDto(loanedBook.UUID, loanedBook.Isbn, "return"));

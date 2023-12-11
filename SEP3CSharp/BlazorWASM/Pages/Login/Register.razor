@@ -2,12 +2,19 @@
 @using Domain.Models
 @using HttpClients.ClientInterfaces
 @using Domain.DTOs
+@using HotChocolate
 @using Microsoft.AspNetCore.Components
+@using BlazorWASM.Services
+@using System.Security.Claims
 @inject NavigationManager navMgr
-@inject IUserService userService; 
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IUserService userService;
 
 <div class="login-card">
-    <h3 class="login-title">Registrer</h3>
+    <h3 class="login-title">
+        @(userClaims.IsInRole("Librarian") ? "Opret Bruger" : "Registrer")
+    </h3>
+
 
     @if (ShowErrors)
     {
@@ -51,11 +58,20 @@
             <input id="confirmPassword" class="login-input" type="password" @bind="registerModel.ConfirmPassword" @bind:event="oninput"/>
             <ValidationMessage For="@(() => registerModel.ConfirmPassword)"/>
         </div>
-        <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="registerModel.IsLibrarian"/>
-            <label class="form-check-label" for="myLoansCheck">Er biblioteks personale</label>
-            <ValidationMessage For="@(() => registerModel.IsLibrarian)"/>
-        </div>
+        <AuthorizeView>
+            <Authorized Context="isLibrarianCheck">
+                <div>
+                    @if (userClaims.IsInRole("Librarian"))
+                    {
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="registerModel.IsLibrarian"/>
+                            <label class="form-check-label" for="myLoansCheck">Er biblioteks personale</label>
+                            <ValidationMessage For="@(() => registerModel.IsLibrarian)"/>
+                        </div>
+                    }
+                </div>
+            </Authorized>
+        </AuthorizeView>
         <div class="login-field">
             <button type="submit" class="login-button">Registrer</button>
         </div>
@@ -67,7 +83,14 @@
     private bool ShowSuccess { get; set; }
     private string Message { get; set; }
     private RegisterModel registerModel { get; } = new();
+    ClaimsPrincipal? userClaims;
 
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        userClaims = authState.User;
+    }
 
     private async Task HandleRegistration()
     {
@@ -150,7 +173,5 @@
         }
         return false;
     }
-
-}
 
 }

@@ -31,7 +31,8 @@ public class UserValidator
             throw new Exception("Email is not valid");
 
         if (password.Length < 8)
-            throw new Exception("Password must be at least 8 characters long");    }
+            throw new Exception("Password must be at least 8 characters long");
+    }
 
     public static bool IsValidEmail(string email)
     {
@@ -43,16 +44,16 @@ public class UserValidator
         catch
         {
             return false;
-        }    
+        }
     }
-    
+
     public static void SearchParametersValidator(SearchUserParametersDto searchParameters)
     {
         var firstName = searchParameters.FirstNameContains;
         var lastName = searchParameters.LastNameContains;
-        
 
-        if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName) )
+
+        if (string.IsNullOrWhiteSpace(firstName) && string.IsNullOrWhiteSpace(lastName))
             throw new Exception("At least one search parameter is required");
 
         if (firstName != null && firstName.Length < 3)
@@ -61,17 +62,4 @@ public class UserValidator
         if (lastName != null && lastName.Length < 3)
             throw new Exception("Last Name must be at least 3 characters long");
     }
-    
-    public static bool IsLibrarian(bool isLibrarian)
-    {
-        if (isLibrarian == true)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    
 }

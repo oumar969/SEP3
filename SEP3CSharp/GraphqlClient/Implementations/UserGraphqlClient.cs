@@ -89,7 +89,9 @@ public class UserGraphqlClient : IUserService
             }
         };
 
+        Console.WriteLine("asddas 10 " + _email);
         Console.WriteLine("asddas 11");
+        Console.WriteLine("asddas 12 " + getUserDataQuery.ToString());
         var response = await graphqlClient.SendQueryAsync<GetUserDataResponse>(getUserDataQuery);
 
 
@@ -171,7 +173,7 @@ public class UserGraphqlClient : IUserService
     {
         public ICollection<User> AllUsers { get; set; }
     }
-    
+
     public async Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
     {
         var getLoanerBooksQuery = new GraphQLRequest
@@ -202,5 +204,4 @@ public class UserGraphqlClient : IUserService
     {
         public ICollection<Book> allLoanerBooks { get; set; }
     }
-
 }

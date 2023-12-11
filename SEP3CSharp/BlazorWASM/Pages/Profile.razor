@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components
 @using Newtonsoft.Json
 @using System.Security.Claims
+@using BlazorWASM.Services
 
 @inject IUserService userClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -14,19 +15,16 @@
         <div class="card">
             <div class="card-body">
                 <p>
-                    <strong>Email: </strong>@user.Identity.Name
+                    <strong>Email: </strong>@userClaims.Identity?.Name
                 </p>
                 <p>
-                    <strong>Navn: </strong>@firstName
+                    <strong>Navn: </strong>@userClaims.FindFirst("FirstName")?.Value
                 </p>
                 <p>
-                    <strong>Efternavn: </strong>@lastName
+                    <strong>Efternavn: </strong>@userClaims.FindFirst("LastName")?.Value
                 </p>
                 <p>
-                    <strong>UUID: </strong>@uuid
-                </p>
-                <p>
-                    <strong>bøde: </strong>@fee
+                    <strong>UUID: </strong>@userClaims.FindFirst("UUID")?.Value
                 </p>
                 <p>
                     <strong>Antal af lånebøger: </strong>@bookCount
@@ -40,58 +38,18 @@
 </AuthorizeView>
 
 @code {
-
-    [Parameter]
-    public string Email { get; set; }
-
-    private string uuid;
-    private string firstName;
-    private string lastName;
-    private double fee;
     private string bookCount;
-    private AuthenticationState authState;
-    private ClaimsPrincipal user;
-    
+    ClaimsPrincipal? userClaims;
 
     protected override async Task OnInitializedAsync()
     {
-        authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        user = authState.User;
-
-        if (user.Identity.IsAuthenticated)
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        userClaims = authState.User;
+        if (userClaims.Identity?.Name != null)
         {
-            var userDetails = await userClient.GetUserByEmailAsync(user.Identity.Name);
-    //Console.WriteLine(userDetails.Email); THHIS WORKS
-
-            if (userDetails != null)
-            {
-                Email = userDetails.Email;
-                firstName = userDetails.FirstName;
-                lastName = userDetails.LastName;
-                uuid = userDetails.UUID;
-            }
-            
-            var loanerBooks = await userClient.GetAllLoanerBooks(uuid);
-            bookCount = loanerBooks.Count.ToString(); 
-    // Email = userDetails.Email;
-    // firstName = userDetails.FirstName;
-    // lastName = userDetails.LastName;
-    // fee = userDetails.Fee;
-    // bookCount = userDetails.BookCount;
+            var loanerBooks = await userClient.GetAllLoanerBooks(userClaims.FindFirst("UUID")?.Value);
+            bookCount = loanerBooks.Count.ToString();
         }
     }
-
-    // protected override async Task OnInitializedAsync()
-    // {
-    // // var user = await userClient.GetByIdAsync(Email);
-    // // Email = user.Email;
-    // // firstName = user.FirstName;
-    // // lastName = user.LastName;
-    // // uuid = user.Uuid;
-    // // fee = user.Fee;
-    //
-    // // var ratingDto = await _ratingClient.GetRatingMeanBySubject(Email);
-    // // rating = ratingDto.Rating;
-    // }
 
 }

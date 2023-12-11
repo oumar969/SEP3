@@ -3,8 +3,11 @@
 @using Microsoft.AspNetCore.Components
 @using Domain.DTOs
 @using Microsoft.IdentityModel.Tokens
+@using BlazorWASM.Services
 @inject IAuthService authService
 @inject NavigationManager navMgr
+@inject IUserService userClient
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <CascadingAuthenticationState>
 

@@ -3,19 +3,20 @@
 @using Microsoft.AspNetCore.Components
 @using Domain.Models
 @using BlazorWASM.Services
+@using Microsoft.IdentityModel.Tokens
+@using System.Security.Claims
 @inject IBookService bookService
 @inject NavigationManager navMgr
-@inject IUserService userClient
-@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IBookRegistryService bookRegistryService;
 @inject BookStateService bookStateService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 
 <div class="row align-items-center justify-content-between mb-4">
     <div class="col">
         <h3>Bog Katalog</h3>
     </div>
-    @if (isLibrarian)
+    @if (userClaims.IsInRole("Librarian"))
     {
         <div class="col-auto">
             <button type="button" class="btn btn-primary" @onclick="RegisterBook">Registrer Ny Bog</button>
@@ -23,11 +24,11 @@
     }
 </div>
 
-@if (books == null)
+@if (bookRegistries == null)
 {
     <p>Kunne ikke indlæse bøger</p>
 }
-else if (filteredBooks == null)
+else if (filteredBookRegistries == null)
 {
     <p>Indlæser bøger...</p>
 }
@@ -38,23 +39,14 @@ else
             <div class="d-flex flex-wrap align-items-end">
                 <div class="flex-grow-1 me-2">
                     <label for="searchField" class="form-label">Søg</label>
-                    <input type="text" id="searchField" class="form-control" placeholder="Søg efter titel eller forfatter..." @bind="searchTerm" @bind:event="oninput"/>
-                </div>
-                <div class="me-2">
-                    <label for="genreSelect" class="form-label">Genre</label>
-                    <select id="genreSelect" class="form-select" @bind="selectedGenre">
-                        @foreach (var genre in genres)
-                        {
-                            <option value="@genre">@genre</option>
-                        }
-                    </select>
+                    <input type="text" id="searchField" class="form-control" placeholder="Søg efter titel, genre eller forfatter..." @bind="searchTerm" @bind:event="oninput"/>
                 </div>
                 <AuthorizeView>
                     <Authorized>
-                        @if (!isLibrarian)
+                        @if (!userClaims.IsInRole("Librarian"))
                         {
                             <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans"/>
+                                <input type="checkbox" class="form-check-input" id="myLoansCheck" @bind="myLoans" @onclick="MyLoansPressed"/>
                                 <label class="form-check-label" for="myLoansCheck">Mine lån</label>
                             </div>
                         }
@@ -63,8 +55,12 @@ else
             </div>
         </div>
         <div class="row">
-            @foreach (var book in filteredBooks)
+            @foreach (var book in filteredBookRegistries)
             {
+                @if (myLoans && !loanedBooks.Contains(book.Isbn))
+                {
+                    continue;
+                }
                 <div class="col-md-3">
                     <div class="card mb-4 shadow-sm" style="cursor: pointer;" @onclick="_ => OpenBookView(book)">
                         <img class="bd-placeholder-img card-img-top" width="100%" height="300" src="@(true ? "Image/book-placeholder.png" : "Image/book-placeholder.png")" alt="Book image">
@@ -81,13 +77,13 @@ else
 }
 
 @code {
-    private ICollection<BookRegistry> books;
-    private bool isLibrarian;
-
-    private bool myLoans;
-
-    private List<BookRegistry> filteredBooks = new();
-    private readonly List<string> genres = new() { "Alle", "Klassisk", "Historie", "Fiktion", "Science Fiction", "Fantasy" };
+    private ICollection<BookRegistry> bookRegistries;
+    private bool myLoans = false;
+    private User userDetails;
+    private ICollection<Book> books;
+    private ICollection<string> loanedBooks;
+    private List<BookRegistry> filteredBookRegistries = new();
+    ClaimsPrincipal? userClaims;
 
     private string _searchTerm;
 
@@ -104,42 +100,42 @@ else
         }
     }
 
-    private string _selectedGenre = "Alle"; // Initialize with "All" to show all genres by default
-
-    private string selectedGenre
-    {
-        get => _selectedGenre;
-        set
-        {
-            if (_selectedGenre != value)
-            {
-                _selectedGenre = value;
-                FilterBooks(); // Call FilterBooks whenever selectedGenre changes
-            }
-        }
-    }
-
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-        isLibrarian = user.IsInRole("Librarian");
-    // var userDetails = await userClient.GetUserByEmailAsync(user.Identity?.Name.ToString());
+        userClaims = authState.User;
+        bookRegistries = await bookRegistryService.GetBookRegistries();
 
-        books = await bookRegistryService.GetBookRegistries();
-
-        selectedGenre = "Alle";
+        Console.WriteLine("cur us: " + userClaims.Identity);
+        if (userClaims.Identity != null)
+        {
+            books = await bookService.GetAllBooksAsync("");
+            LoanedBooks();
+        }
         searchTerm = "";
         FilterBooks();
+    }
+
+    private void LoanedBooks()
+    {
+        Console.WriteLine("here tyhere");
+        if (books.Count() > 0)
+        {
+            loanedBooks = books
+                .Where(b => b.LoanerUuid == userDetails?.UUID)
+                .Select(b => b.Isbn)
+                .ToList();
+        }
     }
 
     // FilterBooks method remains unchanged
     private void FilterBooks()
     {
-        filteredBooks = books
-            .Where(b => (selectedGenre == "Alle" || b.Genre == selectedGenre) &&
-                        (string.IsNullOrEmpty(searchTerm) || b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-                         b.Author.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
+        filteredBookRegistries = bookRegistries
+            .Where(b =>
+                (string.IsNullOrEmpty(searchTerm) || b.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                 b.Genre.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                 b.Author.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
             .OrderBy(b => b.Title)
             .ToList();
     }
@@ -156,6 +152,9 @@ else
         navMgr.NavigateTo("/CreateBook");
     }
 
-
+    private void MyLoansPressed()
+    {
+        myLoans = !myLoans;
+    }
 
 }

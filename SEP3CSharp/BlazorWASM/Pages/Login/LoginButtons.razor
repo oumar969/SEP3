@@ -1,12 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Components
+@using BlazorWASM.Services
+@using System.Security.Claims
 @namespace Login
 @inject NavigationManager navMgr
-@* /@inject IAuthService authService  *@
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <AuthorizeView>
     <Authorized>
         <div class="lg-container">
-            <p class="lb-button" @onclick="Register">Opret bruger</p>
+            @if (userClaims.IsInRole("Librarian"))
+            {
+                <p class="lb-button" @onclick="Register">Opret bruger</p>
+            }
             <p class="lb-button" @onclick="Register">Rediger bruger</p>
             <p class="lb-button" @onclick="Logout">Log ud</p>
         </div>
@@ -20,6 +25,13 @@
 </AuthorizeView>
 
 @code {
+    ClaimsPrincipal? userClaims;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        userClaims = authState.User;
+    }
 
     private void Login()
     {

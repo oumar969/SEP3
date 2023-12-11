@@ -66,7 +66,15 @@ public class BookDao : IBookDao
 
     public async Task<ICollection<Book>> GetAllAsync(string isbn)
     {
-        var url = $"{ServerOptions.serverUrl}/book/get/all/{isbn}";
+        string url;
+        if (isbn.Equals(""))
+        {
+            url = $"{ServerOptions.serverUrl}/book/get/all";
+        }
+        else
+        {
+            url = $"{ServerOptions.serverUrl}/book/get/all/{isbn}";
+        }
 
         var response = await _httpClient.GetAsync(url);
 

@@ -103,6 +103,7 @@ public class AuthService : IAuthService
             new Claim(ClaimTypes.Name, user.Email),
             new Claim("FirstName", user.FirstName),
             new Claim("LastName", user.LastName),
+            new Claim("UUID", user.UUID),
             new Claim(ClaimTypes.Role, user.IsLibrarian ? "Librarian" : "User")
         };
         Console.WriteLine("generate claims 1");
