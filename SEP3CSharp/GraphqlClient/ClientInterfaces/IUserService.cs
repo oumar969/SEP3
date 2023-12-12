@@ -8,7 +8,7 @@ public interface IUserService
     Task<UserCreationDto> Create(UserCreationDto dto);
     Task<ICollection<User>> GetUsers(string? usernameContains = null);
 
-    Task<string> Delete(string uuid);
+    Task<UserDeleteDto> Delete(UserDeleteDto dto);
     Task<User> GetUserByEmailAsync(string email);
     Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid);
 

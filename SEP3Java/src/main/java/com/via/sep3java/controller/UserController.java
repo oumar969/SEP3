@@ -99,6 +99,7 @@ import org.springframework.web.bind.annotation.*;
   @DeleteMapping("/delete/{uuid}") public ResponseEntity<?> deleteUser(
       @PathVariable String uuid)
   {
+    System.out.println("delete user: " + uuid);
     User existingUser = userRepository.findByUuid(uuid);
     if (existingUser == null)
     {

@@ -24,11 +24,6 @@ public class UserQuery
         return await _userLogic.GetAllUsersAsync();
     }
 
-    public async Task DeleteUser(string uuid)
-    {
-        await _userLogic.DeleteAsync(uuid);
-    }
-
     public async Task<User> userByEmail(string email)
     {
         Console.WriteLine("here1");
@@ -36,7 +31,7 @@ public class UserQuery
         Console.WriteLine("userQuery" + user);
         return user;
     }
-    
+
     public async Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)
     {
         return await _userLogic.GetAllLoanerBooks(loanerUuid);

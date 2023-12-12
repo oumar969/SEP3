@@ -2,6 +2,7 @@
 @using Domain.Models
 @using HttpClients.ClientInterfaces
 @using System.Security.Claims
+@using Domain.DTOs
 @using Microsoft.AspNetCore.Components
 @attribute [Authorize]
 @inject IUserService userService;
@@ -26,8 +27,9 @@
             {
                 <div class="user-card card mb-3">
                     <div class="card-header">
-                        <h5 class="card-title">
-                            @user.FirstName @user.LastName <button class="btn btn-danger float-right" @onclick="() => DeleteUser(user.UUID)">Delete</button>
+                        <h5 class="d-flex justify-content-between align-items-center m-0">
+                            <span>@user.FirstName @user.LastName</span>
+                            <button class="btn btn-danger ms-3" @onclick="() => DeleteUser(user.UUID)">Delete</button>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -88,20 +90,28 @@ else
     {
         users = (ICollection<User>?)await userService.GetUsers();
         Console.WriteLine("users len : " + users.Count);
+        foreach (var user in users)
+        {
+            Console.WriteLine("user id: " + user.UUID);
+        }
     }
 
     private async Task<bool> DeleteUser(string userUUID)
     {
         try
         {
-            var result = await userService.Delete(userUUID);
-
-            if (result == "ok")
+            Console.WriteLine("Delete user with uuid: " + userUUID);
+            var result = await userService.Delete(new UserDeleteDto(userUUID));
+            Console.WriteLine("result : " + result);
+            if (result.IsSuccessful)
             {
                 await LoadUsers();
+                return true;
             }
-
-            return result == "ok";
+            else
+            {
+                throw new Exception(result.ErrMsg);
+            }
         }
         catch (Exception e)
         {

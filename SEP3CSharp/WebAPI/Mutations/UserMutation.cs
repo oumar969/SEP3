@@ -40,9 +40,10 @@ public class UserMutation
         return await _userLogic.CreateAsync(userCreationDto);
     }
 
-    public async Task DeleteUser(string uuid)
+    public async Task<UserDeleteDto> DeleteUser(string uuid)
     {
-        await _userLogic.DeleteAsync(uuid);
+        Console.WriteLine("delete mutation: " + uuid);
+        return await _userLogic.DeleteAsync(new UserDeleteDto(uuid));
     }
 
 

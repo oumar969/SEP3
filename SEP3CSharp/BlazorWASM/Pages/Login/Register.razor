@@ -109,7 +109,15 @@
                 Console.WriteLine("created user");
                 ShowSuccess = true;
                 ShowErrors = false;
-                navMgr.NavigateTo("/Login");
+                Console.WriteLine("hmm? " + userClaims.FindFirst("UUID")?.Value);
+                if (userClaims.FindFirst("UUID")?.Value == null)
+                {
+                    navMgr.NavigateTo("/Login");
+                }
+                else
+                {
+                    navMgr.NavigateTo("/");
+                }
             }
             else
             {

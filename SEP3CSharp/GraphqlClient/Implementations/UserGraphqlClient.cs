@@ -47,26 +47,28 @@ public class UserGraphqlClient : IUserService
         return response.Data?.AllUsers;
     }
 
-    public async Task<string> Delete(string uuid)
+    public async Task<UserDeleteDto> Delete(UserDeleteDto dto)
     {
         var deleteUserMutation = new GraphQLRequest
         {
             Query = @"
                 mutation ($uuid: String!) {
-                    deleteUser(uuid: $uuid)
+                    deleteUser(uuid: $uuid) {
+                        isSuccessful
+                        errMsg
+                    }
                 }",
             Variables = new
             {
-                uuid
+                dto.UUID
             }
         };
 
         var response = await graphqlClient.SendMutationAsync<DeleteUserResponse>(deleteUserMutation);
-        var resultMsg = "ok";
 
         if (response.Errors != null && response.Errors.Length > 0)
-            resultMsg = "Error: " + string.Join(", ", response.Errors.Select(e => e.Message));
-        return resultMsg;
+            throw new Exception("Error: " + string.Join(", ", response.Errors.Select(e => e.Message)));
+        return response.Data?.DeleteUser;
     }
 
     public async Task<User> GetUserByEmailAsync(string _email)
@@ -160,8 +162,7 @@ public class UserGraphqlClient : IUserService
 
     private class DeleteUserResponse
     {
-        public bool Success { get; set; }
-        public string Message { get; set; }
+        public UserDeleteDto DeleteUser { get; set; }
     }
 
     private class GetUserDataResponse

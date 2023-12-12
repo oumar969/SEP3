@@ -41,12 +41,9 @@ public class UserLogic : IUserLogic
         throw new NotImplementedException();
     }
 
-    public async Task DeleteAsync(string uuid)
+    public async Task<UserDeleteDto> DeleteAsync(UserDeleteDto dto)
     {
-        var user = await userDao.GetByUuidAsync(uuid);
-        if (user == null) throw new Exception($"User with UUID {uuid} was not found!");
-
-        await userDao.DeleteAsync(uuid);
+        return await userDao.DeleteAsync(dto);
     }
 
     public Task<ICollection<User>> GetAllUsersAsync()

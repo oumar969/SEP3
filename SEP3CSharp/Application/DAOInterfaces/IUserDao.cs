@@ -13,7 +13,7 @@ public interface IUserDao
     Task<ICollection<User>> GetAsync(SearchUserParametersDto searchParameters);
     Task<User?> GetByIdAsync(int id);
     Task<UserUpdateDto> UpdateAsync(UserUpdateDto user);
-    Task DeleteAsync(string uuid);
+    Task<UserDeleteDto> DeleteAsync(UserDeleteDto dto);
     Task<ICollection<User>> GetAllUsersAsync();
     Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid);
 }

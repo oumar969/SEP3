@@ -5,13 +5,14 @@
 @using Domain.Models
 @using Microsoft.IdentityModel.Tokens
 @using System.Security.Claims
-@using Microsoft.AspNetCore.Components
+@using Newtonsoft.Json
 @inject IBookService bookService
 @inject IBookRegistryService bookRegistryService;
 @inject IUserService userClient
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager navMgr
 @inject BookStateService bookStateService
+@inject IJSRuntime JSRuntime
 
 
 <div class="row align-items-center justify-content-between mb-4">
@@ -124,6 +125,8 @@ else
     private BookRegistry bookRegistry;
     private ICollection<Book> books;
     ClaimsPrincipal? userClaims;
+    private bool isRendered = false;
+
 
     private async void deleteBookRegistry()
     {
@@ -213,16 +216,43 @@ else
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         userClaims = authState.User;
-        bookRegistry = bookStateService.CurrentBook;
-        books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
-        foreach (var book in books)
+
+        if (bookStateService.CurrentBook != null)
         {
-            if (book.LoanerUuid.IsNullOrEmpty())
-            {
-                ++bookCount;
-            }
+            bookRegistry = bookStateService.CurrentBook;
         }
     }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (bookStateService.CurrentBook == null)
+            {
+                var bookJson = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "selectedBook");
+                if (!string.IsNullOrEmpty(bookJson))
+                {
+                    bookRegistry = JsonConvert.DeserializeObject<BookRegistry>(bookJson);
+                }
+            }
+            else
+            {
+                bookRegistry = bookStateService.CurrentBook;
+            }
+
+            books = await bookService.GetAllBooksAsync(bookRegistry.Isbn);
+            foreach (var book in books)
+            {
+                if (book.LoanerUuid.IsNullOrEmpty())
+                {
+                    ++bookCount;
+                }
+            }
+
+            StateHasChanged();
+        }
+    }
+
 
     private async Task LoanBook()
     {
