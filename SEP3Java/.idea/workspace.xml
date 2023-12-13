@@ -5,24 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65997ed3-4c48-4d64-b067-0e474fb981fd" name="Changes" comment="Return på java delen virker nu">
-      <change afterPath="$PROJECT_DIR$/../SEP3CSharp/Domain/DTOs/UserDeleteDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IUserDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/DAOInterfaces/IUserDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/UserLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/Logic/UserLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IUserLogic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/Application/LogicInterfaces/IUserLogic.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookCatalog.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookView.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Book/BookView.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/LoginButtons.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/LoginButtons.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Register.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/Login/Register.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/ViewUsers.razor" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/BlazorWASM/Pages/User/ViewUsers.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/service/GenerateLibrarian.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/ClientInterfaces/IUserService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/UserGraphqlClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/GraphqlClient/Implementations/UserGraphqlClient.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/UserDao.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/JavaPersistenceClient/DAO's/UserDao.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/UserMutation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Mutations/UserMutation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Queries/UserQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../SEP3CSharp/WebAPI/Queries/UserQuery.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.mv.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/data/library.trace.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/via/sep3java/repository/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

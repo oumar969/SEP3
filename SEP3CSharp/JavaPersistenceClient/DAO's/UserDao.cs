@@ -68,19 +68,11 @@ public class UserDao : IUserDao
 
         var response = await _httpClient.GetAsync(url);
 
-        Console.WriteLine($"GET request to {url}");
-        Console.WriteLine($"Response status code: {response.StatusCode}");
         if (response.IsSuccessStatusCode)
         {
             var jsonResponse = await response.Content.ReadAsStringAsync();
-
-            Console.WriteLine($"JSON Response: {jsonResponse}");
-
             return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
-
-        var errorResponse = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"Error Response: {errorResponse}");
 
         throw new Exception($"Error getting user by UUID. Status code: {response.StatusCode}");
     }
