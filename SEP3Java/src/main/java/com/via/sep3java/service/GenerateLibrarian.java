@@ -21,7 +21,7 @@ import java.util.List;
       User newLibrarian = new User();
       newLibrarian.setUuid("librarian-admin");
       newLibrarian.setEmail("librarian@admin.net");
-      newLibrarian.setPassword("12345678"); // Use proper password encryption
+      newLibrarian.setPassword("12345678");
       newLibrarian.setFirstName("Librarian");
       newLibrarian.setLastName("Admin");
       newLibrarian.setIsLibrarian(true);

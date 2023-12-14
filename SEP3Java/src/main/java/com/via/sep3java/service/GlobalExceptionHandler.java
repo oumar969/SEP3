@@ -6,21 +6,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
-public class GlobalExceptionHandler {
+@ControllerAdvice public class GlobalExceptionHandler
+{
 
     private static final GlobalExceptionHandler instance = new GlobalExceptionHandler();
 
-    private GlobalExceptionHandler() {
-        // Privat konstruktør for at forhindre instantiering udenfor klassen
+    private GlobalExceptionHandler()
+    {
     }
 
-    public static GlobalExceptionHandler getInstance() {
+    public static GlobalExceptionHandler getInstance()
+    {
         return instance;
     }
 
-    @ExceptionHandler(PropertyValueException.class)
-    public ResponseEntity<String> handlePropertyValueException(PropertyValueException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request data: " + ex.getMessage());
+    @ExceptionHandler(PropertyValueException.class) public ResponseEntity<String> handlePropertyValueException(
+        PropertyValueException ex)
+    {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body("Invalid request data: " + ex.getMessage());
     }
 }
