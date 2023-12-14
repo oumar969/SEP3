@@ -31,7 +31,6 @@ public class BookLogic : IBookLogic
 
     public async Task<BookCreationDto> CreateAsync(BookCreationDto dto)
     {
-        Console.WriteLine("lgoc");
         return await _bookDao.CreateAsync(dto);
     }
 

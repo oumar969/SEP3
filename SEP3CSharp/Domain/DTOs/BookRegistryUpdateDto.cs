@@ -28,5 +28,5 @@ public class BookRegistryUpdateDto
     public int? BorrowerId { get; set; }
 
 
-    public User? Borrower { get; set; } // Brugeren, der har lånt bogen    
+    public User? Borrower { get; set; } 
 }

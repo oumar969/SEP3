@@ -14,10 +14,8 @@ using WebAPI.Schema;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddHttpClient();
@@ -58,7 +56,7 @@ var app = builder.Build();
 app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader()
-    .SetIsOriginAllowed(origin => true) // allow any origin
+    .SetIsOriginAllowed(origin => true) 
     .AllowCredentials());
 
 app.UseHttpsRedirection();
@@ -70,7 +68,6 @@ app.MapControllers();
 
 app.UseAuthentication();
 
-// Add GraphQL endpoint
 app.MapGraphQL();
 
 app.UseGraphQLPlayground();

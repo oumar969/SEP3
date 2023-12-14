@@ -54,9 +54,7 @@ public class UserLogic : IUserLogic
     public async Task<User> GetByEmailAsync(string email)
     {
         return await userDao.GetByEmailAsync(email);
-        // User? user = await userDao.GetByEmailAsync(email);
-        // Console.WriteLine(user + "UserLogic");
-        // return user;
+      
     }
 
     public Task<ICollection<Book>> GetAllLoanerBooks(string loanerUuid)

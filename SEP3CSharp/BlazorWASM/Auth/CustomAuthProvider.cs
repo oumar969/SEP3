@@ -25,7 +25,6 @@ public class CustomAuthProvider: AuthenticationStateProvider
         {
             ClaimsPrincipal principal = await authService.GetAuthAsync();
 
-            // Log indholdet af AuthenticationState for fejlfinding
             logger.LogInformation("AuthenticationState: {0}", principal);
 
             return new AuthenticationState(principal);
@@ -46,26 +45,4 @@ public class CustomAuthProvider: AuthenticationStateProvider
         );
     }
 }
-//
-//     public CustomAuthProvider(IAuthService authService)
-//     {
-//         this.authService = authService;
-//         authService.OnAuthStateChanged += AuthStateChanged;
-//     }
-//     
-//     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
-//     {
-//         ClaimsPrincipal principal = await authService.GetAuthAsync();
-//         
-//         return new AuthenticationState(principal);
-//     }
-//     
-//     private void AuthStateChanged(ClaimsPrincipal principal)
-//     {
-//         NotifyAuthenticationStateChanged(
-//             Task.FromResult(
-//                 new AuthenticationState(principal)
-//             )
-//         );
-//     }
-// }
+

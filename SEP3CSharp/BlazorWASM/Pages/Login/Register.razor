@@ -94,7 +94,6 @@
 
     private async Task HandleRegistration()
     {
-        Console.WriteLine("handling registration");
         try
         {
             if (!IsValidtInput())
@@ -106,10 +105,8 @@
 
             if (userCreatedDto.IsSuccessful)
             {
-                Console.WriteLine("created user");
                 ShowSuccess = true;
                 ShowErrors = false;
-                Console.WriteLine("hmm? " + userClaims.FindFirst("UUID")?.Value);
                 if (userClaims.FindFirst("UUID")?.Value == null)
                 {
                     navMgr.NavigateTo("/Login");
@@ -121,7 +118,6 @@
             }
             else
             {
-                Console.WriteLine("did not create user");
                 ShowSuccess = false;
                 ShowErrors = true;
                 Message = userCreatedDto.ErrMsg;

@@ -57,20 +57,7 @@ public class BookRegistryLogic : IBookRegistryLogic
 
         if (string.IsNullOrWhiteSpace(bookRegistry.Description)) throw new Exception("Book description is required.");
     }
-
-    /*
-    public async Task<Domain.Models.BookRegistry> CreateAsync(BookRegistryCreationDto dto)
-    {
-        var existing = await _bookRegistryDao.GetByBookTitleAsync(dto.Title);
-
-        if (existing != null) throw new Exception("Book already exists");
-
-        ValidateBookRegistry(dto);
-        var bookRegistry = new Domain.Models.BookRegistry(dto.Title, dto.Author, dto.Genre, dto.Isbn, dto.Description, dto.Review);
-        var created = await _bookRegistryDao.CreateAsync(bookRegistry);
-        return created;
-    }
-    */
+    
 
     private void ValidateBookRegistry(BookRegistry bookRegistry)
     {

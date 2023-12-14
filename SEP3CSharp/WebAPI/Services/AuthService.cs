@@ -24,11 +24,8 @@ public class AuthService : IAuthService
     {
         try
         {
-            Console.WriteLine("login auth service 1");
             var user = await ValidateUser(dto);
-            Console.WriteLine("login auth service 2");
             var token = GenerateJwt(dto);
-            Console.WriteLine("token: " + token);
             dto.IsSuccess = true;
             dto.Token = token;
             dto.Message = "Login successfuldt";
@@ -36,7 +33,6 @@ public class AuthService : IAuthService
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
             dto.IsSuccess = false;
             dto.Message = e.Message;
             return dto;
@@ -53,14 +49,12 @@ public class AuthService : IAuthService
         try
         {
             users = userDao.GetAllAsync().Result;
-            Console.WriteLine("users: " + users);
             var existingUser = users.FirstOrDefault(u =>
                 u.Email.Equals(dto.Email, StringComparison.OrdinalIgnoreCase));
 
             if (existingUser == null) throw new Exception("Bruger ikke fundet");
 
             if (!existingUser.Password.Equals(dto.Password)) throw new Exception("Forkert kodeord");
-            Console.WriteLine("existingUser: " + existingUser);
             dto.IsSuccess = true;
             return dto;
         }
@@ -106,7 +100,6 @@ public class AuthService : IAuthService
             new Claim("UUID", user.UUID),
             new Claim(ClaimTypes.Role, user.IsLibrarian ? "Librarian" : "User")
         };
-        Console.WriteLine("generate claims 1");
         return claims.ToList();
     }
 
