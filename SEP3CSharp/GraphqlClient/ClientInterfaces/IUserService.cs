@@ -6,7 +6,7 @@ namespace HttpClients.ClientInterfaces;
 public interface IUserService
 {
     Task<UserCreationDto> Create(UserCreationDto dto);
-    Task<ICollection<User>> GetUsers(string? usernameContains = null);
+    Task<ICollection<User>> GetUsers();
 
     Task<UserDeleteDto> Delete(UserDeleteDto dto);
     Task<User> GetUserByEmailAsync(string email);

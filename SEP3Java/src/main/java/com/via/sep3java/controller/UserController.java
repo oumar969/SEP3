@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.*;
           "User with UUID " + user.getUuid() + " already exists.",
           HttpStatus.BAD_REQUEST);
     }
-    System.out.println("user json");
-    System.out.println(user.toString());
 
     User savedUser = userRepository.save(user);
     return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
@@ -72,7 +70,6 @@ import org.springframework.web.bind.annotation.*;
     existingUser.setEmail(user.getEmail());
     existingUser.setPassword(user.getPassword());
     existingUser.setIsLibrarian(user.getIsLibrarian());
-    //existingUser.setUuid(user.getUuid());
     userRepository.save(existingUser);
     return new ResponseEntity<>(existingUser, HttpStatus.OK);
   }
@@ -91,7 +88,6 @@ import org.springframework.web.bind.annotation.*;
     existingUser.setEmail(user.getEmail());
     existingUser.setPassword(user.getPassword());
     existingUser.setIsLibrarian(user.getIsLibrarian());
-    //existingUser.setUuid(user.getUuid());
     userRepository.save(existingUser);
     return new ResponseEntity<>(existingUser, HttpStatus.OK);
   }
@@ -99,7 +95,6 @@ import org.springframework.web.bind.annotation.*;
   @DeleteMapping("/delete/{uuid}") public ResponseEntity<?> deleteUser(
       @PathVariable String uuid)
   {
-    System.out.println("delete user: " + uuid);
     User existingUser = userRepository.findByUuid(uuid);
     if (existingUser == null)
     {

@@ -1,33 +1,22 @@
 package com.via.sep3java.entity;
 
-import com.via.sep3java.service.ISBNServices;
-import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-@Entity
-public class BookRegistry
+@Entity public class BookRegistry
 {
-  @Id
-  private String isbn;
+  @Id private String isbn;
 
-  @Column(nullable = false)
-  private String title;
+  @Column(nullable = false) private String title;
 
-  @Column
-  private String author;
+  @Column private String author;
 
-  @Column
-  private String description;
+  @Column private String description;
 
-  @Column
-  private String genre;
+  @Column private String genre;
 
-  @Column
-  private String reviews;
-
-//  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bookRegistry")
-//  private List<Review> reviews = new ArrayList<>();
+  @Column private String reviews;
 
   public String getGenre()
   {
@@ -49,8 +38,8 @@ public class BookRegistry
     this.reviews = reviews;
   }
 
-  // Default constructor is required by JPA specifications
-  public BookRegistry() {
+  public BookRegistry()
+  {
   }
 
   public String getDescription()
@@ -63,32 +52,33 @@ public class BookRegistry
     this.description = description;
   }
 
-  // For the title field
-  public String getTitle() {
+  public String getTitle()
+  {
     return title;
   }
 
-  public void setTitle(String title) {
+  public void setTitle(String title)
+  {
     this.title = title;
   }
 
-  // For the author field
-  public String getAuthor() {
+  public String getAuthor()
+  {
     return author;
   }
 
-  public void setAuthor(String author) {
+  public void setAuthor(String author)
+  {
     this.author = author;
   }
 
-  // For the id field
-  public String getIsbn() {
+  public String getIsbn()
+  {
     return isbn;
   }
 
-  public void setIsbn(String isbn) {
+  public void setIsbn(String isbn)
+  {
     this.isbn = isbn;
   }
-
-  // ...additional fields, constructors, methods as necessary...
 }

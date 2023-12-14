@@ -12,12 +12,10 @@ import jakarta.persistence.Id;
 
   @Column(nullable = false) private String loanerUuid;
 
-  // Default constructor is required by JPA specifications
   public Book()
   {
   }
 
-  // For the id field
   public String getUuid()
   {
     return uuid;

@@ -20,7 +20,7 @@ public class UserGraphqlClient : IUserService
         graphqlClient = new GraphQLHttpClient(ClientOptions.serverUrl, new NewtonsoftJsonSerializer());
     }
 
-    public async Task<ICollection<User>> GetUsers(string? usernameContains = null)
+    public async Task<ICollection<User>> GetUsers()
     {
         var graphQlRequest = new GraphQLRequest
         {
@@ -36,7 +36,6 @@ public class UserGraphqlClient : IUserService
                     }",
         };
 
-        Console.WriteLine("asddas 11");
         var response = await graphqlClient.SendQueryAsync<GetUsersDataRespnse>(graphQlRequest);
 
         if (response.Errors != null && response.Errors.Length > 0)
@@ -45,6 +44,11 @@ public class UserGraphqlClient : IUserService
         }
 
         return response.Data?.AllUsers;
+    }
+
+    public Task<ICollection<User>> GetUsers(string? usernameContains = null)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<UserDeleteDto> Delete(UserDeleteDto dto)
